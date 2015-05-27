@@ -1,0 +1,42 @@
+html, body {
+  width:  100%;
+  height: 100%;
+  margin: 0px;
+}
+#demoCanvas, #processingCanvas, #jsCanvas {
+	border: solid 2px black;
+}
+
+.draggable {
+	position: absolute;	
+	background: #ffffff;
+	border: solid 1px #ccc;
+}
+.handle {
+	min-height: 20px;
+	color: #FFFFFF;
+	background: #000000;
+	border: solid 1px #ccc;
+	margin: 0;
+	padding: 0 0 0 10px;
+	cursor: move;
+}
+#resTable th, #resTable td {
+	padding: 0 20px 0 20px;
+}
+.jobName {
+	padding: 0 10px 0 10px;
+	
+}
+.jobCount, .buildCost {
+	min-width: 50px;
+	text-align: right;
+}
+.chamberTable {
+	border-bottom: solid 1px #ccc;
+	padding: 0 10px 0 10px;
+}
+.chamberName {
+	min-width: 150px;
+	text-align: left;
+}
