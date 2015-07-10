@@ -1,213 +1,107 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
 "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-	<head>
-		<title>WWW Programmierung - Hausarbeit - Image Gallery</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-		<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-		<link rel="stylesheet" media="screen" href="css/style.css"/>
-				<script type="text/javascript" src="js/frameworks/processing.min.js"></script>
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-		<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-		<script type="text/javascript" src="https://code.createjs.com/easeljs-0.8.0.min.js"></script>
+<head>
+	<title>WWW Programmierung - Hausarbeit - Image Gallery</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" media="screen" href="css/reset.css"/>
+	<link rel="stylesheet" media="screen" href="css/style.css"/>
 
-		<script type="text/javascript" src="js/View.js"></script>
-		<script type="text/javascript" src="js/Model.js"></script>
-		<script type="text/javascript" src="js/Controller.js"></script>
-		
-		
-	<script>
-		var stage, output;
-		
-		function init() {
-			stage = new createjs.Stage("demoCanvas");
-			
-			stage.canvas.width = window.innerWidth;
-  			stage.canvas.height = window.innerHeight;
-			
-			stage.enableMouseOver();
-			
+	<script type="text/javascript" src="js/frameworks/processing.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script type="text/javascript" src="https://code.createjs.com/easeljs-0.8.0.min.js"></script>
 
+	<script type="text/javascript" src="js/init.js"></script>
+</head>
 
-			
-			// draw line
-createjs.Ticker.addEventListener("tick", tick);
-stage.enableMouseOver();
-var connection = null;
+<body>
 
-for (var i=0; i<5; i++) {
-    var end = new createjs.Shape().set({
-        x: Math.random()*400,
-        y: Math.random()*400,
-        cursor: "pointer",
-        name:"target"
-    });
-    end.graphics.f(createjs.Graphics.getRGB(Math.random()*0xFFFFFF))
-        .dc(0,0,20);
-    stage.addChild(end);
-    end.on("dblclick", handlePress);
-    end.on("pressmove", handleMove);
-}
-$('body').on('contextmenu', '#demoCanvas', function(e){ return false; });
-
-			function handleMove(evt) {
-				//alert("hello");
-				// currentTarget will be the container that the event listener was added to:
-				evt.currentTarget.x = evt.stageX;
-				evt.currentTarget.y = evt.stageY;
-				// make sure to redraw the stage to show the change:
-				stage.update();   
-			}
-function handlePress(event) {
-    connection = new createjs.Shape().set({
-        x:event.target.x, 
-        y:event.target.y,
-        mouseEnabled:false,
-        graphics: new createjs.Graphics().s("#00f").dc(0,0,50)
-    });
-    stage.addChild(connection);
-    stage.addEventListener("stagemousemove", drawLine);
-    stage.addEventListener("stagemouseup", endDraw);
-}
-
-function drawLine(event) {
-    connection.graphics.clear()
-        .s("#f00")
-        .mt(0,0).lt(stage.mouseX-connection.x, stage.mouseY-connection.y);
-}
-
-function endDraw() {
-    var target, targets = stage.getObjectsUnderPoint(stage.mouseX, stage.mouseY);
-    console.log(targets);
-    for (var i=0; i<targets.length; i++) {
-        if (targets[i].name == "target") { target = targets[i]; break; }   
-    }
-    
-    if (target != null) {
-        connection.graphics.clear()
-        .s("#00f")
-        .mt(0,0).lt(target.x-connection.x, target.y-connection.y);
-    } else {
-        stage.removeChild(connection);
-    }
-    
-    stage.removeEventListener("stagemousemove", drawLine);
-    stage.removeEventListener("stagemouseup", endDraw);
-}
-
-function tick(event) {
-    stage.update();
-}
-			
-			
-			
-			stage.update();
-		}
-	</script>
-	<script>
-	  $(function() {
-	  	
-	    $( ".draggable" ).draggable({ snap: ".draggable", containment: 'parent',  handle: ".handle" });
-	    // $( "#draggable2" ).draggable({ snap: ".draggable" });
-	    // $( "#draggable3" ).draggable({ snap: ".ui-widget-header", snapMode: "outer" });
-	    // $( "#draggable4" ).draggable({ grid: [ 20, 20 ] });
-	    // $( "#draggable5" ).draggable({ grid: [ 80, 80 ] });
-	  });
-  	</script>
-
-	</head>
-
-	<body onload="init();">
-
-	<canvas id="demoCanvas" width="100%" height="100%">
-		alternate content
+	<canvas id="demoCanvas" data-processing-sources="js/bannerSketch.pde">
+		Canvas kann nicht dargestellt werden
 	</canvas>
-	
-	
 
-	
+
 	<div id="draggable18" class="draggable">
-	  <div class="handle">Chambers</div>
-				<table class="chamberTable">
-					<tr>
-						<th class="chamberName" colspan="2">Mushroom Chamber</th>
-					</tr>
-					<tr>
-						<td>Leafs</td>
-						<td class="buildCost">1502313</td>
-					</tr>
-					<tr>
-						<td>Stone</td>
-						<td class="buildCost">12011</td>
-						<td class="buildCost"><button class="build" id="btn_conHatch">Build</button></td>
-						
-					</tr>
-				</table>
-				<table class="chamberTable">
-					<tr>
-						<th class="chamberName" colspan="2">Brood Chamber</th>
-					</tr>
-					<tr>
-						<td>Leafs</td>
-						<td class="buildCost">1502313</td>
-					</tr>
-					<tr>
-						<td>Stone</td>
-						<td class="buildCost">12011</td>
-						<td class="buildCost"><button class="build" id="btn_conHatch">Build</button></td>
-						
-					</tr>
-				</table>
-				<table class="chamberTable">
-					<tr>
-						<th class="chamberName" colspan="2">Storage</th>
-					</tr>
-					<tr>
-						<td>Leafs</td>
-						<td class="buildCost">1502313</td>
-					</tr>
-					<tr>
-						<td>Stone</td>
-						<td class="buildCost">12011</td>
-						<td class="buildCost"><button class="build" id="btn_conHatch">Build</button></td>
-						
-					</tr>
-				</table>
-				<table class="chamberTable">
-					<tr>
-						<th class="chamberName" colspan="2">Pantry</th>
-					</tr>
-					<tr>
-						<td>Leafs</td>
-						<td class="buildCost">1502313</td>
-					</tr>
-					<tr>
-						<td>Stone</td>
-						<td class="buildCost">12011</td>
-						<td class="buildCost"><button class="build" id="btn_conHatch">Build</button></td>
-						
-					</tr>
-				</table>
-				<table class="chamberTable">
-					<tr>
-						<th class="chamberName" colspan="2">Dumping Ground</th>
-					</tr>
-					<tr>
-						<td>Leafs</td>
-						<td class="buildCost">1502313</td>
-					</tr>
-					<tr>
-						<td>Stone</td>
-						<td class="buildCost">12011</td>
-						<td class="buildCost"><button class="build" id="btn_conHatch">Build</button></td>
-						
-					</tr>
-				</table>
-	  		
-
+		<div class="handle">Chambers</div>
+		<table class="chamberTable">
+			<tr>
+				<th class="chamberName" colspan="2">Mushroom Chamber</th>
+			</tr>
+			<tr>
+				<td>Leafs</td>
+				<td class="buildCost">1502313</td>
+			</tr>
+			<tr>
+				<td>Stone</td>
+				<td class="buildCost">12011</td>
+				<td class="buildCost"><button class="build" id="btn_conHatch">Build</button></td>
+				
+			</tr>
+		</table>
+		<table class="chamberTable">
+			<tr>
+				<th class="chamberName" colspan="2">Brood Chamber</th>
+			</tr>
+			<tr>
+				<td>Leafs</td>
+				<td class="buildCost">1502313</td>
+			</tr>
+			<tr>
+				<td>Stone</td>
+				<td class="buildCost">12011</td>
+				<td class="buildCost"><button class="build" id="btn_conHatch">Build</button></td>
+				
+			</tr>
+		</table>
+		<table class="chamberTable">
+			<tr>
+				<th class="chamberName" colspan="2">Storage</th>
+			</tr>
+			<tr>
+				<td>Leafs</td>
+				<td class="buildCost">1502313</td>
+			</tr>
+			<tr>
+				<td>Stone</td>
+				<td class="buildCost">12011</td>
+				<td class="buildCost"><button class="build" id="btn_conHatch">Build</button></td>
+				
+			</tr>
+		</table>
+		<table class="chamberTable">
+			<tr>
+				<th class="chamberName" colspan="2">Pantry</th>
+			</tr>
+			<tr>
+				<td>Leafs</td>
+				<td class="buildCost">1502313</td>
+			</tr>
+			<tr>
+				<td>Stone</td>
+				<td class="buildCost">12011</td>
+				<td class="buildCost"><button class="build" id="btn_conHatch">Build</button></td>
+				
+			</tr>
+		</table>
+		<table class="chamberTable">
+			<tr>
+				<th class="chamberName" colspan="2">Dumping Ground</th>
+			</tr>
+			<tr>
+				<td>Leafs</td>
+				<td class="buildCost">1502313</td>
+			</tr>
+			<tr>
+				<td>Stone</td>
+				<td class="buildCost">12011</td>
+				<td class="buildCost"><button class="build" id="btn_conHatch">Build</button></td>
+				
+			</tr>
+		</table>
 	</div>
-	
+
 	<div id="draggable19" class="draggable">
 	  <div class="handle">Jobs</div>
 	  <table id="jobTable">
@@ -243,7 +137,8 @@ function tick(event) {
 	  	</tr>
 	  </table>
 	</div>
-	
+
+
 	<div id="draggable17" class="draggable">
 		<div class="handle"></div>
 		<table id="resTable">
@@ -260,9 +155,9 @@ function tick(event) {
 				<td><span>xxx</span></td>
 			</tr>
 		</table>
-	</div>	
+	</div>
 
-	</body>
+</body>
 </html>
 
 
