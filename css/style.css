@@ -12,6 +12,8 @@ html {
 	position: absolute;	
 	background: #ffffff;
 	border: solid 1px #ccc;
+	top:0;
+	left:0;
 }
 .handle {
 	min-height: 20px;
@@ -40,4 +42,10 @@ html {
 .chamberName {
 	min-width: 150px;
 	text-align: left;
+}
+/**
+ * custom style
+ */
+body {
+	overflow: hidden;
 }

@@ -2,107 +2,114 @@
 "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-	<title>WWW Programmierung - Hausarbeit - Image Gallery</title>
+	<title>Ameisen</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	
 	<link rel="stylesheet" media="screen" href="css/reset.css"/>
 	<link rel="stylesheet" media="screen" href="css/style.css"/>
-
-	<script type="text/javascript" src="js/frameworks/processing.min.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<script type="text/javascript" src="https://code.createjs.com/easeljs-0.8.0.min.js"></script>
-
-	<script type="text/javascript" src="js/init.js"></script>
 </head>
 
 <body>
 
-	<canvas id="demoCanvas" data-processing-sources="js/bannerSketch.pde">
+	<canvas id="canvasWrapper">
 		Canvas kann nicht dargestellt werden
 	</canvas>
 
 
-	<div id="draggable18" class="draggable">
-		<div class="handle">Chambers</div>
-		<table class="chamberTable">
+	<div class="draggable">
+		<div class="handle">Chambers
+		</div>
+		<table class="chamberTable" id="mushroomBuild">
 			<tr>
 				<th class="chamberName" colspan="2">Mushroom Chamber</th>
 			</tr>
 			<tr>
 				<td>Leafs</td>
-				<td class="buildCost">1502313</td>
+				<td class="buildCostLeafs">1502313</td>
 			</tr>
 			<tr>
 				<td>Stone</td>
-				<td class="buildCost">12011</td>
-				<td class="buildCost"><button class="build" id="btn_conHatch">Build</button></td>
-				
+				<td class="buildCostStone">12011</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><button class="build">Build</button></td>
 			</tr>
 		</table>
-		<table class="chamberTable">
+
+		<table class="chamberTable" id="broodBuild">
 			<tr>
 				<th class="chamberName" colspan="2">Brood Chamber</th>
 			</tr>
 			<tr>
 				<td>Leafs</td>
-				<td class="buildCost">1502313</td>
+				<td class="buildCostLeafs">1502313</td>
 			</tr>
 			<tr>
 				<td>Stone</td>
-				<td class="buildCost">12011</td>
-				<td class="buildCost"><button class="build" id="btn_conHatch">Build</button></td>
-				
+				<td class="buildCostStone">12011</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><button class="build">Build</button></td>
 			</tr>
 		</table>
-		<table class="chamberTable">
+
+		<table class="chamberTable"  id="storageBuild">	
 			<tr>
 				<th class="chamberName" colspan="2">Storage</th>
 			</tr>
 			<tr>
 				<td>Leafs</td>
-				<td class="buildCost">1502313</td>
+				<td class="buildCostLeafs">1502313</td>
 			</tr>
 			<tr>
 				<td>Stone</td>
-				<td class="buildCost">12011</td>
-				<td class="buildCost"><button class="build" id="btn_conHatch">Build</button></td>
-				
+				<td class="buildCostStone">12011</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><button class="build">Build</button></td>
 			</tr>
 		</table>
-		<table class="chamberTable">
+
+		<table class="chamberTable"  id="pantryBuild">
 			<tr>
 				<th class="chamberName" colspan="2">Pantry</th>
 			</tr>
 			<tr>
 				<td>Leafs</td>
-				<td class="buildCost">1502313</td>
+				<td class="buildCostLeafs">1502313</td>
 			</tr>
 			<tr>
 				<td>Stone</td>
-				<td class="buildCost">12011</td>
-				<td class="buildCost"><button class="build" id="btn_conHatch">Build</button></td>
-				
+				<td class="buildCostStone">12011</td>		
+			</tr>
+			<tr>
+				<td></td>
+				<td><button class="build">Build</button></td>
 			</tr>
 		</table>
-		<table class="chamberTable">
+		<table class="chamberTable" id="dumpingBuild">
 			<tr>
 				<th class="chamberName" colspan="2">Dumping Ground</th>
 			</tr>
 			<tr>
 				<td>Leafs</td>
-				<td class="buildCost">1502313</td>
+				<td class="buildCostLeafs">1502313</td>
 			</tr>
 			<tr>
 				<td>Stone</td>
-				<td class="buildCost">12011</td>
-				<td class="buildCost"><button class="build" id="btn_conHatch">Build</button></td>
-				
+				<td class="buildCostStone">12011</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><button class="build">Build</button></td>
 			</tr>
 		</table>
 	</div>
 
-	<div id="draggable19" class="draggable">
+	<div class="draggable">
 	  <div class="handle">Jobs</div>
 	  <table id="jobTable">
 	  	<tr>
@@ -139,7 +146,7 @@
 	</div>
 
 
-	<div id="draggable17" class="draggable">
+	<div class="draggable">
 		<div class="handle"></div>
 		<table id="resTable">
 			<tr>
@@ -156,13 +163,12 @@
 			</tr>
 		</table>
 	</div>
-
+	<script type="text/javascript" src="js/helpFunctions.js"></script>
+	<script type="text/javascript" src="js/plugins/zim_1.3.js"></script>
+	<script type="text/javascript" src="js/plugins/createjs-2015.05.21.min.js"></script>
+	<script type="text/javascript" src="js/ameisen/builder.js"></script>
+	<script type="text/javascript" src="js/ameisen/stage.js"></script>
+	<script type="text/javascript" src="js/ameisen/canvas.js"></script>
+	<script type="text/javascript" src="js/init.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
