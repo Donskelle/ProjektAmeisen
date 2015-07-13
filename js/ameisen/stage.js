@@ -5,7 +5,7 @@
  */
 function AmeisenStage(_options) {
 	var options = {
-		wrapper: "canvasWrapper",
+		canvas: "canvas",
 		wrapperBuildMenu: "",
 		forms: {	
 			dumpingBuild: "dumpingBuild",
@@ -32,7 +32,7 @@ function AmeisenStage(_options) {
 	}
 
 	canvasResize = function() {
-		var wrapper = document.getElementById(options.wrapper);
+		var wrapper = document.getElementById(options.canvas);
 		wrapper.width = window.innerWidth;
 		wrapper.height = window.innerHeight;
 	}
