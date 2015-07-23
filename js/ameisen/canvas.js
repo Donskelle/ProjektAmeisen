@@ -88,7 +88,7 @@ function Canvas(_options) {
 			
 		// you can make a slider behavior like so:
 		var circle2 = zimCircle();
-		stage.addChildcanvCon(circle2,0);	
+		//stage.addChildcanvCon(circle2,0);	
 		
 		var slideBounds = new createjs.Rectangle(100,500,600,0); // no y movement
 		
