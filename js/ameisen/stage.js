@@ -6,6 +6,7 @@
 function AmeisenStage(_options) {
 	var options = {
 		canvas: "canvas",
+		canvasConnector: "connector",
 		wrapperBuildMenu: "",
 		forms: {	
 			dumpingBuild: "dumpingBuild",
@@ -15,10 +16,11 @@ function AmeisenStage(_options) {
 			mushroomBuild: "mushroomBuild"	
 		}
 	};
-	var builder;
+	var builder,canvasBuilder;
 
 	function init() {
 		var that = this;
+		canvasResize();
 		options = HelpFunction.merge(options, _options);
 
 
@@ -26,15 +28,29 @@ function AmeisenStage(_options) {
 			options
 		);
 
-		this.canvasResize();
+		canvasBuilder = new Canvas(
+			options
+		);
 
-		window.addEventListener("resize", that.canvasResize);
+		
+
+		//window.addEventListener("resize", canvasResize);
 	}
 
-	canvasResize = function() {
-		var wrapper = document.getElementById(options.canvas);
-		wrapper.width = window.innerWidth;
-		wrapper.height = window.innerHeight;
+	var canvasResize = function() {
+		var canv = zid(options.canvas);
+		var canvCon = zid(options.canvasConnector);
+		canv.style.width = window.innerWidth + "px";
+		canv.style.height = window.innerHeight + "px";
+		canv.style.marginTop = -window.innerHeight + "px";
+		canv.height = window.innerHeight;
+		canv.width = window.innerWidth;
+
+
+		canvCon.style.width = window.innerWidth + "px";
+		canvCon.style.height = window.innerHeight + "px";
+		canvCon.height = window.innerHeight;
+		canvCon.width = window.innerWidth;
 	}
 
 
