@@ -23,9 +23,9 @@
 	<div class="draggable">
 		<div class="handle">Chambers
 		</div>
-		<table class="chamberTable" id="mushroomBuild">
+				<table class="chamberTable" id="broodBuild">
 			<tr>
-				<th class="chamberName" colspan="2">Mushroom Chamber</th>
+				<th class="chamberName" colspan="2">Brood Chamber</th>
 			</tr>
 			<tr>
 				<td>Leafs</td>
@@ -40,10 +40,10 @@
 				<td><button class="build">Build</button></td>
 			</tr>
 		</table>
-
-		<table class="chamberTable" id="broodBuild">
+		
+		<table class="chamberTable" id="mushroomBuild">
 			<tr>
-				<th class="chamberName" colspan="2">Brood Chamber</th>
+				<th class="chamberName" colspan="2">Mushroom Chamber</th>
 			</tr>
 			<tr>
 				<td>Leafs</td>
@@ -119,32 +119,32 @@
 	  	<tr>
 	  		<td class="jobName">Collect Leafs</td>
 	  		<td><button id="btn_subJobL">-</button></td>
-		  	<td class="jobCount"><span>20</span></td>
+		  	<td class="jobCount" id="jobCountL"><span>0</span></td>
 		  	<td><button id="btn_addJobL">+</button></td>
 	  	</tr>
 	  	<tr>
 	  		<td class="jobName">Collect Stone</td>
-	  		<td><button id="btn_subJobL">-</button></td>
-		  	<td class="jobCount"><span>2022222</span></td>
-		  	<td><button id="btn_addJobL">+</button></td>
+	  		<td><button id="btn_subJobS">-</button></td>
+		  	<td class="jobCount" id="jobCountS"><span>0</span></td>
+		  	<td><button id="btn_addJobS">+</button></td>
 	  	</tr>
 	  	<tr>
 	  		<td class="jobName">Hunt</td>
-	  		<td><button id="btn_subJobL">-</button></td>
-		  	<td class="jobCount"><span>20</span></td>
-		  	<td><button id="btn_addJobL">+</button></td>
+	  		<td><button id="btn_subJobHu">-</button></td>
+		  	<td class="jobCount" id="jobCountHu"><span>0</span></td>
+		  	<td><button id="btn_addJobHu">+</button></td>
 	  	</tr>
 	  	<tr>
 	  		<td class="jobName">Hatch</td>
-	  		<td><button id="btn_subJobL">-</button></td>
-		  	<td class="jobCount"><span>20</span></td>
-		  	<td><button id="btn_addJobL">+</button></td>
+	  		<td><button id="btn_subJobHa">-</button></td>
+		  	<td class="jobCount" id="jobCountHa"><span>0</span></td>
+		  	<td><button id="btn_addJobHa">+</button></td>
 	  	</tr>	  	
 	  	<tr>
 	  		<td class="jobName">Clean</td>
-	  		<td><button id="btn_subJobL">-</button></td>
-		  	<td class="jobCount"><span>20</span></td>
-		  	<td><button id="btn_addJobL">+</button></td>
+	  		<td><button id="btn_subJobC">-</button></td>
+		  	<td class="jobCount" id="jobCountC"><span>0</span></td>
+		  	<td><button id="btn_addJobC">+</button></td>
 	  	</tr>
 	  </table>
 	</div>
@@ -160,10 +160,10 @@
 				<th>Amber:</th>
 			</tr>
 			<tr>
-				<td><span>xxx</span></td>
-				<td><span>xxx</span></td>
-				<td><span>xxx</span></td>
-				<td><span>xxx</span></td>
+				<td id="leafCount"><span>xxx</span></td>
+				<td id="stoneCount"><span>xxx</span></td>
+				<td id="foodCount"><span>xxx</span></td>
+				<td id="amberCount"><span>xxx</span></td>
 			</tr>
 		</table>
 	</div>
