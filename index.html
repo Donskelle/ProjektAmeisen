@@ -150,7 +150,7 @@
 	</div>
 
 
-	<div class="draggable">
+	<div class="draggable" id="dxy">
 		<div class="handle"></div>
 		<table id="resTable">
 			<tr>
@@ -174,5 +174,49 @@
 	<script type="text/javascript" src="js/ameisen/stage.js"></script>
 	<script type="text/javascript" src="js/ameisen/canvas.js"></script>
 	<script type="text/javascript" src="js/init.js"></script>
+	<script type="text/javascript" src="js/ameisen/test.js"></script>
+	
+<script>
+  var offsetLeft = 0;
+  var offsetTop = 0;
+
+window.onload = addListeners();
+	
+
+	
+function addListeners(){
+	var dxy = document.getElementById('dxy');
+	//var dab = document.getElementById('dab');
+	//var dzz = document.getElementById('dzz');
+	
+    dxy.addEventListener('mousedown', mouseDown, false);
+    //dab.addEventListener('mousedown', mouseDown, false);
+    //dzz.addEventListener('mousedown', mouseDown, false);
+    window.addEventListener('mouseup', mouseUp, false);
+    
+
+}
+
+function mouseUp()
+{
+    window.removeEventListener('mousemove', divMove, true);
+}
+
+function mouseDown(e){
+  var div = document.getElementById('dxy');
+	
+  offsetTop = (div.offsetTop - e.clientY );
+  offsetLeft = (div.offsetLeft - e.clientX ) ;
+
+  window.addEventListener('mousemove', divMove, true);
+}
+
+function divMove(e){
+  var div = document.getElementById('dxy');
+  div.style.position = 'absolute';
+  div.style.top = (e.clientY) + offsetTop + 'px';
+  div.style.left = (e.clientX) + offsetLeft + 'px';
+}
+	</script>	
 </body>
 </html>
