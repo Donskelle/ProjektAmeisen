@@ -16,23 +16,24 @@ function AmeisenStage(_options) {
 			mushroomBuild: "mushroomBuild"	
 		}
 	};
-	var builder,canvasBuilder;
+	var builder,canvasBuilder, tester;
 
 	function init() {
 		var that = this;
 		canvasResize();
 		options = HelpFunction.merge(options, _options);
 
-
-		builder = new Builder(
-			options
-		);
-
 		canvasBuilder = new Canvas(
 			options
 		);
 
-		
+		tester = new test(
+			options
+		);
+
+		zid("canvas").addEventListener("build", function(e) {
+			console.log(e);
+		})
 
 		//window.addEventListener("resize", canvasResize);
 	}

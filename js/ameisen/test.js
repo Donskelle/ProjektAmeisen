@@ -1,4 +1,5 @@
-window.addEventListener('load', function() {
+function test (_options) {
+	var options = _options;
 
 	//Bestand von Rohstoffen
 	var _leafs = 0;
@@ -55,7 +56,34 @@ window.addEventListener('load', function() {
 	var _hatchRatioW = 10;
 	var _hatchRatioS = 15;
 	
-  
+  	
+  	function init() {
+  		var that = this;
+  		var dumpingForm = zid(options.forms.dumpingBuild);
+		var pantryForm = zid(options.forms.pantryBuild);
+		var broodForm = zid(options.forms.broodBuild);
+		var mushroomForm = zid(options.forms.mushroomBuild);
+		var storageForm = zid(options.forms.storageBuild);
+
+		dumpingForm.addEventListener("click", function(e) {
+			build(1);
+		});
+
+		pantryForm.addEventListener("click", function(e) {
+			build(1);
+		});
+		broodForm.addEventListener("click", function(e) {
+			build(1);
+		});
+		mushroomForm.addEventListener("click", function(e) {
+			build(1);
+		});
+		storageForm.addEventListener("click", function(e) {
+			build(1);
+		});
+  	}
+
+  	init();
   
     function gameLoop() {
        _leafs += _prodLeafs;
@@ -66,7 +94,7 @@ window.addEventListener('load', function() {
        
 	
 
-		window.setTimeout(gameLoop, tickRate);
+		window.setTimeout(gameLoop, _tickRate);
     }
     
     // type = {1,2}
@@ -74,7 +102,7 @@ window.addEventListener('load', function() {
     	switch(type)
     	{
     		case 1:
-	    		if(_leafs >= _antCostW[leafs] && _stone >= _antCostW[stone] && _food >= _antCostW[food])
+	    		if(_leafs >= _antCostW["leafs"] && _stone >= _antCostW[stone] && _food >= _antCostW[food])
 	    		{
 	    			_antW++;
 	    		}
@@ -135,8 +163,8 @@ window.addEventListener('load', function() {
     var buildings = {
 	    1 : { //mushroom chamber
 	    	count: 0,
-	    	costLeafs: 20,
-	    	costStone: 10,
+	    	costLeafs: 0,
+	    	costStone: 0,
 	    	costFood: 0
 	    },
 	    2 : { //brood chamber
@@ -166,12 +194,13 @@ window.addEventListener('load', function() {
 	};
 	//type = {1,2,3,4,5}
 	function build(type) {
-		if(_leafs >= buildins[type][costLeafs] && _stone >= buildings[type][costStone] && _food >= buildings[type][costFood])
+		if(_leafs >= buildings[type]["costLeafs"] && _stone >= buildings[type]["costStone"] && _food >= buildings[type]["costFood"])
 		{
 			switch(type)
 			{
 				case 1: //mushroom chamber
-				
+					var eventTest = new CustomEvent('build', { [{"hallo"},{"hallo"}] });
+					zid("canvas").dispatchEvent(eventTest);
 					break;
 				case 2: //brood chamber
 				
@@ -187,7 +216,5 @@ window.addEventListener('load', function() {
 					break;
 			}
 		}
-
 	}
-
-});
+}
