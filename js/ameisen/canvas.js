@@ -38,10 +38,6 @@ function Canvas(_options) {
 	function init() {
 		options = _options;
 		var canv = zid(options.canvas);
-			
-
-		// Url zeile auf Handy entfernen
-		setTimeout(function() {window.scrollTo(0, 1);}, 100); 
 		
 		stageW = window.innerWidth;
 		stageH = window.innerHeight;
@@ -115,7 +111,6 @@ function Canvas(_options) {
 		// is hitting the shape even if the shape is
 		// nested, rotated, moved or has had a registration change
 		// makes use of globalToLocal - always tricky...
-		
 		var target = makeTarget();
 		target.x = stageW/2;
 		target.y = stageH/2;
@@ -340,13 +335,6 @@ function Canvas(_options) {
 			zim.move(circle2, 200, 500, 1500, "elasticOut");
 		});
 		
-
-		// ANIMATE 
-		// a wrapper for the createjs Tween class that makes and removes a Ticker
-		// target, obj, t, ease, callBack, params, wait
-		//circle3.alpha = 0;
-		//zim.animate(circle3, {alpha:1}, 1000, null, null, null,500);
-		
 		
 		
 		// Hilf Funktionen
@@ -447,15 +435,6 @@ function Canvas(_options) {
 		addDrag(c);
 
 		return c;
-	}
-
-	function resizeMe() {
-		// strategy:  
-		// design for an average dimension 960 x 640
-		// all your positioning will be based on these dimensions
-		// then scale the whole canvas
-		// and pad the left/right or top/bottom as needed
-		// you can go further into flexive design http://danzen.com/flexive
 	}
 
 	init();
