@@ -86,6 +86,8 @@ function Canvas(_options) {
 	function create() {
 		var circle = self.createBuilding(0);
 		var circle2 = self.createBuilding(1);
+		var circle3 = self.createBuilding(1);
+		var circle4 = self.createBuilding(1);
 				
 		stage.update();	
 	}
@@ -100,7 +102,10 @@ function Canvas(_options) {
 	function Building(type, i) {
 		(function init() {
 			var c = new createjs.Shape();
+			c.buildingData = buidlingsTypes[type];
 			c.connector = new Array();
+
+
 			c.x = 300 * (i +1);
 			c.y = 200 * (i +1);
 			var g = c.graphics;
@@ -113,22 +118,29 @@ function Canvas(_options) {
 
 			c.setBounds(-c.radius, -c.radius, c.radius*2, c.radius*2);
 			eles[i] = c;
+
 			addDrag(c);
 			stage.addChild(c);
 		})();
 		
 
-		function addDrag(c) {
+		function addDrag(c) {			
 			c.on("mousedown",function(e){
+				c.clickStart = Date.now();
+
+
 				e.target.graphics.beginStroke("black");
-				e.target.graphics.f("rgba(0,0,0,0.1)").dc(0,0,150);
+				e.target.graphics.f("rgba(0,0,0,0.1)").dc(0,0,130);
 			}); 
 
 			c.on("click",function(e){
 				e.target.graphics.c().f("#f58e25").dc(0,0,50);
-
 				stage.update();
-				console.log(eles);
+
+
+				// Wenn weniger als 280 MS vergangen sind
+				if((Date.now() - c.clickStart) <= 280)
+					showInfoBox(i);
 			});
 
 			zim.drag(c, bounds);
@@ -151,6 +163,7 @@ function Canvas(_options) {
 
 			eles[_i].on("pressmove", function(e) 
 			{
+				console.log("pressmove");
 				if ( zim.hitTestCircle(eles[_i], eles[_j]) ) 
 				{
 					if (!hitTest) {
@@ -182,6 +195,10 @@ function Canvas(_options) {
 				}
 			});	
 		}
+	}
+
+	function showInfoBox(i) {
+		console.log(eles[i].buildingData.name);
 	}
 
 	function createConnector(_i, _j) {
@@ -221,6 +238,7 @@ function Canvas(_options) {
 
 		return connector;
 	}
+
 
 	init();
 }
