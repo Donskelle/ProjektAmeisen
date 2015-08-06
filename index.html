@@ -179,7 +179,8 @@
 
 			<form id="buildingViewForm">
 				<p id="buildingViewTextUpgrade">
-				<input type="text" placeholder="Gruppen Name" name="groupName" maxlength="6" required>
+
+				</p>
 				<div class="row">
 					<button>Upgrade</button>
 				</div>
@@ -270,11 +271,11 @@ function menuBarDragger (ele) {
 		};
 
 		// Oben angeschlagen 
-		if(click.y + offsetTop <= 0) {
+		if(click.y + offsetTop <= 20) {
 			values.y = 0
 		}
 		// Unten angeschlagen
-		else if ( (window.innerHeight - (click.y + offsetTop + ele.parentNode.offsetHeight)) <= 0){
+		else if ( (window.innerHeight - (click.y + offsetTop + ele.parentNode.offsetHeight)) <= 20){
 			values.y = window.innerHeight - ele.parentNode.offsetHeight;
 		}
 		else {
@@ -282,11 +283,11 @@ function menuBarDragger (ele) {
 		}
 
 		// Links angeschlagen
-		if(click.x + offsetLeft <= 0){
+		if(click.x + offsetLeft <= 20){
 			values.x = 0;
 		}
 		// Rechts angeschlagen
-		else if( (window.innerWidth - (click.x + offsetLeft + ele.parentNode.offsetWidth)) <= 0 ){
+		else if( (window.innerWidth - (click.x + offsetLeft + ele.parentNode.offsetWidth)) <= 20 ){
 			values.x = window.innerWidth - ele.parentNode.offsetWidth;
 		}
 		else {
