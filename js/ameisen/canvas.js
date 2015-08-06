@@ -10,18 +10,43 @@ function Canvas(_options) {
 	var eles = new Array();
 	var connections = new Array();
 
+	var buidlings = [
+		{
+			name: "Atomkraftwerk",
+			image: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			lvl: "15",
+			text: "Ich mach die SUPER ENERGIE",
+			costs: {
+				costLeafs: 200,
+		    	costStone: 100,
+		    	costFood: 0
+			}
+		},
+		{
+			name: "Atomkraftwerk",
+			image: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			lvl: "15",
+			text: "Ich mach die SUPER ENERGIE",
+			costs: {
+				costLeafs: 200,
+		    	costStone: 100,
+		    	costFood: 0
+			}
+		}
+	]
+
 	function init() {
 		options = _options;
 		var canv = zid(options.canvas);
-		//resizeMe();	
+			
 
-		// for mobile - pan to the bottom, hides the location bar
-		// need to set a delay though
+		// Url zeile auf Handy entfernen
 		setTimeout(function() {window.scrollTo(0, 1);}, 100); 
 		
 		stageW = window.innerWidth;
 		stageH = window.innerHeight;
 
+		// In diesem Rectangle dürfen sich die Gebäude bewegen
 		bounds = new createjs.Rectangle(
 		 	50,
 			50,
@@ -31,24 +56,15 @@ function Canvas(_options) {
 
 		stage = new createjs.Stage(options.canvas);
 
-		stage.enableMouseOver(10); // if you need mouse rollover
-		console.log(stage);
-		createjs.Touch.enable(stage, true); // added for mobile	
-		
-		//makeProgress();
-		
-		create(); // comment this out when you have preload going
+		// Mouseover aktivieren
+		stage.enableMouseOver(10);
+
+		// Für Touch
+		createjs.Touch.enable(stage, true);
+
+		create();
 	}
 
-	function makeProgress() {
-		
-		progress = new createjs.Container();
-		// more code in here to make bar or text or whatever, etc.
-		// we do not animate the progress here - we do that in preloadProgress()
-		stage.addChild(progress);
-		stage.update();
-		
-	}
 
 	function animateProgress(e) {
 		
@@ -61,31 +77,18 @@ function Canvas(_options) {
 
 	}
 
-	function create() {
-		
-		zog("____ ZIM Create Examples ____"); 
-		
+	function create() {		
 		var titleText = "ZIM Create Module";
 		var title = makeTitle(titleText);
 		
 		var circle = zimCircle();
-		stage.addChild(circle);
-		circle.x = 260; circle.y = 230;
-		
-		// DRAGGING
-		// assuming that we have a createjs stage
-		// and two createjs shapes (or bitmaps, etc) called circle and square
-		// these could be nested inside various containers (or not)
-		// the code behind the zim.drag() function is quite complicated
-		
-		// to set up dragging and dropping the circle we simply use:
-		
-		// zim.drag(circle);
-		
-		
-		
 
-			
+		circle.name = "test";
+		stage.addChild(circle);
+		circle.x = 260;
+		circle.y = 230;
+		
+		
 		// you can make a slider behavior like so:
 		var circle2 = zimCircle();
 		//stage.addChildcanvCon(circle2,0);	
@@ -346,86 +349,7 @@ function Canvas(_options) {
 		
 		
 		
-		// some helper functions ;-)
-
-		function zimCircle() {
-			var i = eles.length ;
-
-			function create() {
-				var c = new createjs.Shape();
-				var g = c.graphics;
-				c.radius = 100;
-		
-
-				g.f("#f58e25").dc(0,0,70);
-
-				c.setBounds(-c.radius, -c.radius, c.radius*2, c.radius*2);
-				eles[i] = c;
-				return c;
-			}
-			
-
-			function addDrag(c) {
-				c.on("mousedown",function(e){
-					e.target.graphics.beginStroke("black");
-					e.target.graphics.f("rgba(0,0,0,0.1)").dc(0,0,150);
-					zog(e.target);
-					stage.addChild(e.target);
-					console.log(i);
-				}); 
-
-				c.on("click",function(e){
-					var Circle = create();
-					Circle.x = e.target.x;
-					Circle.y = e.target.y;
-
-					stage.removeChild(e.target);
-					stage.addChild(Circle);
-					addDrag(Circle);
-					stage.update();
-					console.log(i);
-					console.log(eles);
-				});
-				zim.drag(c, bounds);
-
-				for (var j = 0; j < eles.length; j++) {
-					if(i == j) {
-						// eigenes element, kein Hitest
-					}
-					else {
-						createHitTest(i, j);
-						createHitTest(j, i);
-					}
-				};
-			}
-			function createHitTest(_i, _j) {
-				var hitTest = false;
-				console.log("hittest wird erstellt");
-				eles[_i].on("pressmove", function() {
-					if ( zim.hitTestBounds(eles[_i], eles[_j]) ) {
-						if (!hitTest) { // if it was not hitting, now it is...
-							hitTest = true;
-							zog("circle " + _i + " hits Circle " + _j);
-							title.text = titleText + " :: bounds hitting";
-							stage.update();
-						}				
-					} else {
-						if (hitTest) {// if it was hitting, now it is not...	
-							title.text = titleText;
-							zog("circle " + _i + " unhids Circle " + _j);
-							hitTest = false;
-							stage.update();		
-						}
-					}
-				});	
-			}
-
-			var c = create();
-			addDrag(c);
-
-			return c;
-		}
-		
+		// Hilf Funktionen
 		function makeTitle(t) {	
 			var title = new createjs.Text(t, "26px Verdana", "#933");		
 			title.textBaseline = "alphabetic";
@@ -446,6 +370,84 @@ function Canvas(_options) {
 		stage.update();	
 	}
 
+
+	function zimCircle() {
+		var i = eles.length ;
+
+		function create() {
+			var c = new createjs.Shape();
+			var g = c.graphics;
+			c.radius = 100;
+	
+
+			g.f("#f58e25").dc(0,0,70);
+
+			c.setBounds(-c.radius, -c.radius, c.radius*2, c.radius*2);
+			eles[i] = c;
+			return c;
+		}
+		
+
+		function addDrag(c) {
+			c.on("mousedown",function(e){
+				e.target.graphics.beginStroke("black");
+				e.target.graphics.f("rgba(0,0,0,0.1)").dc(0,0,150);
+				zog(e.target);
+				stage.addChild(e.target);
+				console.log(i);
+			}); 
+
+			c.on("click",function(e){
+				var Circle = create();
+				Circle.x = e.target.x;
+				Circle.y = e.target.y;
+
+				stage.removeChild(e.target);
+				stage.addChild(Circle);
+				addDrag(Circle);
+				stage.update();
+				console.log(i);
+				console.log(eles);
+			});
+			zim.drag(c, bounds);
+
+			for (var j = 0; j < eles.length; j++) {
+				if(i == j) {
+					// eigenes element, kein Hitest
+				}
+				else {
+					createHitTest(i, j);
+					createHitTest(j, i);
+				}
+			};
+		}
+		function createHitTest(_i, _j) {
+			var hitTest = false;
+			console.log("hittest wird erstellt");
+			eles[_i].on("pressmove", function() {
+				if ( zim.hitTestBounds(eles[_i], eles[_j]) ) {
+					if (!hitTest) { // if it was not hitting, now it is...
+						hitTest = true;
+						zog("circle " + _i + " hits Circle " + _j);
+						title.text = titleText + " :: bounds hitting";
+						stage.update();
+					}				
+				} else {
+					if (hitTest) {// if it was hitting, now it is not...	
+						title.text = titleText;
+						zog("circle " + _i + " unhids Circle " + _j);
+						hitTest = false;
+						stage.update();		
+					}
+				}
+			});	
+		}
+
+		var c = create();
+		addDrag(c);
+
+		return c;
+	}
 
 	function resizeMe() {
 		// strategy:  

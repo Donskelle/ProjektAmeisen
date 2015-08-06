@@ -7,7 +7,22 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+body {
+	overflow: hidden;
+}
+/*
+ *	Grundklassen bereitstellen
+ */
+.row {
+	display: block;
+}
+/*
+ *	Lightbox Klassen
+ */
 
+/*
+ *	Drag Klassen
+ */
 .draggable {
 	position: absolute;	
 	background: #ffffff;
@@ -31,6 +46,10 @@ html {
 	padding: 0 10px 0 10px;
 	
 }
+
+/*
+ *	Menü Styles
+ */
 .jobCount, .buildCost {
 	min-width: 50px;
 	text-align: right;
@@ -42,10 +61,4 @@ html {
 .chamberName {
 	min-width: 150px;
 	text-align: left;
-}
-/**
- * custom style
- */
-body {
-	overflow: hidden;
 }

@@ -19,7 +19,6 @@
 		</canvas>
 	</div>
 
-
 	<div class="draggable">
 		<div class="handle">Chambers
 		</div>
@@ -167,55 +166,140 @@
 			</tr>
 		</table>
 	</div>
+
+
+	<!-- Lightbox Gebäude Click -->
+	<div id="buildingView" class="lightboxWrapper">
+		<div class="lightboxContent">
+			<!-- Name des Gebäudes -->
+			<h1 id="buildingViewTitle">
+				Building
+			</h1>
+			<img id="buildingViewImage">
+
+			<form id="buildingViewForm">
+				<p id="buildingViewTextUpgrade">
+				<input type="text" placeholder="Gruppen Name" name="groupName" maxlength="6" required>
+				<div class="row">
+					<button>Upgrade</button>
+				</div>
+				<div class="row">
+					<a href="#closeLightBox">Schließen</a>
+				</div>
+			</form>
+		</div>
+	</div>
+	<a id="closeLightbox" href="#closeLightbox"></a>
+
+
+
+
+	<!--
+		Notwendige Javascript Datein
+	-->
 	<script type="text/javascript" src="js/helpFunctions.js"></script>
 	<script type="text/javascript" src="js/plugins/zim_1.3.js"></script>
 	<script type="text/javascript" src="js/plugins/createjs-2015.05.21.min.js"></script>
-	<script type="text/javascript" src="js/ameisen/builder.js"></script>
+
 	<script type="text/javascript" src="js/ameisen/stage.js"></script>
 	<script type="text/javascript" src="js/ameisen/canvas.js"></script>
-	<script type="text/javascript" src="js/init.js"></script>
 	<script type="text/javascript" src="js/ameisen/test.js"></script>
 	
+	<!--
+		Spiel erstellen
+	-->
+	<script type="text/javascript" src="js/init.js"></script>
 <script>
-  var offsetLeft = 0;
-  var offsetTop = 0;
-
 window.onload = addListeners();
 	
 
-	
 function addListeners(){
-	var dxy = document.getElementById('dxy');
-	//var dab = document.getElementById('dab');
-	//var dzz = document.getElementById('dzz');
-	
-    dxy.addEventListener('mousedown', mouseDown, false);
-    //dab.addEventListener('mousedown', mouseDown, false);
-    //dzz.addEventListener('mousedown', mouseDown, false);
-    window.addEventListener('mouseup', mouseUp, false);
-    
+	var bars = document.querySelectorAll(".handle");
 
+	for (var i = bars.length - 1; i >= 0; i--) {
+		new menuBarDragger(bars[i]);
+	};
 }
 
-function mouseUp()
-{
-    window.removeEventListener('mousemove', divMove, true);
-}
+function menuBarDragger (ele) {
+	var offsetLeft = 0;
+	var offsetTop = 0;
+	var timerId = null;
+	var click = {
+		x : null,
+		y : null
+	};
 
-function mouseDown(e){
-  var div = document.getElementById('dxy');
-	
-  offsetTop = (div.offsetTop - e.clientY );
-  offsetLeft = (div.offsetLeft - e.clientX ) ;
+	(function init() {
+		ele.parentNode.style.position = 'absolute';
 
-  window.addEventListener('mousemove', divMove, true);
-}
+		ele.addEventListener('mousedown', mouseDown, false);
+		window.addEventListener('mouseup', mouseUp, false);
+	})();
 
-function divMove(e){
-  var div = document.getElementById('dxy');
-  div.style.position = 'absolute';
-  div.style.top = (e.clientY) + offsetTop + 'px';
-  div.style.left = (e.clientX) + offsetLeft + 'px';
+	function mouseUp()
+	{
+	    window.removeEventListener('mousemove', newMousePos, true);
+	    if(timerId != null){
+	    	window.cancelAnimationFrame(timerId);
+	  		timerId = null;
+	    }
+	}
+
+	function mouseDown(e){
+	  offsetTop = (ele.parentNode.offsetTop - e.clientY );
+	  offsetLeft = (ele.parentNode.offsetLeft - e.clientX ) ;
+	  newMousePos(e);
+
+	  timerId = window.requestAnimationFrame(divMove);
+	  window.addEventListener('mousemove', newMousePos, true);
+	}
+
+	function newMousePos(e) {
+		click.x = e.clientX;
+  		click.y = e.clientY;
+
+  		// Kein Makieren von Texten bei Bewegung
+  		e.preventDefault();
+	}
+
+	function divMove(){
+		var values = {
+			x: 0,
+			y: 0
+		};
+
+		// Oben angeschlagen 
+		if(click.y + offsetTop <= 0) {
+			values.y = 0
+		}
+		// Unten angeschlagen
+		else if ( (window.innerHeight - (click.y + offsetTop + ele.parentNode.offsetHeight)) <= 0){
+			values.y = window.innerHeight - ele.parentNode.offsetHeight;
+		}
+		else {
+			values.y = (click.y + offsetTop);
+		}
+
+		// Links angeschlagen
+		if(click.x + offsetLeft <= 0){
+			values.x = 0;
+		}
+		// Rechts angeschlagen
+		else if( (window.innerWidth - (click.x + offsetLeft + ele.parentNode.offsetWidth)) <= 0 ){
+			values.x = window.innerWidth - ele.parentNode.offsetWidth;
+		}
+		else {
+			values.x = (click.x + offsetLeft);
+		}
+
+
+		ele.parentNode.style.top = values.y + 'px';
+		ele.parentNode.style.left = values.x + 'px';
+
+
+		timerId = window.requestAnimationFrame(divMove);
+	}
 }
 	</script>	
 </body>
