@@ -68,6 +68,12 @@ function Canvas(_options) {
 		// Für Touch
 		createjs.Touch.enable(stage, true);
 
+		// Upgrade eines Gebäudes
+		zid("buildingUpgradeViewForm").addEventListener("submit", function(e) {
+			console.log(e);
+			e.preventDefault();
+		})
+
 		create();
 	}
 
@@ -138,8 +144,8 @@ function Canvas(_options) {
 				stage.update();
 
 
-				// Wenn weniger als 280 MS vergangen sind
-				if((Date.now() - c.clickStart) <= 280)
+				// Wenn weniger als 250 MS vergangen sind
+				if((Date.now() - c.clickStart) <= 250)
 					showInfoBox(i);
 			});
 
@@ -163,7 +169,6 @@ function Canvas(_options) {
 
 			eles[_i].on("pressmove", function(e) 
 			{
-				console.log("pressmove");
 				if ( zim.hitTestCircle(eles[_i], eles[_j]) ) 
 				{
 					if (!hitTest) {
@@ -198,7 +203,23 @@ function Canvas(_options) {
 	}
 
 	function showInfoBox(i) {
-		console.log(eles[i].buildingData.name);
+		zid("buildingUpgradeViewTitle").innerHTML = eles[i].buildingData.name;
+		zid("buildingUpgradeViewImage").src = eles[i].buildingData.image1;
+		zid("buildingUpgradeViewTextUpgrade").innerHTML = eles[i].buildingData.text;
+		zid("buildingUpgradeViewFormBuildingId").innerHTML = i;
+
+
+
+		zid("buildingUpgradeViewCostLeafs").innerHTML = eles[i].buildingData.costs.leafs;
+		//zid("buildingUpgradeViewCostLeafsHidden").innerHTML = eles[i].buildingData.costs.leafs;
+		zid("buildingUpgradeViewCostStone").innerHTML = eles[i].buildingData.costs.stone;
+		//zid("buildingUpgradeViewCostStoneHidden").innerHTML = eles[i].buildingData.costs.stone;
+		zid("buildingUpgradeViewCostFood").innerHTML = eles[i].buildingData.costs.food;
+		//zid("buildingUpgradeViewCostFoodHidden").innerHTML = eles[i].buildingData.costs.food;
+
+		
+
+		zid("openLightboxBuildingUpgradeView").click();
 	}
 
 	function createConnector(_i, _j) {
@@ -208,6 +229,8 @@ function Canvas(_options) {
 		function draw() {
 			connector.visible = true;
 			connector.graphics.c().setStrokeStyle(10, 'round', 'round').beginStroke("black").moveTo(eles[_i].x, eles[_i].y).lineTo(eles[_j].x, eles[_j].y);
+			// Connector wird als oberesten Element eingefügt, damit es oberhalb der anderen Elemente liegt.
+			stage.addChild(connector);
 		}
 
 		function hide() {

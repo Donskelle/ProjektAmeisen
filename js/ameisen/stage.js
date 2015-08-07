@@ -1,5 +1,6 @@
 /**
  * [amaeisenStage description]
+ * Der eigentliche Controller, welcher die Kommunikation zwischen den Klassen abbildet.
  * @param  {[type]} options [description]
  * @return {[type]}         [description]
  */
@@ -31,29 +32,51 @@ function AmeisenStage(_options) {
 			options
 		);
 
-		zid("canvas").addEventListener("build", function(e) {
-			console.log(e);
-		})
+		zid("canvas").addEventListener("ant", function(e) 
+		{
+			switch(e.detail.action)
+			{
+				// Gebäude wird gebaut
+				case "buildBuilding": 
+					canvasBuilder.createBuilding(e.detail.typeId);
+					break;
+				// Upgrade wird angefragt
+				case 2: 
+					
+					break;
+				case 3:
+				
+					break;
+				case 4:
+				
+					break;
+				case 5:
+				
+					break;
+			}
 
-		//window.addEventListener("resize", canvasResize);
+			
+		});
+
+
+		/**
+         * Alle lightboxWrapper Klassen werden mit einem Click oder Touch Listener belegt,
+         * um bei offener Lightbox auch durch Berührung des dunklen Feldes die Lightbox zu schließen.
+         * Lightbox bei Canvas erstellen oder Gruppe erstellen
+         */
+        var lightboxWrapper = document.querySelectorAll(".lightboxWrapper");
+        for (var i = lightboxWrapper.length - 1; i >= 0; i--) {
+            lightboxWrapper[i].addEventListener("click", HelpFunction.closeLightbox);
+        };
 	}
 
 	var canvasResize = function() {
 		var canv = zid(options.canvas);
-		var canvCon = zid(options.canvasConnector);
 		canv.style.width = window.innerWidth + "px";
 		canv.style.height = window.innerHeight + "px";
-		canv.style.marginTop = -window.innerHeight + "px";
 		canv.height = window.innerHeight;
 		canv.width = window.innerWidth;
-
-
-		canvCon.style.width = window.innerWidth + "px";
-		canvCon.style.height = window.innerHeight + "px";
-		canvCon.height = window.innerHeight;
-		canvCon.width = window.innerWidth;
 	}
-
 
 
 	init();

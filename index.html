@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 	<title>Ameisen</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	
 	<link rel="stylesheet" media="screen" href="css/reset.css"/>
 	<link rel="stylesheet" media="screen" href="css/style.css"/>
@@ -11,9 +11,6 @@
 
 <body>
 	<div id="canvasWrapper">
-		<canvas id="connector">
-
-		</canvas>
 		<canvas id="canvas">
 			Canvas kann nicht dargestellt werden
 		</canvas>
@@ -169,18 +166,24 @@
 
 
 	<!-- Lightbox Gebäude Click -->
-	<div id="buildingView" class="lightboxWrapper">
+	<div id="buildingUpgradeView" class="lightboxWrapper">
 		<div class="lightboxContent">
 			<!-- Name des Gebäudes -->
-			<h1 id="buildingViewTitle">
+			<h1 id="buildingUpgradeViewTitle">
 				Building
 			</h1>
-			<img id="buildingViewImage">
+			<div class="buildingUpgradeViewImageWrapper">
+				<img id="buildingUpgradeViewImage">
+			</div>
+			<p id="buildingUpgradeViewTextUpgrade">
 
-			<form id="buildingViewForm">
-				<p id="buildingViewTextUpgrade">
-
-				</p>
+			</p>
+			<form id="buildingUpgradeViewForm">
+				<h3>Upgrade Costs</h3>
+				<input type="hidden" name="buildingId" id="buildingUpgradeViewFormBuildingId">
+				<p>Leafs: <span id="buildingUpgradeViewCostLeafs"></span></p>
+				<p>Stone: <span id="buildingUpgradeViewCostStone"></span></p>
+				<p>Food: <span id="buildingUpgradeViewCostFood"></span></p>
 				<div class="row">
 					<button>Upgrade</button>
 				</div>
@@ -191,6 +194,7 @@
 		</div>
 	</div>
 	<a id="closeLightbox" href="#closeLightbox"></a>
+	<a id="openLightboxBuildingUpgradeView" href="#buildingUpgradeView"></a>
 
 
 
@@ -198,9 +202,10 @@
 	<!--
 		Notwendige Javascript Datein
 	-->
-	<script type="text/javascript" src="js/helpFunctions.js"></script>
 	<script type="text/javascript" src="js/plugins/zim_1.3.js"></script>
 	<script type="text/javascript" src="js/plugins/createjs-2015.05.21.min.js"></script>
+	<script type="text/javascript" src="js/helpFunctions.js"></script>
+	<script type="text/javascript" src="js/menu.js"></script>
 
 	<script type="text/javascript" src="js/ameisen/stage.js"></script>
 	<script type="text/javascript" src="js/ameisen/canvas.js"></script>
@@ -209,99 +214,6 @@
 	<!--
 		Spiel erstellen
 	-->
-	<script type="text/javascript" src="js/init.js"></script>
-<script>
-window.onload = addListeners();
-	
-
-function addListeners(){
-	var bars = document.querySelectorAll(".handle");
-
-	for (var i = bars.length - 1; i >= 0; i--) {
-		new menuBarDragger(bars[i]);
-	};
-}
-
-function menuBarDragger (ele) {
-	var offsetLeft = 0;
-	var offsetTop = 0;
-	var timerId = null;
-	var click = {
-		x : null,
-		y : null
-	};
-
-	(function init() {
-		ele.parentNode.style.position = 'absolute';
-
-		ele.addEventListener('mousedown', mouseDown, false);
-		window.addEventListener('mouseup', mouseUp, false);
-	})();
-
-	function mouseUp()
-	{
-	    window.removeEventListener('mousemove', newMousePos, true);
-	    if(timerId != null){
-	    	window.cancelAnimationFrame(timerId);
-	  		timerId = null;
-	    }
-	}
-
-	function mouseDown(e){
-	  offsetTop = (ele.parentNode.offsetTop - e.clientY );
-	  offsetLeft = (ele.parentNode.offsetLeft - e.clientX ) ;
-	  newMousePos(e);
-
-	  timerId = window.requestAnimationFrame(divMove);
-	  window.addEventListener('mousemove', newMousePos, true);
-	}
-
-	function newMousePos(e) {
-		click.x = e.clientX;
-  		click.y = e.clientY;
-
-  		// Kein Makieren von Texten bei Bewegung
-  		e.preventDefault();
-	}
-
-	function divMove(){
-		var values = {
-			x: 0,
-			y: 0
-		};
-
-		// Oben angeschlagen 
-		if(click.y + offsetTop <= 20) {
-			values.y = 0
-		}
-		// Unten angeschlagen
-		else if ( (window.innerHeight - (click.y + offsetTop + ele.parentNode.offsetHeight)) <= 20){
-			values.y = window.innerHeight - ele.parentNode.offsetHeight;
-		}
-		else {
-			values.y = (click.y + offsetTop);
-		}
-
-		// Links angeschlagen
-		if(click.x + offsetLeft <= 20){
-			values.x = 0;
-		}
-		// Rechts angeschlagen
-		else if( (window.innerWidth - (click.x + offsetLeft + ele.parentNode.offsetWidth)) <= 20 ){
-			values.x = window.innerWidth - ele.parentNode.offsetWidth;
-		}
-		else {
-			values.x = (click.x + offsetLeft);
-		}
-
-
-		ele.parentNode.style.top = values.y + 'px';
-		ele.parentNode.style.left = values.x + 'px';
-
-
-		timerId = window.requestAnimationFrame(divMove);
-	}
-}
-	</script>	
+	<script type="text/javascript" src="js/init.js"></script>	
 </body>
 </html>

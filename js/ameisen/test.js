@@ -304,7 +304,7 @@ function test (_options) {
 			switch(type) //kann eventuell raus?
 			{
 				case 1: //mushroom chamber
-
+					
 					
 					break;
 				case 2: //brood chamber
@@ -320,8 +320,11 @@ function test (_options) {
 				
 					break;
 			}
-			var buildEvent = new CustomEvent('build', type);
-			zid("canvas").dispatchEvent(buildEvent);
+
+			
+			HelpFunction.pushEvent("buildBuilding", {
+				'typeId': type
+			});
 		}
 	}
 	

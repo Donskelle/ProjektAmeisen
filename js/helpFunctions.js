@@ -25,6 +25,30 @@ function HelpFunction() {
 		return true;
 	}
 
+	/**
+	 * [pushEvent description]
+	 * Érstellt ein "Ant" Event auf dem Canvas
+	 * @param  {[type]} action [description]
+	 * string identifier für auszuführende Aktion
+	 * @param  {[type]} data   [description]
+	 * object daten die übermittelt werden sollen
+	 */
+	this.pushEvent = function(action, data) {
+		var buildEvent = new CustomEvent(
+			'ant', 
+			{
+				'detail': 
+				{
+					'action': action,
+					'eventData' : {
+						data
+					}
+				}
+			}
+		);
+		zid("canvas").dispatchEvent(buildEvent);
+	}
+
 
 	this.merge = function(defaultObject, overWriteObject) {
 		for (var prop in overWriteObject) {
@@ -32,6 +56,7 @@ function HelpFunction() {
 		}
 		return defaultObject;
 	}
+
 
 	/**
 	 * [toggleClassName description]
