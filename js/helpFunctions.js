@@ -47,7 +47,6 @@ function HelpFunction() {
 		);
 
 		zid("canvas").dispatchEvent(buildEvent);
-		console.log("event ausgelöst");
 	}
 
 

@@ -48,7 +48,7 @@ function NaturalDisasters() {
 				console.log("Kein Event")
 				break;
 		}
-		window.setTimeout(randomDisasters, 1000);
+		window.setTimeout(randomDisasters, 60000);
 	}
 
 

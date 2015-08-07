@@ -343,7 +343,8 @@ function test (_options) {
 			stone: 5,
 			food: 0
 		};
-		console.log("drin");
+
+		
 		return costs;
 	}
 

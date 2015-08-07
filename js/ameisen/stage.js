@@ -62,7 +62,6 @@ function AmeisenStage(_options) {
 	function initController() {
 		zid("canvas").addEventListener("ant", function(e) 
 		{
-			console.log("event erhalten");
 			switch(e.detail.action)
 			{
 				// Gebäude wird gebaut
