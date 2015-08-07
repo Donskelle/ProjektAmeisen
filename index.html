@@ -173,8 +173,8 @@
 				Building
 			</h1>
 			<p>Level: <span id="buildingUpgradeViewLevel"></span></p>
-			<div class="buildingUpgradeViewImageWrapper">
-				<img id="buildingUpgradeViewImage">
+			<div class="lightboxImageWrapper">
+				<img id="buildingUpgradeViewImage" class="lightboxImage">
 			</div>
 
 			<p id="buildingUpgradeViewTextUpgrade">
@@ -202,6 +202,29 @@
 
 
 
+	<!-- Lightbox Gebäude Click -->
+	<div id="naturalDisasterView" class="lightboxWrapper">
+		<div class="lightboxContent">
+			<!-- Name des Gebäudes -->
+			<h1 id="naturalDisasterTitle">
+				Natural Disaster
+			</h1>
+			<div class="lightboxImageWrapper">
+				<img id="naturalDisasterImage" class="lightboxImage">
+			</div>
+
+			<p id="naturalDisasterText">
+
+			</p>
+
+			<a href="#closeLightBox">Ok</a>
+		</div>
+	</div>
+	<a id="openLightboxNaturalDisasterView" href="#naturalDisasterView"></a>
+
+
+
+
 	<!--
 		Notwendige Javascript Datein
 	-->
@@ -210,9 +233,11 @@
 	<script type="text/javascript" src="js/helpFunctions.js"></script>
 	<script type="text/javascript" src="js/menu.js"></script>
 
+	<script type="text/javascript" src="js/ameisen/naturaldisasters.js"></script>
 	<script type="text/javascript" src="js/ameisen/stage.js"></script>
 	<script type="text/javascript" src="js/ameisen/canvas.js"></script>
 	<script type="text/javascript" src="js/ameisen/test.js"></script>
+	
 	
 	<!--
 		Spiel erstellen

@@ -9,7 +9,7 @@ function AmeisenStage(_options) {
 		canvas: "canvas",
 		canvasConnector: "connector",
 		wrapperBuildMenu: "",
-		forms: {	
+		forms: {
 			dumpingBuild: "dumpingBuild",
 			pantryBuild: "pantryBuild",
 			storageBuild: "storageBuild",
@@ -17,7 +17,7 @@ function AmeisenStage(_options) {
 			mushroomBuild: "mushroomBuild"	
 		}
 	};
-	var builder,canvasBuilder, tester;
+	var builder,canvasBuilder, tester, disasters;
 
 	function init() {
 		var that = this;
@@ -32,7 +32,9 @@ function AmeisenStage(_options) {
 		canvasBuilder = new Canvas(
 			options
 		);
-		
+
+		disasters = new NaturalDisasters();
+
 		initController();
 
 		canvasBuilder.createDefaults();
