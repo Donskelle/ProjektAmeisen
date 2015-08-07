@@ -13,7 +13,10 @@ function init(){
 
 	// Lightbox schließen via Klick auf Rand
 	var bars = document.querySelectorAll(".handle");
-	for (var i = bars.length - 1; i >= 0; i--) {
+	var width = 0;
+	for (var i = 0; i < bars.length; i++) {
+		bars[i].parentNode.style.left = width + "px";
+		width += bars[i].parentNode.offsetWidth + 3;
 		new menuBarDragger(bars[i]);
 	};
 

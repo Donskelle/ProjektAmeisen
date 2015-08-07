@@ -24,39 +24,18 @@ function AmeisenStage(_options) {
 		canvasResize();
 		options = HelpFunction.merge(options, _options);
 
-		canvasBuilder = new Canvas(
-			options
-		);
 
 		tester = new test(
 			options
 		);
 
-		zid("canvas").addEventListener("ant", function(e) 
-		{
-			switch(e.detail.action)
-			{
-				// Gebäude wird gebaut
-				case "buildBuilding": 
-					canvasBuilder.createBuilding(e.detail.typeId);
-					break;
-				// Upgrade wird angefragt
-				case 2: 
-					
-					break;
-				case 3:
-				
-					break;
-				case 4:
-				
-					break;
-				case 5:
-				
-					break;
-			}
+		canvasBuilder = new Canvas(
+			options
+		);
+		
+		initController();
 
-			
-		});
+		canvasBuilder.createDefaults();
 
 
 		/**
@@ -76,6 +55,57 @@ function AmeisenStage(_options) {
 		canv.style.height = window.innerHeight + "px";
 		canv.height = window.innerHeight;
 		canv.width = window.innerWidth;
+	}
+
+	function initController() {
+		zid("canvas").addEventListener("ant", function(e) 
+		{
+			console.log("event erhalten");
+			switch(e.detail.action)
+			{
+				// Gebäude wird gebaut
+				case "buildBuilding": 
+					canvasBuilder.createBuilding(e.detail.eventData.typeId);
+					break;
+
+				// Upgrade Kosten werden angefragt
+				case "getUpgradeCosts": 
+				
+					var costs = tester.getUpgradeCots(e.detail.eventData.buildingId);
+
+					canvasBuilder.setUpgradeCosts(e.detail.eventData.buildingId, costs, e.detail.eventData.updateView);
+					break;
+
+				// Upgrade wird angefragt
+				case "requestUpdate":
+					var updated = tester.requestUpdate(e.detail.eventData.buildingId);
+					if(updated) {
+						canvasBuilder.upgradeBuilding(e.detail.eventData.buildingId);
+						
+
+						HelpFunction.pushEvent("getUpgradeCosts", {
+							'buildingId': e.detail.eventData.buildingId,
+							'updateView': true
+						});
+					}
+					else {
+						alert("Upgrade konnte nicht durchgeführt werden");
+					}
+					break;
+
+				//
+				case 4:
+				
+					break;
+
+				//
+				case 5:
+				
+					break;
+			}
+
+			
+		});
 	}
 
 

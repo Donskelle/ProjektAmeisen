@@ -16,11 +16,56 @@ function Canvas(_options) {
 		{
 			name: "Atomkraftwerk",
 			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image2: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image3: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
+			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
 			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			lvl: "1",
+			lvl: 1,
+			text: "Ich mach die super Energie, byebye global warming",
+			costs: {
+				leafs: null,
+		    	stone: null,
+		    	food: null
+			}
+		},
+		{
+			name: "Atomkraftwerk",
+			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
+			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
+			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			lvl: 1,
+			text: "Ich mach die super Energie, byebye global warming",
+			costs: {
+				leafs: null,
+		    	stone: null,
+		    	food: null
+			}
+		},
+		{
+			name: "Atomkraftwerk",
+			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
+			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
+			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			lvl: 1,
+			text: "Ich mach die super Energie, byebye global warming",
+			costs: {
+				leafs: null,
+		    	stone: null,
+		    	food: null
+			}
+		},
+		{
+			name: "Atomkraftwerk",
+			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
+			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
+			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			lvl: 1,
 			text: "Ich mach die super Energie, byebye global warming",
 			costs: {
 				leafs: null,
@@ -31,11 +76,11 @@ function Canvas(_options) {
 		{
 			name: "Atomkraftwerk 2",
 			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image2: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image3: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
+			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
 			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			lvl: "1",
+			lvl: 1,
 			text: "Ich mach die SUPER ENERGIE. BYE BYE global warming",
 			costs: {
 				leafs: null,
@@ -70,26 +115,19 @@ function Canvas(_options) {
 
 		// Upgrade eines Gebäudes
 		zid("buildingUpgradeViewForm").addEventListener("submit", function(e) {
-			console.log(e);
+			var fields = HelpFunction.readForm.apply(zid("buildingUpgradeViewForm"));
+	
+			HelpFunction.pushEvent("requestUpdate", {
+				'buildingId': parseInt(fields.buildingId)
+			});
+
 			e.preventDefault();
 		})
 
-		create();
-	}
-
-
-	function animateProgress(e) {
 		
-		// zog("progress " + e.target.progress);	
-		// this event runs quite quickly and often
-		// e.target is the preload object in this case
-		// the progress property gives a number from 0-1 representing progress
-		// in percent we would multiply by 100
-		// we would operate on the progress object we established in makeProgress() 
-
 	}
 
-	function create() {
+	this.createDefaults = function() {
 		var circle = self.createBuilding(0);
 		var circle2 = self.createBuilding(1);
 		var circle3 = self.createBuilding(1);
@@ -102,6 +140,23 @@ function Canvas(_options) {
 		var i = eles.length;
 		var build = new Building(type, i);
 		stage.update();
+		
+		console.log(i);
+		HelpFunction.pushEvent("getUpgradeCosts", {
+			'buildingId': i,
+			'updateView': false
+		});
+	}
+
+	this.upgradeBuilding = function(id) {
+		eles[id].upgradeBuilding();
+
+	}
+
+	this.setUpgradeCosts = function(id, costs, updateView) {
+		eles[id].setUpgradeCost(costs);
+		if(updateView)
+			showInfoBox(id);
 	}
 
 
@@ -119,6 +174,13 @@ function Canvas(_options) {
 			c.addHitTest = function (i, j) {
 				createHitTest(i,j);
 			}
+			c.upgradeBuilding = function() {
+				this.buildingData.lvl += 1;
+			}
+			c.setUpgradeCost = function(_costs) {
+				this.buildingData.costs = _costs;
+				console.log(this.buildingData.costs);
+			}
 
 			g.f("#f58e25").dc(0,0,50);
 
@@ -128,9 +190,11 @@ function Canvas(_options) {
 			addDrag(c);
 			stage.addChild(c);
 		})();
+
+		
 		
 
-		function addDrag(c) {			
+		function addDrag(c) {		
 			c.on("mousedown",function(e){
 				c.clickStart = Date.now();
 
@@ -203,10 +267,31 @@ function Canvas(_options) {
 	}
 
 	function showInfoBox(i) {
+
+
 		zid("buildingUpgradeViewTitle").innerHTML = eles[i].buildingData.name;
-		zid("buildingUpgradeViewImage").src = eles[i].buildingData.image1;
+
+		var img = "";
+		if(eles[i].buildingData.lvl <= 9)
+			img = eles[i].buildingData.image1;
+		else if (eles[i].buildingData.lvl <= 19)
+			img = eles[i].buildingData.image2;
+		else if(eles[i].buildingData.lvl <= 29)
+			img = eles[i].buildingData.image3;
+		else if(eles[i].buildingData.lvl <= 39)
+			img = eles[i].buildingData.image4;
+		else 
+			img = eles[i].buildingData.image5;
+
+		zid("buildingUpgradeViewImage").src = img;
+
 		zid("buildingUpgradeViewTextUpgrade").innerHTML = eles[i].buildingData.text;
-		zid("buildingUpgradeViewFormBuildingId").innerHTML = i;
+		zid("buildingUpgradeViewFormBuildingId").value = i;
+
+
+		
+		zid("buildingUpgradeViewLevel").innerHTML = eles[i].buildingData.lvl;
+
 
 
 
@@ -217,7 +302,6 @@ function Canvas(_options) {
 		zid("buildingUpgradeViewCostFood").innerHTML = eles[i].buildingData.costs.food;
 		//zid("buildingUpgradeViewCostFoodHidden").innerHTML = eles[i].buildingData.costs.food;
 
-		
 
 		zid("openLightboxBuildingUpgradeView").click();
 	}

@@ -34,19 +34,20 @@ function HelpFunction() {
 	 * object daten die übermittelt werden sollen
 	 */
 	this.pushEvent = function(action, data) {
+
 		var buildEvent = new CustomEvent(
 			'ant', 
 			{
 				'detail': 
 				{
 					'action': action,
-					'eventData' : {
-						data
-					}
+					'eventData' : data
 				}
 			}
 		);
+
 		zid("canvas").dispatchEvent(buildEvent);
+		console.log("event ausgelöst");
 	}
 
 

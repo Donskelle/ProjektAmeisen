@@ -321,15 +321,32 @@ function test (_options) {
 					break;
 			}
 
-			
+
 			HelpFunction.pushEvent("buildBuilding", {
 				'typeId': type
 			});
 		}
 	}
 	
-	//type = {1,2,3,4,5}, id = {1..n}
-	function upgrade(type, id) {
-		
+	
+	this.requestUpdate = function(buildingId) {
+		// if(möglich) 
+			// upgrade
+		return true;
+		// else
+		return false;
 	}
+
+	this.getUpgradeCots = function(buildingId) {
+		var costs = {
+			leafs: 5,
+			stone: 5,
+			food: 0
+		};
+		console.log("drin");
+		return costs;
+	}
+
+
+
 }
