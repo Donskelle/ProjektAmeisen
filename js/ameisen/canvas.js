@@ -20,7 +20,7 @@ function Canvas(_options) {
 
 	var buidlingsTypes = [
 		{
-			name: "Atomkraftwerk",
+			name: "Dumping Ground",
 			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
 			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
@@ -35,7 +35,7 @@ function Canvas(_options) {
 			}
 		},
 		{
-			name: "Atomkraftwerk",
+			name: "Pantry",
 			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
 			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
@@ -50,7 +50,7 @@ function Canvas(_options) {
 			}
 		},
 		{
-			name: "Atomkraftwerk",
+			name: "Brood Chamber",
 			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
 			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
@@ -65,7 +65,7 @@ function Canvas(_options) {
 			}
 		},
 		{
-			name: "Atomkraftwerk",
+			name: "Mushroom Chamber",
 			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
 			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
@@ -80,7 +80,7 @@ function Canvas(_options) {
 			}
 		},
 		{
-			name: "Atomkraftwerk 2",
+			name: "Storage",
 			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
 			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
@@ -147,8 +147,8 @@ function Canvas(_options) {
 	this.createDefaults = function() {
 		var circle = self.createBuilding(0);
 		var circle2 = self.createBuilding(1);
-		var circle3 = self.createBuilding(1);
-		var circle4 = self.createBuilding(1);
+		var circle3 = self.createBuilding(2);
+		var circle4 = self.createBuilding(3);
 				
 		stage.update();	
 	}
@@ -160,7 +160,7 @@ function Canvas(_options) {
 	 */
 	this.createBuilding = function(type) {
 		var i = eles.length;
-		var build = new Building(type, i);
+		var build = new Building((type-1), i);
 		stage.update();
 		
 		console.log(i);
