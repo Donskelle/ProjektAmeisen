@@ -188,26 +188,6 @@ function test (_options) {
     	
     }
  
-    // type = {1,2}
-    // function addAnts(type) {
-    	// switch(type)
-    	// {
-    		// case 1:
-	    		// if(_leafs >= _antCostW.leafs && _stone >= _antCostW.stone && _food >= _antCostW.food)
-	    		// {
-	    			// _antW++;
-	    			// countdown();
-	    		// }
-    			// break;
-    		// case 2:
-    			// if(_leafs >= _antCostS[leafs] && _stone >= _antCostS[stone] && _food >= _antCostW[food])
-    			// {
-    				// _antS++;
-    				// countdown();
-    			// }
-    			// break;
-    	// }
-    // }
 
 
 	
@@ -285,28 +265,42 @@ function test (_options) {
     
     var countdownW = zid("countdownW");
     function countdown (type, i) {
-    	
-	  countdownW.innerHTML = i;
-  		alert(i);	
+    	if(type == 1) {
+    		countdownW.innerHTML = i;
+    	}
+    	else {
+    		countdownS.innerHTML = i;
+    	}
+	  
+  		
 	  if (i > 0) {
 	    i--;
 	    // Funktion verzögert aufrufen
-	    window.setTimeout(countdown(type,i), 10000);
+	    //window.setTimeout(countdown(type,i), 10000);
 	    //window.setTimeout("countdown(" +type+ ","+ i + ")", 1000);
 	    
-	    
+	    window.setTimeout(function() {
+	    	countdown(type,i);
+	    }, 1000);
 	  }
 	  else {
 	  	switch(type) {
 	  	case 1:
 	  			//alert("finishW");
 	  			_antW++;
+	  			_leafs -= _antCostW["leafs"];
+	  			_stone -= _antCostW["stone"];
+	  			_food -= _antCostW["food"];
 	  		break;
 	  	case 2:
 	  			//alert("finishS");
 	  			_antS++;
+	  			_leafs -= _antCostS["leafs"];
+	  			_stone -= _antCostS["stone"];
+	  			_food -= _antCostS["food"];
 	  		break;
 	  }
+	  updateRes();
 	  }
 	}   
     gameLoop();
