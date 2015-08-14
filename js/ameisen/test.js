@@ -72,7 +72,54 @@ function test (_options) {
 	
 	var _increment = 1.13;
 	
-	
+			    //Buildings
+    var _buildingCostRatio = 10; //balancing
+    
+    
+    
+    //Kosten für neue Gebaeude(nicht Upgrades)
+    var _buildings = {
+	    1 : { //brood chamber
+	    	count: 0,
+	    	costLeafs: 20,
+	    	costStone: 10,
+	    	costFood: 0,
+	    	costLeafsHtml: zid("broodCostL"),
+	    	costStoneHtml:	zid("broodCostS")
+	    },
+	    2 : { //mushroom chamber
+	    	count: 0,
+	    	costLeafs: 100,
+	    	costStone: 50,
+	    	costFood: 0,
+	    	costLeafsHtml: zid("mushCostL"),
+	    	costStoneHtml:	zid("mushCostS")
+	    },
+	    3 : { //storage
+	    	count: 0,
+	    	costLeafs: 200,
+	    	costStone: 100,
+	    	costFood: 0,
+	    	costLeafsHtml: zid("storageCostL"),
+	    	costStoneHtml:	zid("storageCostS")
+	    },
+	    4 : { //pantry
+	    	count: 0,
+	    	costLeafs: 200,
+	    	costStone: 100,
+	    	costFood: 0,
+	    	costLeafsHtml: zid("pantryCostL"),
+	    	costStoneHtml:	zid("pantryCostS")
+	    },
+	    5 : { //dumping ground
+	    	count: 0,
+	    	costLeafs: 500,
+	    	costStone: 250,
+	    	costFood: 0,
+	    	costLeafsHtml: zid("dumpingCostL"),
+	    	costStoneHtml:	zid("dumpingCostS")
+	    }
+	};
   	
   	function init() {
   		var dumpingForm = zid(options.forms.dumpingBuild);
@@ -80,22 +127,24 @@ function test (_options) {
 		var broodForm = zid(options.forms.broodBuild);
 		var mushroomForm = zid(options.forms.mushroomBuild);
 		var storageForm = zid(options.forms.storageBuild);
-
-		dumpingForm.addEventListener("click", function(e) {
+		broodForm.addEventListener("click", function(e) {
 			build(1);
 		});
-		pantryForm.addEventListener("click", function(e) {
+		mushroomForm.addEventListener("click", function(e) {
 			build(2);
 		});
-		broodForm.addEventListener("click", function(e) {
+		storageForm.addEventListener("click", function(e) {
 			build(3);
 		});
-		mushroomForm.addEventListener("click", function(e) {
+		pantryForm.addEventListener("click", function(e) {
 			build(4);
 		});
-		storageForm.addEventListener("click", function(e) {
+		dumpingForm.addEventListener("click", function(e) {
 			build(5);
 		});
+		
+		
+		
 		
 		var addAntW = zid("btn_addAntW");
 		var addAntS = zid("btn_addAntS");
@@ -156,6 +205,12 @@ function test (_options) {
 		subJobC.addEventListener("click", function(e) {
 			setJobs(5,-1);
 		});
+		
+
+		for(var i=1; i<=5; i++) {
+			_buildings[i]["costLeafsHtml"].innerHTML = _buildings[i]["costLeafs"];
+			_buildings[i]["costStoneHtml"].innerHTML = _buildings[i]["costStone"];
+		}
   	}
 
   	init();
@@ -310,54 +365,7 @@ function test (_options) {
 	}   
     gameLoop();
     
-    //Buildings
-    var _buildingCostRatio = 10; //balancing
-    
-    
-    
-    //Kosten für neue Gebaeude(nicht Upgrades)
-    var _buildings = {
-	    1 : { //brood chamber
-	    	count: 0,
-	    	costLeafs: 20,
-	    	costStone: 10,
-	    	costFood: 0,
-	    	costLeafsHtml: zid("broodCostL"),
-	    	costStoneHtml:	zid("broodCostS")
-	    },
-	    2 : { //mushroom chamber
-	    	count: 0,
-	    	costLeafs: 100,
-	    	costStone: 50,
-	    	costFood: 0,
-	    	costLeafsHtml: zid("mushCostL"),
-	    	costStoneHtml:	zid("mushCostS")
-	    },
-	    3 : { //storage
-	    	count: 0,
-	    	costLeafs: 200,
-	    	costStone: 100,
-	    	costFood: 0,
-	    	costLeafsHtml: zid("storageCostL"),
-	    	costStoneHtml:	zid("storageCostS")
-	    },
-	    4 : { //pantry
-	    	count: 0,
-	    	costLeafs: 200,
-	    	costStone: 100,
-	    	costFood: 0,
-	    	costLeafsHtml: zid("pantryCostL"),
-	    	costStoneHtml:	zid("pantryCostS")
-	    },
-	    5 : { //dumping ground
-	    	count: 0,
-	    	costLeafs: 500,
-	    	costStone: 250,
-	    	costFood: 0,
-	    	costLeafsHtml: zid("DumpCostL"),
-	    	costStoneHtml:	zid("DumpCostS")
-	    }
-	};
+
 	
 	
 	
@@ -380,7 +388,7 @@ function test (_options) {
 			_buildings[type]["count"]++;
 			
 			 
-			
+				
 				_buildings[type]["costLeafsHtml"].innerHTML = _buildings[type]["costLeafs"];
 				_buildings[type]["costStoneHtml"].innerHTML = _buildings[type]["costStone"];
 				
