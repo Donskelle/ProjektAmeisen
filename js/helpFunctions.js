@@ -13,12 +13,19 @@ function HelpFunction() {
  * @return {[type]} [description]
  */
 (function() {
-	// Schließt die Lightbox
+	/**
+	 * [closeLightbox description]
+	 * Schließt alle geöffneten Lightboxes
+	 * Die Lightboxes werden über die Pseudo Klasse :target geöffnet. Wenn diese nun geöffnet sind,
+	 * wird ein Klick auf einem anderem Element ausgeführt und so die Lightbox geschlossen.
+	 */
 	this.closeLightbox = function(e) {
+		// Kein Event
 		if(typeof e === "undefined")
 		{
 			document.getElementById("closeLightbox").click();
 		}
+		// Durch Event ausgelöst. Prüfen ob das rictige Element ausgewählt wurde
 		else if(e.target.className == "lightboxWrapper") {
 			document.getElementById("closeLightbox").click();
 		}
@@ -49,7 +56,17 @@ function HelpFunction() {
 		zid("canvas").dispatchEvent(buildEvent);
 	}
 
-
+	/**
+	 * [merge description]
+	 * Verbindet 2. Objecte. Alle Einträge aus dem overWriteObject werden ins 1. Object kopiert.
+	 * Elemente werden kopiert. Keine Referenz
+	 * @param  {[type]} defaultObject   [description]
+	 * Das zu bearbeitende Objekt
+	 * @param  {[type]} overWriteObject [description]
+	 * Das zu kopierende Objekt
+	 * @return {[type]}                 [description]
+	 * Der erweiterte 1. Parameter
+	 */
 	this.merge = function(defaultObject, overWriteObject) {
 		for (var prop in overWriteObject) {
 		    defaultObject[prop] = overWriteObject[prop];
@@ -136,6 +153,7 @@ function HelpFunction() {
         window.requestAnimationFrame = function(callback, element) {
             var currTime = new Date().getTime();
             var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            console.log(timeToCall);
             var id = window.setTimeout(function() { callback(currTime + timeToCall); },
               timeToCall);
             lastTime = currTime + timeToCall;
@@ -148,6 +166,9 @@ function HelpFunction() {
         };
 }());
 
+/**
+ * Fallback für ältere Browser bei date.now()
+ */
 if (!Date.now) {
   Date.now = function now() {
     return new Date().getTime();

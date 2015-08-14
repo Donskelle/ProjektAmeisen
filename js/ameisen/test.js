@@ -348,6 +348,35 @@ function test (_options) {
 		return costs;
 	}
 
+	this.getValues = function() {
+		var values = {
+			'ressources': {
+				'leafs': 0,
+				'stone': 0,
+				'food': 0
+			},
+			'antCount': 0,
+			'buildings': [
+				{
+					'buildingId': 0,
+					'lvl': 10,
+					'type': 0
+				},
+				{
+					'buildingId': 0,
+					'lvl': 10,
+					'type': 0
+				}
+			]
+		};
+
+		return values;
+	}
+
+	this.setValues = function(values) {
+		// zum zusammenfüheren verwenden
+		//HelpFunction.merge(a,b);
+	}
 
 
 }

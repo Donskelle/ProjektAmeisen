@@ -1,3 +1,9 @@
+/**
+ * [Canvas description]
+ * Einzige Klasse, welche auf dem Canvas mahlt. Außerdem werden die Erstellten Gebüude gespeichert.
+ * Der eigentliche Bauprozess wird, wird in "test" durchgeführt.
+ * @param {[object]} _options [description]
+ */
 function Canvas(_options) {
 	var self = this;
 
@@ -90,6 +96,13 @@ function Canvas(_options) {
 		}
 	]
 
+
+	/**
+	 * [init description]
+	 * Wird deim Erstellen des Objekts ausgeführt. 
+	 * 
+	 * @return {[type]} [description]
+	 */
 	function init() {
 		options = _options;
 		var canv = zid(options.canvas);
@@ -127,6 +140,10 @@ function Canvas(_options) {
 		
 	}
 
+	/**
+	 * [createDefaults description]
+	 * Erstellt Standart Gebäude
+	 */
 	this.createDefaults = function() {
 		var circle = self.createBuilding(0);
 		var circle2 = self.createBuilding(1);
@@ -136,7 +153,12 @@ function Canvas(_options) {
 		stage.update();	
 	}
 
-	this.createBuilding = function(type) {
+	/**
+	 * [createBuilding description]
+	 * Erstellt eine Instanz des Objects Building und fragt die Upgradekosten ab. 
+	 * @param  {[number]} type [description]
+	 */
+	this.createBuilding = function(type) 
 		var i = eles.length;
 		var build = new Building(type, i);
 		stage.update();
@@ -148,11 +170,25 @@ function Canvas(_options) {
 		});
 	}
 
+	/**
+	 * [upgradeBuilding description]
+	 * Public Mehtode für das Upgrade eines Gebäudes
+	 * @param  {[number]} id [description]
+	 * Die Id des Gebäudes
+	 */
 	this.upgradeBuilding = function(id) {
 		eles[id].upgradeBuilding();
-
 	}
 
+	/**
+	 * [setUpgradeCosts description]
+	 * Public Mehtode um die Upgrade Kosten eines Geäudes festzulegen
+	 * @param {[number]} id         [description]
+	 * Id des Gebäudes
+	 * @param {[object]} costs      [description]
+	 * Object mit allen Werten
+	 * @param {[boolean]} updateView [description]
+	 */
 	this.setUpgradeCosts = function(id, costs, updateView) {
 		eles[id].setUpgradeCost(costs);
 		if(updateView)
