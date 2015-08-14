@@ -158,7 +158,7 @@ function Canvas(_options) {
 	 * Erstellt eine Instanz des Objects Building und fragt die Upgradekosten ab. 
 	 * @param  {[number]} type [description]
 	 */
-	this.createBuilding = function(type) 
+	this.createBuilding = function(type) {
 		var i = eles.length;
 		var build = new Building(type, i);
 		stage.update();
