@@ -45,8 +45,8 @@ function test (_options) {
 	//Tickrate der verschiedenen Loops
 	var _tickRate = 1500;
 	
-	var _hatchRateW = 10000;	
-	var _hatchRateS = 15000;
+	var _hatchRateW = 10;	
+	var _hatchRateS = 15;
 	
 	//zur Berechnung s. setJobs case 4
 	var _HATCHW = 10000; 
@@ -97,6 +97,8 @@ function test (_options) {
 			build(5);
 		});
 		
+		var addAntW = zid("btn_addAntW");
+		var addAntS = zid("btn_addAntS");
 		
 		var addJobL = zid("btn_addJobL");
 		var subJobL = zid("btn_subJobL");
@@ -111,7 +113,14 @@ function test (_options) {
 		var subJobHa = zid("btn_subJobHa");
 		
 		var addJobC = zid("btn_addJobC");
-		var subJobC = zid("btn_subJobC");	
+		var subJobC = zid("btn_subJobC");
+		
+		addAntW.addEventListener("click", function(e) {
+			setJobs(6,1);
+		});	
+		addAntS.addEventListener("click", function(e) {
+			setJobs(7,1);
+		});		
 		
 		addJobL.addEventListener("click", function(e) {
 			setJobs(1,1);
@@ -166,41 +175,51 @@ function test (_options) {
     var _stoneCount = zid("stoneCount");
     var _foodCount = zid("foodCount");
     var _amberCount = zid("amberCount");
+    var _workerCount = zid("workerCount");
+    var _soldierCount = zid("soldierCount");
     function updateRes() {
     	_leafCount.innerHTML = _leafs;
     	_stoneCount.innerHTML = _stone;
     	_foodCount.innerHTML = _food;
     	_amberCount.innerHTML = _amber;
+    	_workerCount.innerHTML = _antW;
+    	_soldierCount.innerHTML = _antS;
 
     	
     }
-    
+ 
     // type = {1,2}
-    function addAnts(type) {
-    	switch(type)
-    	{
-    		case 1:
-	    		if(_leafs >= _antCostW["leafs"] && _stone >= _antCostW[stone] && _food >= _antCostW[food])
-	    		{
-	    			_antW++;
-	    		}
-    			break;
-    		case 2:
-    			if(_leafs >= _antCostS[leafs] && _stone >= _antCostS[stone] && _food >= _antCostW[food])
-    			{
-    				_antS++;
-    			}
-    			break;
-    	}
-    }	
-    
+    // function addAnts(type) {
+    	// switch(type)
+    	// {
+    		// case 1:
+	    		// if(_leafs >= _antCostW.leafs && _stone >= _antCostW.stone && _food >= _antCostW.food)
+	    		// {
+	    			// _antW++;
+	    			// countdown();
+	    		// }
+    			// break;
+    		// case 2:
+    			// if(_leafs >= _antCostS[leafs] && _stone >= _antCostS[stone] && _food >= _antCostW[food])
+    			// {
+    				// _antS++;
+    				// countdown();
+    			// }
+    			// break;
+    	// }
+    // }
+
+
+	
+    _jobAntW = zid("jobAntW");
+    _jobAntS = zid("jobAntS");
     _jobCountL = zid("jobCountL");
     _jobCountS = zid("jobCountS");
     _jobCountHu = zid("jobCountHu");
     _jobCountHa = zid("jobCountHa");
     _jobCountC = zid("jobCountC");
     
-    //type = {1,2,3,4,5}, amount = {1,-1}
+    //type = {1,2,3,4,5,6,7}, amount = {1,-1}
     function setJobs(type, amount) {
     	
     	if(_antW >= 1 || amount == -1)
@@ -210,6 +229,7 @@ function test (_options) {
 	    		case 1: //collect leafs
 	    			if(_jobLeafs >= 1 || amount == 1)
 	    			_jobLeafs += amount;
+	    			
 	    			_prodLeafs = _jobLeafs * _ratioLeafs;
 	    			_jobCountL.innerHTML = _jobLeafs;
 	    			
@@ -229,6 +249,7 @@ function test (_options) {
 	    		case 4: //hatch
 	    			if(_jobHatch >= 1 || amount == 1)
 	    			_jobHatch += amount;
+	    			
 	    			_hatchRateW = _HATCHW - (_hatchRatioW * _jobHatch);
 	    			_hatchRateS = _HATCHS - (_hatchRatioS * _jobHatch);
 	    			_jobCountHa.innerHTML = _jobHatch;
@@ -236,13 +257,58 @@ function test (_options) {
 	    		case 5:	//clean
 	    			if(_jobClean >= 1 || amount == 1)
 	    			_jobClean += amount;
+	    			
 	    			_jobCountC.innerHTML = _jobClean;
 	    			//weitere Berechnung fehlt noch
 	    			break;
+	    		case 6:	//addAntW
+	    		
+	    			if(_leafs >= _antCostW["leafs"] && _stone >= _antCostW["stone"] && _food >= _antCostW["food"])
+	    			{
+	    				
+		    			countdown(1, _hatchRateW);
+	    			}
+	    			amount *= 0;
+	    			break;
+	    		case 7:	//addAntS
+	    			if(_leafs >= _antCostS["leafs"] && _stone >= _antCostS["stone"] && _food >= _antCostW["food"])
+    				{
+    					
+	    				countdown(2, _hatchRateS);
+    				}
+	    			amount *= 0;
+	    			break;
 	    	}
+	    	_antW += -amount;
 	    }
     }
     
+    var countdownW = zid("countdownW");
+    function countdown (type, i) {
+    	
+	  countdownW.innerHTML = i;
+  		alert(i);	
+	  if (i > 0) {
+	    i--;
+	    // Funktion verzögert aufrufen
+	    window.setTimeout(countdown(type,i), 10000);
+	    //window.setTimeout("countdown(" +type+ ","+ i + ")", 1000);
+	    
+	    
+	  }
+	  else {
+	  	switch(type) {
+	  	case 1:
+	  			//alert("finishW");
+	  			_antW++;
+	  		break;
+	  	case 2:
+	  			//alert("finishS");
+	  			_antS++;
+	  		break;
+	  }
+	  }
+	}   
     gameLoop();
     
     //Buildings
@@ -256,33 +322,46 @@ function test (_options) {
 	    	count: 0,
 	    	costLeafs: 20,
 	    	costStone: 10,
-	    	costFood: 0
+	    	costFood: 0,
+	    	costLeafsHtml: zid("broodCostL"),
+	    	costStoneHtml:	zid("broodCostS")
 	    },
 	    2 : { //mushroom chamber
 	    	count: 0,
 	    	costLeafs: 100,
 	    	costStone: 50,
-	    	costFood: 0
+	    	costFood: 0,
+	    	costLeafsHtml: zid("mushCostL"),
+	    	costStoneHtml:	zid("mushCostS")
 	    },
 	    3 : { //storage
 	    	count: 0,
 	    	costLeafs: 200,
 	    	costStone: 100,
-	    	costFood: 0
+	    	costFood: 0,
+	    	costLeafsHtml: zid("storageCostL"),
+	    	costStoneHtml:	zid("storageCostS")
 	    },
 	    4 : { //pantry
 	    	count: 0,
 	    	costLeafs: 200,
 	    	costStone: 100,
-	    	costFood: 0
+	    	costFood: 0,
+	    	costLeafsHtml: zid("pantryCostL"),
+	    	costStoneHtml:	zid("pantryCostS")
 	    },
 	    5 : { //dumping ground
 	    	count: 0,
 	    	costLeafs: 500,
 	    	costStone: 250,
-	    	costFood: 0
+	    	costFood: 0,
+	    	costLeafsHtml: zid("DumpCostL"),
+	    	costStoneHtml:	zid("DumpCostS")
 	    }
 	};
+	
+	
+	
 	//type = {1,2,3,4,5}
 	function build(type) {
 		//Abfrage, ob die Ressourcen die Kosten uebersteigen
@@ -300,6 +379,12 @@ function test (_options) {
 			_buildings[type]["costFood"] *= _buildingCostRatio;
 			
 			_buildings[type]["count"]++;
+			
+			 
+			for(var i=1; i<7; i++) {
+				_buildings[i]["costLeafsHtml"].innerHTML = _buildings[i]["costLeafs"];
+				_buildings[i]["costStoneHtml"].innerHTML = _buildings[i]["costStone"];
+			};
 			
 			switch(type) //kann eventuell raus?
 			{
@@ -332,6 +417,7 @@ function test (_options) {
 	this.requestUpdate = function(buildingId) {
 		// if(möglich) 
 			// upgrade
+			
 		return true;
 		// else
 		return false;
