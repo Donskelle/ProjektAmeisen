@@ -27,7 +27,7 @@ function NaturalDisasters() {
 
 	(function init(){
 
-		window.setTimeout(randomDisasters, 2000);
+		window.setTimeout(randomDisasters, 120000);
 	})();
 
 	function randomDisasters() {
@@ -64,7 +64,7 @@ function NaturalDisasters() {
 
 				break;
 		}
-		window.setTimeout(randomDisasters, 3000);
+		window.setTimeout(randomDisasters, 120000);
 	}
 
 
