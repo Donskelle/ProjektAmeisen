@@ -145,10 +145,10 @@ function Canvas(_options) {
 	 * Erstellt Standart Gebäude
 	 */
 	this.createDefaults = function() {
-		var circle = self.createBuilding(0);
-		var circle2 = self.createBuilding(1);
-		var circle3 = self.createBuilding(2);
-		var circle4 = self.createBuilding(3);
+		var circle = self.createBuilding(1);
+		var circle2 = self.createBuilding(2);
+		var circle3 = self.createBuilding(3);
+		var circle4 = self.createBuilding(4);
 				
 		stage.update();	
 	}
