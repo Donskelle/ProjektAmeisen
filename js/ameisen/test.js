@@ -247,6 +247,9 @@ function test (_options) {
 	    			{
 	    				
 		    			countdown(1, _hatchRateW);
+		    			_leafs -= _antCostW["leafs"];
+	  					_stone -= _antCostW["stone"];
+	  					_food -= _antCostW["food"];
 	    			}
 	    			amount *= 0;
 	    			break;
@@ -255,6 +258,9 @@ function test (_options) {
     				{
     					
 	    				countdown(2, _hatchRateS);
+	    				_leafs -= _antCostS["leafs"];
+	  					_stone -= _antCostS["stone"];
+	  					_food -= _antCostS["food"];
     				}
 	    			amount *= 0;
 	    			break;
@@ -267,6 +273,7 @@ function test (_options) {
     function countdown (type, i) {
     	if(type == 1) {
     		countdownW.innerHTML = i;
+    		
     	}
     	else {
     		countdownS.innerHTML = i;
@@ -288,9 +295,7 @@ function test (_options) {
 	  	case 1:
 	  			//alert("finishW");
 	  			_antW++;
-	  			_leafs -= _antCostW["leafs"];
-	  			_stone -= _antCostW["stone"];
-	  			_food -= _antCostW["food"];
+	  			
 	  		break;
 	  	case 2:
 	  			//alert("finishS");
@@ -375,10 +380,10 @@ function test (_options) {
 			_buildings[type]["count"]++;
 			
 			 
-			for(var i=1; i<7; i++) {
-				_buildings[i]["costLeafsHtml"].innerHTML = _buildings[i]["costLeafs"];
-				_buildings[i]["costStoneHtml"].innerHTML = _buildings[i]["costStone"];
-			};
+			
+				_buildings[type]["costLeafsHtml"].innerHTML = _buildings[type]["costLeafs"];
+				_buildings[type]["costStoneHtml"].innerHTML = _buildings[type]["costStone"];
+				
 			
 			switch(type) //kann eventuell raus?
 			{
