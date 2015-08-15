@@ -5,6 +5,10 @@
  * @return {[type]}         [description]
  */
 function AmeisenStage(_options) {
+	/**
+	 * [options description]
+	 * Die standart Optionen
+	 */
 	var options = {
 		canvas: "canvas",
 		canvasConnector: "connector",
@@ -19,6 +23,10 @@ function AmeisenStage(_options) {
 	};
 	var builder,canvasBuilder, tester, disasters;
 
+	/**
+	 * [init description]
+	 * Initzialisiert das Spiel. Diese Function wird automatisch aufgerufen, sobald das Objekt erstellt wurde.
+	 */
 	function init() {
 		var that = this;
 		canvasResize();
@@ -35,6 +43,9 @@ function AmeisenStage(_options) {
 
 		disasters = new NaturalDisasters();
 
+		/**
+		 * Hier findet die Kommunikation zwischen den Klassen statt.
+		 */
 		initController();
 
 		canvasBuilder.createDefaults();
@@ -94,21 +105,19 @@ function AmeisenStage(_options) {
 					}
 					break;
 
-				//
-				case 4:
-				
+				// Katastrophe ausgebrochen
+				case "disaster":
+					var values = e.detail.eventData.calculateFunction(tester.getCurrentValues());
+					tester.setValues(values);
 					break;
 
 				//
-				case 5:
+				case "####":
 				
 					break;
 			}
-
-			
 		});
 	}
-
 
 	init();
 }

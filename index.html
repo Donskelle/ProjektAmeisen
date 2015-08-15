@@ -25,11 +25,11 @@
 			</tr>
 			<tr>
 				<td>Leafs</td>
-				<td class="buildCostLeafs">1502313</td>
+				<td class="buildCostLeafs" id="broodCostL">1502313</td>
 			</tr>
 			<tr>
 				<td>Stone</td>
-				<td class="buildCostStone">12011</td>
+				<td class="buildCostStone" id="broodCostS">12011</td>
 			</tr>
 			<tr>
 				<td></td>
@@ -43,11 +43,11 @@
 			</tr>
 			<tr>
 				<td>Leafs</td>
-				<td class="buildCostLeafs">1502313</td>
+				<td class="buildCostLeafs" id="mushCostL">1502313</td>
 			</tr>
 			<tr>
 				<td>Stone</td>
-				<td class="buildCostStone">12011</td>
+				<td class="buildCostStone" id="mushCostS">12011</td>
 			</tr>
 			<tr>
 				<td></td>
@@ -61,11 +61,11 @@
 			</tr>
 			<tr>
 				<td>Leafs</td>
-				<td class="buildCostLeafs">1502313</td>
+				<td class="buildCostLeafs" id="storageCostL">1502313</td>
 			</tr>
 			<tr>
 				<td>Stone</td>
-				<td class="buildCostStone">12011</td>
+				<td class="buildCostStone" id="storageCostS">12011</td>
 			</tr>
 			<tr>
 				<td></td>
@@ -79,11 +79,11 @@
 			</tr>
 			<tr>
 				<td>Leafs</td>
-				<td class="buildCostLeafs">1502313</td>
+				<td class="buildCostLeafs" id="pantryCostL">1502313</td>
 			</tr>
 			<tr>
 				<td>Stone</td>
-				<td class="buildCostStone">12011</td>		
+				<td class="buildCostStone" id="pantryCostS">12011</td>		
 			</tr>
 			<tr>
 				<td></td>
@@ -96,11 +96,11 @@
 			</tr>
 			<tr>
 				<td>Leafs</td>
-				<td class="buildCostLeafs">1502313</td>
+				<td class="buildCostLeafs" id="dumpingCostL">1502313</td>
 			</tr>
 			<tr>
 				<td>Stone</td>
-				<td class="buildCostStone">12011</td>
+				<td class="buildCostStone" id="dumpingCostS">12011</td>
 			</tr>
 			<tr>
 				<td></td>
@@ -112,6 +112,18 @@
 	<div class="draggable">
 	  <div class="handle">Jobs</div>
 	  <table id="jobTable">
+	  	<tr>
+	  		<td class="jobName">Hatch Worker</td>
+		  	<td class="jobCount" id="workerCount"><span>0</span></td>
+		  	<td><button id="btn_addAntW">+</button></td>
+		  	<td id="countdownW"><span>0</span></td>
+	  	</tr>
+	  	<tr>
+	  		<td class="jobName">Hatch Soldier</td>
+		  	<td class="jobCount" id="soldierCount"><span>0</span></td>
+		  	<td><button id="btn_addAntS">+</button></td>
+		  	<td id="countdownS"><span>0</span></td>
+	  	</tr>
 	  	<tr>
 	  		<td class="jobName">Collect Leafs</td>
 	  		<td><button id="btn_subJobL">-</button></td>

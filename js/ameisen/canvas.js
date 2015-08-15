@@ -1,3 +1,9 @@
+/**
+ * [Canvas description]
+ * Einzige Klasse, welche auf dem Canvas mahlt. Außerdem werden die Erstellten Gebüude gespeichert.
+ * Der eigentliche Bauprozess wird, wird in "test" durchgeführt.
+ * @param {[object]} _options [description]
+ */
 function Canvas(_options) {
 	var self = this;
 
@@ -14,7 +20,7 @@ function Canvas(_options) {
 
 	var buidlingsTypes = [
 		{
-			name: "Atomkraftwerk",
+			name: "Brood Chamber",
 			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
 			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
@@ -29,7 +35,7 @@ function Canvas(_options) {
 			}
 		},
 		{
-			name: "Atomkraftwerk",
+			name: "Mushroom Chamber",
 			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
 			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
@@ -44,37 +50,7 @@ function Canvas(_options) {
 			}
 		},
 		{
-			name: "Atomkraftwerk",
-			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
-			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
-			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			lvl: 1,
-			text: "Ich mach die super Energie, byebye global warming",
-			costs: {
-				leafs: null,
-		    	stone: null,
-		    	food: null
-			}
-		},
-		{
-			name: "Atomkraftwerk",
-			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
-			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
-			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			lvl: 1,
-			text: "Ich mach die super Energie, byebye global warming",
-			costs: {
-				leafs: null,
-		    	stone: null,
-		    	food: null
-			}
-		},
-		{
-			name: "Atomkraftwerk 2",
+			name: "Storage",
 			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
 			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
@@ -87,9 +63,46 @@ function Canvas(_options) {
 		    	stone: null,
 		    	food: null
 			}
+		},
+		{
+			name: "Pantry",
+			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
+			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
+			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			lvl: 1,
+			text: "Ich mach die super Energie, byebye global warming",
+			costs: {
+				leafs: null,
+		    	stone: null,
+		    	food: null
+			}
+		},
+		{
+			name: "Dumping Ground",
+			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
+			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
+			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			lvl: 1,
+			text: "Ich mach die super Energie, byebye global warming",
+			costs: {
+				leafs: null,
+		    	stone: null,
+		    	food: null
+			}
 		}
 	]
 
+
+	/**
+	 * [init description]
+	 * Wird deim Erstellen des Objekts ausgeführt. 
+	 * 
+	 * @return {[type]} [description]
+	 */
 	function init() {
 		options = _options;
 		var canv = zid(options.canvas);
@@ -127,18 +140,27 @@ function Canvas(_options) {
 		
 	}
 
+	/**
+	 * [createDefaults description]
+	 * Erstellt Standart Gebäude
+	 */
 	this.createDefaults = function() {
-		var circle = self.createBuilding(0);
-		var circle2 = self.createBuilding(1);
-		var circle3 = self.createBuilding(1);
-		var circle4 = self.createBuilding(1);
+		var circle = self.createBuilding(1);
+		var circle2 = self.createBuilding(2);
+		var circle3 = self.createBuilding(3);
+		var circle4 = self.createBuilding(4);
 				
 		stage.update();	
 	}
 
+	/**
+	 * [createBuilding description]
+	 * Erstellt eine Instanz des Objects Building und fragt die Upgradekosten ab. 
+	 * @param  {[number]} type [description]
+	 */
 	this.createBuilding = function(type) {
 		var i = eles.length;
-		var build = new Building(type, i);
+		var build = new Building((type-1), i);
 		stage.update();
 		
 		console.log(i);
@@ -148,11 +170,25 @@ function Canvas(_options) {
 		});
 	}
 
+	/**
+	 * [upgradeBuilding description]
+	 * Public Mehtode für das Upgrade eines Gebäudes
+	 * @param  {[number]} id [description]
+	 * Die Id des Gebäudes
+	 */
 	this.upgradeBuilding = function(id) {
 		eles[id].upgradeBuilding();
-
 	}
 
+	/**
+	 * [setUpgradeCosts description]
+	 * Public Mehtode um die Upgrade Kosten eines Geäudes festzulegen
+	 * @param {[number]} id         [description]
+	 * Id des Gebäudes
+	 * @param {[object]} costs      [description]
+	 * Object mit allen Werten
+	 * @param {[boolean]} updateView [description]
+	 */
 	this.setUpgradeCosts = function(id, costs, updateView) {
 		eles[id].setUpgradeCost(costs);
 		if(updateView)
