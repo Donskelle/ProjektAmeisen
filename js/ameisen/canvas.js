@@ -20,36 +20,6 @@ function Canvas(_options) {
 
 	var buidlingsTypes = [
 		{
-			name: "Dumping Ground",
-			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
-			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
-			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			lvl: 1,
-			text: "Ich mach die super Energie, byebye global warming",
-			costs: {
-				leafs: null,
-		    	stone: null,
-		    	food: null
-			}
-		},
-		{
-			name: "Pantry",
-			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
-			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
-			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			lvl: 1,
-			text: "Ich mach die super Energie, byebye global warming",
-			costs: {
-				leafs: null,
-		    	stone: null,
-		    	food: null
-			}
-		},
-		{
 			name: "Brood Chamber",
 			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
@@ -88,6 +58,36 @@ function Canvas(_options) {
 			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			lvl: 1,
 			text: "Ich mach die SUPER ENERGIE. BYE BYE global warming",
+			costs: {
+				leafs: null,
+		    	stone: null,
+		    	food: null
+			}
+		},
+		{
+			name: "Pantry",
+			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
+			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
+			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			lvl: 1,
+			text: "Ich mach die super Energie, byebye global warming",
+			costs: {
+				leafs: null,
+		    	stone: null,
+		    	food: null
+			}
+		},
+		{
+			name: "Dumping Ground",
+			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
+			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
+			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			lvl: 1,
+			text: "Ich mach die super Energie, byebye global warming",
 			costs: {
 				leafs: null,
 		    	stone: null,
