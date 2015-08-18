@@ -40,7 +40,9 @@ function test (_options) {
 	var _ratioHunt = 1;
 	var _ratioHatch = 1;
 	var _ratioClean = 1;
+
 	
+	var _upgradeCostIncrease = 2;
 	
 	//Tickrate der verschiedenen Loops
 	var _tickRate = 1500;
@@ -76,7 +78,9 @@ function test (_options) {
     var _buildingCostRatio = 10; //balancing
     
     
-    
+    var buildedBuildings = [];
+
+
     //Kosten für neue Gebaeude(nicht Upgrades)
     var _buildings = {
 	    1 : { //brood chamber
@@ -85,7 +89,12 @@ function test (_options) {
 	    	costStone: 10,
 	    	costFood: 0,
 	    	costLeafsHtml: zid("broodCostL"),
-	    	costStoneHtml:	zid("broodCostS")
+	    	costStoneHtml:	zid("broodCostS"),
+	    	upgradeCost: {
+	    		leafs: 10,
+	    		stone: 10,
+	    		food: 0
+	    	}
 	    },
 	    2 : { //mushroom chamber
 	    	count: 1,
@@ -95,7 +104,12 @@ function test (_options) {
 	    	costLeafsHtml: zid("mushCostL"),
 	    	costStoneHtml:	zid("mushCostS"),
 	    	leafConsume: 2,
-	    	foodProd: 1
+	    	foodProd: 1,
+	    	upgradeCost: {
+	    		leafs: 10,
+	    		stone: 10,
+	    		food: 0
+	    	}
 	    },
 	    3 : { //storage
 	    	count: 0,
@@ -103,7 +117,12 @@ function test (_options) {
 	    	costStone: 100,
 	    	costFood: 0,
 	    	costLeafsHtml: zid("storageCostL"),
-	    	costStoneHtml:	zid("storageCostS")
+	    	costStoneHtml:	zid("storageCostS"),
+	    	upgradeCost: {
+	    		leafs: 10,
+	    		stone: 10,
+	    		food: 0
+	    	}
 	    },
 	    4 : { //pantry
 	    	count: 0,
@@ -111,7 +130,12 @@ function test (_options) {
 	    	costStone: 100,
 	    	costFood: 0,
 	    	costLeafsHtml: zid("pantryCostL"),
-	    	costStoneHtml:	zid("pantryCostS")
+	    	costStoneHtml:	zid("pantryCostS"),
+	    	upgradeCost: {
+	    		leafs: 10,
+	    		stone: 10,
+	    		food: 0
+	    	}
 	    },
 	    5 : { //dumping ground
 	    	count: 0,
@@ -119,7 +143,12 @@ function test (_options) {
 	    	costStone: 250,
 	    	costFood: 0,
 	    	costLeafsHtml: zid("dumpingCostL"),
-	    	costStoneHtml:	zid("dumpingCostS")
+	    	costStoneHtml:	zid("dumpingCostS"),
+	    	upgradeCost: {
+	    		leafs: 10,
+	    		stone: 10,
+	    		food: 0
+	    	}
 	    }
 	};
   	
@@ -238,6 +267,8 @@ function test (_options) {
     var _stoneProd = zid("stoneProd");
     var _foodProd = zid("foodProd");
     var _amberProd = zid("amberProd");
+
+
     function updateRes() {
     	_prodLeafs = (_jobLeafs * _ratioLeafs) - (_buildings[2]["leafConsume"] * _buildings[2]["count"]);
     	if(_prodLeafs < 0){
@@ -258,10 +289,6 @@ function test (_options) {
     	_stoneProd.innerHTML = _prodStone;
     	_foodProd.innerHTML = _prodFood;
     	_amberProd.innerHTML = _prodAmber;
-    	
-    	
-
-    	
     }
  
 
@@ -423,6 +450,14 @@ function test (_options) {
 					break;
 			}
 
+			var countBuildings = buildedBuildings.length;
+
+
+			buildedBuildings[countBuildings] = {};
+
+			HelpFunction.merge(buildedBuildings[countBuildings], _buildings[type]);
+			buildedBuildings[countBuildings].lvl = 1;
+			
 
 			HelpFunction.pushEvent("buildBuilding", {
 				'typeId': type
@@ -432,23 +467,24 @@ function test (_options) {
 	
 	
 	this.requestUpdate = function(buildingId) {
-		// if(möglich) 
-			// upgrade
-			
-		return true;
-		// else
-		return false;
+		if(buildedBuildings[buildingId].upgradeCost.stone <= _stone
+			&& buildedBuildings[buildingId].upgradeCost.leafs <= _leafs
+			&& buildedBuildings[buildingId].upgradeCost.food <= _food
+			)
+		{
+			buildedBuildings[buildingId].upgradeCost.lvl += 1;
+			buildedBuildings[buildingId].upgradeCost.stone *= _upgradeCostIncrease;
+			buildedBuildings[buildingId].upgradeCost.food *= _upgradeCostIncrease;
+			buildedBuildings[buildingId].upgradeCost.leafs *= _upgradeCostIncrease;
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	this.getUpgradeCots = function(buildingId) {
-		var costs = {
-			leafs: 5,
-			stone: 5,
-			food: 0
-		};
-
-		
-		return costs;
+		return buildedBuildings[buildingId].upgradeCost;
 	}
 
 	this.getValues = function() {
