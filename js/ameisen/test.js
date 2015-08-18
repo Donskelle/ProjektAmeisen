@@ -79,6 +79,7 @@ function test (_options) {
     
     
     var buildedBuildings = [];
+    var timerBuild = new countdown();
 
 
     //Kosten für neue Gebaeude(nicht Upgrades)
@@ -355,7 +356,7 @@ function test (_options) {
 	    		
 	    			if(_leafs >= _antCostW["leafs"] && _stone >= _antCostW["stone"] && _food >= _antCostW["food"])
 	    			{
-		    			countdown(1, _hatchRateW);
+		    			timerBuild.addW(_hatchRateW);
 		    			_leafs -= _antCostW["leafs"];
 	  					_stone -= _antCostW["stone"];
 	  					_food -= _antCostW["food"];
@@ -365,7 +366,7 @@ function test (_options) {
 	    		case 7:	//addAntS
 	    			if(_leafs >= _antCostS["leafs"] && _stone >= _antCostS["stone"] && _food >= _antCostW["food"])
     				{
-	    				countdown(2, _hatchRateS);
+	    				timerBuild.addS(_hatchRateS);
 	    				_leafs -= _antCostS["leafs"];
 	  					_stone -= _antCostS["stone"];
 	  					_food -= _antCostS["food"];
@@ -379,40 +380,103 @@ function test (_options) {
     }
     
     var countdownW = zid("countdownW");
-    function countdown (type, i) {
-    	if(type == 1) {
-    		 
-    		countdownW.innerHTML = (Math.floor(i * 10) / 10).toFixed(2);
-    		
+   function countdown () {
+    	var timer;
+    	var countDowns = {
+    		ants: {
+    			end: null
+    		},
+    		solders: {
+    			end: null
+    		}
     	}
-    	else {
-    		countdownS.innerHTML = (Math.floor(i * 10) / 10).toFixed(2);
+    	var ants = [];
+    	var solders = [];
+
+    	this.addW = function(rate) {
+    		ants[ants.length] = {
+    			end: Date.now() + (rate * 1000) + Math.floor(countDowns.ants.end * 1000)
+    		};
+
+    		countDowns.ants.end += (rate);
+
+    		if(timer == null)
+    			start();
     	}
-	  
-  		
-	  if (i > 0) {
-	    i -= .1;
-	
-	    window.setTimeout(function() {
-	    	countdown(type,i);
-	    }, 100);
-	  }
-	  else {
-	  	switch(type) {
-	  	case 1:
-	  			countdownW.innerHTML = (0.00).toFixed(2);
-	  			_antW++;
-	  			
-	  		break;
-	  	case 2:
-	  			countdownS.innerHTML = (0.00).toFixed(2);
-	  			_antS++;
-	  			
-	  		break;
-	  }
-	  updateRes();
-	  }
-	}   
+    	this.addS = function(rate) {
+    		solders[solders.length] = {
+    			end: Date.now() + (rate * 1000) + Math.floor(countDowns.solders.end * 1000)
+    		}
+
+    		countDowns.solders.end += (rate);
+
+    		if(timer == null)
+    			start();
+    	}
+
+    	function start() {
+    		timer = window.setInterval(function() {
+    			tick();
+	    	}, 100);
+    	}
+    	function end() {
+    		window.clearInterval(timer);
+    		timer = null;
+    	}
+
+    	function tick() {
+    		if(ants.length > 0) {
+    			countDowns.ants.end -= .1;
+
+	    		for (var i = 0; i < ants.length; i++) {
+	    			if(typeof ants[i] != undefined) {
+	    				// Prüfen, ob fertig
+	    				if(ants[i].end <= Date.now()) {
+	    					_antW++;
+	   						ants.splice(i, 1);
+
+	   						if(ants.length == 0)
+	   							countDowns.ants.end = 0;
+	    				}
+	    			}
+	    		};
+	    	}
+
+	    	if(solders.length > 0) {
+	    		countDowns.solders.end -= .1;
+
+	    		for (var i = 0; i < solders.length; i++) {
+	    			if(typeof solders[i] != undefined) {
+	    				// Prüfen, ob fertig
+	    				if(solders[i].end <= Date.now()) {
+	    					_antS++;
+	   						solders.splice(i, 1);
+
+	   						if(ants.length == 0)
+	   							countDowns.solders.end = 0;
+	    				}
+	    			}
+	    		};
+    		}
+    		if(allDone())
+    			end();
+
+    		updateView();
+    		updateRes();
+    	}
+
+    	function allDone() {
+    		if(solders.length > 0 || ants.length > 0)
+    			return false;
+
+    		return true;
+    	}
+
+    	function updateView() {
+    		countdownW.innerHTML = (Math.floor(countDowns.ants.end * 10) / 10).toFixed(2);
+    		countdownS.innerHTML = (Math.floor(countDowns.solders.end * 10) / 10).toFixed(2);
+    	}
+	}
     gameLoop();
     
 
