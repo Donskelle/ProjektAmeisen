@@ -49,12 +49,12 @@ function test (_options) {
 	var _hatchRateS = 15;
 	
 	//zur Berechnung s. setJobs case 4
-	var _HATCHW = 10000; 
-	var _HATCHS = 15000;
+	var _HATCHW = 10; 
+	var _HATCHS = 15;
 	
 	//Balancing
-	var _hatchRatioW = 10;
-	var _hatchRatioS = 15;
+	var _hatchRatioW = .1;
+	var _hatchRatioS = .15;
 	
 	//Gebaeudevariablen
 	var _broodLevel = 0; //Anzahl aller Gebaeudelevel vom gleichen Typ
@@ -88,12 +88,14 @@ function test (_options) {
 	    	costStoneHtml:	zid("broodCostS")
 	    },
 	    2 : { //mushroom chamber
-	    	count: 0,
+	    	count: 1,
 	    	costLeafs: 100,
 	    	costStone: 50,
 	    	costFood: 0,
 	    	costLeafsHtml: zid("mushCostL"),
-	    	costStoneHtml:	zid("mushCostS")
+	    	costStoneHtml:	zid("mushCostS"),
+	    	leafConsume: 2,
+	    	foodProd: 1
 	    },
 	    3 : { //storage
 	    	count: 0,
@@ -232,13 +234,32 @@ function test (_options) {
     var _amberCount = zid("amberCount");
     var _workerCount = zid("workerCount");
     var _soldierCount = zid("soldierCount");
+    var _leafProd = zid("leafProd");
+    var _stoneProd = zid("stoneProd");
+    var _foodProd = zid("foodProd");
+    var _amberProd = zid("amberProd");
     function updateRes() {
+    	_prodLeafs = (_jobLeafs * _ratioLeafs) - (_buildings[2]["leafConsume"] * _buildings[2]["count"]);
+    	if(_prodLeafs < 0){
+    		_leafProd.style.color = "red";
+    	}
+    	else{
+    		_leafProd.style.color = "green";
+    	}
+    	_prodStone = _jobStone * _ratioStone;
+    	_prodFood = (_jobHunt * _ratioHunt) + (_buildings[2]["foodProd"] * _buildings[2]["count"]); //_mushroomLevel -> Gebaeudestufen
+    	_workerCount.innerHTML = _antW;
+    	_soldierCount.innerHTML = _antS;
     	_leafCount.innerHTML = _leafs;
     	_stoneCount.innerHTML = _stone;
     	_foodCount.innerHTML = _food;
     	_amberCount.innerHTML = _amber;
-    	_workerCount.innerHTML = _antW;
-    	_soldierCount.innerHTML = _antS;
+    	_leafProd.innerHTML = _prodLeafs;
+    	_stoneProd.innerHTML = _prodStone;
+    	_foodProd.innerHTML = _prodFood;
+    	_amberProd.innerHTML = _prodAmber;
+    	
+    	
 
     	
     }
@@ -264,27 +285,22 @@ function test (_options) {
 	    		case 1: //collect leafs
 	    			if(_jobLeafs >= 1 || amount == 1)
 	    			_jobLeafs += amount;
-	    			
-	    			_prodLeafs = _jobLeafs * _ratioLeafs;
 	    			_jobCountL.innerHTML = _jobLeafs;
 	    			
 	    			break;
 	    		case 2:	//collect stone
 	    			if(_jobStone >= 1 || amount == 1)
 	    			_jobStone += amount;
-	    			_prodStone = _jobStone * _ratioStone;
 	    			_jobCountS.innerHTML = _jobStone;
 	    			break;
 	    		case 3: //hunt
 	    			if(_jobHunt >= 1 || amount == 1)
 	    			_jobHunt += amount;
-	    			_prodFood = (_jobHunt * _ratioHunt) + (_mushroomLevel * _mushroomRatio); //_mushroomLevel -> Gebaeudestufen
 	    			_jobCountHu.innerHTML = _jobHunt;
 	    			break;
 	    		case 4: //hatch
 	    			if(_jobHatch >= 1 || amount == 1)
 	    			_jobHatch += amount;
-	    			
 	    			_hatchRateW = _HATCHW - (_hatchRatioW * _jobHatch);
 	    			_hatchRateS = _HATCHS - (_hatchRatioS * _jobHatch);
 	    			_jobCountHa.innerHTML = _jobHatch;
@@ -292,7 +308,6 @@ function test (_options) {
 	    		case 5:	//clean
 	    			if(_jobClean >= 1 || amount == 1)
 	    			_jobClean += amount;
-	    			
 	    			_jobCountC.innerHTML = _jobClean;
 	    			//weitere Berechnung fehlt noch
 	    			break;
@@ -300,7 +315,6 @@ function test (_options) {
 	    		
 	    			if(_leafs >= _antCostW["leafs"] && _stone >= _antCostW["stone"] && _food >= _antCostW["food"])
 	    			{
-	    				
 		    			countdown(1, _hatchRateW);
 		    			_leafs -= _antCostW["leafs"];
 	  					_stone -= _antCostW["stone"];
@@ -311,7 +325,6 @@ function test (_options) {
 	    		case 7:	//addAntS
 	    			if(_leafs >= _antCostS["leafs"] && _stone >= _antCostS["stone"] && _food >= _antCostW["food"])
     				{
-    					
 	    				countdown(2, _hatchRateS);
 	    				_leafs -= _antCostS["leafs"];
 	  					_stone -= _antCostS["stone"];
@@ -321,43 +334,40 @@ function test (_options) {
 	    			break;
 	    	}
 	    	_antW += -amount;
+	    	updateRes();
 	    }
     }
     
     var countdownW = zid("countdownW");
     function countdown (type, i) {
     	if(type == 1) {
-    		countdownW.innerHTML = i;
+    		 
+    		countdownW.innerHTML = (Math.floor(i * 10) / 10).toFixed(2);
     		
     	}
     	else {
-    		countdownS.innerHTML = i;
+    		countdownS.innerHTML = (Math.floor(i * 10) / 10).toFixed(2);
     	}
 	  
   		
 	  if (i > 0) {
-	    i--;
-	    // Funktion verzögert aufrufen
-	    //window.setTimeout(countdown(type,i), 10000);
-	    //window.setTimeout("countdown(" +type+ ","+ i + ")", 1000);
-	    
+	    i -= .1;
+	
 	    window.setTimeout(function() {
 	    	countdown(type,i);
-	    }, 1000);
+	    }, 100);
 	  }
 	  else {
 	  	switch(type) {
 	  	case 1:
-	  			//alert("finishW");
+	  			countdownW.innerHTML = (0.00).toFixed(2);
 	  			_antW++;
 	  			
 	  		break;
 	  	case 2:
-	  			//alert("finishS");
+	  			countdownS.innerHTML = (0.00).toFixed(2);
 	  			_antS++;
-	  			_leafs -= _antCostS["leafs"];
-	  			_stone -= _antCostS["stone"];
-	  			_food -= _antCostS["food"];
+	  			
 	  		break;
 	  }
 	  updateRes();
@@ -387,11 +397,11 @@ function test (_options) {
 			
 			_buildings[type]["count"]++;
 			
-			 
+			
 				
-				_buildings[type]["costLeafsHtml"].innerHTML = _buildings[type]["costLeafs"];
-				_buildings[type]["costStoneHtml"].innerHTML = _buildings[type]["costStone"];
-				
+			_buildings[type]["costLeafsHtml"].innerHTML = _buildings[type]["costLeafs"];
+			_buildings[type]["costStoneHtml"].innerHTML = _buildings[type]["costStone"];
+			updateRes();
 			
 			switch(type) //kann eventuell raus?
 			{
