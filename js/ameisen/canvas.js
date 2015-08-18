@@ -202,19 +202,22 @@ function Canvas(_options) {
 			c.x = 300 * (i +1);
 			c.y = 200 * (i +1);
 			var g = c.graphics;
-			c.radius = 50;
+			c.radius = 25 + (c.buildingData.lvl * 2);
 			c.addHitTest = function (i, j) {
 				createHitTest(i,j);
 			}
 			c.upgradeBuilding = function() {
 				this.buildingData.lvl += 1;
+				this.radius = 25 + (c.buildingData.lvl * 2);
+				c.graphics.c().f("#f58e25").dc(0,0,c.radius);
+				stage.update();
 			}
 			c.setUpgradeCost = function(_costs) {
 				this.buildingData.costs = _costs;
 				console.log(this.buildingData.costs);
 			}
 
-			g.f("#f58e25").dc(0,0,50);
+			g.f("#f58e25").dc(0,0,c.radius);
 
 			c.setBounds(-c.radius, -c.radius, c.radius*2, c.radius*2);
 			eles[i] = c;
@@ -232,11 +235,11 @@ function Canvas(_options) {
 
 
 				e.target.graphics.beginStroke("black");
-				e.target.graphics.f("rgba(0,0,0,0.1)").dc(0,0,130);
+				e.target.graphics.f("rgba(0,0,0,0.1)").dc(0,0,(c.radius * 3));
 			}); 
 
 			c.on("click",function(e){
-				e.target.graphics.c().f("#f58e25").dc(0,0,50);
+				e.target.graphics.c().f("#f58e25").dc(0,0,c.radius);
 				stage.update();
 
 
@@ -344,7 +347,7 @@ function Canvas(_options) {
 
 		function draw() {
 			connector.visible = true;
-			connector.graphics.c().setStrokeStyle(10, 'round', 'round').beginStroke("black").moveTo(eles[_i].x, eles[_i].y).lineTo(eles[_j].x, eles[_j].y);
+			connector.graphics.c().setStrokeStyle(6, 'round', 'round').beginStroke("black").moveTo(eles[_i].x, eles[_i].y).lineTo(eles[_j].x, eles[_j].y);
 			// Connector wird als oberesten Element eingefügt, damit es oberhalb der anderen Elemente liegt.
 			stage.addChild(connector);
 		}
