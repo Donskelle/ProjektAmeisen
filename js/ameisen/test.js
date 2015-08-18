@@ -91,6 +91,7 @@ function test (_options) {
 	    	costLeafsHtml: zid("broodCostL"),
 	    	costStoneHtml:	zid("broodCostS"),
 	    	upgradeCost: {
+	    		totalUpgrades: 0,
 	    		leafs: 10,
 	    		stone: 10,
 	    		food: 0
@@ -106,6 +107,7 @@ function test (_options) {
 	    	leafConsume: 2,
 	    	foodProd: 1,
 	    	upgradeCost: {
+	    		totalUpgrades: 0,
 	    		leafs: 10,
 	    		stone: 10,
 	    		food: 0
@@ -119,6 +121,7 @@ function test (_options) {
 	    	costLeafsHtml: zid("storageCostL"),
 	    	costStoneHtml:	zid("storageCostS"),
 	    	upgradeCost: {
+	    		totalUpgrades: 0,
 	    		leafs: 10,
 	    		stone: 10,
 	    		food: 0
@@ -132,6 +135,7 @@ function test (_options) {
 	    	costLeafsHtml: zid("pantryCostL"),
 	    	costStoneHtml:	zid("pantryCostS"),
 	    	upgradeCost: {
+	    		totalUpgrades: 0,
 	    		leafs: 10,
 	    		stone: 10,
 	    		food: 0
@@ -145,6 +149,7 @@ function test (_options) {
 	    	costLeafsHtml: zid("dumpingCostL"),
 	    	costStoneHtml:	zid("dumpingCostS"),
 	    	upgradeCost: {
+	    		totalUpgrades: 0,
 	    		leafs: 10,
 	    		stone: 10,
 	    		food: 0
@@ -424,32 +429,13 @@ function test (_options) {
 			
 			_buildings[type]["count"]++;
 			
-			
+			_buildings[type]["upgradeCost"]["totalUpgrades"]++;
 				
 			_buildings[type]["costLeafsHtml"].innerHTML = _buildings[type]["costLeafs"];
 			_buildings[type]["costStoneHtml"].innerHTML = _buildings[type]["costStone"];
 			updateRes();
 			
-			switch(type) //kann eventuell raus?
-			{
-				case 1: //mushroom chamber
-					
-					
-					break;
-				case 2: //brood chamber
-				
-					break;
-				case 3: //storage
-				
-					break;
-				case 4: //pantry
-				
-					break;
-				case 5: //dumping ground
-				
-					break;
-			}
-
+			
 			var countBuildings = buildedBuildings.length;
 
 
@@ -457,6 +443,7 @@ function test (_options) {
 
 			HelpFunction.merge(buildedBuildings[countBuildings], _buildings[type]);
 			buildedBuildings[countBuildings].lvl = 1;
+			buildedBuildings[countBuildings].type = type;
 			
 
 			HelpFunction.pushEvent("buildBuilding", {
@@ -472,10 +459,18 @@ function test (_options) {
 			&& buildedBuildings[buildingId].upgradeCost.food <= _food
 			)
 		{
+			_leafs -= buildedBuildings[buildingId].upgradeCost.leafs;
+			_stone -= buildedBuildings[buildingId].upgradeCost.stone;
+			_food -= buildedBuildings[buildingId].upgradeCost.food;
+			
+			_buildings[buildedBuildings[buildingId].type]["upgradeCost"]["totalUpgrades"]++;
+			
+			
 			buildedBuildings[buildingId].upgradeCost.lvl += 1;
 			buildedBuildings[buildingId].upgradeCost.stone *= _upgradeCostIncrease;
 			buildedBuildings[buildingId].upgradeCost.food *= _upgradeCostIncrease;
 			buildedBuildings[buildingId].upgradeCost.leafs *= _upgradeCostIncrease;
+			updateRes();
 			return true;
 		}
 		else {
