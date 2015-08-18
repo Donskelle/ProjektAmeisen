@@ -8,8 +8,8 @@ function test (_options) {
 	var _amber = 1000;
 	
 	//Bestand und Kosten von Ameisen
-	var _antW = 100;
-	var _antS = 100;
+	var _antW = 10;
+	var _antS = 0;
 	
 	var _antCostW = {
 		leafs: 10,
@@ -98,14 +98,14 @@ function test (_options) {
 	    	}
 	    },
 	    2 : { //mushroom chamber
-	    	count: 1,
+	    	count: 0,
 	    	costLeafs: 100,
 	    	costStone: 50,
 	    	costFood: 0,
 	    	costLeafsHtml: zid("mushCostL"),
 	    	costStoneHtml:	zid("mushCostS"),
-	    	leafConsume: 2,
-	    	foodProd: 1,
+	    	leafConsume: 1,
+	    	foodProd: 2,
 	    	upgradeCost: {
 	    		totalUpgrades: 0,
 	    		leafs: 10,
@@ -275,15 +275,23 @@ function test (_options) {
 
 
     function updateRes() {
-    	_prodLeafs = (_jobLeafs * _ratioLeafs) - (_buildings[2]["leafConsume"] * _buildings[2]["count"]);
+    	_prodLeafs = (_jobLeafs * _ratioLeafs) - (_buildings[2]["leafConsume"] * _buildings[2]["count"] * _buildings[2]["upgradeCost"]["totalUpgrades"]);
     	if(_prodLeafs < 0){
     		_leafProd.style.color = "red";
     	}
     	else{
     		_leafProd.style.color = "green";
     	}
+    	_prodFood = (_jobHunt * _ratioHunt) + (_buildings[2]["foodProd"] * _buildings[2]["count"] * _buildings[2]["upgradeCost"]["totalUpgrades"]) - (_antW + _antS); //_mushroomLevel -> Gebaeudestufen
+    	
+    	if(_prodFood < 0){
+    		_foodProd.style.color = "red";
+    	}
+    	else{
+    		_foodProd.style.color = "green";
+    	}
     	_prodStone = _jobStone * _ratioStone;
-    	_prodFood = (_jobHunt * _ratioHunt) + (_buildings[2]["foodProd"] * _buildings[2]["count"]); //_mushroomLevel -> Gebaeudestufen
+    	
     	_workerCount.innerHTML = _antW;
     	_soldierCount.innerHTML = _antS;
     	_leafCount.innerHTML = _leafs;
