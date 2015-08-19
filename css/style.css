@@ -23,12 +23,42 @@ body {
 /*
  *	Drag Klassen
  */
+#menuWrapper {
+	width: 100%;
+	position: absolute;
+	margin: 0 0 0 0;
+	padding-top: 67%;
+	background-color: #000000;
+	background-image: url("../img/test.jpg");
+	background-size: contain;
+	background-repeat: no-repeat;
+	-webkit-transition: margin 1s;
+	-moz-transition: margin 1s;
+	-o-transition: margin 1s;
+	transition: margin 1s;
+}
+#btn_toggleMenu {
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 100;
+}
+#gameWrapper {
+	margin: 67% 0 0 0;
+	width: 100%;
+	position: absolute;
+	-webkit-transition: margin 1s;
+	-moz-transition: margin 1s;
+	-o-transition: margin 1s;
+	transition: margin 1s;
+	
+}
 .draggable {
 	position: absolute;	
 	background: #ffffff;
 	border: solid 1px #ccc;
-	top:0;
-	left:0;
+	top: 0;
+	left: 0;
 }
 .handle {
 	min-height: 20px;

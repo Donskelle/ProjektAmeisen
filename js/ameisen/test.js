@@ -115,7 +115,7 @@ function test (_options) {
 	    	}
 	    },
 	    3 : { //storage
-	    	count: 1,
+	    	count: 0,
 	    	costLeafs: 10,
 	    	costStone: 10,
 	    	costFood: 0,
@@ -124,7 +124,7 @@ function test (_options) {
 	    	storeLeafs: 10,
 	    	storeStone: 10,
 	    	upgradeCost: {
-	    		totalUpgrades: 1,
+	    		totalUpgrades: 0,
 	    		leafs: 10,
 	    		stone: 10,
 	    		food: 0
@@ -301,9 +301,9 @@ function test (_options) {
     function updateRes() {
     	
     	
-    	_buildings[3]["storeLeafs"] = 10 + 10 * _buildings[3]["count"] * _buildings[3]["upgradeCost"]["totalUpgrades"];
+    	_buildings[3]["storeLeafs"] = 100 + 10 * _buildings[3]["count"] * _buildings[3]["upgradeCost"]["totalUpgrades"];
     	_leafStorage.innerHTML = _buildings[3]["storeLeafs"];
-    	_buildings[3]["storeStone"] = 10 + 10 * _buildings[3]["count"] * _buildings[3]["upgradeCost"]["totalUpgrades"];
+    	_buildings[3]["storeStone"] = 100 + 10 * _buildings[3]["count"] * _buildings[3]["upgradeCost"]["totalUpgrades"];
     	_stoneStorage.innerHTML = _buildings[3]["storeStone"];
     	_prodLeafs = (_jobLeafs * _ratioLeafs) - (_buildings[2]["leafConsume"] * _buildings[2]["count"] * _buildings[2]["upgradeCost"]["totalUpgrades"]);
     	if(_prodLeafs < 0){
