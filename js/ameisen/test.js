@@ -115,14 +115,16 @@ function test (_options) {
 	    	}
 	    },
 	    3 : { //storage
-	    	count: 0,
-	    	costLeafs: 200,
-	    	costStone: 100,
+	    	count: 1,
+	    	costLeafs: 10,
+	    	costStone: 10,
 	    	costFood: 0,
 	    	costLeafsHtml: zid("storageCostL"),
 	    	costStoneHtml:	zid("storageCostS"),
+	    	storeLeafs: 10,
+	    	storeStone: 10,
 	    	upgradeCost: {
-	    		totalUpgrades: 0,
+	    		totalUpgrades: 1,
 	    		leafs: 10,
 	    		stone: 10,
 	    		food: 0
@@ -181,7 +183,7 @@ function test (_options) {
 		});
 		
 		
-		
+		var addLeafs = zid("btn_addLeafs");
 		
 		var addAntW = zid("btn_addAntW");
 		var addAntS = zid("btn_addAntS");
@@ -200,6 +202,11 @@ function test (_options) {
 		
 		var addJobC = zid("btn_addJobC");
 		var subJobC = zid("btn_subJobC");
+		
+		addLeafs.addEventListener("click", function(e) {
+			_leafs++;
+			updateRes();
+		});
 		
 		addAntW.addEventListener("click", function(e) {
 			setJobs(6,1);
@@ -253,7 +260,19 @@ function test (_options) {
   	init();
   
     function gameLoop() {
-       _leafs += _prodLeafs;
+    	if(_leafs + _prodLeafs <= _buildings[3]["storeLeafs"]){
+    		_leafs += _prodLeafs;
+    	}
+    	else {
+    		_leafs = _buildings[3]["storeLeafs"];
+    	}
+    	if(_stone + _prodStone <= _buildings[3]["storeStone"]){
+    		_stone += _prodStone;
+    	}
+    	else {
+    		_stone = _buildings[3]["storeStone"];
+    	}
+      
        _stone += _prodStone;
        _food += _prodFood;
        _amber += _prodAmber;
@@ -273,9 +292,19 @@ function test (_options) {
     var _stoneProd = zid("stoneProd");
     var _foodProd = zid("foodProd");
     var _amberProd = zid("amberProd");
+    var _leafStorage = zid("leafStorage");
+    var _stoneStorage = zid("stoneStorage");
+    var _foodStorage = zid("foodStorage");
+    var _amberStorage = zid("amberStorage");
 
 
     function updateRes() {
+    	
+    	
+    	_buildings[3]["storeLeafs"] = 10 + 10 * _buildings[3]["count"] * _buildings[3]["upgradeCost"]["totalUpgrades"];
+    	_leafStorage.innerHTML = _buildings[3]["storeLeafs"];
+    	_buildings[3]["storeStone"] = 10 + 10 * _buildings[3]["count"] * _buildings[3]["upgradeCost"]["totalUpgrades"];
+    	_stoneStorage.innerHTML = _buildings[3]["storeStone"];
     	_prodLeafs = (_jobLeafs * _ratioLeafs) - (_buildings[2]["leafConsume"] * _buildings[2]["count"] * _buildings[2]["upgradeCost"]["totalUpgrades"]);
     	if(_prodLeafs < 0){
     		_leafProd.style.color = "red";
