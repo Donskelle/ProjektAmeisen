@@ -2,24 +2,24 @@ function test (_options) {
 	var options = _options;
 
 	//Bestand von Rohstoffen
-	var _leafs = 1000;
-	var _stone = 1000;
-	var _food = 1000;
-	var _amber = 1000;
+	var _leafs = 100;
+	var _stone = 100;
+	var _food = 10;
+	var _amber = 10;
 	
 	//Bestand und Kosten von Ameisen
-	var _antW = 10;
+	var _antW = 1;
 	var _antS = 0;
 	
 	var _antCostW = {
 		leafs: 10,
 		stone: 10,
-		food: 20
+		food: 10
 	};
 	var _antCostS = {
 		leafs: 10,
 		stone: 10,
-		food: 20
+		food: 10
 	};
 	
 	//belegte Jobs
@@ -37,12 +37,12 @@ function test (_options) {
 	
 	var _ratioLeafs = 1;
 	var _ratioStone = 1;
-	var _ratioHunt = 1;
+	var _ratioHunt = 2;
 	var _ratioHatch = 1;
 	var _ratioClean = 1;
 
 	
-	var _upgradeCostIncrease = 2;
+	var _upgradeCostIncrease = 1.13;
 	
 	//Tickrate der verschiedenen Loops
 	var _tickRate = 1500;
@@ -72,7 +72,7 @@ function test (_options) {
 	var _pantryRatio = 200;
 	var _garbageRatio = 500;
 	
-	var _increment = 1.13;
+	
 	
 			    //Buildings
     var _buildingCostRatio = 10; //balancing
@@ -121,8 +121,8 @@ function test (_options) {
 	    	costFood: 0,
 	    	costLeafsHtml: zid("storageCostL"),
 	    	costStoneHtml:	zid("storageCostS"),
-	    	storeLeafs: 10,
-	    	storeStone: 10,
+	    	storeLeafs: 100,
+	    	storeStone: 100,
 	    	upgradeCost: {
 	    		totalUpgrades: 0,
 	    		leafs: 10,
@@ -132,11 +132,12 @@ function test (_options) {
 	    },
 	    4 : { //pantry
 	    	count: 0,
-	    	costLeafs: 200,
-	    	costStone: 100,
+	    	costLeafs: 10,
+	    	costStone: 10,
 	    	costFood: 0,
 	    	costLeafsHtml: zid("pantryCostL"),
 	    	costStoneHtml:	zid("pantryCostS"),
+	    	storeFood: 100,
 	    	upgradeCost: {
 	    		totalUpgrades: 0,
 	    		leafs: 10,
@@ -146,8 +147,8 @@ function test (_options) {
 	    },
 	    5 : { //dumping ground
 	    	count: 0,
-	    	costLeafs: 500,
-	    	costStone: 250,
+	    	costLeafs: 250,
+	    	costStone: 500,
 	    	costFood: 0,
 	    	costLeafsHtml: zid("dumpingCostL"),
 	    	costStoneHtml:	zid("dumpingCostS"),
@@ -272,9 +273,14 @@ function test (_options) {
     	else {
     		_stone = _buildings[3]["storeStone"];
     	}
+    	if(_food + _prodFood <= _buildings[4]["storeFood"]){
+    		_food += _prodFood;
+    	}
+    	else {
+    		_food = _buildings[4]["storeFood"];
+    	}
       
-       _stone += _prodStone;
-       _food += _prodFood;
+       
        _amber += _prodAmber;
        updateRes();
        
@@ -301,10 +307,13 @@ function test (_options) {
     function updateRes() {
     	
     	
-    	_buildings[3]["storeLeafs"] = 100 + 10 * _buildings[3]["count"] * _buildings[3]["upgradeCost"]["totalUpgrades"];
+    	_buildings[3]["storeLeafs"] = 100 + 30 * _buildings[3]["count"] * _buildings[3]["upgradeCost"]["totalUpgrades"];
     	_leafStorage.innerHTML = _buildings[3]["storeLeafs"];
-    	_buildings[3]["storeStone"] = 100 + 10 * _buildings[3]["count"] * _buildings[3]["upgradeCost"]["totalUpgrades"];
+    	_buildings[3]["storeStone"] = 100 + 30 * _buildings[3]["count"] * _buildings[3]["upgradeCost"]["totalUpgrades"];
     	_stoneStorage.innerHTML = _buildings[3]["storeStone"];
+    	_buildings[4]["storeFood"] = 100 + 30 * _buildings[4]["count"] * _buildings[4]["upgradeCost"]["totalUpgrades"];
+    	_foodStorage.innerHTML = _buildings[4]["storeFood"];
+    	
     	_prodLeafs = (_jobLeafs * _ratioLeafs) - (_buildings[2]["leafConsume"] * _buildings[2]["count"] * _buildings[2]["upgradeCost"]["totalUpgrades"]);
     	if(_prodLeafs < 0){
     		_leafProd.style.color = "red";
@@ -312,7 +321,13 @@ function test (_options) {
     	else{
     		_leafProd.style.color = "green";
     	}
-    	_prodFood = (_jobHunt * _ratioHunt) + (_buildings[2]["foodProd"] * _buildings[2]["count"] * _buildings[2]["upgradeCost"]["totalUpgrades"]) - (_antW + _antS); //_mushroomLevel -> Gebaeudestufen
+    	if(_prodStone < 0){
+    		_stoneProd.style.color = "red";
+    	}
+    	else{
+    		_stoneProd.style.color = "green";
+    	}
+    	_prodFood = (_jobHunt * _ratioHunt) + (_buildings[2]["foodProd"] * _buildings[2]["count"] * _buildings[2]["upgradeCost"]["totalUpgrades"]) - (_antW + _antS + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean); //_mushroomLevel -> Gebaeudestufen
     	
     	if(_prodFood < 0){
     		_foodProd.style.color = "red";
@@ -568,9 +583,10 @@ function test (_options) {
 			
 			
 			buildedBuildings[buildingId].upgradeCost.lvl += 1;
-			buildedBuildings[buildingId].upgradeCost.stone *= _upgradeCostIncrease;
-			buildedBuildings[buildingId].upgradeCost.food *= _upgradeCostIncrease;
-			buildedBuildings[buildingId].upgradeCost.leafs *= _upgradeCostIncrease;
+			buildedBuildings[buildingId].upgradeCost.leafs = Math.floor(buildedBuildings[buildingId].upgradeCost.leafs * _upgradeCostIncrease);
+			buildedBuildings[buildingId].upgradeCost.stone = Math.floor(buildedBuildings[buildingId].upgradeCost.stone * _upgradeCostIncrease);
+			buildedBuildings[buildingId].upgradeCost.food = Math.floor(buildedBuildings[buildingId].upgradeCost.food * _upgradeCostIncrease);
+			
 			updateRes();
 			return true;
 		}
