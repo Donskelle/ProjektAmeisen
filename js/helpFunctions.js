@@ -74,6 +74,11 @@ function HelpFunction() {
 		return defaultObject;
 	}
 
+	
+	this.clone = function(obj) {
+		return JSON.parse(JSON.stringify(obj));
+	}
+
 
 	/**
 	 * [toggleClassName description]

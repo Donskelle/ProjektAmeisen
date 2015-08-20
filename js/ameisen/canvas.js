@@ -195,7 +195,7 @@ function Canvas(_options) {
 		(function init() {
 			var c = new createjs.Shape();
 			c.buildingData = {}
-			HelpFunction.merge(c.buildingData, buidlingsTypes[type]);
+			c.buildingData = HelpFunction.clone(buidlingsTypes[type]);
 			c.connector = new Array();
 
 
