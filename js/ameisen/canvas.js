@@ -235,7 +235,7 @@ function Canvas(_options) {
 
 
 				e.target.graphics.beginStroke("black");
-				e.target.graphics.f("rgba(0,0,0,0.1)").dc(0,0,(c.radius * 3));
+				e.target.graphics.f("rgba(0,0,0,0.1)").dc(0,0,c.radius*3);
 			}); 
 
 			c.on("click",function(e){
@@ -275,8 +275,10 @@ function Canvas(_options) {
 				hitTesten();
 
 				for (var k = 0; k < eles.length; k++) {
-					if(typeof eles[k].connector[_i] != undefined)
+					zog(typeof eles[k].connector[_i]);
+					if(typeof eles[k].connector[_i] != "undefined") {
 						eles[k].connector[_i].hittesten();
+					}
 				};
 			});
 
