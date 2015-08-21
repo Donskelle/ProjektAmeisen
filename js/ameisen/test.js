@@ -121,8 +121,8 @@ function test (_options) {
 	    	costFood: 0,
 	    	costLeafsHtml: zid("storageCostL"),
 	    	costStoneHtml:	zid("storageCostS"),
-	    	storeLeafs: 100,
-	    	storeStone: 100,
+	    	storeLeafs: 15,
+	    	storeStone: 15,
 	    	upgradeCost: {
 	    		totalUpgrades: 0,
 	    		leafs: 10,
@@ -137,7 +137,7 @@ function test (_options) {
 	    	costFood: 0,
 	    	costLeafsHtml: zid("pantryCostL"),
 	    	costStoneHtml:	zid("pantryCostS"),
-	    	storeFood: 100,
+	    	storeFood: 15,
 	    	upgradeCost: {
 	    		totalUpgrades: 0,
 	    		leafs: 10,
@@ -307,12 +307,7 @@ function test (_options) {
     function updateRes() {
     	
     	
-    	_buildings[3]["storeLeafs"] = 100 + 30 * _buildings[3]["count"] * _buildings[3]["upgradeCost"]["totalUpgrades"];
-    	_leafStorage.innerHTML = _buildings[3]["storeLeafs"];
-    	_buildings[3]["storeStone"] = 100 + 30 * _buildings[3]["count"] * _buildings[3]["upgradeCost"]["totalUpgrades"];
-    	_stoneStorage.innerHTML = _buildings[3]["storeStone"];
-    	_buildings[4]["storeFood"] = 100 + 30 * _buildings[4]["count"] * _buildings[4]["upgradeCost"]["totalUpgrades"];
-    	_foodStorage.innerHTML = _buildings[4]["storeFood"];
+    	
     	
     	_prodLeafs = (_jobLeafs * _ratioLeafs) - (_buildings[2]["leafConsume"] * _buildings[2]["count"] * _buildings[2]["upgradeCost"]["totalUpgrades"]);
     	if(_prodLeafs < 0){
@@ -327,7 +322,7 @@ function test (_options) {
     	else{
     		_stoneProd.style.color = "green";
     	}
-    	_prodFood = (_jobHunt * _ratioHunt) + (_buildings[2]["foodProd"] * _buildings[2]["count"] * _buildings[2]["upgradeCost"]["totalUpgrades"]) - (_antW + _antS + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean); //_mushroomLevel -> Gebaeudestufen
+    	_prodFood = (_jobHunt * _ratioHunt) + (_buildings[2]["foodProd"] * _buildings[2]["count"] * _buildings[2]["upgradeCost"]["totalUpgrades"]) - (_antW + _antS + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean); 
     	
     	if(_prodFood < 0){
     		_foodProd.style.color = "red";
@@ -347,6 +342,10 @@ function test (_options) {
     	_stoneProd.innerHTML = _prodStone;
     	_foodProd.innerHTML = _prodFood;
     	_amberProd.innerHTML = _prodAmber;
+    	
+    	_leafStorage.innerHTML = _buildings[3]["storeLeafs"];
+		_stoneStorage.innerHTML = _buildings[3]["storeStone"];
+		_foodStorage.innerHTML = _buildings[4]["storeFood"];
     }
  
 
@@ -549,6 +548,17 @@ function test (_options) {
 				
 			_buildings[type]["costLeafsHtml"].innerHTML = _buildings[type]["costLeafs"];
 			_buildings[type]["costStoneHtml"].innerHTML = _buildings[type]["costStone"];
+			
+			if(type == 3) {
+				_buildings[3]["storeLeafs"] = 15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease;
+		    	_buildings[3]["storeStone"] = 15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease;
+		    	
+			}
+			if(type == 4) {
+				_buildings[4]["storeFood"] = 15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease;
+	    		
+			}
+			
 			updateRes();
 			
 			
@@ -586,6 +596,17 @@ function test (_options) {
 			buildedBuildings[buildingId].upgradeCost.leafs = Math.floor(buildedBuildings[buildingId].upgradeCost.leafs * _upgradeCostIncrease);
 			buildedBuildings[buildingId].upgradeCost.stone = Math.floor(buildedBuildings[buildingId].upgradeCost.stone * _upgradeCostIncrease);
 			buildedBuildings[buildingId].upgradeCost.food = Math.floor(buildedBuildings[buildingId].upgradeCost.food * _upgradeCostIncrease);
+			
+			if(buildedBuildings[buildingId].type == 3) {
+				_buildings[3]["storeLeafs"] = 15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease;
+		    	_buildings[3]["storeStone"] = 15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease;
+		    	
+			}
+			if(buildedBuildings[buildingId].type == 4) {
+				_buildings[4]["storeFood"] = 15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease;
+	    		
+			}
+	    	
 			
 			updateRes();
 			return true;
