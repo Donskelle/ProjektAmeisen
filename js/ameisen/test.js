@@ -359,7 +359,7 @@ function test (_options) {
     //type = {1,2,3,4,5,6,7}, amount = {1,-1}
     function setJobs(type, amount) {
     	
-    	if(_antW >= 1 || amount == -1)
+    	if(type <= 5 && _antW >= 1 || amount == -1)
     	{
 	    	switch(type)
 	    	{
@@ -392,30 +392,31 @@ function test (_options) {
 	    			_jobCountC.innerHTML = _jobClean;
 	    			//weitere Berechnung fehlt noch
 	    			break;
-	    		case 6:	//addAntW
-	    		
-	    			if(_leafs >= _antCostW["leafs"] && _stone >= _antCostW["stone"] && _food >= _antCostW["food"])
-	    			{
-		    			timerBuild.addW(_hatchRateW);
-		    			_leafs -= _antCostW["leafs"];
-	  					_stone -= _antCostW["stone"];
-	  					_food -= _antCostW["food"];
-	    			}
-	    			amount *= 0;
-	    			break;
-	    		case 7:	//addAntS
-	    			if(_leafs >= _antCostS["leafs"] && _stone >= _antCostS["stone"] && _food >= _antCostW["food"])
-    				{
-	    				timerBuild.addS(_hatchRateS);
-	    				_leafs -= _antCostS["leafs"];
-	  					_stone -= _antCostS["stone"];
-	  					_food -= _antCostS["food"];
-    				}
-	    			amount *= 0;
-	    			break;
 	    	}
 	    	_antW += -amount;
 	    	updateRes();
+	    }
+	    else {
+	    	if( type == 6 ){	    		
+    			if(_leafs >= _antCostW["leafs"] && _stone >= _antCostW["stone"] && _food >= _antCostW["food"])
+    			{
+	    			timerBuild.addW(_hatchRateW);
+	    			_leafs -= _antCostW["leafs"];
+  					_stone -= _antCostW["stone"];
+  					_food -= _antCostW["food"];
+    			}
+    			amount *= 0;
+    		}
+    		else if( type == 7 ) {
+    			if(_leafs >= _antCostS["leafs"] && _stone >= _antCostS["stone"] && _food >= _antCostW["food"])
+				{
+    				timerBuild.addS(_hatchRateS);
+    				_leafs -= _antCostS["leafs"];
+  					_stone -= _antCostS["stone"];
+  					_food -= _antCostS["food"];
+				}
+    			amount *= 0;
+    		}
 	    }
     }
     
