@@ -264,23 +264,36 @@ function Canvas(_options) {
 		function createHitTest(_i, _j) {
 			var hitTest = false;
 			eles[_i].connector[_j] = createConnector(_i, _j);
+			eles[_i].connector[_j].hittesten = function() {
+				hitTesten();
+			}
 
+			hitTesten();
 
 			eles[_i].on("pressmove", function(e) 
 			{
+				hitTesten();
+
+				for (var k = 0; k < eles.length; k++) {
+					if(typeof eles[k].connector[_i] != undefined)
+						eles[k].connector[_i].hittesten();
+				};
+			});
+
+			function hitTesten() {
 				if ( zim.hitTestCircle(eles[_i], eles[_j]) ) 
 				{
 					if (!hitTest) {
 					// if it was not hitting, now it is...
 						zog("circle " + _i + " hits Circle " + _j);
 						
-						e.target.connector[_j].updateLine();
+						eles[_i].connector[_j].updateLine();
 
 						hitTest = true;
 						stage.update();
 					}
 					else {
-						e.target.connector[_j].updateLine();
+						eles[_i].connector[_j].updateLine();
 					}
 				}
 				else 
@@ -289,15 +302,13 @@ function Canvas(_options) {
 					// if it was hitting, now it is not...	
 						zog("circle " + _i + " unhids Circle " + _j);
 
-						e.target.connector[_j].hideLine();
-						console.log(e.target.connector);
-
+						eles[_i].connector[_j].hideLine();
 
 						hitTest = false;
 						stage.update();	
 					}
 				}
-			});	
+			}
 		}
 	}
 
