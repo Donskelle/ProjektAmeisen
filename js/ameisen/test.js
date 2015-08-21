@@ -45,7 +45,7 @@ function test (_options) {
 	var _upgradeCostIncrease = 1.13;
 	
 	//Tickrate der verschiedenen Loops
-	var _tickRate = 1500;
+	var _tickRate = 500;
 	
 	var _hatchRateW = 10;	
 	var _hatchRateS = 15;
@@ -550,13 +550,14 @@ function test (_options) {
 			_buildings[type]["costStoneHtml"].innerHTML = _buildings[type]["costStone"];
 			
 			if(type == 3) {
-				_buildings[3]["storeLeafs"] = 15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease;
-		    	_buildings[3]["storeStone"] = 15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease;
-		    	
+				//_buildings[3]["storeLeafs"] = Math.floor(15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
+		    	//_buildings[3]["storeStone"] = Math.floor(15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
+		    	_buildings[3]["storeLeafs"] = Math.floor(_buildings[3]["storeLeafs"] * _upgradeCostIncrease);
+		    	_buildings[3]["storeStone"] = Math.floor(_buildings[3]["storeStone"] * _upgradeCostIncrease);
 			}
 			if(type == 4) {
-				_buildings[4]["storeFood"] = 15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease;
-	    		
+				//_buildings[4]["storeFood"] = Math.floor(15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
+	    		_buildings[4]["storeFood"] = Math.floor(_buildings[4]["storeFood"] * _upgradeCostIncrease);
 			}
 			
 			updateRes();
@@ -598,13 +599,14 @@ function test (_options) {
 			buildedBuildings[buildingId].upgradeCost.food = Math.floor(buildedBuildings[buildingId].upgradeCost.food * _upgradeCostIncrease);
 			
 			if(buildedBuildings[buildingId].type == 3) {
-				_buildings[3]["storeLeafs"] = 15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease;
-		    	_buildings[3]["storeStone"] = 15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease;
-		    	
+				//_buildings[3]["storeLeafs"] = Math.floor(15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
+		    	//_buildings[3]["storeStone"] = Math.floor(15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
+		    	_buildings[3]["storeLeafs"] = Math.floor(_buildings[3]["storeLeafs"] * _upgradeCostIncrease);
+		    	_buildings[3]["storeStone"] = Math.floor(_buildings[3]["storeStone"] * _upgradeCostIncrease);
 			}
 			if(buildedBuildings[buildingId].type == 4) {
-				_buildings[4]["storeFood"] = 15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease;
-	    		
+				//_buildings[4]["storeFood"] = Math.floor(15 * _buildings[4]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
+	    		_buildings[4]["storeFood"] = Math.floor(_buildings[4]["storeFood"] * _upgradeCostIncrease);
 			}
 	    	
 			
