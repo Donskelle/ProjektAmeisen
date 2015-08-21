@@ -557,7 +557,7 @@ function test (_options) {
 
 			buildedBuildings[countBuildings] = {};
 
-			HelpFunction.merge(buildedBuildings[countBuildings], _buildings[type]);
+			buildedBuildings[countBuildings] = HelpFunction.clone(_buildings[type]);
 			buildedBuildings[countBuildings].lvl = 1;
 			buildedBuildings[countBuildings].type = type;
 			
