@@ -305,10 +305,7 @@ function test (_options) {
 
 
     function updateRes() {
-    	
-    	
-    	
-    	
+
     	_prodLeafs = (_jobLeafs * _ratioLeafs) - (_buildings[2]["leafConsume"] * _buildings[2]["count"] * _buildings[2]["upgradeCost"]["totalUpgrades"]);
     	if(_prodLeafs < 0){
     		_leafProd.style.color = "red";
