@@ -552,12 +552,12 @@ function test (_options) {
 			if(type == 3) {
 				//_buildings[3]["storeLeafs"] = Math.floor(15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
 		    	//_buildings[3]["storeStone"] = Math.floor(15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
-		    	_buildings[3]["storeLeafs"] = Math.floor(_buildings[3]["storeLeafs"] * _upgradeCostIncrease);
-		    	_buildings[3]["storeStone"] = Math.floor(_buildings[3]["storeStone"] * _upgradeCostIncrease);
+		    	_buildings[3]["storeLeafs"] = 10 + Math.floor(_buildings[3]["storeLeafs"] * (1.03));
+		    	_buildings[3]["storeStone"] = 10 + Math.floor(_buildings[3]["storeStone"] * (1.03));
 			}
 			if(type == 4) {
 				//_buildings[4]["storeFood"] = Math.floor(15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
-	    		_buildings[4]["storeFood"] = Math.floor(_buildings[4]["storeFood"] * _upgradeCostIncrease);
+	    		_buildings[4]["storeFood"] = 10 + Math.floor(_buildings[4]["storeFood"] * (1.03));
 			}
 			
 			updateRes();
@@ -601,12 +601,12 @@ function test (_options) {
 			if(buildedBuildings[buildingId].type == 3) {
 				//_buildings[3]["storeLeafs"] = Math.floor(15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
 		    	//_buildings[3]["storeStone"] = Math.floor(15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
-		    	_buildings[3]["storeLeafs"] = Math.floor(_buildings[3]["storeLeafs"] * _upgradeCostIncrease);
-		    	_buildings[3]["storeStone"] = Math.floor(_buildings[3]["storeStone"] * _upgradeCostIncrease);
+		    	_buildings[3]["storeLeafs"] = 10 + Math.floor(_buildings[3]["storeLeafs"] * (1.03));
+		    	_buildings[3]["storeStone"] = 10 + Math.floor(_buildings[3]["storeStone"] * (1.03));
 			}
 			if(buildedBuildings[buildingId].type == 4) {
 				//_buildings[4]["storeFood"] = Math.floor(15 * _buildings[4]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
-	    		_buildings[4]["storeFood"] = Math.floor(_buildings[4]["storeFood"] * _upgradeCostIncrease);
+	    		_buildings[4]["storeFood"] = 10 + Math.floor(_buildings[4]["storeFood"] * (1.03));
 			}
 	    	
 			
