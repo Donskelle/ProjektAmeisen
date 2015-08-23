@@ -79,7 +79,7 @@ function test (_options) {
     
     
     var buildedBuildings = [];
-    var timerBuild = new countdown();
+    var timerBuild = new antBuilder();
 
 
     //Kosten für neue Gebaeude(nicht Upgrades)
@@ -421,8 +421,9 @@ function test (_options) {
     }
     
     var countdownW = zid("countdownW");
-   function countdown () {
+   function antBuilder () {
     	var timer;
+    	var self = this;
     	var countDowns = {
     		ants: {
     			end: null
@@ -433,6 +434,23 @@ function test (_options) {
     	}
     	var ants = [];
     	var solders = [];
+    	var posibleAnts = 1;
+
+    	function updateViewBuilder() {
+    		var countsAnt = ants.length;
+    		var countsSolders = solders.length;
+    		var maxProduction = _buildings[1]["count"] + (Math.floor(_buildings[1].upgradeCost.totalUpgrades - _buildings[1]["count"] /5)) + 1;
+    		zid("possibleSolderProduction").innerHTML = maxProduction;
+    		zid("possibleAntProduction").innerHTML = maxProduction;
+
+
+    		zid("currentSolderProduction").innerHTML = countsSolders;
+    		zid("currentAntProduction").innerHTML = countsAnt;
+    	}
+
+    	this.update = function() {
+			updateViewBuilder();
+    	}
 
     	this.addW = function(rate) {
     		ants[ants.length] = {
@@ -443,6 +461,8 @@ function test (_options) {
 
     		if(timer == null)
     			start();
+
+    		updateViewBuilder();
     	}
     	this.addS = function(rate) {
     		solders[solders.length] = {
@@ -453,7 +473,10 @@ function test (_options) {
 
     		if(timer == null)
     			start();
+    		
+    		updateViewBuilder();
     	}
+
 
     	function start() {
     		timer = window.setInterval(function() {
@@ -475,7 +498,7 @@ function test (_options) {
 	    				if(ants[i].end <= Date.now()) {
 	    					_antW++;
 	   						ants.splice(i, 1);
-
+	   						updateViewBuilder();
 	   						if(ants.length == 0)
 	   							countDowns.ants.end = 0;
 	    				}
@@ -492,7 +515,7 @@ function test (_options) {
 	    				if(solders[i].end <= Date.now()) {
 	    					_antS++;
 	   						solders.splice(i, 1);
-
+updateViewBuilder();
 	   						if(ants.length == 0)
 	   							countDowns.solders.end = 0;
 	    				}
@@ -547,13 +570,17 @@ function test (_options) {
 			_buildings[type]["costLeafsHtml"].innerHTML = _buildings[type]["costLeafs"];
 			_buildings[type]["costStoneHtml"].innerHTML = _buildings[type]["costStone"];
 			
-			if(type == 3) {
+			if(type == 1) {
+				timerBuild.update();
+			}
+
+			else if(type == 3) {
 				//_buildings[3]["storeLeafs"] = Math.floor(15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
 		    	//_buildings[3]["storeStone"] = Math.floor(15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
 		    	_buildings[3]["storeLeafs"] = 10 + Math.floor(_buildings[3]["storeLeafs"] * (1.03));
 		    	_buildings[3]["storeStone"] = 10 + Math.floor(_buildings[3]["storeStone"] * (1.03));
 			}
-			if(type == 4) {
+			else if(type == 4) {
 				//_buildings[4]["storeFood"] = Math.floor(15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
 	    		_buildings[4]["storeFood"] = 10 + Math.floor(_buildings[4]["storeFood"] * (1.03));
 			}

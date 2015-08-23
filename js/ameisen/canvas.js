@@ -158,7 +158,6 @@ function Canvas(_options) {
 		var build = new Building((type-1), i);
 		stage.update();
 		
-		console.log(i);
 		HelpFunction.pushEvent("getUpgradeCosts", {
 			'buildingId': i,
 			'updateView': false
@@ -199,22 +198,21 @@ function Canvas(_options) {
 			c.connector = new Array();
 
 
-			c.x = 300 * (i +1);
-			c.y = 200 * (i +1);
+			c.x = 150 * (i +1);
+			c.y = 250 + (i * 15);
 			var g = c.graphics;
-			c.radius = 25 + (c.buildingData.lvl * 2);
+			c.radius = HelpFunction.getProcentValue(20, 150, c.buildingData.lvl);
 			c.addHitTest = function (i, j) {
 				createHitTest(i,j);
 			}
 			c.upgradeBuilding = function() {
 				this.buildingData.lvl += 1;
-				this.radius = 25 + (c.buildingData.lvl * 2);
-				c.graphics.c().f("#f58e25").dc(0,0,c.radius);
+				this.radius = HelpFunction.getProcentValue(20, 150, c.buildingData.lvl);
+				this.graphics.c().f("#f58e25").dc(0,0,this.radius);
 				stage.update();
 			}
 			c.setUpgradeCost = function(_costs) {
 				this.buildingData.costs = _costs;
-				console.log(this.buildingData.costs);
 			}
 
 			g.f("#f58e25").dc(0,0,c.radius);
@@ -381,7 +379,6 @@ function Canvas(_options) {
 
 		connector.hideLine = function() {
 			if(eles[_j].connector[_i].visible == true) {
-				console.log("hi")
 				eles[_j].connector[_i].hideLine();
 			}
 			else {

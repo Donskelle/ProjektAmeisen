@@ -14,6 +14,24 @@ function HelpFunction() {
  */
 (function() {
 	/**
+	 * [getProcentValue description]
+	 * @param  {[type]} min     [description]
+	 * @param  {[type]} max     [description]
+	 * @param  {[type]} procent [description]
+	 * @return {[type]}         [description]
+	 */
+	this.getProcentValue = function(min, max, procent){
+		var intValue = max-min;
+		if (procent > 100) {
+			procent = 100;
+		};
+		intValue = intValue * procent;
+
+		return intValue;
+	}
+
+
+	/**
 	 * [closeLightbox description]
 	 * Schließt alle geöffneten Lightboxes
 	 * Die Lightboxes werden über die Pseudo Klasse :target geöffnet. Wenn diese nun geöffnet sind,
