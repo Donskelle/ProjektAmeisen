@@ -25,7 +25,7 @@ function HelpFunction() {
 		if (procent > 100) {
 			procent = 100;
 		};
-		intValue = intValue * procent;
+		intValue = Math.floor((intValue * procent / 100) + min);
 
 		return intValue;
 	}

@@ -96,9 +96,10 @@ function test (_options) {
 	    		leafs: 10,
 	    		stone: 10,
 	    		food: 0
-	    	}
+	    	},
+	    	buildedBuildings : []
 	    },
-	    2 : { //mushroom chamber
+	   	2 : { //mushroom chamber
 	    	count: 0,
 	    	costLeafs: 100,
 	    	costStone: 50,
@@ -112,7 +113,8 @@ function test (_options) {
 	    		leafs: 10,
 	    		stone: 10,
 	    		food: 0
-	    	}
+	    	},
+	    	buildedBuildings : []	    	
 	    },
 	    3 : { //storage
 	    	count: 0,
@@ -128,7 +130,8 @@ function test (_options) {
 	    		leafs: 10,
 	    		stone: 10,
 	    		food: 0
-	    	}
+	    	},
+	    	buildedBuildings : []
 	    },
 	    4 : { //pantry
 	    	count: 0,
@@ -143,7 +146,8 @@ function test (_options) {
 	    		leafs: 10,
 	    		stone: 10,
 	    		food: 0
-	    	}
+	    	},
+	    	buildedBuildings : []
 	    },
 	    5 : { //dumping ground
 	    	count: 0,
@@ -157,7 +161,8 @@ function test (_options) {
 	    		leafs: 10,
 	    		stone: 10,
 	    		food: 0
-	    	}
+	    	},
+	    	buildedBuildings : []
 	    }
 	};
   	
@@ -589,6 +594,9 @@ updateViewBuilder();
 			
 			
 			var countBuildings = buildedBuildings.length;
+
+
+			_buildings[type].buildedBuildings[_buildings[type].buildedBuildings.length] = countBuildings;
 
 
 			buildedBuildings[countBuildings] = {};
