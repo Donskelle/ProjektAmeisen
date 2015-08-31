@@ -289,6 +289,11 @@ function Canvas(_options) {
 						
 						eles[_i].connector[_j].updateLine();
 
+						HelpFunction.pushEvent("buidlingConnected", {
+							"from": _i,
+							"to": _j
+						});
+
 						hitTest = true;
 						stage.update();
 					}
@@ -304,6 +309,11 @@ function Canvas(_options) {
 
 						eles[_i].connector[_j].hideLine();
 
+						HelpFunction.pushEvent("buidlingDisconnected", {
+							"from": _i,
+							"to": _j
+						});
+
 						hitTest = false;
 						stage.update();	
 					}
@@ -313,8 +323,6 @@ function Canvas(_options) {
 	}
 
 	function showInfoBox(i) {
-
-
 		zid("buildingUpgradeViewTitle").innerHTML = eles[i].buildingData.name;
 
 		var img = "";

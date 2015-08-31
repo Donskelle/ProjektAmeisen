@@ -595,13 +595,23 @@ updateViewBuilder();
 			
 			var countBuildings = buildedBuildings.length;
 
-
 			_buildings[type].buildedBuildings[_buildings[type].buildedBuildings.length] = countBuildings;
-
-
 			buildedBuildings[countBuildings] = {};
 
+			/**
+			 * Buildings um Connector erweitern 
+			 */
+			for (var j = 0; j < buildedBuildings.length; j++) {
+				if(countBuildings != j) {
+					buildedBuildings[countBuildings].connections[_j] = false;
+					buildedBuildings[_j].connections[countBuildings] = false;
+				}
+			};
+
 			buildedBuildings[countBuildings] = HelpFunction.clone(_buildings[type]);
+			buildedBuildings[countBuildings].lvl = 1;
+			
+
 			buildedBuildings[countBuildings].lvl = 1;
 			buildedBuildings[countBuildings].type = type;
 			
@@ -685,5 +695,27 @@ updateViewBuilder();
 		//HelpFunction.merge(a,b);
 	}
 
+	/**
+	 * [connectBuilding description]
+	 * Verbindung von Gebäuden wurde hergestellt
+	 * @param  {[object]} eventData [description]
+	 * Enthählt "from" id (number) des 1. Gebäudes
+	 * Enthält "to" id (number) des 2. Gebäudes
+	 */
+	this.connectBuilding = function(eventData) {
+		buildedBuildings[eventData.from].connections[eventData.to] = true;
+		buildedBuildings[eventData.to].connections[eventData.from] = true;
+	}
 
+	/**
+	 * [disconnectBuilding description]
+	 * Verbindung zwischen Gebäuden wurde getrennt
+	 * @param  {[object]} eventData [description]
+	 * Enthählt "from" id (number) des 1. Gebäudes
+	 * Enthält "to" id (number) des 2. Gebäudes
+	 */
+	this.disconnectBuilding = function(eventData) {
+		buildedBuildings[eventData.from].connections[eventData.to] = false;
+		buildedBuildings[eventData.to].connections[eventData.from] = false;
+	}
 }
