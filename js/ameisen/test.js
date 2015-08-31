@@ -520,7 +520,9 @@ function test (_options) {
 	    				if(solders[i].end <= Date.now()) {
 	    					_antS++;
 	   						solders.splice(i, 1);
-updateViewBuilder();
+	   						
+							updateViewBuilder();
+
 	   						if(ants.length == 0)
 	   							countDowns.solders.end = 0;
 	    				}
@@ -596,21 +598,24 @@ updateViewBuilder();
 			var countBuildings = buildedBuildings.length;
 
 			_buildings[type].buildedBuildings[_buildings[type].buildedBuildings.length] = countBuildings;
+
 			buildedBuildings[countBuildings] = {};
+			buildedBuildings[countBuildings] = HelpFunction.clone(_buildings[type]);
+			buildedBuildings[countBuildings].connections = [];
 
 			/**
 			 * Buildings um Connector erweitern 
 			 */
 			for (var j = 0; j < buildedBuildings.length; j++) {
 				if(countBuildings != j) {
-					buildedBuildings[countBuildings].connections[_j] = false;
-					buildedBuildings[_j].connections[countBuildings] = false;
+					console.log("drin");
+					console.log(buildedBuildings[countBuildings]);
+					console.log(buildedBuildings[j]);
+					buildedBuildings[countBuildings].connections[j] = false;
+					buildedBuildings[j].connections[countBuildings] = false;
 				}
 			};
 
-			buildedBuildings[countBuildings] = HelpFunction.clone(_buildings[type]);
-			buildedBuildings[countBuildings].lvl = 1;
-			
 
 			buildedBuildings[countBuildings].lvl = 1;
 			buildedBuildings[countBuildings].type = type;

@@ -201,13 +201,13 @@ function Canvas(_options) {
 			c.x = 150 * (i +1);
 			c.y = 250 + (i * 15);
 			var g = c.graphics;
-			c.radius = HelpFunction.getProcentValue(20, 150, c.buildingData.lvl);
+			c.radius = HelpFunction.getProcentValue(20, 80, c.buildingData.lvl);
 			c.addHitTest = function (i, j) {
 				createHitTest(i,j);
 			}
 			c.upgradeBuilding = function() {
 				this.buildingData.lvl += 1;
-				this.radius = HelpFunction.getProcentValue(20, 150, c.buildingData.lvl);
+				this.radius = HelpFunction.getProcentValue(20, 80, c.buildingData.lvl);
 				this.graphics.c().f("#f58e25").dc(0,0,this.radius);
 				stage.update();
 			}
@@ -270,12 +270,14 @@ function Canvas(_options) {
 
 			eles[_i].on("pressmove", function(e) 
 			{
+				console.log(_e);
 				hitTesten();
 
 				for (var k = 0; k < eles.length; k++) {
-					zog(typeof eles[k].connector[_i]);
-					if(typeof eles[k].connector[_i] != "undefined") {
-						eles[k].connector[_i].hittesten();
+					if(k != _j) {
+						if(typeof eles[k].connector[_i] != "undefined") {
+							eles[k].connector[_i].hittesten();
+						}
 					}
 				};
 			});
@@ -377,8 +379,12 @@ function Canvas(_options) {
 		}
 
 		connector.updateLine = function() {
-			if(eles[_j].connector[_i].visible == true) {
-				eles[_j].connector[_i].updateLine();
+			if(typeof eles[_j].connector[_i] != "undefined") {
+				if(eles[_j].connector[_i].visible == true) {
+					eles[_j].connector[_i].updateLine();
+				}
+				else 
+					draw();
 			}
 			else {
 				draw();
