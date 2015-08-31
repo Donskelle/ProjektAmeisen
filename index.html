@@ -12,16 +12,38 @@
 	<body>
 		
 		<div id="menuWrapper">
-			<button id="btn_toggleMenu">Menu</button>
+			<div id="menuBox">
+				<ul>
+					<li id="menuHowToPlay">How To Play</li>
+					<li id="menuSettings">Settings</li>
+					<li id="menuQuit">Quit</li>
+				</ul>
+			</div>
+			<div id="btn_toggleMenu"></div>
+			<div id="howToPlay">
+				<div id="howToPlayTitle">How To Play</div>
+				<div id="menuText">Here you will find an explanation on how to play the game.</div>
+			</div>
+			<div id="settings">
+				<div id="settingsTitle">Settings</div>
+				<div id="menuText">Here you will find settings to personalize your game experience.</div>
+			</div>
 		</div>
 		<div id="gameWrapper">
-
+			
+			<div id="tipBox">
+				<h1 id="tipTitle">title</h1>
+				<p id="tipText">tttttttttttttttttttttt</p>
+			</div>
+			
 			<div id="canvasWrapper">
 				<canvas id="canvas">
 					Canvas kann nicht dargestellt werden
 				</canvas>
 			</div>
-
+			
+			
+			
 			<div class="draggable">
 				<div class="handle">
 					Chambers
@@ -29,6 +51,7 @@
 				<table class="chamberTable">
 					<tr>
 						<th class="chamberName" colspan="2">Brood Chamber</th>
+						<th><div class="tooltip" data-type="broodChamber">?</div></th>
 					</tr>
 					<tr>
 						<td>Leafs</td>
@@ -50,6 +73,7 @@
 				<table class="chamberTable">
 					<tr>
 						<th class="chamberName" colspan="2">Mushroom Chamber</th>
+						<th><div class="tooltip" data-type="mushroomChamber">?</div></th>
 					</tr>
 					<tr>
 						<td>Leafs</td>
@@ -71,6 +95,7 @@
 				<table class="chamberTable">
 					<tr>
 						<th class="chamberName" colspan="2">Storage</th>
+						<th><div class="tooltip" data-type="storage">?</div></th>
 					</tr>
 					<tr>
 						<td>Leafs</td>
@@ -92,6 +117,7 @@
 				<table class="chamberTable">
 					<tr>
 						<th class="chamberName" colspan="2">Pantry</th>
+						<th><div class="tooltip" data-type="pantry">?</div></th>
 					</tr>
 					<tr>
 						<td>Leafs</td>
@@ -112,6 +138,7 @@
 				<table class="chamberTable">
 					<tr>
 						<th class="chamberName" colspan="2">Dumping Ground</th>
+						<th><div class="tooltip" data-type="dumpingGround">?</div></th>
 					</tr>
 					<tr>
 						<td>Leafs</td>
@@ -224,11 +251,18 @@
 			<div class="draggable" id="dxy">
 				<div class="handle"></div>
 				<table id="resTable">
+					
 					<tr>
 						<th>Leafs:</th>
 						<th>Stone:</th>
 						<th>Food:</th>
 						<th>Amber:</th>
+					</tr>
+					<tr>
+						<td id="leafFill"><div id="leafBar"></div></td>
+						<td id="stoneFill"><div id="stoneBar"></div></td>
+						<td id="foodFill"><div id="foodBar"></div></td>
+						<td id="amberFill"><div id="amberBar"></div></td>
 					</tr>
 					<tr>
 						<td><span id="leafCount">xxx</span> / <span id="leafStorage">xxx</span></td>
@@ -243,11 +277,13 @@
 						<td id="amberProd"><span>xxx</span></td>
 					</tr>
 					<tr>
-						<td>
-						<button id="btn_addLeafs">
-							+
-						</button></td>
+						<td><button id="btn_addLeafs">+</button></td>
+						<td><button id="btn_addStone">+</button></td>
+						<td><button id="btn_addFood">+</button></td>
+						<td></td>
 					</tr>
+					
+					
 				</table>
 			</div>
 
@@ -314,6 +350,7 @@
 			<!--
 			Notwendige Javascript Datein
 			-->
+			<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 			<script type="text/javascript" src="js/plugins/zim_1.3.js"></script>
 			<script type="text/javascript" src="js/plugins/createjs-2015.05.21.min.js"></script>
 			<script type="text/javascript" src="js/helpFunctions.js"></script>

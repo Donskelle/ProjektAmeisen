@@ -9,6 +9,49 @@ html {
 }
 body {
 	overflow: hidden;
+	
+}
+button {
+	background-color: #FFFFFF;
+	
+	border: solid 1px black;
+	width: 60px;
+	height: 20px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+button:hover {
+	background-color: #2F2E30;
+	color: #FFFFFF;
+}
+#tipBox {
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	background-color: #FFFFFF;
+	z-index: 1000;
+	display: none;
+	border: solid 1px black;
+	
+}
+.tooltip {
+	padding: 0px;
+	width: 20px;
+	background-color: #FFFFFF;
+	
+	text-align: center;
+	float: right;
+	font-size: .8em;
+	cursor: default;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: solid 1px black;
+}
+.tooltip:hover {
+	background-color: #2F2E30;
+	color: #FFFFFF;
 }
 /*
  *	Grundklassen bereitstellen
@@ -27,30 +70,108 @@ body {
 	width: 100%;
 	position: absolute;
 	margin: 0 0 0 0;
-	padding-top: 67%;
-	background-color: #000000;
-	background-image: url("../img/test.jpg");
-	background-size: contain;
+	height: 100vh;
+	background-color: #2F2E30;
+	background-image: url("../img/menu_background.png");
+	background-size: cover;
+	background-position: bottom;
 	background-repeat: no-repeat;
 	-webkit-transition: margin 1s;
 	-moz-transition: margin 1s;
 	-o-transition: margin 1s;
 	transition: margin 1s;
 }
+#menuBox {
+	position: absolute;
+	
+	right: 15%;
+	top: 20%;
+}
+#menuBox ul {
+	
+}
+#menuBox ul li {
+	padding: 15px 25px 15px 25px;
+	margin: 5px 0 5px 0;
+	cursor: pointer;
+	background-color: #FFFFFF;
+	text-align: center;
+	border: solid 1px #CCCCCC;
+	-webkit-transition: all .2s;
+	-moz-transition: all .2s;
+	-o-transition: all .2s;
+	transition: all .2s;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	
+}
+#menuBox ul li:hover {
+	background-color: #2F2E30;
+	color: #FFFFFF;
+	
+		
+}
 #btn_toggleMenu {
 	position: fixed;
-	top: 0;
-	right: 0;
-	z-index: 100;
+	top: 5px;
+	right: 5px;
+	z-index: 1;
+	width: 30px;
+	height: 30px;
+	background-image: url("../img/play.png");
+	background-size: contain;
+	background-color: #FFFFFF;
+	-webkit-transition: top 1s, background-color .2s;
+	-moz-transition: top 1s, background-color .2s;
+	-o-transition: top 1s, background-color .2s;
+	transition: top 1s, background-color .2s;
+	border: solid 1px #CCCCCC;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	
 }
+#btn_toggleMenu:hover {
+	background-color: #2F2E30;
+}
+#howToPlay, #settings {
+	width: 700px;
+	height: 500px;
+	background-color: #FFFFFF;
+	position: absolute;
+	right: 30%;
+	top: 5%;
+	display: none;
+	padding: 20px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	
+}
+#howToPlayTitle, #settingsTitle {
+	padding: 20px 0 20px 0;
+}
+
 #gameWrapper {
-	margin: 67% 0 0 0;
+	margin: 100vh 0 0 0;
 	width: 100%;
 	position: absolute;
 	-webkit-transition: margin 1s;
 	-moz-transition: margin 1s;
 	-o-transition: margin 1s;
 	transition: margin 1s;
+	background-image: url("../img/game_background1.png");
+	background-position: bottom left;
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 100vh;
 	
 }
 .draggable {
@@ -63,19 +184,35 @@ body {
 .handle {
 	min-height: 20px;
 	color: #FFFFFF;
-	background: #000000;
+	background: #2F2E30;
 	border: solid 1px #ccc;
 	margin: 0;
 	padding: 0 0 0 10px;
 	cursor: move;
 }
+.chamberTable th, .chamberTable td, #jobTable th, #jobTable td {
+	padding: 2px 5px 2px 5px;
+}
 #resTable th, #resTable td {
-	padding: 0 20px 0 20px;
+	width: 200px;
+	text-align: center;
+	border-right: solid .5px #ccc;
 }
 .jobName {
 	padding: 0 10px 0 10px;
 	
 }
+#leafFill, #stoneFill, #foodFill, #amberFill {
+	background-color: red;
+	width: 100%;
+	height: 5px;
+}
+#leafBar, #stoneBar, #foodBar, #amberBar {
+	background-color: green;
+	width: 50%;
+	height: 5px;
+}
+
 
 /*
  *	Menü Styles

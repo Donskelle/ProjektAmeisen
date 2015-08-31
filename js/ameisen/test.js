@@ -189,7 +189,12 @@ function test (_options) {
 		});
 		
 		
+		
+		
+		
 		var addLeafs = zid("btn_addLeafs");
+		var addStone = zid("btn_addStone");
+		var addFood = zid("btn_addFood");
 		
 		var addAntW = zid("btn_addAntW");
 		var addAntS = zid("btn_addAntS");
@@ -211,6 +216,14 @@ function test (_options) {
 		
 		addLeafs.addEventListener("click", function(e) {
 			_leafs++;
+			updateRes();
+		});
+		addStone.addEventListener("click", function(e) {
+			_stone++;
+			updateRes();
+		});
+		addFood.addEventListener("click", function(e) {
+			_food++;
 			updateRes();
 		});
 		
@@ -309,30 +322,57 @@ function test (_options) {
     var _amberStorage = zid("amberStorage");
 
 
+		//Fuellstand der Vorratslager
+		var leafBar = zid("leafBar");
+		var stoneBar = zid("stoneBar");
+		var foodBar = zid("foodBar");
+		var amberBar = zid("amberBar");
+		
+		
     function updateRes() {
-
+		
     	_prodLeafs = (_jobLeafs * _ratioLeafs) - (_buildings[2]["leafConsume"] * _buildings[2]["count"] * _buildings[2]["upgradeCost"]["totalUpgrades"]);
+    	_prodStone = _jobStone * _ratioStone;
+    	_prodFood = (_jobHunt * _ratioHunt) + (_buildings[2]["foodProd"] * _buildings[2]["count"] * _buildings[2]["upgradeCost"]["totalUpgrades"]) - (_antW + _antS + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean);
     	if(_prodLeafs < 0){
     		_leafProd.style.color = "red";
+    		_leafProd.innerHTML = _prodLeafs;
     	}
-    	else{
+    	else if(_prodLeafs > 0){
     		_leafProd.style.color = "green";
+    		_leafProd.innerHTML = "+" + _prodLeafs;
+    	}
+    	else {
+    		_leafProd.style.color = "black";
+    		_leafProd.innerHTML = _prodLeafs;
     	}
     	if(_prodStone < 0){
     		_stoneProd.style.color = "red";
+    		_stoneProd.innerHTML = _prodStone;
     	}
-    	else{
+    	else if(_prodStone > 0){
     		_stoneProd.style.color = "green";
+    		_stoneProd.innerHTML = "+" + _prodStone;
     	}
-    	_prodFood = (_jobHunt * _ratioHunt) + (_buildings[2]["foodProd"] * _buildings[2]["count"] * _buildings[2]["upgradeCost"]["totalUpgrades"]) - (_antW + _antS + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean); 
+    	else {
+    		_stoneProd.style.color = "black";
+    		_stoneProd.innerHTML = _prodStone;
+    	}
+    	 
     	
     	if(_prodFood < 0){
     		_foodProd.style.color = "red";
+    		_foodProd.innerHTML = _prodFood;
     	}
-    	else{
+    	else if(_prodFood > 0){
     		_foodProd.style.color = "green";
+    		_foodProd.innerHTML = "+" + _prodFood;
     	}
-    	_prodStone = _jobStone * _ratioStone;
+    	else {
+    		_foodProd.style.color = "black";
+    		_foodProd.innerHTML = _prodFood;
+    	}
+    	
     	
     	_workerCount.innerHTML = _antW;
     	_soldierCount.innerHTML = _antS;
@@ -340,14 +380,19 @@ function test (_options) {
     	_stoneCount.innerHTML = _stone;
     	_foodCount.innerHTML = _food;
     	_amberCount.innerHTML = _amber;
-    	_leafProd.innerHTML = _prodLeafs;
-    	_stoneProd.innerHTML = _prodStone;
-    	_foodProd.innerHTML = _prodFood;
+    	
+    	
+    	
     	_amberProd.innerHTML = _prodAmber;
     	
     	_leafStorage.innerHTML = _buildings[3]["storeLeafs"];
 		_stoneStorage.innerHTML = _buildings[3]["storeStone"];
 		_foodStorage.innerHTML = _buildings[4]["storeFood"];
+		
+		leafBar.style.width = (_leafs/_buildings[3]["storeLeafs"])*100 + "%"; 
+		stoneBar.style.width = (_stone/_buildings[3]["storeStone"])*100 + "%"; ;
+		foodBar.style.width = (_food/_buildings[4]["storeFood"])*100 + "%"; ;
+		amberBar.style.width = "100%";
     }
  
 
@@ -399,7 +444,7 @@ function test (_options) {
 	    			break;
 	    	}
 	    	_antW += -amount;
-	    	updateRes();
+	    	
 	    }
 	    else {
 	    	if( type == 6 ){	    		
@@ -423,6 +468,7 @@ function test (_options) {
     			amount *= 0;
     		}
 	    }
+	    updateRes();
     }
     
     var countdownW = zid("countdownW");
