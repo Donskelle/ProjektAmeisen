@@ -1,0 +1,29 @@
+Todo Fabian:
+- Startgebäude
+- Min 2!  Disaster Funktionen
+	- Ameisen sterben
+	- Later: Gebaude entwickelt sich zurück
+	- Later: Gebäude entwickelt sich vor
+	- Vorräte verfallen
+	- Ameisen dazu
+- Gebäudeverbindung
+- Mitte Screen neue Gebäude
+
+
+Todo Ole:
+- CSSn
+- Fix Ameisen erstellen via "-" Button
+- Texte erstellen
+- Tooltips anlegen und füllen
+- Menüs füllen
+
+Todo Wiebke:
+- hard Design
+
+Maybe: 
+- Settings 
+	Gamespeed:
+	- Quick 500
+	- Normal 1500
+	- Long 3000
+- Upgradevview anpassen

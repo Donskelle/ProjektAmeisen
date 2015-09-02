@@ -112,14 +112,14 @@ function AmeisenStage(_options) {
 
 				// Gebäude nicht mehr verbunden
 				case "buidlingDisconnected":
-					zog(e.detail.eventData);				
-					tester.connectBuilding(e.detail.eventData);
+					zog(e.detail.eventData);
+					tester.disconnectBuilding(e.detail.eventData);
 					break;
 				
 				// Gebäude verbunden
 				case "buidlingConnected":
 					zog(e.detail.eventData);
-					tester.disconnectBuilding(e.detail.eventData);
+					tester.connectBuilding(e.detail.eventData);
 					break;
 			}
 		});

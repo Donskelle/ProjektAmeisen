@@ -74,7 +74,7 @@ function test (_options) {
 	
 	
 	
-			    //Buildings
+	//Buildings
     var _buildingCostRatio = 10; //balancing
     
     
@@ -647,6 +647,8 @@ function test (_options) {
 
 			buildedBuildings[countBuildings] = {};
 			buildedBuildings[countBuildings] = HelpFunction.clone(_buildings[type]);
+			buildedBuildings[countBuildings].connected = false;
+
 			buildedBuildings[countBuildings].connections = [];
 
 			/**
@@ -654,9 +656,6 @@ function test (_options) {
 			 */
 			for (var j = 0; j < buildedBuildings.length; j++) {
 				if(countBuildings != j) {
-					console.log("drin");
-					console.log(buildedBuildings[countBuildings]);
-					console.log(buildedBuildings[j]);
 					buildedBuildings[countBuildings].connections[j] = false;
 					buildedBuildings[j].connections[countBuildings] = false;
 				}
@@ -756,6 +755,24 @@ function test (_options) {
 	this.connectBuilding = function(eventData) {
 		buildedBuildings[eventData.from].connections[eventData.to] = true;
 		buildedBuildings[eventData.to].connections[eventData.from] = true;
+
+		buildedBuildings[eventData.from].connected = true;
+		buildedBuildings[eventData.to].connected = true;
+	}
+
+	function checkConnection(arr) { 
+		arr.connected = false;
+		
+		arr.connections.forEach(check);
+
+
+		function check(element, index, array) {
+			if(element == true) {
+				arr.connected = true;
+			}
+		}
+
+		
 	}
 
 	/**
@@ -768,5 +785,10 @@ function test (_options) {
 	this.disconnectBuilding = function(eventData) {
 		buildedBuildings[eventData.from].connections[eventData.to] = false;
 		buildedBuildings[eventData.to].connections[eventData.from] = false;
+
+		
+		console.log(buildedBuildings[eventData.from]);
+		checkConnection(buildedBuildings[eventData.from]);
+		checkConnection(buildedBuildings[eventData.to]);
 	}
 }

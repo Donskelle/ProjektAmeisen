@@ -136,8 +136,6 @@ function Canvas(_options) {
 
 			e.preventDefault();
 		})
-
-		
 	}
 
 	/**
@@ -270,7 +268,6 @@ function Canvas(_options) {
 
 			eles[_i].on("pressmove", function(e) 
 			{
-				console.log(_e);
 				hitTesten();
 
 				for (var k = 0; k < eles.length; k++) {
@@ -300,6 +297,10 @@ function Canvas(_options) {
 						stage.update();
 					}
 					else {
+						/*HelpFunction.pushEvent("buidlingConnected", {
+							"from": _i,
+							"to": _j
+						});*/
 						eles[_i].connector[_j].updateLine();
 					}
 				}
