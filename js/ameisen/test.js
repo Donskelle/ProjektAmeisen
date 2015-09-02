@@ -338,10 +338,21 @@ function test (_options) {
 		
     function updateRes() {
     	var connectedBuildingsLevel = getConnectedBuildingsLevelByType(3);
-    	var maxRes = 15 + Math.floor(10 * 1.03 * connectedBuildingsLevel);
+    	var maxRes = 15;
+    	for (var i = 0; i < connectedBuildingsLevel; i++) {
+    		maxRes = 10 + Math.floor(maxRes * 1.03);
+    	};
 
     	_buildings[3]["storeLeafs"] = maxRes;
     	_buildings[3]["storeStone"] = maxRes;
+
+
+    	connectedBuildingsLevel = getConnectedBuildingsLevelByType(4);
+    	var maxFood = 25;
+    	for (var i = 0; i < connectedBuildingsLevel; i++) {
+    		maxFood = 10 + Math.floor(maxFood * 1.03);
+    	};
+    	_buildings[4]["storeFood"] = maxFood;
 
 		
     	connectedBuildingsLevel = getConnectedBuildingsLevelByType(2);
@@ -711,13 +722,7 @@ function test (_options) {
 			buildedBuildings[buildingId].lvl += 1;
 			buildedBuildings[buildingId].upgradeCost.leafs = Math.floor(buildedBuildings[buildingId].upgradeCost.leafs * _upgradeCostIncrease);
 			buildedBuildings[buildingId].upgradeCost.stone = Math.floor(buildedBuildings[buildingId].upgradeCost.stone * _upgradeCostIncrease);
-			buildedBuildings[buildingId].upgradeCost.food = Math.floor(buildedBuildings[buildingId].upgradeCost.food * _upgradeCostIncrease);
-		
-			if(buildedBuildings[buildingId].type == 4) {
-				//_buildings[4]["storeFood"] = Math.floor(15 * _buildings[4]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
-	    		_buildings[4]["storeFood"] = 10 + Math.floor(_buildings[4]["storeFood"] * (1.03));
-			}
-	    	
+			buildedBuildings[buildingId].upgradeCost.food = Math.floor(buildedBuildings[buildingId].upgradeCost.food * _upgradeCostIncrease);  	
 			
 			updateRes();
 			return true;
