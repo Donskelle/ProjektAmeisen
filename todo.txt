@@ -1,13 +1,13 @@
 Todo Fabian:
-- Startgebäude
+- Startgebäude /done
 - Min 2!  Disaster Funktionen
 	- Ameisen sterben
 	- Later: Gebaude entwickelt sich zurück
 	- Later: Gebäude entwickelt sich vor
 	- Vorräte verfallen
 	- Ameisen dazu
-- Gebäudeverbindung
-- Mitte Screen neue Gebäude
+- Gebäudeverbindung / done
+- Mitte Screen neue Gebäude / done
 
 
 Todo Ole:

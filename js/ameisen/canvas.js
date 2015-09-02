@@ -93,6 +93,21 @@ function Canvas(_options) {
 		    	stone: null,
 		    	food: null
 			}
+		},
+		{
+			name: "Start",
+			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
+			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
+			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			lvl: null,
+			text: "Ich mach die super Energie, byebye global warming",
+			costs: {
+				leafs: null,
+		    	stone: null,
+		    	food: null
+			}
 		}
 	]
 
@@ -135,7 +150,9 @@ function Canvas(_options) {
 			});
 
 			e.preventDefault();
-		})
+		});
+		// Startgebäude
+		new Building(5, 0);
 	}
 
 	/**
@@ -153,7 +170,7 @@ function Canvas(_options) {
 	 */
 	this.createBuilding = function(type) {
 		var i = eles.length;
-		var build = new Building((type-1), i);
+		new Building((type-1), i);
 		stage.update();
 		
 		HelpFunction.pushEvent("getUpgradeCosts", {
@@ -220,6 +237,15 @@ function Canvas(_options) {
 
 			addDrag(c);
 			stage.addChild(c);
+
+			// Startverbindunge nach oben
+			if(type == 5) {
+				var connector = createConnector(i, "top");
+				eles[i].on("pressmove", function(e) 
+				{
+					connector.updateLine();
+				});
+			}
 		})();
 
 		
@@ -259,6 +285,9 @@ function Canvas(_options) {
 
 		function createHitTest(_i, _j) {
 			var hitTest = false;
+			if(_j == "top") {
+
+			}
 			eles[_i].connector[_j] = createConnector(_i, _j);
 			eles[_i].connector[_j].hittesten = function() {
 				hitTesten();
@@ -367,10 +396,19 @@ function Canvas(_options) {
 		var connector = new createjs.Shape();
 		connector.visible = false;
 
+		if(_j == "top")
+			drawTop();
+
 		function draw() {
 			connector.visible = true;
 			connector.graphics.c().setStrokeStyle(6, 'round', 'round').beginStroke("black").moveTo(eles[_i].x, eles[_i].y).lineTo(eles[_j].x, eles[_j].y);
 			// Connector wird als oberesten Element eingefügt, damit es oberhalb der anderen Elemente liegt.
+			stage.addChild(connector);
+		}
+
+		function drawTop() {
+			connector.visible = true;
+			connector.graphics.c().setStrokeStyle(6, 'round', 'round').beginStroke("black").moveTo(eles[_i].x, eles[_i].y).lineTo(stageW/2, 0);
 			stage.addChild(connector);
 		}
 
@@ -380,15 +418,19 @@ function Canvas(_options) {
 		}
 
 		connector.updateLine = function() {
-			if(typeof eles[_j].connector[_i] != "undefined") {
-				if(eles[_j].connector[_i].visible == true) {
-					eles[_j].connector[_i].updateLine();
-				}
-				else 
-					draw();
-			}
+			if(_j == "top")
+				drawTop();
 			else {
-				draw();
+				if(typeof eles[_j].connector[_i] != "undefined") {
+					if(eles[_j].connector[_i].visible == true) {
+						eles[_j].connector[_i].updateLine();
+					}
+					else 
+						draw();
+				}
+				else {
+					draw();
+				}
 			}
 		}
 
