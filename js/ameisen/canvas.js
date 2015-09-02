@@ -196,8 +196,8 @@ function Canvas(_options) {
 			c.connector = new Array();
 
 
-			c.x = 150 * (i +1);
-			c.y = 250 + (i * 15);
+			c.x = window.innerWidth/2 + ((i * 15) - 50);
+			c.y = window.innerHeight/2 + ((i * 15) - 50);
 			var g = c.graphics;
 			c.radius = HelpFunction.getProcentValue(20, 80, c.buildingData.lvl);
 			c.addHitTest = function (i, j) {
@@ -231,7 +231,7 @@ function Canvas(_options) {
 
 
 				e.target.graphics.beginStroke("black");
-				e.target.graphics.f("rgba(0,0,0,0.1)").dc(0,0,c.radius*3);
+				e.target.graphics.f("rgba(0,0,0,0.1)").dc(0,0,120);
 			}); 
 
 			c.on("click",function(e){
