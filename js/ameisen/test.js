@@ -414,36 +414,45 @@ function test (_options) {
 	    	switch(type)
 	    	{
 	    		case 1: //collect leafs
-	    			if(_jobLeafs >= 1 || amount == 1)
-	    			_jobLeafs += amount;
-	    			_jobCountL.innerHTML = _jobLeafs;
-	    			
+	    			if(_jobLeafs >= 1 || amount == 1){
+	    				_jobLeafs += amount;
+	    				_jobCountL.innerHTML = _jobLeafs;
+	    				_antW += -amount;
+	    			}
 	    			break;
 	    		case 2:	//collect stone
-	    			if(_jobStone >= 1 || amount == 1)
-	    			_jobStone += amount;
-	    			_jobCountS.innerHTML = _jobStone;
+	    			if(_jobStone >= 1 || amount == 1){
+	    				_jobStone += amount;
+	    				_jobCountS.innerHTML = _jobStone;
+	    				_antW += -amount;
+	    			}
 	    			break;
 	    		case 3: //hunt
-	    			if(_jobHunt >= 1 || amount == 1)
-	    			_jobHunt += amount;
-	    			_jobCountHu.innerHTML = _jobHunt;
+	    			if(_jobHunt >= 1 || amount == 1){
+	    				_jobHunt += amount;
+	    				_jobCountHu.innerHTML = _jobHunt;
+	    				_antW += -amount;
+	    			}
 	    			break;
 	    		case 4: //hatch
-	    			if(_jobHatch >= 1 || amount == 1)
-	    			_jobHatch += amount;
-	    			_hatchRateW = _HATCHW - (_hatchRatioW * _jobHatch);
-	    			_hatchRateS = _HATCHS - (_hatchRatioS * _jobHatch);
-	    			_jobCountHa.innerHTML = _jobHatch;
+	    			if(_jobHatch >= 1 || amount == 1){
+	    				_jobHatch += amount;
+	    				_hatchRateW = _HATCHW - (_hatchRatioW * _jobHatch);
+	    				_hatchRateS = _HATCHS - (_hatchRatioS * _jobHatch);
+	    				_jobCountHa.innerHTML = _jobHatch;
+	    				_antW += -amount;
+	    			}
 	    			break;
 	    		case 5:	//clean
-	    			if(_jobClean >= 1 || amount == 1)
-	    			_jobClean += amount;
-	    			_jobCountC.innerHTML = _jobClean;
+	    			if(_jobClean >= 1 || amount == 1){
+	    				_jobClean += amount;
+	    				_jobCountC.innerHTML = _jobClean;
+	    				_antW += -amount;
+	    			}
 	    			//weitere Berechnung fehlt noch
 	    			break;
 	    	}
-	    	_antW += -amount;
+	    	
 	    	
 	    }
 	    else {

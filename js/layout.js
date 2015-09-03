@@ -92,24 +92,68 @@ $(".tooltip").mouseenter(handler);
 
 var tipArray = {
 	broodChamber : {
-		title : "Brood Chamber",
-		text : "brutkammer text text text text"
+		title : "Brutkammer",
+		text : "Hier werden neue Arbeiterinnen ausgebildet. Die Ausbaustufe entscheidet darüber, wie viele Larven sich gleichzeitig in der Warteschleife befinden können."
 	},
 	mushroomChamber : {
-		title : "Mushroom Chamber",
-		text : "mushroom text text text text"
+		title : "Pilzkammer",
+		text : "In der Pilzkammer gedeiht ein Speisepilz, der hervorragend auf Blättern und anderen Pflanzenteilen wächst. Deine Ameisen ernähren sich von ihm. Du solltest dafür sorgen, dass immer genug Blätter vorhanden sind, da der Pilz sich sonst zurück entwickelt."
 	},
 	storage : {
-		title : "Storage",
-		text : "storage text text text text"
+		title : "Lager",
+		text : "Im Lager werden deine Baumaterialien gespeichert, also Blätter und Steine. Je höher die Ausbaustufe, desto mehr Einheiten können gelagert werden."
 	},
 	pantry : {
-		title : "Pantry",
-		text : "pantry text text text text"
+		title : "Speisekammer",
+		text : "Hier werden Nahrungsmittel gelagert, die der Pilz produziert oder deine Arbeiterinnen bei der Jagt erbeutet haben. Auch hier bestimmt die Ausbaustufe die Größe des Speichers."
 	},
 	dumpingGround : {
-		title : "Dumping Ground",
-		text : "dump text text text text"
+		title : "Deponie",
+		text : "Dies ist der Ort wo Abfälle, die dein Volk produziert, entsorgt werden. Dazu zählen tote Ameisen, verdorbene Nahrungsreste und die Notdurft deines Volkes. Je höher die Kammer ausgebaut ist, desto mehr Platz bietet sie und desto schneller wird der Abfall abgebaut."
+	},
+	worker : {
+		title : "Arbeiter",
+		text : "Hier kannst du neue Arbeiterinnen ausbrüten. Sie bilden das Rückrat deines Volkes und übernehmen sämtliche Aufgaben. Jede Ameise muss fressen und verbraucht pro Spielrunde (Tick) eine Nahrungseinheit. Sorge dafür, dass immer genug Nahrung vorhanden ist oder deine Ameisen verhungern."
+	},
+	soldier : {
+		title : "Soldaten",
+		text : "Deine Soldaten schützen den Bau vor Feinden und anderen Bedrohungen. Obwohl auch Arbeiterinnen dazu in der Lage sind, ist die Kriegerkaste deutlich effektiver bei der Bewältigung dieser Aufgabe."
+	},
+	jLeafs : {
+		title : "Blätter sammeln",
+		text : "Ameisen auf diesem Posten sammeln eifrig Blätter. Pro Spielrunde (Tick) sammelt jede Ameise auf diesem Posten ein Blatt."
+	},
+	jStone : {
+		title : "Steine sammeln",
+		text : "Steine zu sammeln ist keine einfache Aufgabe. Jede Ameise sammelt pro Spielrunde (Tick) einen Stein."
+	},
+	jHunt : {
+		title : "Jagen",
+		text : "Du kannst deine Ameisen auf die Jagt schicken, um Insekten und andere Kleintiere zu erbeuten. Es gibt Ameisenarten, die sogar Jungvögel erlegen."
+	},
+	jHatch : {
+		title : "Brutpflege",
+		text : "Die Brutpflege ist ein wichtiger Bestandteil einer florierenden Kolonie. Je mehr Ameisen sich um den Nachwuchs kümmern, desto schneller wächst dieser heran."
+	},
+	jClean : {
+		title : "Bau säubern",
+		text : "Ist dein Nest nicht gepflegt, können deine Ameisen krank werden. Sorge also dafür, dass sich immer genug Arbeiterinnen um die Sauberkeit im Bau kümmern."
+	},
+	leafs : {
+		title : "Blätter",
+		text : "Blätter sind äußerst wichtig für die Entwicklung deines Volkes. Du kannst sie entweder zum Bau von neuen Kammern oder zum speisen deines Pilzes verwenden."
+	},
+	stone : {
+		title : "Steine",
+		text : "Steine dienen ebenfalls als Baumaterial, das erforderlich ist, um Kammern zu erweitern oder neue zu bauen. Dieser Rohstoff ist unabdingbar und du solltest den Füllstand ständig im Auge behalten, damit das Wachstum nicht stagniert."
+	},
+	food : {
+		title : "Nahrung",
+		text : "Nahrung ist die Basis, damit dein Volk existieren kann. Es gibt verschiedene Möglichkeiten um Nahrung zu gewinnen. Du kannst entweder über den Pilz Blätter in Nahrung umwandeln oder deine Ameisen auf die Jagt schicken."
+	},
+	amber : {
+		title : "Bernstein",
+		text : "Die antibakteriellen Eigenschaften von Harz sind sogar den Ameisen bekannt. Besonders Waldameisen machen sich diese zunutze, indem sie Baumharzstücke in den Bau schleppen und so die Vermehrung von Keimen unterbinden bzw. erschweren."
 	}
 };
 

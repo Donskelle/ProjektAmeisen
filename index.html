@@ -14,26 +14,29 @@
 		<div id="menuWrapper">
 			<div id="menuBox">
 				<ul>
-					<li id="menuHowToPlay">How To Play</li>
-					<li id="menuSettings">Settings</li>
-					<li id="menuQuit">Quit</li>
+					<li id="menuHowToPlay">Spieleinf&uuml;hrung</li>
+					<li id="menuSettings">Einstellungen</li>
+					<li id="menuQuit">Beenden</li>
 				</ul>
 			</div>
 			<div id="btn_toggleMenu"></div>
 			<div id="howToPlay">
-				<div id="howToPlayTitle">How To Play</div>
-				<div id="menuText">Here you will find an explanation on how to play the game.</div>
+				<div id="howToPlayTitle">Spieleinf&uuml;hrung</div>
+				<div id="menuText">Herzlich willkommen bei "SPIELNAME". <br/> In diesem Spiel ist es deine Aufgabe ein eigenes Ameisenimperium zu errichten und zu verwalten. Deine Königin hat bereits eine kleine Erdhöhle ausgehoben, die als Start für dein Königreich dient. 
+									<br/> Zu Beginn des Spiels kannst du manuell Rohstoffe sammeln. Dies geschieht über die Buttons unterhalb der Rohstoffanzeige. Dein erstes Ziel sollte es sein neue Ameisen auszubilden, die dir bei der Beschaffung neuer Materialien behilflich sind.
+											Du musst dafür sorgen, dass dein Volk immer genug zu fressen hat, da deine Arbeiterinnen sonst verhungern. Zunächst solltest du Ameisen auf die Jagt schicken, um deinen Nahrungsvorrat kurzfristig aufzubessern. Später im Spiel ist es effektiver die Pilzkammer zu bauen und zu erweitern. 
+											Diese wandelt Bl&auml;tter in Nahrung um und versorgt dein Volk. <br/> Das Spielziel ist es den größten Ameisenhügel zu errichten, die die Welt je gesehen hat. <br/> Viel Erfolg!</div>
 			</div>
 			<div id="settings">
-				<div id="settingsTitle">Settings</div>
+				<div id="settingsTitle">Einstellungen</div>
 				<div id="menuText">Here you will find settings to personalize your game experience.</div>
 			</div>
 		</div>
 		<div id="gameWrapper">
 			
 			<div id="tipBox">
-				<h1 id="tipTitle">title</h1>
-				<p id="tipText">tttttttttttttttttttttt</p>
+				<h1 id="tipTitle">kein Inhalt</h1>
+				<p id="tipText">Fehler: Inhalt nicht verf&uuml;gbar</p>
 			</div>
 			
 			<div id="canvasWrapper">
@@ -46,113 +49,123 @@
 			
 			<div class="draggable">
 				<div class="handle">
-					Chambers
+					Kammern
 				</div>
 				<table class="chamberTable">
 					<tr>
-						<th class="chamberName" colspan="2">Brood Chamber</th>
 						<th><div class="tooltip" data-type="broodChamber">?</div></th>
+						<th class="chamberName" colspan="2">Brutkammer</th>
 					</tr>
 					<tr>
-						<td>Leafs</td>
+						<td></td>
+						<td>Bl&auml;tter</td>
 						<td class="buildCostLeafs" id="broodCostL">1502313</td>
 					</tr>
 					<tr>
-						<td>Stone</td>
+						<td></td>
+						<td>Steine</td>
 						<td class="buildCostStone" id="broodCostS">12011</td>
 					</tr>
 					<tr>
 						<td></td>
 						<td>
 						<button id="broodBuild" class="build">
-							Build
+							Bauen
 						</button></td>
 					</tr>
 				</table>
 
 				<table class="chamberTable">
 					<tr>
-						<th class="chamberName" colspan="2">Mushroom Chamber</th>
 						<th><div class="tooltip" data-type="mushroomChamber">?</div></th>
+						<th class="chamberName" colspan="2">Pilzkammer</th>
 					</tr>
 					<tr>
-						<td>Leafs</td>
+						<td></td>
+						<td>Bl&auml;tter</td>
 						<td class="buildCostLeafs" id="mushCostL">1502313</td>
 					</tr>
 					<tr>
-						<td>Stone</td>
+						<td></td>
+						<td>Steine</td>
 						<td class="buildCostStone" id="mushCostS">12011</td>
 					</tr>
 					<tr>
 						<td></td>
 						<td>
 						<button id="mushroomBuild" class="build">
-							Build
+							Bauen
 						</button></td>
 					</tr>
 				</table>
 
 				<table class="chamberTable">
 					<tr>
-						<th class="chamberName" colspan="2">Storage</th>
 						<th><div class="tooltip" data-type="storage">?</div></th>
+						<th class="chamberName" colspan="2">Lager</th>
 					</tr>
 					<tr>
-						<td>Leafs</td>
+						<td></td>
+						<td>Bl&auml;tter</td>
 						<td class="buildCostLeafs" id="storageCostL">1502313</td>
 					</tr>
 					<tr>
-						<td>Stone</td>
+						<td></td>
+						<td>Steine</td>
 						<td class="buildCostStone" id="storageCostS">12011</td>
 					</tr>
 					<tr>
 						<td></td>
 						<td>
 						<button id="storageBuild" class="build">
-							Build
+							Bauen
 						</button></td>
 					</tr>
 				</table>
 
 				<table class="chamberTable">
 					<tr>
-						<th class="chamberName" colspan="2">Pantry</th>
 						<th><div class="tooltip" data-type="pantry">?</div></th>
+						<th class="chamberName" colspan="2">Speisekammer</th>
 					</tr>
 					<tr>
-						<td>Leafs</td>
+						<td></td>
+						<td>Bl&auml;tter</td>
 						<td class="buildCostLeafs" id="pantryCostL">1502313</td>
 					</tr>
 					<tr>
-						<td>Stone</td>
+						<td></td>
+						<td>Steine</td>
 						<td class="buildCostStone" id="pantryCostS">12011</td>
 					</tr>
 					<tr>
 						<td></td>
 						<td>
 						<button id="pantryBuild" class="build">
-							Build
+							Bauen
 						</button></td>
 					</tr>
 				</table>
 				<table class="chamberTable">
 					<tr>
-						<th class="chamberName" colspan="2">Dumping Ground</th>
 						<th><div class="tooltip" data-type="dumpingGround">?</div></th>
+						<th class="chamberName" colspan="2">Deponie</th>
 					</tr>
 					<tr>
-						<td>Leafs</td>
+						<td></td>
+						<td>Bl&auml;tter</td>
 						<td class="buildCostLeafs" id="dumpingCostL">1502313</td>
 					</tr>
 					<tr>
-						<td>Stone</td>
+						<td></td>
+						<td>Steine</td>
 						<td class="buildCostStone" id="dumpingCostS">12011</td>
 					</tr>
 					<tr>
 						<td></td>
 						<td>
 						<button id="dumpingBuild" class="build">
-							Build
+							Bauen
 						</button></td>
 					</tr>
 				</table>
@@ -164,7 +177,8 @@
 				</div>
 				<table id="jobTable">
 					<tr>
-						<td class="jobName">Hatch Worker</td>
+						<td><div class="tooltip" data-type="worker">?</div></td>
+						<td class="jobName">Arbeiter</td>
 						<td class="jobCount" id="workerCount"><span>0</span></td>
 						<td>
 							<button id="btn_addAntW">
@@ -175,7 +189,8 @@
 						<td id="countdownW"><span>0.00</span></td>
 					</tr>
 					<tr>
-						<td class="jobName">Hatch Soldier</td>
+						<td><div class="tooltip" data-type="soldier">?</div></td>
+						<td class="jobName">Soldat</td>
 						<td class="jobCount" id="soldierCount"><span>0</span></td>
 						<td>
 							<button id="btn_addAntS">
@@ -186,7 +201,8 @@
 						<td id="countdownS"><span>0.00</span></td>
 					</tr>
 					<tr>
-						<td class="jobName">Collect Leafs</td>
+						<td><div class="tooltip" data-type="jLeafs">?</div></td>
+						<td class="jobName">Bl&auml;tter sammeln</td>
 						<td>
 						<button id="btn_subJobL">
 							-
@@ -198,7 +214,8 @@
 						</button></td>
 					</tr>
 					<tr>
-						<td class="jobName">Collect Stone</td>
+						<td><div class="tooltip" data-type="jStone">?</div></td>
+						<td class="jobName">Steine sammeln</td>
 						<td>
 						<button id="btn_subJobS">
 							-
@@ -210,7 +227,8 @@
 						</button></td>
 					</tr>
 					<tr>
-						<td class="jobName">Hunt</td>
+						<td><div class="tooltip" data-type="jHunt">?</div></td>
+						<td class="jobName">Jagen</td>
 						<td>
 						<button id="btn_subJobHu">
 							-
@@ -222,7 +240,8 @@
 						</button></td>
 					</tr>
 					<tr>
-						<td class="jobName">Hatch</td>
+						<td><div class="tooltip" data-type="jHatch">?</div></td>
+						<td class="jobName">Brutpflege</td>
 						<td>
 						<button id="btn_subJobHa">
 							-
@@ -234,7 +253,8 @@
 						</button></td>
 					</tr>
 					<tr>
-						<td class="jobName">Clean</td>
+						<td><div class="tooltip" data-type="jClean">?</div></td>
+						<td class="jobName">Bau s&auml;ubern</td>
 						<td>
 						<button id="btn_subJobC">
 							-
@@ -253,10 +273,10 @@
 				<table id="resTable">
 					
 					<tr>
-						<th>Leafs:</th>
-						<th>Stone:</th>
-						<th>Food:</th>
-						<th>Amber:</th>
+						<th><div class="tooltip" data-type="leafs">?</div> Bl&auml;tter:</th>
+						<th><div class="tooltip" data-type="stone">?</div> Stein:</th>
+						<th><div class="tooltip" data-type="food">?</div> Nahrung:</th>
+						<th><div class="tooltip" data-type="amber">?</div> Bernstein:</th>
 					</tr>
 					<tr>
 						<td id="leafFill"><div id="leafBar"></div></td>
@@ -291,7 +311,7 @@
 			<div id="buildingUpgradeView" class="lightboxWrapper">
 				<div class="lightboxContent">
 					<!-- Name des Gebäudes -->
-					<h1 id="buildingUpgradeViewTitle"> Building </h1>
+					<h1 id="buildingUpgradeViewTitle"> Geb&auml;ude </h1>
 					<p>
 						Level: <span id="buildingUpgradeViewLevel"></span>
 					</p>
@@ -304,20 +324,20 @@
 					</p>
 
 					<form id="buildingUpgradeViewForm">
-						<h3>Upgrade Costs</h3>
+						<h3>Kosten</h3>
 						<input type="hidden" name="buildingId" id="buildingUpgradeViewFormBuildingId">
 						<p>
-							Leafs: <span id="buildingUpgradeViewCostLeafs"></span>
+							Bl&auml;tter: <span id="buildingUpgradeViewCostLeafs"></span>
 						</p>
 						<p>
-							Stone: <span id="buildingUpgradeViewCostStone"></span>
+							Stein: <span id="buildingUpgradeViewCostStone"></span>
 						</p>
 						<p>
-							Food: <span id="buildingUpgradeViewCostFood"></span>
+							Nahrung: <span id="buildingUpgradeViewCostFood"></span>
 						</p>
 						<div class="row">
 							<button>
-								Upgrade
+								Ausbauen
 							</button>
 						</div>
 						<div class="row">
@@ -333,7 +353,7 @@
 			<div id="naturalDisasterView" class="lightboxWrapper">
 				<div class="lightboxContent">
 					<!-- Name des Gebäudes -->
-					<h1 id="naturalDisasterTitle"> Natural Disaster </h1>
+					<h1 id="naturalDisasterTitle"> Ereignis </h1>
 					<div class="lightboxImageWrapper">
 						<img id="naturalDisasterImage" class="lightboxImage">
 					</div>
