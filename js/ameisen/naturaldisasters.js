@@ -1,9 +1,4 @@
 function NaturalDisasters() {
-
-	{
-		test
-	}
-
 	var disastersTypes = [
 		{
 			'name': 'Disaster 1',

@@ -74,11 +74,18 @@ function test (_options) {
 	
 	
 	
-			    //Buildings
+	//Buildings
     var _buildingCostRatio = 10; //balancing
     
     
-    var buildedBuildings = [];
+    var buildedBuildings = [
+	    {
+	    	type: "start",
+	    	connected: false,
+
+			connections: []
+	    }
+    ];
     var timerBuild = new antBuilder();
 
 
@@ -330,10 +337,30 @@ function test (_options) {
 		
 		
     function updateRes() {
+    	var connectedBuildingsLevel = getConnectedBuildingsLevelByType(3);
+    	var maxRes = 15;
+    	for (var i = 0; i < connectedBuildingsLevel; i++) {
+    		maxRes = 10 + Math.floor(maxRes * 1.03);
+    	};
+
+    	_buildings[3]["storeLeafs"] = maxRes;
+    	_buildings[3]["storeStone"] = maxRes;
+
+
+    	connectedBuildingsLevel = getConnectedBuildingsLevelByType(4);
+    	var maxFood = 25;
+    	for (var i = 0; i < connectedBuildingsLevel; i++) {
+    		maxFood = 10 + Math.floor(maxFood * 1.03);
+    	};
+    	_buildings[4]["storeFood"] = maxFood;
+
 		
-    	_prodLeafs = (_jobLeafs * _ratioLeafs) - (_buildings[2]["leafConsume"] * _buildings[2]["count"] * _buildings[2]["upgradeCost"]["totalUpgrades"]);
+    	connectedBuildingsLevel = getConnectedBuildingsLevelByType(2);
+    	var connectedBuildingsCount = getConnectedBuildingsCountByType(2);
+
+    	_prodLeafs = (_jobLeafs * _ratioLeafs) - (_buildings[2]["leafConsume"] * connectedBuildingsCount * connectedBuildingsLevel);
     	_prodStone = _jobStone * _ratioStone;
-    	_prodFood = (_jobHunt * _ratioHunt) + (_buildings[2]["foodProd"] * _buildings[2]["count"] * _buildings[2]["upgradeCost"]["totalUpgrades"]) - (_antW + _antS + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean);
+    	_prodFood = (_jobHunt * _ratioHunt) + (_buildings[2]["foodProd"] * connectedBuildingsCount * connectedBuildingsLevel) - (_antW + _antS + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean);
     	if(_prodLeafs < 0){
     		_leafProd.style.color = "red";
     		_leafProd.innerHTML = _prodLeafs;
@@ -499,7 +526,13 @@ function test (_options) {
     	function updateViewBuilder() {
     		var countsAnt = ants.length;
     		var countsSolders = solders.length;
-    		var maxProduction = _buildings[1]["count"] + (Math.floor(_buildings[1].upgradeCost.totalUpgrades - _buildings[1]["count"] /5)) + 1;
+    		
+
+    		var countBuildingsLvl = getConnectedBuildingsLevelByType(1);
+    		var countBuildings = getConnectedBuildingsCountByType(1);
+
+
+    		var maxProduction = countBuildings + (Math.floor(countBuildingsLvl - countBuildings /5)) + 1;
     		zid("possibleSolderProduction").innerHTML = maxProduction;
     		zid("possibleAntProduction").innerHTML = maxProduction;
 
@@ -656,6 +689,8 @@ function test (_options) {
 
 			buildedBuildings[countBuildings] = {};
 			buildedBuildings[countBuildings] = HelpFunction.clone(_buildings[type]);
+			buildedBuildings[countBuildings].connected = false;
+
 			buildedBuildings[countBuildings].connections = [];
 
 			/**
@@ -663,9 +698,6 @@ function test (_options) {
 			 */
 			for (var j = 0; j < buildedBuildings.length; j++) {
 				if(countBuildings != j) {
-					console.log("drin");
-					console.log(buildedBuildings[countBuildings]);
-					console.log(buildedBuildings[j]);
 					buildedBuildings[countBuildings].connections[j] = false;
 					buildedBuildings[j].connections[countBuildings] = false;
 				}
@@ -696,22 +728,10 @@ function test (_options) {
 			_buildings[buildedBuildings[buildingId].type]["upgradeCost"]["totalUpgrades"]++;
 			
 			
-			buildedBuildings[buildingId].upgradeCost.lvl += 1;
+			buildedBuildings[buildingId].lvl += 1;
 			buildedBuildings[buildingId].upgradeCost.leafs = Math.floor(buildedBuildings[buildingId].upgradeCost.leafs * _upgradeCostIncrease);
 			buildedBuildings[buildingId].upgradeCost.stone = Math.floor(buildedBuildings[buildingId].upgradeCost.stone * _upgradeCostIncrease);
-			buildedBuildings[buildingId].upgradeCost.food = Math.floor(buildedBuildings[buildingId].upgradeCost.food * _upgradeCostIncrease);
-			
-			if(buildedBuildings[buildingId].type == 3) {
-				//_buildings[3]["storeLeafs"] = Math.floor(15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
-		    	//_buildings[3]["storeStone"] = Math.floor(15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
-		    	_buildings[3]["storeLeafs"] = 10 + Math.floor(_buildings[3]["storeLeafs"] * (1.03));
-		    	_buildings[3]["storeStone"] = 10 + Math.floor(_buildings[3]["storeStone"] * (1.03));
-			}
-			if(buildedBuildings[buildingId].type == 4) {
-				//_buildings[4]["storeFood"] = Math.floor(15 * _buildings[4]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
-	    		_buildings[4]["storeFood"] = 10 + Math.floor(_buildings[4]["storeFood"] * (1.03));
-			}
-	    	
+			buildedBuildings[buildingId].upgradeCost.food = Math.floor(buildedBuildings[buildingId].upgradeCost.food * _upgradeCostIncrease);  	
 			
 			updateRes();
 			return true;
@@ -765,6 +785,24 @@ function test (_options) {
 	this.connectBuilding = function(eventData) {
 		buildedBuildings[eventData.from].connections[eventData.to] = true;
 		buildedBuildings[eventData.to].connections[eventData.from] = true;
+
+		buildedBuildings[eventData.from].connected = true;
+		buildedBuildings[eventData.to].connected = true;
+	}
+
+	function checkConnection(arr) { 
+		arr.connected = false;
+		
+		arr.connections.forEach(check);
+
+
+		function check(element, index, array) {
+			if(element == true) {
+				arr.connected = true;
+			}
+		}
+
+		
 	}
 
 	/**
@@ -777,5 +815,34 @@ function test (_options) {
 	this.disconnectBuilding = function(eventData) {
 		buildedBuildings[eventData.from].connections[eventData.to] = false;
 		buildedBuildings[eventData.to].connections[eventData.from] = false;
+
+		
+		checkConnection(buildedBuildings[eventData.from]);
+		checkConnection(buildedBuildings[eventData.to]);
+	}
+
+
+	function getConnectedBuildingsLevelByType(type) {
+		var level = 0;
+
+		for (var i = 0; i < _buildings[type].buildedBuildings.length; i++) {
+			if(buildedBuildings[_buildings[type].buildedBuildings[i]].connected == true) {
+				level += buildedBuildings[_buildings[type].buildedBuildings[i]].lvl;
+			}
+		};
+
+		return level;
+	}
+
+	function getConnectedBuildingsCountByType(type) {
+		var count = 0;
+
+		for (var i = 0; i < _buildings[type].buildedBuildings.length; i++) {
+			if(buildedBuildings[_buildings[type].buildedBuildings[i]].connected == true)
+				count++;
+		};
+
+
+		return count;
 	}
 }
