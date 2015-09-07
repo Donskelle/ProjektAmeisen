@@ -16,7 +16,7 @@ function load() {
 			isClicked = true;
 			menuWrapper.style.margin = "-100vh 0 0 0";
 			gameWrapper.style.margin = "0 0 0 0";
-			menuButton.style.top = "93%";
+			menuButton.style.top = "92%";
 			menuButton.style.backgroundImage = "url(img/menu.png)";
 			
 		}

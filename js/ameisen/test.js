@@ -670,13 +670,10 @@ function test (_options) {
 			}
 
 			else if(type == 3) {
-				//_buildings[3]["storeLeafs"] = Math.floor(15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
-		    	//_buildings[3]["storeStone"] = Math.floor(15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
 		    	_buildings[3]["storeLeafs"] = 10 + Math.floor(_buildings[3]["storeLeafs"] * (1.03));
 		    	_buildings[3]["storeStone"] = 10 + Math.floor(_buildings[3]["storeStone"] * (1.03));
 			}
 			else if(type == 4) {
-				//_buildings[4]["storeFood"] = Math.floor(15 * _buildings[3]["upgradeCost"]["totalUpgrades"] * _upgradeCostIncrease);
 	    		_buildings[4]["storeFood"] = 10 + Math.floor(_buildings[4]["storeFood"] * (1.03));
 			}
 			

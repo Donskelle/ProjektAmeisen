@@ -1,8 +1,18 @@
+@font-face {
+    font-family: 'BebasNeue';
+    src: url('../fonts/BebasNeue Regular.otf');
+}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url('../fonts/SourceSansPro-Regular.otf');
+}
+
 html {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
+  font-family: 'SourceSansPro';
 }
 *, *:before, *:after {
   box-sizing: inherit;
@@ -13,14 +23,14 @@ body {
 }
 button {
 	background-color: #FFFFFF;
-	
 	border: solid 1px black;
 	width: 60px;
-	height: 20px;
+	
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
-	letter-spacing: 50;
+	font-size: 1em;
+	font-family: 'BebasNeue';
 }
 button:hover {
 	background-color: #2F2E30;
@@ -57,6 +67,7 @@ button:hover {
 	background-color: #2F2E30;
 	color: #FFFFFF;
 }
+
 /*
  *	Grundklassen bereitstellen
  */
@@ -127,8 +138,8 @@ button:hover {
 	top: 5px;
 	right: 5px;
 	z-index: 1;
-	width: 30px;
-	height: 30px;
+	width: 40px;
+	height: 40px;
 	background-image: url("../img/play.png");
 	background-size: contain;
 	background-color: #FFFFFF;
@@ -184,6 +195,7 @@ button:hover {
 	border: solid 1px #ccc;
 	top: 0;
 	left: 0;
+	
 }
 .handle {
 	min-height: 20px;
@@ -193,21 +205,42 @@ button:hover {
 	margin: 0;
 	padding: 0 0 0 10px;
 	cursor: move;
+	font-family: 'BebasNeue';
 }
 .chamberTable th, .chamberTable td, #jobTable th, #jobTable td {
 	padding: 2px 5px 2px 5px;
 }
 #resTable th, #resTable td {
-	width: 200px;
+	width: 180px;
 	text-align: center;
 	border-right: solid .5px #ccc;
 }
 #resTable th {
 	padding: 5px;
+	height: 100px;
 }
 #resTable tr th div {
 	position: absolute;
 	
+}
+.resIcons {
+	width: 100px;
+	height: 100px;
+	
+	background-size: contain;
+}
+#resLeafs {
+	background-image: url("../img/icons/leafs.png");
+}
+#resStone {
+	background-image: url("../img/icons/stone.png");
+}
+#resFood {
+	background-image: url("../img/icons/food.png");
+}
+.resText {
+	position: absolute;
+	margin: 50px 0 0 100px;
 }
 .jobName {
 	padding: 0 10px 0 10px;
