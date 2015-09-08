@@ -82,7 +82,6 @@ function AmeisenStage(_options) {
 
 				// Upgrade Kosten werden angefragt
 				case "getUpgradeCosts": 
-				
 					var costs = tester.getUpgradeCots(e.detail.eventData.buildingId);
 
 					canvasBuilder.setUpgradeCosts(e.detail.eventData.buildingId, costs, e.detail.eventData.updateView);
@@ -111,9 +110,16 @@ function AmeisenStage(_options) {
 					tester.setValues(values);
 					break;
 
-				//
-				case "####":
+				// Gebäude nicht mehr verbunden
+				case "buidlingDisconnected":
+					zog(e.detail.eventData);
+					tester.disconnectBuilding(e.detail.eventData);
+					break;
 				
+				// Gebäude verbunden
+				case "buidlingConnected":
+					zog(e.detail.eventData);
+					tester.connectBuilding(e.detail.eventData);
 					break;
 			}
 		});

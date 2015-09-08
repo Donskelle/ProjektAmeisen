@@ -1,8 +1,18 @@
+@font-face {
+    font-family: 'BebasNeue';
+    src: url('../fonts/BebasNeue Regular.otf');
+}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url('../fonts/SourceSansPro-Regular.otf');
+}
+
 html {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
+  font-family: 'SourceSansPro';
 }
 *, *:before, *:after {
   box-sizing: inherit;
@@ -10,6 +20,58 @@ html {
 body {
 	overflow: hidden;
 }
+.clearAfter:after {
+	content:'';
+    display:block;
+    clear: both;
+}
+button {
+	background-color: #FFFFFF;
+	border: solid 1px black;
+	width: 60px;
+	
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	font-size: 1em;
+	font-family: 'BebasNeue';
+}
+button:hover {
+	background-color: #2F2E30;
+	color: #FFFFFF;
+}
+#tipBox {
+	position: absolute;
+	width: 200px;
+	
+	background-color: #FFFFFF;
+	z-index: 1000;
+	display: none;
+	border: solid 1px black;
+	padding: 10px;
+}
+#tipTitle {
+	margin: 0 0 10px 0;
+}
+.tooltip {
+	
+	width: 20px;
+	background-color: #FFFFFF;
+	
+	text-align: center;
+	float: left;
+	font-size: .8em;
+	cursor: default;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: solid 1px black;
+}
+.tooltip:hover {
+	background-color: #2F2E30;
+	color: #FFFFFF;
+}
+
 /*
  *	Grundklassen bereitstellen
  */
@@ -23,29 +85,182 @@ body {
 /*
  *	Drag Klassen
  */
+#menuWrapper {
+	width: 100%;
+	position: absolute;
+	margin: 0 0 0 0;
+	height: 100vh;
+	background-color: #2F2E30;
+	background-image: url("../img/menu_background.png");
+	background-size: cover;
+	background-position: bottom;
+	background-repeat: no-repeat;
+	-webkit-transition: margin 1s;
+	-moz-transition: margin 1s;
+	-o-transition: margin 1s;
+	transition: margin 1s;
+}
+#menuBox {
+	position: absolute;
+	
+	right: 15%;
+	top: 20%;
+}
+#menuBox ul {
+	
+}
+#menuBox ul li {
+	padding: 15px 25px 15px 25px;
+	margin: 5px 0 5px 0;
+	cursor: pointer;
+	background-color: #FFFFFF;
+	text-align: center;
+	border: solid 1px #CCCCCC;
+	-webkit-transition: all .2s;
+	-moz-transition: all .2s;
+	-o-transition: all .2s;
+	transition: all .2s;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	
+}
+#menuBox ul li:hover {
+	background-color: #2F2E30;
+	color: #FFFFFF;
+	
+		
+}
+#btn_toggleMenu {
+	position: fixed;
+	top: 5px;
+	right: 5px;
+	z-index: 1;
+	width: 40px;
+	height: 40px;
+	background-image: url("../img/play.png");
+	background-size: contain;
+	background-color: #FFFFFF;
+	-webkit-transition: top 1s, background-color .2s;
+	-moz-transition: top 1s, background-color .2s;
+	-o-transition: top 1s, background-color .2s;
+	transition: top 1s, background-color .2s;
+	border: solid 1px #000000;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	
+}
+#btn_toggleMenu:hover {
+	background-color: #2F2E30;
+}
+#howToPlay, #settings {
+	width: 700px;
+	height: 500px;
+	background-color: #FFFFFF;
+	position: absolute;
+	right: 30%;
+	top: 5%;
+	display: none;
+	padding: 20px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	
+}
+#howToPlayTitle, #settingsTitle {
+	padding: 20px 0 20px 0;
+}
+
+#gameWrapper {
+	margin: 100vh 0 0 0;
+	width: 100%;
+	position: absolute;
+	-webkit-transition: margin 1s;
+	-moz-transition: margin 1s;
+	-o-transition: margin 1s;
+	transition: margin 1s;
+	background-image: url("../img/game_background1.png");
+	background-position: bottom left;
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 100vh;
+	
+}
 .draggable {
 	position: absolute;	
 	background: #ffffff;
 	border: solid 1px #ccc;
-	top:0;
-	left:0;
+	top: 0;
+	left: 0;
+	
 }
 .handle {
 	min-height: 20px;
 	color: #FFFFFF;
-	background: #000000;
+	background: #2F2E30;
 	border: solid 1px #ccc;
 	margin: 0;
 	padding: 0 0 0 10px;
 	cursor: move;
+	font-family: 'BebasNeue';
+}
+.chamberTable th, .chamberTable td, #jobTable th, #jobTable td {
+	padding: 2px 5px 2px 5px;
 }
 #resTable th, #resTable td {
-	padding: 0 20px 0 20px;
+	width: 180px;
+	text-align: center;
+	border-right: solid .5px #ccc;
+}
+#resTable th {
+	padding: 5px;
+	height: 100px;
+}
+#resTable tr th div {
+	position: absolute;
+	
+}
+.resIcons {
+	width: 100px;
+	height: 100px;
+	
+	background-size: contain;
+}
+#resLeafs {
+	background-image: url("../img/icons/leafs.png");
+}
+#resStone {
+	background-image: url("../img/icons/stone.png");
+}
+#resFood {
+	background-image: url("../img/icons/food.png");
+}
+.resText {
+	position: absolute;
+	margin: 50px 0 0 100px;
 }
 .jobName {
 	padding: 0 10px 0 10px;
 	
 }
+#leafFill, #stoneFill, #foodFill, #amberFill {
+	background-color: red;
+	width: 100%;
+	height: 5px;
+}
+#leafBar, #stoneBar, #foodBar, #amberBar {
+	background-color: green;
+	width: 50%;
+	height: 5px;
+}
+
 
 /*
  *	Menü Styles
@@ -73,6 +288,7 @@ body {
 	bottom: 0;
 	height: 100vh;
 	width: 100%;
+	z-index: 100;
 
 	background-color: rgba(0, 0, 0, 0.6);
 }
@@ -102,14 +318,79 @@ body {
 }
 .lightboxImageWrapper {
 	height: 200px;
-	margin: 10px 5%;
+	width: 300px;
 }
 .lightboxImage {
 	max-width: 100%;
 	max-height: 100%;
 	margin: 0 auto;
 }
+.lightboxWrapper#buildingUpgradeView .lightboxContent .upgradeContent {
+	margin: 10px 0;
+	display: inline-block;
+	text-align: left;
+}
+.lightboxWrapper#buildingUpgradeView .lightboxContent {
+	bottom: 0;
+	left: 0;
+	top: initial;
+	height: initial;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	color: white;
+	text-align: center;
+	background: none;
+}
+.lightboxWrapper#buildingUpgradeView .lightboxContent .lightboxImageWrapper { 
+	height: 170px;
+}
 
+#buildingUpgradeViewBG {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.6);
+	width: 100%;
+}
+.fl_left.upgradeBuildingViewRight {
+	display: block;
+	float: left;
+	width: 500px;
+	margin-left: 15px;
+
+	font-size: 12px;
+}
+#buildingUpgradeView {
+	background: none;
+}
+#buildingUpgradeViewTitle {
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+.buildingUpgradeViewLevelDiv {
+	margin: 15px 0;
+}
+.fl_left {
+	display: block;
+	float: left;
+}
+.antGreenButton {
+	display: block;
+	color: white;
+	background-color: green;
+	padding: 6px 15px;
+}
+.antGreenButton {
+	border-radius: 0;
+	color:white;
+	background-color: #84BB68;
+	border: none;
+	width: auto;
+	margin-top: 10px;
+	padding: 8px 25px;
+	font-size: 20px;
+}
 /**
  * Lightbox Klick Events
  */

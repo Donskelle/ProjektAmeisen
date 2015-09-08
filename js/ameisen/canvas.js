@@ -93,6 +93,21 @@ function Canvas(_options) {
 		    	stone: null,
 		    	food: null
 			}
+		},
+		{
+			name: "Start",
+			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
+			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
+			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			lvl: 1,
+			text: "Ich mach die super Energie, byebye global warming",
+			costs: {
+				leafs: 2,
+		    	stone: 2,
+		    	food: 2
+			}
 		}
 	]
 
@@ -135,9 +150,9 @@ function Canvas(_options) {
 			});
 
 			e.preventDefault();
-		})
-
-		
+		});
+		// Startgebäude
+		new Building(5, 0);
 	}
 
 	/**
@@ -145,12 +160,7 @@ function Canvas(_options) {
 	 * Erstellt Standart Gebäude
 	 */
 	this.createDefaults = function() {
-		var circle = self.createBuilding(1);
-		var circle2 = self.createBuilding(2);
-		var circle3 = self.createBuilding(3);
-		var circle4 = self.createBuilding(4);
-				
-		stage.update();	
+		stage.update();
 	}
 
 	/**
@@ -160,10 +170,9 @@ function Canvas(_options) {
 	 */
 	this.createBuilding = function(type) {
 		var i = eles.length;
-		var build = new Building((type-1), i);
+		new Building((type-1), i);
 		stage.update();
 		
-		console.log(i);
 		HelpFunction.pushEvent("getUpgradeCosts", {
 			'buildingId': i,
 			'updateView': false
@@ -199,33 +208,68 @@ function Canvas(_options) {
 	function Building(type, i) {
 		(function init() {
 			var c = new createjs.Shape();
+			var g = c.graphics;
 			c.buildingData = {}
-			HelpFunction.merge(c.buildingData, buidlingsTypes[type]);
+			c.buildingData = HelpFunction.clone(buidlingsTypes[type]);
 			c.connector = new Array();
 
 
-			c.x = 300 * (i +1);
-			c.y = 200 * (i +1);
-			var g = c.graphics;
-			c.radius = 50;
+			c.x = window.innerWidth/2 + ((i * 15) - 50);
+			c.y = window.innerHeight/2 + ((i * 15) - 50);
+			
+
+
+			c.radius = HelpFunction.getProcentValue(20, 80, c.buildingData.lvl);
 			c.addHitTest = function (i, j) {
 				createHitTest(i,j);
 			}
 			c.upgradeBuilding = function() {
 				this.buildingData.lvl += 1;
+				this.radius = HelpFunction.getProcentValue(20, 80, c.buildingData.lvl);
+
+				this.graphics.c().f("#000").dc(0,0,this.radius);
+				stage.update();
 			}
 			c.setUpgradeCost = function(_costs) {
 				this.buildingData.costs = _costs;
-				console.log(this.buildingData.costs);
 			}
 
-			g.f("#f58e25").dc(0,0,50);
+			g.f("#000").dc(0,0,c.radius);
+
+			/*var image = new Image();
+			image.src = "img/icons/buildings/mushroom.png";
+			image.onload = handleImageLoad;
+
+			function handleImageLoad (event) {
+				var logo = new createjs.Bitmap(event.target);		
+				logo.x = 20; logo.y = 20;		
+				logo.alpha = .8;
+				logo.cursor = "pointer";
+				//var img = event.target;
+				//zog("driun");
+				//g.beginBitmapFill(img).s();
+
+stage.addChild(logo);
+				stage.update() 
+			}*/
+			
+
+
 
 			c.setBounds(-c.radius, -c.radius, c.radius*2, c.radius*2);
 			eles[i] = c;
 
+			
 			addDrag(c);
 			stage.addChild(c);
+			// Startverbindunge nach oben
+			if(type == 5) {
+				var connector = createConnector(i, "top");
+				eles[i].on("pressmove", function(e) 
+				{
+					connector.updateLine();
+				});
+			}
 		})();
 
 		
@@ -235,13 +279,13 @@ function Canvas(_options) {
 			c.on("mousedown",function(e){
 				c.clickStart = Date.now();
 
-
+				e.target.graphics.c().f("#84BB67").dc(0,0,c.radius);
 				e.target.graphics.beginStroke("black");
-				e.target.graphics.f("rgba(0,0,0,0.1)").dc(0,0,130);
+				e.target.graphics.f("rgba(0,0,0,0.1)").dc(0,0,120);
 			}); 
 
 			c.on("click",function(e){
-				e.target.graphics.c().f("#f58e25").dc(0,0,50);
+				e.target.graphics.c().f("#000").dc(0,0,c.radius);
 				stage.update();
 
 
@@ -265,24 +309,52 @@ function Canvas(_options) {
 
 		function createHitTest(_i, _j) {
 			var hitTest = false;
-			eles[_i].connector[_j] = createConnector(_i, _j);
+			if(_j == "top") {
 
+			}
+			eles[_i].connector[_j] = createConnector(_i, _j);
+			eles[_i].connector[_j].hittesten = function() {
+				hitTesten();
+			}
+
+			hitTesten();
 
 			eles[_i].on("pressmove", function(e) 
 			{
+				hitTesten();
+
+				for (var k = 0; k < eles.length; k++) {
+					if(k != _j) {
+						if(typeof eles[k].connector[_i] != "undefined") {
+							eles[k].connector[_i].hittesten();
+						}
+					}
+				};
+			});
+
+			function hitTesten() {
 				if ( zim.hitTestCircle(eles[_i], eles[_j]) ) 
 				{
 					if (!hitTest) {
 					// if it was not hitting, now it is...
 						zog("circle " + _i + " hits Circle " + _j);
 						
-						e.target.connector[_j].updateLine();
+						eles[_i].connector[_j].updateLine();
+
+						HelpFunction.pushEvent("buidlingConnected", {
+							"from": _i,
+							"to": _j
+						});
 
 						hitTest = true;
 						stage.update();
 					}
 					else {
-						e.target.connector[_j].updateLine();
+						/*HelpFunction.pushEvent("buidlingConnected", {
+							"from": _i,
+							"to": _j
+						});*/
+						eles[_i].connector[_j].updateLine();
 					}
 				}
 				else 
@@ -291,67 +363,82 @@ function Canvas(_options) {
 					// if it was hitting, now it is not...	
 						zog("circle " + _i + " unhids Circle " + _j);
 
-						e.target.connector[_j].hideLine();
-						console.log(e.target.connector);
+						eles[_i].connector[_j].hideLine();
 
+						HelpFunction.pushEvent("buidlingDisconnected", {
+							"from": _i,
+							"to": _j
+						});
 
 						hitTest = false;
 						stage.update();	
 					}
 				}
-			});	
+			}
 		}
 	}
 
 	function showInfoBox(i) {
+		//Startgebäude
+		if(i != 0)
+		{
+			zid("buildingUpgradeViewTitle").innerHTML = eles[i].buildingData.name;
+			zid("buildingUpgradeViewFormBuildingName").innerHTML = eles[i].buildingData.name;
+
+			var img = "";
+			if(eles[i].buildingData.lvl <= 9)
+				img = eles[i].buildingData.image1;
+			else if (eles[i].buildingData.lvl <= 19)
+				img = eles[i].buildingData.image2;
+			else if(eles[i].buildingData.lvl <= 29)
+				img = eles[i].buildingData.image3;
+			else if(eles[i].buildingData.lvl <= 39)
+				img = eles[i].buildingData.image4;
+			else 
+				img = eles[i].buildingData.image5;
+
+			zid("buildingUpgradeViewImage").src = img;
+
+			zid("buildingUpgradeViewTextUpgrade").innerHTML = eles[i].buildingData.text;
+			zid("buildingUpgradeViewFormBuildingId").value = i;
+			zid("buildingUpgradeViewLevel").innerHTML = eles[i].buildingData.lvl;
 
 
-		zid("buildingUpgradeViewTitle").innerHTML = eles[i].buildingData.name;
-
-		var img = "";
-		if(eles[i].buildingData.lvl <= 9)
-			img = eles[i].buildingData.image1;
-		else if (eles[i].buildingData.lvl <= 19)
-			img = eles[i].buildingData.image2;
-		else if(eles[i].buildingData.lvl <= 29)
-			img = eles[i].buildingData.image3;
-		else if(eles[i].buildingData.lvl <= 39)
-			img = eles[i].buildingData.image4;
-		else 
-			img = eles[i].buildingData.image5;
-
-		zid("buildingUpgradeViewImage").src = img;
-
-		zid("buildingUpgradeViewTextUpgrade").innerHTML = eles[i].buildingData.text;
-		zid("buildingUpgradeViewFormBuildingId").value = i;
 
 
-		
-		zid("buildingUpgradeViewLevel").innerHTML = eles[i].buildingData.lvl;
+			zid("buildingUpgradeViewCostLeafs").innerHTML = eles[i].buildingData.costs.leafs;
+			//zid("buildingUpgradeViewCostLeafsHidden").innerHTML = eles[i].buildingData.costs.leafs;
+			zid("buildingUpgradeViewCostStone").innerHTML = eles[i].buildingData.costs.stone;
+			//zid("buildingUpgradeViewCostStoneHidden").innerHTML = eles[i].buildingData.costs.stone;
+			zid("buildingUpgradeViewCostFood").innerHTML = eles[i].buildingData.costs.food;
+			//zid("buildingUpgradeViewCostFoodHidden").innerHTML = eles[i].buildingData.costs.food;
 
 
+			zid("openLightboxBuildingUpgradeView").click();
 
 
-		zid("buildingUpgradeViewCostLeafs").innerHTML = eles[i].buildingData.costs.leafs;
-		//zid("buildingUpgradeViewCostLeafsHidden").innerHTML = eles[i].buildingData.costs.leafs;
-		zid("buildingUpgradeViewCostStone").innerHTML = eles[i].buildingData.costs.stone;
-		//zid("buildingUpgradeViewCostStoneHidden").innerHTML = eles[i].buildingData.costs.stone;
-		zid("buildingUpgradeViewCostFood").innerHTML = eles[i].buildingData.costs.food;
-		//zid("buildingUpgradeViewCostFoodHidden").innerHTML = eles[i].buildingData.costs.food;
-
-
-		zid("openLightboxBuildingUpgradeView").click();
+			zid("buildingUpgradeViewBG").style.height = zid("lightboxContentbuildingUpgradeView").offsetHeight + "px";
+		}
 	}
 
 	function createConnector(_i, _j) {
 		var connector = new createjs.Shape();
 		connector.visible = false;
 
+		if(_j == "top")
+			drawTop();
+
 		function draw() {
 			connector.visible = true;
-			connector.graphics.c().setStrokeStyle(10, 'round', 'round').beginStroke("black").moveTo(eles[_i].x, eles[_i].y).lineTo(eles[_j].x, eles[_j].y);
+			connector.graphics.c().setStrokeStyle(6, 'round', 'round').beginStroke("black").moveTo(eles[_i].x, eles[_i].y).lineTo(eles[_j].x, eles[_j].y);
 			// Connector wird als oberesten Element eingefügt, damit es oberhalb der anderen Elemente liegt.
-			stage.addChild(connector);
+			stage.addChildAt(connector,0);
+		}
+
+		function drawTop() {
+			connector.visible = true;
+			connector.graphics.c().setStrokeStyle(6, 'round', 'round').beginStroke("black").moveTo(eles[_i].x, eles[_i].y).lineTo(stageW/2, 0);
+			stage.addChildAt(connector,0);
 		}
 
 		function hide() {
@@ -360,17 +447,24 @@ function Canvas(_options) {
 		}
 
 		connector.updateLine = function() {
-			if(eles[_j].connector[_i].visible == true) {
-				eles[_j].connector[_i].updateLine();
-			}
+			if(_j == "top")
+				drawTop();
 			else {
-				draw();
+				if(typeof eles[_j].connector[_i] != "undefined") {
+					if(eles[_j].connector[_i].visible == true) {
+						eles[_j].connector[_i].updateLine();
+					}
+					else 
+						draw();
+				}
+				else {
+					draw();
+				}
 			}
 		}
 
 		connector.hideLine = function() {
 			if(eles[_j].connector[_i].visible == true) {
-				console.log("hi")
 				eles[_j].connector[_i].hideLine();
 			}
 			else {
@@ -378,7 +472,7 @@ function Canvas(_options) {
 			}
 		}
 
-		stage.addChild(connector);
+		stage.addChildAt(connector,0);
 
 		return connector;
 	}

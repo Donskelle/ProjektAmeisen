@@ -1,259 +1,400 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
 "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head>
-	<title>Ameisen</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	
-	<link rel="stylesheet" media="screen" href="css/reset.css"/>
-	<link rel="stylesheet" media="screen" href="css/style.css"/>
-</head>
+	<head>
+		<title>Ameisen</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<body>
-	<div id="canvasWrapper">
-		<canvas id="canvas">
-			Canvas kann nicht dargestellt werden
-		</canvas>
-	</div>
+		<link rel="stylesheet" media="screen" href="css/reset.css"/>
+		<link rel="stylesheet" media="screen" href="css/style.css"/>
+	</head>
 
-	<div class="draggable">
-		<div class="handle">Chambers
-		</div>
-				<table class="chamberTable" id="broodBuild">
-			<tr>
-				<th class="chamberName" colspan="2">Brood Chamber</th>
-			</tr>
-			<tr>
-				<td>Leafs</td>
-				<td class="buildCostLeafs" id="broodCostL">1502313</td>
-			</tr>
-			<tr>
-				<td>Stone</td>
-				<td class="buildCostStone" id="broodCostS">12011</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><button class="build">Build</button></td>
-			</tr>
-		</table>
+	<body>
 		
-		<table class="chamberTable" id="mushroomBuild">
-			<tr>
-				<th class="chamberName" colspan="2">Mushroom Chamber</th>
-			</tr>
-			<tr>
-				<td>Leafs</td>
-				<td class="buildCostLeafs" id="mushCostL">1502313</td>
-			</tr>
-			<tr>
-				<td>Stone</td>
-				<td class="buildCostStone" id="mushCostS">12011</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><button class="build">Build</button></td>
-			</tr>
-		</table>
+		<div id="menuWrapper">
+			<div id="menuBox">
+				<ul>
+					<li id="menuHowToPlay">Spieleinf&uuml;hrung</li>
+					<li id="menuSettings">Einstellungen</li>
+					<li id="menuQuit">Beenden</li>
+				</ul>
+			</div>
+			<div id="btn_toggleMenu"></div>
+			<div id="howToPlay">
+				<div id="howToPlayTitle">Spieleinf&uuml;hrung</div>
+				<div id="menuText">Herzlich willkommen bei "SPIELNAME". <br/> In diesem Spiel ist es deine Aufgabe ein eigenes Ameisenimperium zu errichten und zu verwalten. Deine Königin hat bereits eine kleine Erdhöhle ausgehoben, die als Start für dein Königreich dient. 
+									<br/> Zu Beginn des Spiels kannst du manuell Rohstoffe sammeln. Dies geschieht über die Buttons unterhalb der Rohstoffanzeige. Dein erstes Ziel sollte es sein neue Ameisen auszubilden, die dir bei der Beschaffung neuer Materialien behilflich sind.
+											Du musst dafür sorgen, dass dein Volk immer genug zu fressen hat, da deine Arbeiterinnen sonst verhungern. Zunächst solltest du Ameisen auf die Jagt schicken, um deinen Nahrungsvorrat kurzfristig aufzubessern. Später im Spiel ist es effektiver die Pilzkammer zu bauen und zu erweitern. 
+											Diese wandelt Bl&auml;tter in Nahrung um und versorgt dein Volk. <br/> Das Spielziel ist es den größten Ameisenhügel zu errichten, den die Welt je gesehen hat. <br/> Viel Erfolg!</div>
+			</div>
+			<div id="settings">
+				<div id="settingsTitle">Einstellungen</div>
+				<div id="menuText">Here you will find settings to personalize your game experience.</div>
+			</div>
+		</div>
+		<div id="gameWrapper">
+			
+			<div id="tipBox">
+				<h1 id="tipTitle">kein Inhalt</h1>
+				<p id="tipText">Fehler: Inhalt nicht verf&uuml;gbar</p>
+			</div>
+			
+			<div id="canvasWrapper">
+				<canvas id="canvas">
+					Canvas kann nicht dargestellt werden
+				</canvas>
+			</div>
+			
+			
+			
+			<div class="draggable">
+				<div class="handle">
+					Kammern
+				</div>
+				<table class="chamberTable">
+					<tr>
+						<th><div class="tooltip" data-type="broodChamber">?</div></th>
+						<th class="chamberName" colspan="2">Brutkammer</th>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Bl&auml;tter</td>
+						<td class="buildCostLeafs" id="broodCostL">1502313</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Steine</td>
+						<td class="buildCostStone" id="broodCostS">12011</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+						<button id="broodBuild" class="build">
+							Bauen
+						</button></td>
+					</tr>
+				</table>
 
-		<table class="chamberTable"  id="storageBuild">	
-			<tr>
-				<th class="chamberName" colspan="2">Storage</th>
-			</tr>
-			<tr>
-				<td>Leafs</td>
-				<td class="buildCostLeafs" id="storageCostL">1502313</td>
-			</tr>
-			<tr>
-				<td>Stone</td>
-				<td class="buildCostStone" id="storageCostS">12011</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><button class="build">Build</button></td>
-			</tr>
-		</table>
+				<table class="chamberTable">
+					<tr>
+						<th><div class="tooltip" data-type="mushroomChamber">?</div></th>
+						<th class="chamberName" colspan="2">Pilzkammer</th>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Bl&auml;tter</td>
+						<td class="buildCostLeafs" id="mushCostL">1502313</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Steine</td>
+						<td class="buildCostStone" id="mushCostS">12011</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+						<button id="mushroomBuild" class="build">
+							Bauen
+						</button></td>
+					</tr>
+				</table>
 
-		<table class="chamberTable"  id="pantryBuild">
-			<tr>
-				<th class="chamberName" colspan="2">Pantry</th>
-			</tr>
-			<tr>
-				<td>Leafs</td>
-				<td class="buildCostLeafs" id="pantryCostL">1502313</td>
-			</tr>
-			<tr>
-				<td>Stone</td>
-				<td class="buildCostStone" id="pantryCostS">12011</td>		
-			</tr>
-			<tr>
-				<td></td>
-				<td><button class="build">Build</button></td>
-			</tr>
-		</table>
-		<table class="chamberTable" id="dumpingBuild">
-			<tr>
-				<th class="chamberName" colspan="2">Dumping Ground</th>
-			</tr>
-			<tr>
-				<td>Leafs</td>
-				<td class="buildCostLeafs" id="dumpingCostL">1502313</td>
-			</tr>
-			<tr>
-				<td>Stone</td>
-				<td class="buildCostStone" id="dumpingCostS">12011</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><button class="build">Build</button></td>
-			</tr>
-		</table>
-	</div>
+				<table class="chamberTable">
+					<tr>
+						<th><div class="tooltip" data-type="storage">?</div></th>
+						<th class="chamberName" colspan="2">Lager</th>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Bl&auml;tter</td>
+						<td class="buildCostLeafs" id="storageCostL">1502313</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Steine</td>
+						<td class="buildCostStone" id="storageCostS">12011</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+						<button id="storageBuild" class="build">
+							Bauen
+						</button></td>
+					</tr>
+				</table>
 
-	<div class="draggable">
-	  <div class="handle">Jobs</div>
-	  <table id="jobTable">
-	  	<tr>
-	  		<td class="jobName">Hatch Worker</td>
-		  	<td class="jobCount" id="workerCount"><span>0</span></td>
-		  	<td><button id="btn_addAntW">+</button></td>
-		  	<td id="countdownW"><span>0</span></td>
-	  	</tr>
-	  	<tr>
-	  		<td class="jobName">Hatch Soldier</td>
-		  	<td class="jobCount" id="soldierCount"><span>0</span></td>
-		  	<td><button id="btn_addAntS">+</button></td>
-		  	<td id="countdownS"><span>0</span></td>
-	  	</tr>
-	  	<tr>
-	  		<td class="jobName">Collect Leafs</td>
-	  		<td><button id="btn_subJobL">-</button></td>
-		  	<td class="jobCount" id="jobCountL"><span>0</span></td>
-		  	<td><button id="btn_addJobL">+</button></td>
-	  	</tr>
-	  	<tr>
-	  		<td class="jobName">Collect Stone</td>
-	  		<td><button id="btn_subJobS">-</button></td>
-		  	<td class="jobCount" id="jobCountS"><span>0</span></td>
-		  	<td><button id="btn_addJobS">+</button></td>
-	  	</tr>
-	  	<tr>
-	  		<td class="jobName">Hunt</td>
-	  		<td><button id="btn_subJobHu">-</button></td>
-		  	<td class="jobCount" id="jobCountHu"><span>0</span></td>
-		  	<td><button id="btn_addJobHu">+</button></td>
-	  	</tr>
-	  	<tr>
-	  		<td class="jobName">Hatch</td>
-	  		<td><button id="btn_subJobHa">-</button></td>
-		  	<td class="jobCount" id="jobCountHa"><span>0</span></td>
-		  	<td><button id="btn_addJobHa">+</button></td>
-	  	</tr>	  	
-	  	<tr>
-	  		<td class="jobName">Clean</td>
-	  		<td><button id="btn_subJobC">-</button></td>
-		  	<td class="jobCount" id="jobCountC"><span>0</span></td>
-		  	<td><button id="btn_addJobC">+</button></td>
-	  	</tr>
-	  </table>
-	</div>
-
-
-	<div class="draggable" id="dxy">
-		<div class="handle"></div>
-		<table id="resTable">
-			<tr>
-				<th>Leafs:</th>
-				<th>Stone:</th>
-				<th>Food:</th>
-				<th>Amber:</th>
-			</tr>
-			<tr>
-				<td id="leafCount"><span>xxx</span></td>
-				<td id="stoneCount"><span>xxx</span></td>
-				<td id="foodCount"><span>xxx</span></td>
-				<td id="amberCount"><span>xxx</span></td>
-			</tr>
-		</table>
-	</div>
-
-
-	<!-- Lightbox Gebäude Click -->
-	<div id="buildingUpgradeView" class="lightboxWrapper">
-		<div class="lightboxContent">
-			<!-- Name des Gebäudes -->
-			<h1 id="buildingUpgradeViewTitle">
-				Building
-			</h1>
-			<p>Level: <span id="buildingUpgradeViewLevel"></span></p>
-			<div class="lightboxImageWrapper">
-				<img id="buildingUpgradeViewImage" class="lightboxImage">
+				<table class="chamberTable">
+					<tr>
+						<th><div class="tooltip" data-type="pantry">?</div></th>
+						<th class="chamberName" colspan="2">Speisekammer</th>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Bl&auml;tter</td>
+						<td class="buildCostLeafs" id="pantryCostL">1502313</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Steine</td>
+						<td class="buildCostStone" id="pantryCostS">12011</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+						<button id="pantryBuild" class="build">
+							Bauen
+						</button></td>
+					</tr>
+				</table>
+				<table class="chamberTable">
+					<tr>
+						<th><div class="tooltip" data-type="dumpingGround">?</div></th>
+						<th class="chamberName" colspan="2">Deponie</th>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Bl&auml;tter</td>
+						<td class="buildCostLeafs" id="dumpingCostL">1502313</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Steine</td>
+						<td class="buildCostStone" id="dumpingCostS">12011</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+						<button id="dumpingBuild" class="build">
+							Bauen
+						</button></td>
+					</tr>
+				</table>
 			</div>
 
-			<p id="buildingUpgradeViewTextUpgrade">
-
-			</p>
-
-			<form id="buildingUpgradeViewForm">
-				<h3>Upgrade Costs</h3>
-				<input type="hidden" name="buildingId" id="buildingUpgradeViewFormBuildingId">
-				<p>Leafs: <span id="buildingUpgradeViewCostLeafs"></span></p>
-				<p>Stone: <span id="buildingUpgradeViewCostStone"></span></p>
-				<p>Food: <span id="buildingUpgradeViewCostFood"></span></p>
-				<div class="row">
-					<button>Upgrade</button>
+			<div class="draggable">
+				<div class="handle">
+					Jobs
 				</div>
-				<div class="row">
-					<a href="#closeLightBox">Schließen</a>
-				</div>
-			</form>
-		</div>
-	</div>
-	<a id="closeLightbox" href="#closeLightbox"></a>
-	<a id="openLightboxBuildingUpgradeView" href="#buildingUpgradeView"></a>
-
-
-
-
-	<!-- Lightbox Gebäude Click -->
-	<div id="naturalDisasterView" class="lightboxWrapper">
-		<div class="lightboxContent">
-			<!-- Name des Gebäudes -->
-			<h1 id="naturalDisasterTitle">
-				Natural Disaster
-			</h1>
-			<div class="lightboxImageWrapper">
-				<img id="naturalDisasterImage" class="lightboxImage">
+				<table id="jobTable">
+					<tr>
+						<td><div class="tooltip" data-type="worker">?</div></td>
+						<td class="jobName">Arbeiter</td>
+						<td class="jobCount" id="workerCount"><span>0</span></td>
+						<td>
+							<button id="btn_addAntW">
+								+
+							</button>
+							<p class="antProduction"><span id="currentAntProduction">0</span>/<span id="possibleAntProduction">1</span></p>
+						</td>
+						<td id="countdownW"><span>0.00</span></td>
+					</tr>
+					<tr>
+						<td><div class="tooltip" data-type="soldier">?</div></td>
+						<td class="jobName">Soldat</td>
+						<td class="jobCount" id="soldierCount"><span>0</span></td>
+						<td>
+							<button id="btn_addAntS">
+								+
+							</button>
+							<p class="solderProduction"><span id="currentSolderProduction">0</span>/<span id="possibleSolderProduction">1</span></p>
+						</td>
+						<td id="countdownS"><span>0.00</span></td>
+					</tr>
+					<tr>
+						<td><div class="tooltip" data-type="jLeafs">?</div></td>
+						<td class="jobName">Bl&auml;tter sammeln</td>
+						<td>
+						<button id="btn_subJobL">
+							-
+						</button></td>
+						<td class="jobCount" id="jobCountL"><span>0</span></td>
+						<td>
+						<button id="btn_addJobL">
+							+
+						</button></td>
+					</tr>
+					<tr>
+						<td><div class="tooltip" data-type="jStone">?</div></td>
+						<td class="jobName">Steine sammeln</td>
+						<td>
+						<button id="btn_subJobS">
+							-
+						</button></td>
+						<td class="jobCount" id="jobCountS"><span>0</span></td>
+						<td>
+						<button id="btn_addJobS">
+							+
+						</button></td>
+					</tr>
+					<tr>
+						<td><div class="tooltip" data-type="jHunt">?</div></td>
+						<td class="jobName">Jagen</td>
+						<td>
+						<button id="btn_subJobHu">
+							-
+						</button></td>
+						<td class="jobCount" id="jobCountHu"><span>0</span></td>
+						<td>
+						<button id="btn_addJobHu">
+							+
+						</button></td>
+					</tr>
+					<tr>
+						<td><div class="tooltip" data-type="jHatch">?</div></td>
+						<td class="jobName">Brutpflege</td>
+						<td>
+						<button id="btn_subJobHa">
+							-
+						</button></td>
+						<td class="jobCount" id="jobCountHa"><span>0</span></td>
+						<td>
+						<button id="btn_addJobHa">
+							+
+						</button></td>
+					</tr>
+					<tr>
+						<td><div class="tooltip" data-type="jClean">?</div></td>
+						<td class="jobName">Bau s&auml;ubern</td>
+						<td>
+						<button id="btn_subJobC">
+							-
+						</button></td>
+						<td class="jobCount" id="jobCountC"><span>0</span></td>
+						<td>
+						<button id="btn_addJobC">
+							+
+						</button></td>
+					</tr>
+				</table>
 			</div>
 
-			<p id="naturalDisasterText">
+			<div class="draggable" id="dxy">
+				<div class="handle"></div>
+				<table id="resTable">
+					
+					<tr>
+						<th><div class="tooltip" data-type="leafs">?</div><div class="resIcons" id="resLeafs"></div><div class="resText"> Bl&auml;tter:</div></th>
+						<th><div class="tooltip" data-type="stone">?</div><div class="resIcons" id="resStone"></div><div class="resText"> Steine:</div></th>
+						<th><div class="tooltip" data-type="food">?</div><div class="resIcons" id="resFood"></div><div class="resText"> Nahrung:</div></th>
+						<th><div class="tooltip" data-type="amber">?</div><div class="resIcons" id="resAmber"></div><div class="resText"> Bernstein:</div></th>
+					</tr>
+					
+					<tr>
+						<td id="leafFill"><div id="leafBar"></div></td>
+						<td id="stoneFill"><div id="stoneBar"></div></td>
+						<td id="foodFill"><div id="foodBar"></div></td>
+						<td id="amberFill"><div id="amberBar"></div></td>
+					</tr>
+					<tr>
+						<td><span id="leafCount">xxx</span> / <span id="leafStorage">xxx</span></td>
+						<td><span id="stoneCount">xxx</span> / <span id="stoneStorage">xxx</span></td>
+						<td><span id="foodCount">xxx</span> / <span id="foodStorage">xxx</span></td>
+						<td><span id="amberCount">xxx</span> / <span id="amberStorage">xxx</span></td>
+					</tr>
+					<tr>
+						<td id="leafProd"><span>xxx</span></td>
+						<td id="stoneProd"><span>xxx</span></td>
+						<td id="foodProd"><span>xxx</span></td>
+						<td id="amberProd"><span>xxx</span></td>
+					</tr>
+					<tr>
+						<td><button id="btn_addLeafs">+</button></td>
+						<td><button id="btn_addStone">+</button></td>
+						<td><button id="btn_addFood">+</button></td>
+						<td></td>
+					</tr>
+					
+					
+				</table>
+			</div>
 
-			</p>
+			<!-- Lightbox Gebäude Click -->
+			<div id="buildingUpgradeView" class="lightboxWrapper">
+				<div class="backgroundBuildingUpgradeView" id="buildingUpgradeViewBG">
+					<div class="lightboxContent" id="lightboxContentbuildingUpgradeView">
+						<div class="upgradeContent clearAfter">
+							
+							<div class="lightboxImageWrapper fl_left">
+								<img id="buildingUpgradeViewImage" class="lightboxImage">
+							</div>
 
-			<a href="#closeLightBox">Ok</a>
+							<div class="fl_left upgradeBuildingViewRight">
+								<!-- Name des Gebäudes -->
+								<h2 id="buildingUpgradeViewTitle">
+										Geb&auml;ude
+								</h2>
+								
+								<p class="buildingUpgradeViewLevelDiv">
+									Level: <span id="buildingUpgradeViewLevel"></span>
+								</p>
+								
+
+								<p id="buildingUpgradeViewTextUpgrade">
+
+								</p>
+
+								<form id="buildingUpgradeViewForm">
+									<input type="hidden" name="buildingId" id="buildingUpgradeViewFormBuildingId">
+									Möchtest du die Kammer <span id="buildingUpgradeViewFormBuildingName"></span> upgraden?<br>
+									Kosten: <span id="buildingUpgradeViewCostLeafs"></span>	Bl&auml;tter, 
+									<span id="buildingUpgradeViewCostStone"></span> Stein,
+									<span id="buildingUpgradeViewCostFood"></span> Nahrung
+									<div class="row">
+										<button class="antGreenButton">
+											Upgraden !
+										</button>
+									</div>
+									<div class="row">
+										<a href="#closeLightBox" style="display: none;">Schließen</a>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a id="closeLightbox" href="#closeLightbox"></a>
+			<a id="openLightboxBuildingUpgradeView" href="#buildingUpgradeView"></a>
+
+			<!-- Lightbox Gebäude Click -->
+			<div id="naturalDisasterView" class="lightboxWrapper">
+				<div class="lightboxContent" id="">
+					<!-- Name des Gebäudes -->
+					<h1 id="naturalDisasterTitle"> Ereignis </h1>
+					<div class="lightboxImageWrapper">
+						<img id="naturalDisasterImage" class="lightboxImage">
+					</div>
+
+					<p id="naturalDisasterText">
+
+					</p>
+
+					<a href="#closeLightBox">Ok</a>
+				</div>
+			</div>
+			<a id="openLightboxNaturalDisasterView" href="#naturalDisasterView"></a>
+
+
+			<!--
+			Notwendige Javascript Datein
+			-->
+			<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+			<script type="text/javascript" src="js/plugins/zim_1.3.js"></script>
+			<script type="text/javascript" src="js/plugins/createjs-2015.05.21.min.js"></script>
+			<script type="text/javascript" src="js/helpFunctions.js"></script>
+			<script type="text/javascript" src="js/menu.js"></script>
+
+			<script type="text/javascript" src="js/ameisen/naturaldisasters.js"></script>
+			<script type="text/javascript" src="js/ameisen/stage.js"></script>
+			<script type="text/javascript" src="js/ameisen/canvas.js"></script>
+			<script type="text/javascript" src="js/ameisen/test.js"></script>
+			
+			<script type="text/javascript" src="js/layout.js"></script>
+
+			<!--
+			Spiel erstellen
+			-->
+			<script type="text/javascript" src="js/init.js"></script>
 		</div>
-	</div>
-	<a id="openLightboxNaturalDisasterView" href="#naturalDisasterView"></a>
-
-
-
-
-	<!--
-		Notwendige Javascript Datein
-	-->
-	<script type="text/javascript" src="js/plugins/zim_1.3.js"></script>
-	<script type="text/javascript" src="js/plugins/createjs-2015.05.21.min.js"></script>
-	<script type="text/javascript" src="js/helpFunctions.js"></script>
-	<script type="text/javascript" src="js/menu.js"></script>
-
-	<script type="text/javascript" src="js/ameisen/naturaldisasters.js"></script>
-	<script type="text/javascript" src="js/ameisen/stage.js"></script>
-	<script type="text/javascript" src="js/ameisen/canvas.js"></script>
-	<script type="text/javascript" src="js/ameisen/test.js"></script>
-	
-	
-	<!--
-		Spiel erstellen
-	-->
-	<script type="text/javascript" src="js/init.js"></script>	
-</body>
+	</body>
 </html>
