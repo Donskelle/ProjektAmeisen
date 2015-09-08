@@ -101,12 +101,12 @@ function Canvas(_options) {
 			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
 			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			lvl: null,
+			lvl: 1,
 			text: "Ich mach die super Energie, byebye global warming",
 			costs: {
-				leafs: null,
-		    	stone: null,
-		    	food: null
+				leafs: 2,
+		    	stone: 2,
+		    	food: 2
 			}
 		}
 	]
@@ -208,6 +208,7 @@ function Canvas(_options) {
 	function Building(type, i) {
 		(function init() {
 			var c = new createjs.Shape();
+			var g = c.graphics;
 			c.buildingData = {}
 			c.buildingData = HelpFunction.clone(buidlingsTypes[type]);
 			c.connector = new Array();
@@ -215,7 +216,9 @@ function Canvas(_options) {
 
 			c.x = window.innerWidth/2 + ((i * 15) - 50);
 			c.y = window.innerHeight/2 + ((i * 15) - 50);
-			var g = c.graphics;
+			
+
+
 			c.radius = HelpFunction.getProcentValue(20, 80, c.buildingData.lvl);
 			c.addHitTest = function (i, j) {
 				createHitTest(i,j);
@@ -223,21 +226,42 @@ function Canvas(_options) {
 			c.upgradeBuilding = function() {
 				this.buildingData.lvl += 1;
 				this.radius = HelpFunction.getProcentValue(20, 80, c.buildingData.lvl);
-				this.graphics.c().f("#f58e25").dc(0,0,this.radius);
+
+				this.graphics.c().f("#000").dc(0,0,this.radius);
 				stage.update();
 			}
 			c.setUpgradeCost = function(_costs) {
 				this.buildingData.costs = _costs;
 			}
 
-			g.f("#f58e25").dc(0,0,c.radius);
+			g.f("#000").dc(0,0,c.radius);
+
+			/*var image = new Image();
+			image.src = "img/icons/buildings/mushroom.png";
+			image.onload = handleImageLoad;
+
+			function handleImageLoad (event) {
+				var logo = new createjs.Bitmap(event.target);		
+				logo.x = 20; logo.y = 20;		
+				logo.alpha = .8;
+				logo.cursor = "pointer";
+				//var img = event.target;
+				//zog("driun");
+				//g.beginBitmapFill(img).s();
+
+stage.addChild(logo);
+				stage.update() 
+			}*/
+			
+
+
 
 			c.setBounds(-c.radius, -c.radius, c.radius*2, c.radius*2);
 			eles[i] = c;
 
+			
 			addDrag(c);
 			stage.addChild(c);
-
 			// Startverbindunge nach oben
 			if(type == 5) {
 				var connector = createConnector(i, "top");
@@ -255,13 +279,13 @@ function Canvas(_options) {
 			c.on("mousedown",function(e){
 				c.clickStart = Date.now();
 
-
+				e.target.graphics.c().f("#84BB67").dc(0,0,c.radius);
 				e.target.graphics.beginStroke("black");
 				e.target.graphics.f("rgba(0,0,0,0.1)").dc(0,0,120);
 			}); 
 
 			c.on("click",function(e){
-				e.target.graphics.c().f("#f58e25").dc(0,0,c.radius);
+				e.target.graphics.c().f("#000").dc(0,0,c.radius);
 				stage.update();
 
 
@@ -355,41 +379,46 @@ function Canvas(_options) {
 	}
 
 	function showInfoBox(i) {
-		zid("buildingUpgradeViewTitle").innerHTML = eles[i].buildingData.name;
+		//Startgebäude
+		if(i != 0)
+		{
+			zid("buildingUpgradeViewTitle").innerHTML = eles[i].buildingData.name;
+			zid("buildingUpgradeViewFormBuildingName").innerHTML = eles[i].buildingData.name;
 
-		var img = "";
-		if(eles[i].buildingData.lvl <= 9)
-			img = eles[i].buildingData.image1;
-		else if (eles[i].buildingData.lvl <= 19)
-			img = eles[i].buildingData.image2;
-		else if(eles[i].buildingData.lvl <= 29)
-			img = eles[i].buildingData.image3;
-		else if(eles[i].buildingData.lvl <= 39)
-			img = eles[i].buildingData.image4;
-		else 
-			img = eles[i].buildingData.image5;
+			var img = "";
+			if(eles[i].buildingData.lvl <= 9)
+				img = eles[i].buildingData.image1;
+			else if (eles[i].buildingData.lvl <= 19)
+				img = eles[i].buildingData.image2;
+			else if(eles[i].buildingData.lvl <= 29)
+				img = eles[i].buildingData.image3;
+			else if(eles[i].buildingData.lvl <= 39)
+				img = eles[i].buildingData.image4;
+			else 
+				img = eles[i].buildingData.image5;
 
-		zid("buildingUpgradeViewImage").src = img;
+			zid("buildingUpgradeViewImage").src = img;
 
-		zid("buildingUpgradeViewTextUpgrade").innerHTML = eles[i].buildingData.text;
-		zid("buildingUpgradeViewFormBuildingId").value = i;
-
-
-		
-		zid("buildingUpgradeViewLevel").innerHTML = eles[i].buildingData.lvl;
-
-
-
-
-		zid("buildingUpgradeViewCostLeafs").innerHTML = eles[i].buildingData.costs.leafs;
-		//zid("buildingUpgradeViewCostLeafsHidden").innerHTML = eles[i].buildingData.costs.leafs;
-		zid("buildingUpgradeViewCostStone").innerHTML = eles[i].buildingData.costs.stone;
-		//zid("buildingUpgradeViewCostStoneHidden").innerHTML = eles[i].buildingData.costs.stone;
-		zid("buildingUpgradeViewCostFood").innerHTML = eles[i].buildingData.costs.food;
-		//zid("buildingUpgradeViewCostFoodHidden").innerHTML = eles[i].buildingData.costs.food;
+			zid("buildingUpgradeViewTextUpgrade").innerHTML = eles[i].buildingData.text;
+			zid("buildingUpgradeViewFormBuildingId").value = i;
+			zid("buildingUpgradeViewLevel").innerHTML = eles[i].buildingData.lvl;
 
 
-		zid("openLightboxBuildingUpgradeView").click();
+
+
+			zid("buildingUpgradeViewCostLeafs").innerHTML = eles[i].buildingData.costs.leafs;
+			//zid("buildingUpgradeViewCostLeafsHidden").innerHTML = eles[i].buildingData.costs.leafs;
+			zid("buildingUpgradeViewCostStone").innerHTML = eles[i].buildingData.costs.stone;
+			//zid("buildingUpgradeViewCostStoneHidden").innerHTML = eles[i].buildingData.costs.stone;
+			zid("buildingUpgradeViewCostFood").innerHTML = eles[i].buildingData.costs.food;
+			//zid("buildingUpgradeViewCostFoodHidden").innerHTML = eles[i].buildingData.costs.food;
+
+
+			zid("openLightboxBuildingUpgradeView").click();
+
+
+			zid("buildingUpgradeViewBG").style.height = zid("lightboxContentbuildingUpgradeView").offsetHeight + "px";
+		}
 	}
 
 	function createConnector(_i, _j) {
@@ -403,13 +432,13 @@ function Canvas(_options) {
 			connector.visible = true;
 			connector.graphics.c().setStrokeStyle(6, 'round', 'round').beginStroke("black").moveTo(eles[_i].x, eles[_i].y).lineTo(eles[_j].x, eles[_j].y);
 			// Connector wird als oberesten Element eingefügt, damit es oberhalb der anderen Elemente liegt.
-			stage.addChild(connector);
+			stage.addChildAt(connector,0);
 		}
 
 		function drawTop() {
 			connector.visible = true;
 			connector.graphics.c().setStrokeStyle(6, 'round', 'round').beginStroke("black").moveTo(eles[_i].x, eles[_i].y).lineTo(stageW/2, 0);
-			stage.addChild(connector);
+			stage.addChildAt(connector,0);
 		}
 
 		function hide() {
@@ -443,7 +472,7 @@ function Canvas(_options) {
 			}
 		}
 
-		stage.addChild(connector);
+		stage.addChildAt(connector,0);
 
 		return connector;
 	}

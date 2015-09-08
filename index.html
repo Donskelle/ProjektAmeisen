@@ -310,41 +310,47 @@
 
 			<!-- Lightbox Gebäude Click -->
 			<div id="buildingUpgradeView" class="lightboxWrapper">
-				<div class="lightboxContent">
-					<!-- Name des Gebäudes -->
-					<h1 id="buildingUpgradeViewTitle"> Geb&auml;ude </h1>
-					<p>
-						Level: <span id="buildingUpgradeViewLevel"></span>
-					</p>
-					<div class="lightboxImageWrapper">
-						<img id="buildingUpgradeViewImage" class="lightboxImage">
+				<div class="backgroundBuildingUpgradeView" id="buildingUpgradeViewBG">
+					<div class="lightboxContent" id="lightboxContentbuildingUpgradeView">
+						<div class="upgradeContent clearAfter">
+							
+							<div class="lightboxImageWrapper fl_left">
+								<img id="buildingUpgradeViewImage" class="lightboxImage">
+							</div>
+
+							<div class="fl_left upgradeBuildingViewRight">
+								<!-- Name des Gebäudes -->
+								<h2 id="buildingUpgradeViewTitle">
+										Geb&auml;ude
+								</h2>
+								
+								<p class="buildingUpgradeViewLevelDiv">
+									Level: <span id="buildingUpgradeViewLevel"></span>
+								</p>
+								
+
+								<p id="buildingUpgradeViewTextUpgrade">
+
+								</p>
+
+								<form id="buildingUpgradeViewForm">
+									<input type="hidden" name="buildingId" id="buildingUpgradeViewFormBuildingId">
+									Möchtest du die Kammer <span id="buildingUpgradeViewFormBuildingName"></span> upgraden?<br>
+									Kosten: <span id="buildingUpgradeViewCostLeafs"></span>	Bl&auml;tter, 
+									<span id="buildingUpgradeViewCostStone"></span> Stein,
+									<span id="buildingUpgradeViewCostFood"></span> Nahrung
+									<div class="row">
+										<button class="antGreenButton">
+											Upgraden !
+										</button>
+									</div>
+									<div class="row">
+										<a href="#closeLightBox" style="display: none;">Schließen</a>
+									</div>
+								</form>
+							</div>
+						</div>
 					</div>
-
-					<p id="buildingUpgradeViewTextUpgrade">
-
-					</p>
-
-					<form id="buildingUpgradeViewForm">
-						<h3>Kosten</h3>
-						<input type="hidden" name="buildingId" id="buildingUpgradeViewFormBuildingId">
-						<p>
-							Bl&auml;tter: <span id="buildingUpgradeViewCostLeafs"></span>
-						</p>
-						<p>
-							Stein: <span id="buildingUpgradeViewCostStone"></span>
-						</p>
-						<p>
-							Nahrung: <span id="buildingUpgradeViewCostFood"></span>
-						</p>
-						<div class="row">
-							<button>
-								Ausbauen
-							</button>
-						</div>
-						<div class="row">
-							<a href="#closeLightBox">Schließen</a>
-						</div>
-					</form>
 				</div>
 			</div>
 			<a id="closeLightbox" href="#closeLightbox"></a>
@@ -352,7 +358,7 @@
 
 			<!-- Lightbox Gebäude Click -->
 			<div id="naturalDisasterView" class="lightboxWrapper">
-				<div class="lightboxContent">
+				<div class="lightboxContent" id="">
 					<!-- Name des Gebäudes -->
 					<h1 id="naturalDisasterTitle"> Ereignis </h1>
 					<div class="lightboxImageWrapper">
@@ -367,6 +373,7 @@
 				</div>
 			</div>
 			<a id="openLightboxNaturalDisasterView" href="#naturalDisasterView"></a>
+
 
 			<!--
 			Notwendige Javascript Datein

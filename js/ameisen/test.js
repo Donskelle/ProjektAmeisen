@@ -420,6 +420,9 @@ function test (_options) {
 		stoneBar.style.width = (_stone/_buildings[3]["storeStone"])*100 + "%"; ;
 		foodBar.style.width = (_food/_buildings[4]["storeFood"])*100 + "%"; ;
 		amberBar.style.width = "100%";
+
+
+		timerBuild.update();
     }
  
 
@@ -531,10 +534,13 @@ function test (_options) {
     		var countBuildingsLvl = getConnectedBuildingsLevelByType(1);
     		var countBuildings = getConnectedBuildingsCountByType(1);
 
+    		var lvlWithoutBuildung = countBuildingsLvl - countBuildings;
 
-    		var maxProduction = countBuildings + (Math.floor(countBuildingsLvl - countBuildings /5)) + 1;
-    		zid("possibleSolderProduction").innerHTML = maxProduction;
-    		zid("possibleAntProduction").innerHTML = maxProduction;
+
+    		posibleAnts = countBuildings + (Math.floor( lvlWithoutBuildung /5 )) + 1;
+
+    		zid("possibleSolderProduction").innerHTML = posibleAnts;
+    		zid("possibleAntProduction").innerHTML = posibleAnts;
 
 
     		zid("currentSolderProduction").innerHTML = countsSolders;
@@ -546,6 +552,10 @@ function test (_options) {
     	}
 
     	this.addW = function(rate) {
+    		if(posibleAnts == ants.length) {
+    			alert("Sie können nicht mehr Ameisen in Auftrag geben.");
+    			return;
+    		}
     		ants[ants.length] = {
     			end: Date.now() + (rate * 1000) + Math.floor(countDowns.ants.end * 1000)
     		};
@@ -742,34 +752,31 @@ function test (_options) {
 		return buildedBuildings[buildingId].upgradeCost;
 	}
 
-	this.getValues = function() {
+	this.getCurrentValues = function() {
 		var values = {
 			'ressources': {
-				'leafs': 0,
-				'stone': 0,
-				'food': 0
+				'leafs': _leafs,
+				'stone': _stone,
+				'food': _food
 			},
-			'antCount': 0,
+			'antCount': _antW,
 			'buildings': [
-				{
-					'buildingId': 0,
-					'lvl': 10,
-					'type': 0
-				},
-				{
-					'buildingId': 0,
-					'lvl': 10,
-					'type': 0
-				}
+				buildedBuildings
 			]
 		};
 
+		console.log(values);
 		return values;
 	}
 
 	this.setValues = function(values) {
-		// zum zusammenfüheren verwenden
-		//HelpFunction.merge(a,b);
+		_leafs = values.ressources.leafs;
+		_stone = values.ressources.stone;
+		_food = values.ressources.food;
+
+		_antW = values.antCount;
+
+		buildedBuildings = values.buildings;
 	}
 
 	/**

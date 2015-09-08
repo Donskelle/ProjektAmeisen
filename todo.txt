@@ -8,6 +8,10 @@ Todo Fabian:
 	- Ameisen dazu
 - Gebäudeverbindung / done
 - Mitte Screen neue Gebäude / done
+- Bugfix
+- Icon Gebäude // Not now
+- Upgradeview anpassen 
+
 
 
 Todo Ole:
