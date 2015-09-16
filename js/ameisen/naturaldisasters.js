@@ -5,8 +5,9 @@ function NaturalDisasters() {
 			'description': '1/3 deiner Ameisen ist verschwunden. Sie sind nicht zu ihrem Lager zurück gegommen.',
 			'image': 'http://img4.wikia.nocookie.net/__cb20140909155820/creepypasta/de/images/3/34/Atompilz.jpg',
 			'calculateFunction': function(values) {
-				values.antCount = values.antCount / 3 * 2;
+				values.antCount = Math.floor(values.antCount / 3 * 2) + 1;
 				console.log(values);
+				return values;
 			}
 		},
 		{

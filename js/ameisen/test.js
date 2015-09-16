@@ -754,7 +754,7 @@ function test (_options) {
 
 	this.getCurrentValues = function() {
 		var values = {
-			'ressources': {
+			'resources': {
 				'leafs': _leafs,
 				'stone': _stone,
 				'food': _food
@@ -770,9 +770,9 @@ function test (_options) {
 	}
 
 	this.setValues = function(values) {
-		_leafs = values.ressources.leafs;
-		_stone = values.ressources.stone;
-		_food = values.ressources.food;
+		_leafs = values.resources.leafs;
+		_stone = values.resources.stone;
+		_food = values.resources.food;
 
 		_antW = values.antCount;
 
