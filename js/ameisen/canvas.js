@@ -208,7 +208,10 @@ function Canvas(_options) {
 	function Building(type, i) {
 		(function init() {
 			var c = new createjs.Shape();
+			var bitmapC = new createjs.Bitmap();
 			var g = c.graphics;
+			var number = i; 
+
 			c.buildingData = {}
 			c.buildingData = HelpFunction.clone(buidlingsTypes[type]);
 			c.connector = new Array();
@@ -216,10 +219,62 @@ function Canvas(_options) {
 
 			c.x = window.innerWidth/2 + ((i * 15) - 50);
 			c.y = window.innerHeight/2 + ((i * 15) - 50);
-			
-
 
 			c.radius = HelpFunction.getProcentValue(20, 80, c.buildingData.lvl);
+
+
+			g.f("#000").dc(0,0,c.radius);
+			c.setBounds(-c.radius, -c.radius, c.radius*2, c.radius*2);
+
+
+			eles[i] = c;
+
+			
+			addDrag(c);
+			stage.addChild(c);
+			// Startverbindunge nach oben
+			if(type == 5) {
+				var connector = createConnector(i, "top");
+				eles[i].topConnector = connector;
+
+				eles[i].on("pressmove", function(e) 
+				{
+					connector.updateLine();
+				});
+			}
+
+
+			var image = new Image();
+			switch(type)
+			{
+				// Brood
+				case 0: 
+					image.src = "img/icons/buildings/hatch_sm.png";
+					break;
+				// Mush
+				case 1: 
+					image.src = "img/icons/buildings/mushroom_sm.png";
+					break;
+				// Storage
+				case 2: 
+					image.src = "img/icons/buildings/storage_sm.png";
+					break;
+				// Pantry
+				case 3: 
+					image.src = "img/icons/buildings/storage_sm.png";
+					break;
+				// Dumping
+				case 4: 
+					image.src = "img/icons/buildings/dump_sm.png";
+					break;
+				// Startegebäude
+				case 5: 
+					image.src = "img/icons/buildings/queen_sm.png";
+					break;
+			}
+			image.onload = handleImageLoad;
+
+
 			c.addHitTest = function (i, j) {
 				createHitTest(i,j);
 			}
@@ -234,48 +289,78 @@ function Canvas(_options) {
 				this.buildingData.costs = _costs;
 			}
 
-			g.f("#000").dc(0,0,c.radius);
-
-			/*var image = new Image();
-			image.src = "img/icons/buildings/mushroom.png";
-			image.onload = handleImageLoad;
 
 			function handleImageLoad (event) {
-				var logo = new createjs.Bitmap(event.target);		
-				logo.x = 20; logo.y = 20;		
+				var logo = new createjs.Bitmap(event.target);	
+
+				logo.x = eles[number].x - 25; 
+				logo.y = eles[number].y - 25;
+				
 				logo.alpha = .8;
 				logo.cursor = "pointer";
-				//var img = event.target;
-				//zog("driun");
-				//g.beginBitmapFill(img).s();
 
-stage.addChild(logo);
-				stage.update() 
-			}*/
-			
+				stage.addChild(logo);
+				stage.update();
+
+				addDragImage();
 
 
+				function addDragImage() {
+					logo.on("pressmove", function(e){
+						eles[number].x = logo.x + 25;
+						eles[number].y = logo.y + 25;
 
-			c.setBounds(-c.radius, -c.radius, c.radius*2, c.radius*2);
-			eles[i] = c;
 
-			
-			addDrag(c);
-			stage.addChild(c);
-			// Startverbindunge nach oben
-			if(type == 5) {
-				var connector = createConnector(i, "top");
-				eles[i].on("pressmove", function(e) 
-				{
-					connector.updateLine();
-				});
+						if(number == 0) {
+							eles[number].topConnector.updateLine();
+						}
+
+						eles[number].connector.forEach(redraw); 
+
+						function redraw(element, index, array) {
+							console.log("element");
+							console.log(element);
+							element.hittesten();
+						}
+
+					});
+					logo.on("mousedown", function(e){
+						eles[number].dispatchEvent("mousedown");
+
+
+						//e.target.graphics.c().f("#84BB67").dc(0,0,c.radius);
+						//e.target.graphics.beginStroke("black");
+						//e.target.graphics.f("rgba(0,0,0,0.1)").dc(0,0,120);
+					}); 
+
+					logo.on("click", function(e){
+						eles[number].dispatchEvent("click");
+						//e.target.graphics.c().f("#000").dc(0,0,c.radius);
+						//stage.update();
+
+
+						// Wenn weniger als 250 MS vergangen sind
+						//if((Date.now() - c.clickStart) <= 250)
+						//	showInfoBox(i);
+					});
+
+					eles[number].on("pressmove", function(e) {
+						logo.x = eles[number].x - 25;
+						logo.y = eles[number].y - 25;
+					});
+
+					zim.drag(logo, bounds);
+
+
+				}
+
 			}
 		})();
 
 		
 		
 
-		function addDrag(c) {		
+		function addDrag(c) {
 			c.on("mousedown",function(e){
 				c.clickStart = Date.now();
 
@@ -293,6 +378,8 @@ stage.addChild(logo);
 				if((Date.now() - c.clickStart) <= 250)
 					showInfoBox(i);
 			});
+
+			
 
 			zim.drag(c, bounds);
 
@@ -321,6 +408,7 @@ stage.addChild(logo);
 
 			eles[_i].on("pressmove", function(e) 
 			{
+				console.log(e);
 				hitTesten();
 
 				for (var k = 0; k < eles.length; k++) {
