@@ -3,7 +3,7 @@ window.addEventListener('load', init);
 
 function init(){
 
-	var stage = new AmeisenStage({});
+	
 	
 	// Menu Bars verschiebar machen
 	var bars = document.querySelectorAll(".handle");
@@ -23,4 +23,13 @@ function init(){
 
 	// Url zeile auf Handy entfernen
 	setTimeout(function() {window.scrollTo(0, 1);}, 100); 
+
+	zid("btn_toggleMenu").style.display = "none";
+	// Start gedrückt 
+	zid("gameStart").addEventListener("click", function(e) {
+		zid("btn_toggleMenu").style.display = "block";
+		zid("btn_toggleMenu").click();
+
+		var stage = new AmeisenStage({});
+	});
 }
