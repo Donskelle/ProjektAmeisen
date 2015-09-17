@@ -756,10 +756,7 @@ function test (_options) {
 				'stone': _stone,
 				'food': _food
 			},
-			'antCount': _antW,
-			'buildings': [
-				buildedBuildings
-			]
+			'antCount': _antW
 		};
 
 		console.log(values);
@@ -772,8 +769,6 @@ function test (_options) {
 		_food = values.resources.food;
 
 		_antW = values.antCount;
-
-		buildedBuildings = values.buildings;
 	}
 
 	/**
@@ -827,6 +822,16 @@ function test (_options) {
 		var level = 0;
 
 		for (var i = 0; i < _buildings[type].buildedBuildings.length; i++) {
+
+			zog("Zeile 830");
+			zog(i);
+			zog("buildedBuildings[_buildings[type].buildedBuildings[i]]");
+			zog(buildedBuildings[_buildings[type].buildedBuildings[i]]);
+			zog("buildedBuildings");
+			zog(buildedBuildings);
+			zog("_buildings[type].buildedBuildings");
+			zog(_buildings[type].buildedBuildings);
+
 			if(buildedBuildings[_buildings[type].buildedBuildings[i]].connected == true) {
 				level += buildedBuildings[_buildings[type].buildedBuildings[i]].lvl;
 			}
