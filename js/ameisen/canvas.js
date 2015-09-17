@@ -27,7 +27,7 @@ function Canvas(_options) {
 			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			lvl: 1,
-			text: "Ich mach die super Energie, byebye global warming",
+			text: "Durch ein Upgrade der Brutkammer, erhöhst du die Anzahl der Ameisen, die du bauen kannst. Alle 5 Upgradestufen erhählst du eine zusätzliche Warteschlangenposition.",
 			costs: {
 				leafs: null,
 		    	stone: null,
@@ -42,7 +42,7 @@ function Canvas(_options) {
 			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			lvl: 1,
-			text: "Ich mach die super Energie, byebye global warming",
+			text: "Die Pilzkammer wandelt Blätter in Nahrung um. Jede Upgradestufe erhöht die Anzahl der Blätter, welche zum Produzieren von Nahrung genutzt wird.",
 			costs: {
 				leafs: null,
 		    	stone: null,
@@ -57,7 +57,7 @@ function Canvas(_options) {
 			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			lvl: 1,
-			text: "Ich mach die SUPER ENERGIE. BYE BYE global warming",
+			text: "Im Lager werden deine Baumaterialien gespeichert, also Blätter und Steine. Je höher die Ausbaustufe, desto mehr Einheiten können gelagert werden.",
 			costs: {
 				leafs: null,
 		    	stone: null,
@@ -72,7 +72,7 @@ function Canvas(_options) {
 			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			lvl: 1,
-			text: "Ich mach die super Energie, byebye global warming",
+			text: "Hier werden Nahrungsmittel gelagert, die der Pilz produziert oder deine Arbeiterinnen bei der Jagt erbeutet haben. Auch hier bestimmt die Ausbaustufe die Größe des Speichers.",
 			costs: {
 				leafs: null,
 		    	stone: null,
@@ -87,7 +87,7 @@ function Canvas(_options) {
 			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			lvl: 1,
-			text: "Ich mach die super Energie, byebye global warming",
+			text: "Dies ist der Ort wo Abfälle, die dein Volk produziert, entsorgt werden. Dazu zählen tote Ameisen, verdorbene Nahrungsreste und die Notdurft deines Volkes. Je höher die Kammer ausgebaut ist, desto mehr Platz bietet sie und desto schneller wird der Abfall abgebaut.",
 			costs: {
 				leafs: null,
 		    	stone: null,
