@@ -487,14 +487,15 @@ function test (_options) {
 	    	if( type == 6 ){	    		
     			if(_leafs >= _antCostW["leafs"] && _stone >= _antCostW["stone"] && _food >= _antCostW["food"])
     			{
-	    			timerBuild.addW(_hatchRateW);
-	    			_leafs -= _antCostW["leafs"];
-  					_stone -= _antCostW["stone"];
-  					_food -= _antCostW["food"];
+	    			if(timerBuild.addW(_hatchRateW)) {
+	    				_leafs -= _antCostW["leafs"];
+  						_stone -= _antCostW["stone"];
+  						_food -= _antCostW["food"];
+  					}
     			}
     			amount *= 0;
     		}
-    		else if( type == 7 ) {
+    		/*else if( type == 7 ) {
     			if(_leafs >= _antCostS["leafs"] && _stone >= _antCostS["stone"] && _food >= _antCostW["food"])
 				{
     				timerBuild.addS(_hatchRateS);
@@ -503,7 +504,7 @@ function test (_options) {
   					_food -= _antCostS["food"];
 				}
     			amount *= 0;
-    		}
+    		}*/
 	    }
 	    updateRes();
     }
@@ -515,18 +516,15 @@ function test (_options) {
     	var countDowns = {
     		ants: {
     			end: null
-    		},
-    		solders: {
-    			end: null
     		}
     	}
     	var ants = [];
-    	var solders = [];
+    	//var solders = [];
     	var posibleAnts = 1;
 
     	function updateViewBuilder() {
     		var countsAnt = ants.length;
-    		var countsSolders = solders.length;
+    		//var countsSolders = solders.length;
     		
 
     		var countBuildingsLvl = getConnectedBuildingsLevelByType(1);
@@ -537,11 +535,11 @@ function test (_options) {
 
     		posibleAnts = countBuildings + (Math.floor( lvlWithoutBuildung /5 )) + 1;
 
-    		zid("possibleSolderProduction").innerHTML = posibleAnts;
+    		//zid("possibleSolderProduction").innerHTML = posibleAnts;
     		zid("possibleAntProduction").innerHTML = posibleAnts;
 
 
-    		zid("currentSolderProduction").innerHTML = countsSolders;
+    		//zid("currentSolderProduction").innerHTML = countsSolders;
     		zid("currentAntProduction").innerHTML = countsAnt;
     	}
 
@@ -552,7 +550,7 @@ function test (_options) {
     	this.addW = function(rate) {
     		if(posibleAnts == ants.length) {
     			alert("Sie können nicht mehr Ameisen in Auftrag geben.");
-    			return;
+    			return false;
     		}
     		ants[ants.length] = {
     			end: Date.now() + (rate * 1000) + Math.floor(countDowns.ants.end * 1000)
@@ -564,8 +562,9 @@ function test (_options) {
     			start();
 
     		updateViewBuilder();
+    		return true;
     	}
-    	this.addS = function(rate) {
+    	/*this.addS = function(rate) {
     		solders[solders.length] = {
     			end: Date.now() + (rate * 1000) + Math.floor(countDowns.solders.end * 1000)
     		}
@@ -576,7 +575,7 @@ function test (_options) {
     			start();
     		
     		updateViewBuilder();
-    	}
+    	}*/
 
 
     	function start() {
@@ -607,7 +606,7 @@ function test (_options) {
 	    		};
 	    	}
 
-	    	if(solders.length > 0) {
+	    	/*if(solders.length > 0) {
 	    		countDowns.solders.end -= .1;
 
 	    		for (var i = 0; i < solders.length; i++) {
@@ -624,7 +623,7 @@ function test (_options) {
 	    				}
 	    			}
 	    		};
-    		}
+    		}*/
     		if(allDone())
     			end();
 
@@ -633,7 +632,8 @@ function test (_options) {
     	}
 
     	function allDone() {
-    		if(solders.length > 0 || ants.length > 0)
+    		//if(solders.length > 0 || ants.length > 0)
+    		if(ants.length > 0)
     			return false;
 
     		return true;
@@ -641,7 +641,6 @@ function test (_options) {
 
     	function updateView() {
     		countdownW.innerHTML = (Math.floor(countDowns.ants.end * 10) / 10).toFixed(2);
-    		
     	}
 	}
     gameLoop();
