@@ -24,9 +24,9 @@ function NaturalDisasters() {
 			'description': 'Eine deiner Arbeitin endeckte, das viele deiner Vorräte geplündert wurden.',
 			'image': 'http://img4.wikia.nocookie.net/__cb20140909155820/creepypasta/de/images/3/34/Atompilz.jpg',
 			'calculateFunction': function(values) {
-				values.resources.leafs -= 10;
-				values.resources.stone -= 10;
-				values.resources.food -= 5;
+				values.resources.leafs = Math.floor(values.resources.leafs / 2);
+				values.resources.stone -= Math.floor(values.resources.leafs / 2);
+				values.resources.food -= Math.floor(values.resources.leafs / 2);
 				return values;
 			}
 		},
