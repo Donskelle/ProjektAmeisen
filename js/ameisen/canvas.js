@@ -306,7 +306,25 @@ function Canvas(_options) {
 
 
 				function addDragImage() {
-					logo.on("pressmove", function(e){
+					logo.on("pressmove", function(e) {
+						eles[number].x = logo.x + 25;
+						eles[number].y = logo.y + 25;
+
+
+						if(number == 0) {
+							eles[number].topConnector.updateLine();
+						}
+
+						eles[number].connector.forEach(redraw); 
+					});
+
+
+					logo.on("mousedown", function(e) {
+						eles[number].dispatchEvent("mousedown");
+					}); 
+
+					logo.on("click", function(e){
+						eles[number].dispatchEvent("click");
 						eles[number].x = logo.x + 25;
 						eles[number].y = logo.y + 25;
 
@@ -317,31 +335,7 @@ function Canvas(_options) {
 
 						eles[number].connector.forEach(redraw); 
 
-						function redraw(element, index, array) {
-							console.log("element");
-							console.log(element);
-							element.hittesten();
-						}
-
-					});
-					logo.on("mousedown", function(e){
-						eles[number].dispatchEvent("mousedown");
-
-
-						//e.target.graphics.c().f("#84BB67").dc(0,0,c.radius);
-						//e.target.graphics.beginStroke("black");
-						//e.target.graphics.f("rgba(0,0,0,0.1)").dc(0,0,120);
-					}); 
-
-					logo.on("click", function(e){
-						eles[number].dispatchEvent("click");
-						//e.target.graphics.c().f("#000").dc(0,0,c.radius);
-						//stage.update();
-
-
-						// Wenn weniger als 250 MS vergangen sind
-						//if((Date.now() - c.clickStart) <= 250)
-						//	showInfoBox(i);
+						stage.update();
 					});
 
 					eles[number].on("pressmove", function(e) {
@@ -352,6 +346,9 @@ function Canvas(_options) {
 					zim.drag(logo, bounds);
 
 
+					function redraw(element, index, array) {
+						element.hittesten();
+					}
 				}
 
 			}
@@ -466,7 +463,8 @@ function Canvas(_options) {
 		}
 	}
 
-	function showInfoBox(i) {
+	function showInfoBox(i)
+	{
 		//Startgebäude
 		if(i != 0)
 		{
@@ -509,7 +507,8 @@ function Canvas(_options) {
 		}
 	}
 
-	function createConnector(_i, _j) {
+	function createConnector(_i, _j) 
+	{
 		var connector = new createjs.Shape();
 		connector.visible = false;
 

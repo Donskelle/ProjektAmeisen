@@ -1,10 +1,7 @@
 
 window.addEventListener('load', init);
 
-function init(){
-
-	
-	
+function init() {
 	// Menu Bars verschiebar machen
 	var bars = document.querySelectorAll(".handle");
 	for (var i = bars.length - 1; i >= 0; i--) {
@@ -25,11 +22,13 @@ function init(){
 	setTimeout(function() {window.scrollTo(0, 1);}, 100); 
 
 	zid("btn_toggleMenu").style.display = "none";
+
 	// Start gedrückt 
 	zid("gameStart").addEventListener("click", function(e) {
 		zid("btn_toggleMenu").style.display = "block";
 		zid("btn_toggleMenu").click();
+		zid("gameStart").style.display = "none";
 
-		var stage = new AmeisenStage({});
+		new AmeisenStage({});
 	});
 }

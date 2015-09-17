@@ -1,6 +1,29 @@
 function test (_options) {
 	var options = _options;
 
+
+	var _leafCount = zid("leafCount");
+    var _stoneCount = zid("stoneCount");
+    var _foodCount = zid("foodCount");
+    var _amberCount = zid("amberCount");
+    var _workerCount = zid("workerCount");
+    var _soldierCount = zid("soldierCount");
+    var _leafProd = zid("leafProd");
+    var _stoneProd = zid("stoneProd");
+    var _foodProd = zid("foodProd");
+    var _amberProd = zid("amberProd");
+    var _leafStorage = zid("leafStorage");
+    var _stoneStorage = zid("stoneStorage");
+    var _foodStorage = zid("foodStorage");
+    var _amberStorage = zid("amberStorage");
+
+
+	//Fuellstand der Vorratslager
+	var leafBar = zid("leafBar");
+	var stoneBar = zid("stoneBar");
+	var foodBar = zid("foodBar");
+	var amberBar = zid("amberBar");
+
 	//Bestand von Rohstoffen
 	var _leafs = 100;
 	var _stone = 100;
@@ -179,6 +202,7 @@ function test (_options) {
 		var broodForm = zid(options.forms.broodBuild);
 		var mushroomForm = zid(options.forms.mushroomBuild);
 		var storageForm = zid(options.forms.storageBuild);
+
 		broodForm.addEventListener("click", function(e) {
 			build(1);
 		});
@@ -194,8 +218,6 @@ function test (_options) {
 		dumpingForm.addEventListener("click", function(e) {
 			build(5);
 		});
-		
-		
 		
 		
 		
@@ -282,9 +304,9 @@ function test (_options) {
 			_buildings[i]["costStoneHtml"].innerHTML = _buildings[i]["costStone"];
 		}
   	}
-
   	init();
   
+
     function gameLoop() {
     	if(_leafs + _prodLeafs <= _buildings[3]["storeLeafs"]){
     		_leafs += _prodLeafs;
@@ -313,28 +335,6 @@ function test (_options) {
 
 		window.setTimeout(gameLoop, _tickRate);
     }
-    var _leafCount = zid("leafCount");
-    var _stoneCount = zid("stoneCount");
-    var _foodCount = zid("foodCount");
-    var _amberCount = zid("amberCount");
-    var _workerCount = zid("workerCount");
-    var _soldierCount = zid("soldierCount");
-    var _leafProd = zid("leafProd");
-    var _stoneProd = zid("stoneProd");
-    var _foodProd = zid("foodProd");
-    var _amberProd = zid("amberProd");
-    var _leafStorage = zid("leafStorage");
-    var _stoneStorage = zid("stoneStorage");
-    var _foodStorage = zid("foodStorage");
-    var _amberStorage = zid("amberStorage");
-
-
-		//Fuellstand der Vorratslager
-		var leafBar = zid("leafBar");
-		var stoneBar = zid("stoneBar");
-		var foodBar = zid("foodBar");
-		var amberBar = zid("amberBar");
-		
 		
     function updateRes() {
     	var connectedBuildingsLevel = getConnectedBuildingsLevelByType(3);
