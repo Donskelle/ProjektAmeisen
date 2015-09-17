@@ -5,30 +5,36 @@ function test (_options) {
 	var _leafCount = zid("leafCount");
     var _stoneCount = zid("stoneCount");
     var _foodCount = zid("foodCount");
-    var _amberCount = zid("amberCount");
+    var _dumpCount = zid("dumpCount");
     var _workerCount = zid("workerCount");
    
     var _leafProd = zid("leafProd");
     var _stoneProd = zid("stoneProd");
     var _foodProd = zid("foodProd");
-    var _amberProd = zid("amberProd");
+    var _dumpProd = zid("dumpProd");
     var _leafStorage = zid("leafStorage");
     var _stoneStorage = zid("stoneStorage");
     var _foodStorage = zid("foodStorage");
-    var _amberStorage = zid("amberStorage");
+    var _dumpStorage = zid("dumpStorage");
+    var _dumpHillhtml = zid("dumpHill");
 
 
 	//Fuellstand der Vorratslager
 	var leafBar = zid("leafBar");
 	var stoneBar = zid("stoneBar");
 	var foodBar = zid("foodBar");
-	var amberBar = zid("amberBar");
+	var dumpBar = zid("dumpBar");
 
 	//Bestand von Rohstoffen
 	var _leafs = 100;
 	var _stone = 100;
 	var _food = 10;
-	var _amber = 10;
+	var _dump = 10;
+	
+	var _prodDump = 0;
+	
+	var _jobCleanRatio = 2;
+    var _dumpHill = 0;
 	
 	//Bestand und Kosten von Ameisen
 	var _antW = 1;
@@ -56,7 +62,7 @@ function test (_options) {
 	var _prodLeafs = 0;
 	var _prodStone = 0;
 	var _prodFood = 0;
-	var _prodAmber = 0;
+	
 	
 	var _ratioLeafs = 1;
 	var _ratioStone = 1;
@@ -129,7 +135,7 @@ function test (_options) {
 	    	},
 	    	buildedBuildings : []
 	    },
-	   	2 : { //mushroom chamber
+	   	2 : { //mushroom chdump
 	    	count: 0,
 	    	costLeafs: 100,
 	    	costStone: 50,
@@ -186,6 +192,7 @@ function test (_options) {
 	    	costFood: 0,
 	    	costLeafsHtml: zid("dumpingCostL"),
 	    	costStoneHtml:	zid("dumpingCostS"),
+	    	storeDump: 15,
 	    	upgradeCost: {
 	    		totalUpgrades: 0,
 	    		leafs: 10,
@@ -324,9 +331,21 @@ function test (_options) {
     	else {
     		_food = _buildings[4]["storeFood"];
     	}
-      
+    	
+    	if(_dump + _prodDump > _buildings[5]["storeDump"]){
+    		_dump = _buildings[5]["storeDump"];
+    		_dumpHill -= (_dump) - (_buildings[5]["storeDump"] + _antW);
+    		
+    	}
+    	else {
+    		_dump += _prodDump;
+    		_dumpHill -= _prodDump;
+    		
+    	}
+    	
+      _dumpHill += _antW;
        
-       _amber += _prodAmber;
+       
        updateRes();
        
 	
@@ -359,6 +378,17 @@ function test (_options) {
     	_prodLeafs = (_jobLeafs * _ratioLeafs) - (_buildings[2]["leafConsume"] * connectedBuildingsLevel);
     	_prodStone = _jobStone * _ratioStone;
     	_prodFood = (_jobHunt * _ratioHunt) + (_buildings[2]["foodProd"] * connectedBuildingsLevel) - (_antW + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean);
+	
+    	
+    	if(_dumpHill >= _jobClean * _jobCleanRatio){
+    		_prodDump = (_jobClean * _jobCleanRatio);
+    	}
+    	else {
+    		_prodDump = _dumpHill;
+    	}
+
+
+
     	if(_prodLeafs < 0){
     		_leafProd.style.color = "red";
     		_leafProd.innerHTML = _prodLeafs;
@@ -404,20 +434,22 @@ function test (_options) {
     	_leafCount.innerHTML = _leafs;
     	_stoneCount.innerHTML = _stone;
     	_foodCount.innerHTML = _food;
-    	_amberCount.innerHTML = _amber;
+    	_dumpCount.innerHTML = _dump;
+    	_dumpHillhtml.innerHTML = _dumpHill;
     	
     	
-    	
-    	_amberProd.innerHTML = _prodAmber;
+    	_dumpProd.innerHTML = _prodDump;
     	
     	_leafStorage.innerHTML = _buildings[3]["storeLeafs"];
 		_stoneStorage.innerHTML = _buildings[3]["storeStone"];
 		_foodStorage.innerHTML = _buildings[4]["storeFood"];
+		_dumpStorage.innerHTML = _buildings[5]["storeDump"];
+		
 		
 		leafBar.style.width = (_leafs/_buildings[3]["storeLeafs"])*100 + "%"; 
 		stoneBar.style.width = (_stone/_buildings[3]["storeStone"])*100 + "%"; ;
 		foodBar.style.width = (_food/_buildings[4]["storeFood"])*100 + "%"; ;
-		amberBar.style.width = "100%";
+		dumpBar.style.width = "100%";
 
 
 		timerBuild.update();
