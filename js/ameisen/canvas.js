@@ -329,11 +329,11 @@ function Canvas(_options) {
 						eles[number].y = logo.y + 25;
 
 
-						if(number == 0) {
+						/*if(number == 0) {
 							eles[number].topConnector.updateLine();
 						}
 
-						eles[number].connector.forEach(redraw); 
+						eles[number].connector.forEach(redraw); */
 
 						stage.update();
 					});
