@@ -334,7 +334,7 @@ function test (_options) {
     	
     	if(_dump + _prodDump > _buildings[5]["storeDump"]){
     		_dump = _buildings[5]["storeDump"];
-    		_dumpHill -= (_dump) - (_buildings[5]["storeDump"] + _antW);
+    		_dumpHill -= (_dump) - (_buildings[5]["storeDump"] + (_antW + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean));
     		
     	}
     	else {

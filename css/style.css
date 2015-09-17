@@ -57,7 +57,7 @@ button:hover {
 	
 	width: 20px;
 	background-color: #FFFFFF;
-	
+	z-index: 101;
 	text-align: center;
 	float: left;
 	font-size: .8em;
@@ -225,8 +225,10 @@ button:hover {
 }
 #resTable tr th div {
 	position: absolute;
+
 	
 }
+
 .resIcons {
 	width: 100px;
 	height: 100px;
@@ -234,13 +236,16 @@ button:hover {
 	background-size: contain;
 }
 #resLeafs {
-	background-image: url("../img/icons/leafs.png");
+	background-image: url("../img/icons/Blätter.png");
 }
 #resStone {
-	background-image: url("../img/icons/stone.png");
+	background-image: url("../img/icons/Steine.png");
 }
 #resFood {
-	background-image: url("../img/icons/food.png");
+	background-image: url("../img/icons/Nahrung.png");
+}
+#resDump {
+	background-image: url("../img/icons/Deponie.png");
 }
 .resText {
 	position: absolute;
@@ -250,12 +255,12 @@ button:hover {
 	padding: 0 10px 0 10px;
 	
 }
-#leafFill, #stoneFill, #foodFill, #amberFill {
+#leafFill, #stoneFill, #foodFill, #dumpFill {
 	background-color: red;
 	width: 100%;
 	height: 5px;
 }
-#leafBar, #stoneBar, #foodBar, #amberBar {
+#leafBar, #stoneBar, #foodBar, #dumpBar {
 	background-color: green;
 	width: 50%;
 	height: 5px;
@@ -288,7 +293,7 @@ button:hover {
 	bottom: 0;
 	height: 100vh;
 	width: 100%;
-	z-index: 100;
+	z-index: 1000;
 
 	background-color: rgba(0, 0, 0, 0.6);
 }
