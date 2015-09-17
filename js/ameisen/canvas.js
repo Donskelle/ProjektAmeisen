@@ -20,7 +20,7 @@ function Canvas(_options) {
 
 	var buidlingsTypes = [
 		{
-			name: "Brood Chamber",
+			name: "Brutkammer",
 			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
 			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
@@ -35,7 +35,7 @@ function Canvas(_options) {
 			}
 		},
 		{
-			name: "Mushroom Chamber",
+			name: "Pilzkammer",
 			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
 			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
@@ -50,7 +50,7 @@ function Canvas(_options) {
 			}
 		},
 		{
-			name: "Storage",
+			name: "Lager",
 			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
 			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
@@ -65,7 +65,7 @@ function Canvas(_options) {
 			}
 		},
 		{
-			name: "Pantry",
+			name: "Speisekammer",
 			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
 			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
@@ -80,7 +80,7 @@ function Canvas(_options) {
 			}
 		},
 		{
-			name: "Dumping Ground",
+			name: "Deponie",
 			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
 			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
@@ -102,7 +102,7 @@ function Canvas(_options) {
 			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			lvl: 1,
-			text: "Ich mach die super Energie, byebye global warming",
+			text: "",
 			costs: {
 				leafs: 2,
 		    	stone: 2,
@@ -261,7 +261,7 @@ function Canvas(_options) {
 					break;
 				// Pantry
 				case 3: 
-					image.src = "img/icons/buildings/storage_sm.png";
+					image.src = "img/icons/buildings/speisekammer_sm.png";
 					break;
 				// Dumping
 				case 4: 

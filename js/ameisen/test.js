@@ -137,7 +137,7 @@ function test (_options) {
 	    	costLeafsHtml: zid("mushCostL"),
 	    	costStoneHtml:	zid("mushCostS"),
 	    	leafConsume: 1,
-	    	foodProd: 2,
+	    	foodProd: 3,
 	    	upgradeCost: {
 	    		totalUpgrades: 0,
 	    		leafs: 10,
@@ -356,9 +356,9 @@ function test (_options) {
     	connectedBuildingsLevel = getConnectedBuildingsLevelByType(2);
     	var connectedBuildingsCount = getConnectedBuildingsCountByType(2);
 
-    	_prodLeafs = (_jobLeafs * _ratioLeafs) - (_buildings[2]["leafConsume"] * connectedBuildingsCount * connectedBuildingsLevel);
+    	_prodLeafs = (_jobLeafs * _ratioLeafs) - (_buildings[2]["leafConsume"] * connectedBuildingsLevel);
     	_prodStone = _jobStone * _ratioStone;
-    	_prodFood = (_jobHunt * _ratioHunt) + (_buildings[2]["foodProd"] * connectedBuildingsCount * connectedBuildingsLevel) - (_antW + _antS + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean);
+    	_prodFood = (_jobHunt * _ratioHunt) + (_buildings[2]["foodProd"] * connectedBuildingsLevel) - (_antW + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean);
     	if(_prodLeafs < 0){
     		_leafProd.style.color = "red";
     		_leafProd.innerHTML = _prodLeafs;
