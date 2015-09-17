@@ -115,10 +115,6 @@ var tipArray = {
 		title : "Arbeiter",
 		text : "Hier kannst du neue Arbeiterinnen ausbrüten. Sie bilden das Rückrat deines Volkes und übernehmen sämtliche Aufgaben. Jede Ameise muss fressen und verbraucht pro Spielrunde (Tick) eine Nahrungseinheit. Sorge dafür, dass immer genug Nahrung vorhanden ist oder deine Ameisen verhungern."
 	},
-	soldier : {
-		title : "Soldaten",
-		text : "Deine Soldaten schützen den Bau vor Feinden und anderen Bedrohungen. Obwohl auch Arbeiterinnen dazu in der Lage sind, ist die Kriegerkaste deutlich effektiver bei der Bewältigung dieser Aufgabe."
-	},
 	jLeafs : {
 		title : "Blätter sammeln",
 		text : "Ameisen auf diesem Posten sammeln eifrig Blätter. Pro Spielrunde (Tick) sammelt jede Ameise auf diesem Posten ein Blatt."

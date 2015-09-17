@@ -7,7 +7,7 @@ function test (_options) {
     var _foodCount = zid("foodCount");
     var _amberCount = zid("amberCount");
     var _workerCount = zid("workerCount");
-    var _soldierCount = zid("soldierCount");
+   
     var _leafProd = zid("leafProd");
     var _stoneProd = zid("stoneProd");
     var _foodProd = zid("foodProd");
@@ -226,7 +226,7 @@ function test (_options) {
 		var addFood = zid("btn_addFood");
 		
 		var addAntW = zid("btn_addAntW");
-		var addAntS = zid("btn_addAntS");
+		
 		
 		var addJobL = zid("btn_addJobL");
 		var subJobL = zid("btn_subJobL");
@@ -259,9 +259,7 @@ function test (_options) {
 		addAntW.addEventListener("click", function(e) {
 			setJobs(6,1);
 		});	
-		addAntS.addEventListener("click", function(e) {
-			setJobs(7,1);
-		});		
+				
 		
 		addJobL.addEventListener("click", function(e) {
 			setJobs(1,1);
@@ -402,7 +400,7 @@ function test (_options) {
     	
     	
     	_workerCount.innerHTML = _antW;
-    	_soldierCount.innerHTML = _antS;
+    	
     	_leafCount.innerHTML = _leafs;
     	_stoneCount.innerHTML = _stone;
     	_foodCount.innerHTML = _food;
@@ -643,7 +641,7 @@ function test (_options) {
 
     	function updateView() {
     		countdownW.innerHTML = (Math.floor(countDowns.ants.end * 10) / 10).toFixed(2);
-    		countdownS.innerHTML = (Math.floor(countDowns.solders.end * 10) / 10).toFixed(2);
+    		
     	}
 	}
     gameLoop();
