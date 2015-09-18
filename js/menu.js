@@ -43,6 +43,8 @@ function menuBarDragger (ele) {
 			ele.parentNode.querySelector(".hideContent").style.display = "block";
 			HelpFunction.toggleClassName(ele.parentNode, true, "visible");
 			visible = true;
+			// Prüfen ob dadurch angeschlagen
+			divMove();
 		}
 	}
 

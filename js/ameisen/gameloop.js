@@ -37,7 +37,7 @@ function GameLoop (_options) {
     var _dumpHill = 0;
 	
 	//Bestand und Kosten von Ameisen
-	var _antW = 1;
+	var unemployedAnts = 1;
 	var _antS = 0;
 	
 	var _antCostW = {
@@ -203,7 +203,8 @@ function GameLoop (_options) {
 	};
 
 
-	var timerBuild = new antBuilder();
+	var antBuildTimer = new antBuilder();
+	var antJob = new antJobs();
   	
   	function init() {
   		var dumpingForm = zid(options.forms.dumpingBuild);
@@ -265,43 +266,43 @@ function GameLoop (_options) {
 		});
 		
 		addAntW.addEventListener("click", function(e) {
-			setJobs(6,1);
+			antBuildTimer.buildAnt(_hatchRateW);
 		});	
-				
+
 		
 		addJobL.addEventListener("click", function(e) {
-			setJobs(1,1);
+			antJob.setJobs(1,1);
 		});	
 		subJobL.addEventListener("click", function(e) {
-			setJobs(1,-1);
+			antJob.setJobs(1,-1);
 		});
 		
 		addJobS.addEventListener("click", function(e) {
-			setJobs(2,1);
+			antJob.setJobs(2,1);
 		});	
 		subJobS.addEventListener("click", function(e) {
-			setJobs(2,-1);
+			antJob.setJobs(2,-1);
 		});
 		
 		addJobHu.addEventListener("click", function(e) {
-			setJobs(3,1);
+			antJob.setJobs(3,1);
 		});	
 		subJobHu.addEventListener("click", function(e) {
-			setJobs(3,-1);
+			antJob.setJobs(3,-1);
 		});
 		
 		addJobHa.addEventListener("click", function(e) {
-			setJobs(4,1);
+			antJob.setJobs(4,1);
 		});	
 		subJobHa.addEventListener("click", function(e) {
-			setJobs(4,-1);
+			antJob.setJobs(4,-1);
 		});
 		
 		addJobC.addEventListener("click", function(e) {
-			setJobs(5,1);
+			antJob.setJobs(5,1);
 		});	
 		subJobC.addEventListener("click", function(e) {
-			setJobs(5,-1);
+			antJob.setJobs(5,-1);
 		});
 		
 
@@ -335,8 +336,7 @@ function GameLoop (_options) {
     	
     	if(_dump + _prodDump > buildingTypes[5]["storeDump"]) {
     		_dump = buildingTypes[5]["storeDump"];
-    		_dumpHill -= (_dump) - (buildingTypes[5]["storeDump"] + (_antW + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean));
-    		
+    		_dumpHill -= (_dump) - (buildingTypes[5]["storeDump"] + (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean));
     	}
     	else {
     		_dump += _prodDump;
@@ -344,7 +344,7 @@ function GameLoop (_options) {
     		
     	}
     	
-      _dumpHill += _antW;
+      _dumpHill += unemployedAnts;
        
        
        updateRes();
@@ -378,7 +378,7 @@ function GameLoop (_options) {
 
     	_prodLeafs = (_jobLeafs * _ratioLeafs) - (buildingTypes[2]["leafConsume"] * connectedBuildingsLevel);
     	_prodStone = _jobStone * _ratioStone;
-    	_prodFood = (_jobHunt * _ratioHunt) + (buildingTypes[2]["foodProd"] * connectedBuildingsLevel) - (_antW + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean);
+    	_prodFood = (_jobHunt * _ratioHunt) + (buildingTypes[2]["foodProd"] * connectedBuildingsLevel) - (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean);
 	
     	
     	if(_dumpHill >= _jobClean * _jobCleanRatio){
@@ -390,11 +390,11 @@ function GameLoop (_options) {
 
 
 
-    	if(_prodLeafs < 0){
+    	if(_prodLeafs < 0) {
     		_leafProd.style.color = "red";
     		_leafProd.innerHTML = _prodLeafs;
     	}
-    	else if(_prodLeafs > 0){
+    	else if(_prodLeafs > 0) {
     		_leafProd.style.color = "green";
     		_leafProd.innerHTML = "+" + _prodLeafs;
     	}
@@ -402,11 +402,11 @@ function GameLoop (_options) {
     		_leafProd.style.color = "black";
     		_leafProd.innerHTML = _prodLeafs;
     	}
-    	if(_prodStone < 0){
+    	if(_prodStone < 0) {
     		_stoneProd.style.color = "red";
     		_stoneProd.innerHTML = _prodStone;
     	}
-    	else if(_prodStone > 0){
+    	else if(_prodStone > 0) {
     		_stoneProd.style.color = "green";
     		_stoneProd.innerHTML = "+" + _prodStone;
     	}
@@ -416,11 +416,11 @@ function GameLoop (_options) {
     	}
     	 
     	
-    	if(_prodFood < 0){
+    	if(_prodFood < 0) {
     		_foodProd.style.color = "red";
     		_foodProd.innerHTML = _prodFood;
     	}
-    	else if(_prodFood > 0){
+    	else if(_prodFood > 0) {
     		_foodProd.style.color = "green";
     		_foodProd.innerHTML = "+" + _prodFood;
     	}
@@ -430,7 +430,7 @@ function GameLoop (_options) {
     	}
     	
     	
-    	_workerCount.innerHTML = _antW;
+    	_workerCount.innerHTML = unemployedAnts;
     	
     	_leafCount.innerHTML = _leafs;
     	_stoneCount.innerHTML = _stone;
@@ -453,93 +453,83 @@ function GameLoop (_options) {
 		dumpBar.style.width = "100%";
 
 
-		timerBuild.update();
+		antBuildTimer.update();
     }
  
 
 
 	
-    _jobAntW = zid("jobAntW");
-    _jobAntS = zid("jobAntS");
-    _jobCountL = zid("jobCountL");
-    _jobCountS = zid("jobCountS");
-    _jobCountHu = zid("jobCountHu");
-    _jobCountHa = zid("jobCountHa");
-    _jobCountC = zid("jobCountC");
+    
     
     //type = {1,2,3,4,5,6,7}, amount = {1,-1}
-    function setJobs(type, amount) {
-    	
-    	if(type <= 5 && _antW >= 1 || amount == -1)
-    	{
-	    	switch(type)
+    function antJobs()
+    {
+    	var _jobAntW = zid("jobAntW");
+	    var _jobCountL = zid("jobCountL");
+	    var _jobCountS = zid("jobCountS");
+	    var _jobCountHu = zid("jobCountHu");
+		var _jobCountHa = zid("jobCountHa");
+	    var _jobCountC = zid("jobCountC");
+
+
+    	this.setJobs = function (type, amount) {
+    		if(unemployedAnts >= 1 || amount == -1)
 	    	{
-	    		case 1: //collect leafs
-	    			if(_jobLeafs >= 1 || amount == 1){
-	    				_jobLeafs += amount;
-	    				_jobCountL.innerHTML = _jobLeafs;
-	    				_antW += -amount;
-	    			}
-	    			break;
-	    		case 2:	//collect stone
-	    			if(_jobStone >= 1 || amount == 1){
-	    				_jobStone += amount;
-	    				_jobCountS.innerHTML = _jobStone;
-	    				_antW += -amount;
-	    			}
-	    			break;
-	    		case 3: //hunt
-	    			if(_jobHunt >= 1 || amount == 1){
-	    				_jobHunt += amount;
-	    				_jobCountHu.innerHTML = _jobHunt;
-	    				_antW += -amount;
-	    			}
-	    			break;
-	    		case 4: //hatch
-	    			if(_jobHatch >= 1 || amount == 1){
-	    				_jobHatch += amount;
-	    				_hatchRateW = _HATCHW - (_hatchRatioW * _jobHatch);
-	    				_hatchRateS = _HATCHS - (_hatchRatioS * _jobHatch);
-	    				_jobCountHa.innerHTML = _jobHatch;
-	    				_antW += -amount;
-	    			}
-	    			break;
-	    		case 5:	//clean
-	    			if(_jobClean >= 1 || amount == 1){
-	    				_jobClean += amount;
-	    				_jobCountC.innerHTML = _jobClean;
-	    				_antW += -amount;
-	    			}
-	    			//weitere Berechnung fehlt noch
-	    			break;
-	    	}
-	    	
-	    	
-	    }
-	    else {
-	    	if( type == 6 ){	    		
-    			if(_leafs >= _antCostW["leafs"] && _stone >= _antCostW["stone"] && _food >= _antCostW["food"])
-    			{
-	    			if(timerBuild.addW(_hatchRateW)) {
-	    				_leafs -= _antCostW["leafs"];
-  						_stone -= _antCostW["stone"];
-  						_food -= _antCostW["food"];
-  					}
-    			}
-    			amount *= 0;
-    		}
-    		/*else if( type == 7 ) {
-    			if(_leafs >= _antCostS["leafs"] && _stone >= _antCostS["stone"] && _food >= _antCostW["food"])
-				{
-    				timerBuild.addS(_hatchRateS);
-    				_leafs -= _antCostS["leafs"];
-  					_stone -= _antCostS["stone"];
-  					_food -= _antCostS["food"];
-				}
-    			amount *= 0;
-    		}*/
-	    }
-	    updateRes();
+		    	switch(type)
+		    	{
+		    		case 1: //collect leafs
+		    			if(_jobLeafs >= 1 || amount == 1){
+		    				_jobLeafs += amount;
+		    				_jobCountL.innerHTML = _jobLeafs;
+		    				unemployedAnts += -amount;
+		    			}
+		    			break;
+		    		case 2:	//collect stone
+		    			if(_jobStone >= 1 || amount == 1){
+		    				_jobStone += amount;
+		    				_jobCountS.innerHTML = _jobStone;
+		    				unemployedAnts += -amount;
+		    			}
+		    			break;
+		    		case 3: //hunt
+		    			if(_jobHunt >= 1 || amount == 1){
+		    				_jobHunt += amount;
+		    				_jobCountHu.innerHTML = _jobHunt;
+		    				unemployedAnts += -amount;
+		    			}
+		    			break;
+		    		case 4: //hatch
+		    			if(_jobHatch >= 1 || amount == 1){
+		    				_jobHatch += amount;
+		    				_hatchRateW = _HATCHW - (_hatchRatioW * _jobHatch);
+		    				_hatchRateS = _HATCHS - (_hatchRatioS * _jobHatch);
+		    				_jobCountHa.innerHTML = _jobHatch;
+		    				unemployedAnts += -amount;
+		    			}
+		    			break;
+		    		case 5:	//clean
+		    			if(_jobClean >= 1 || amount == 1){
+		    				_jobClean += amount;
+		    				_jobCountC.innerHTML = _jobClean;
+		    				unemployedAnts += -amount;
+		    			}
+		    			break;
+		    	}
+				updateRes();
+		    }
+    	}
+
+    	this.updateJobs = function() {
+    		_jobCountL.innerHTML = _jobLeafs;
+    		_jobCountS.innerHTML = _jobStone;
+    		_jobCountHu.innerHTML = _jobHunt;
+
+    		_hatchRateW = _HATCHW - (_hatchRatioW * _jobHatch);
+			_hatchRateS = _HATCHS - (_hatchRatioS * _jobHatch);
+			_jobCountHa.innerHTML = _jobHatch;
+
+			_jobCountC.innerHTML = _jobClean;
+    	}
     }
     
     
@@ -573,7 +563,7 @@ function GameLoop (_options) {
 			buildingTypes[type]["costStoneHtml"].innerHTML = buildingTypes[type]["costStone"];
 			
 			if(type == 1) {
-				timerBuild.update();
+				antBuildTimer.update();
 			}
 
 			else if(type == 3) {
@@ -656,7 +646,14 @@ function GameLoop (_options) {
 				'stone': _stone,
 				'food': _food
 			},
-			'antCount': _antW
+			'ants': {
+				'unemployed': unemployedAnts,
+				'jobLeaf': _jobLeafs,
+				'jobStone': _jobStone,
+				'jobHunt': _jobHunt,
+				'jobHatch': _jobHatch,
+				'jobClean': _jobClean
+			}
 		};
 
 		console.log(values);
@@ -668,7 +665,13 @@ function GameLoop (_options) {
 		_stone = values.resources.stone;
 		_food = values.resources.food;
 
-		_antW = values.antCount;
+		unemployedAnts = values.ants.unemployed;
+		_jobLeafs = values.ants.jobLeaf;
+		_jobStone = values.ants.jobStone;
+		_jobHunt = values.ants.jobHunt;
+		_jobClean = values.ants.jobClean;
+
+		antJob.updateJobs();
 	}
 
 	/**
@@ -756,22 +759,31 @@ function GameLoop (_options) {
 			updateViewBuilder();
 		}
 
-		this.addW = function(rate) {
-			if(posibleAnts == ants.length) {
-				alert("Sie können nicht mehr Ameisen in Auftrag geben.");
-				return false;
+		this.buildAnt = function(rate) {
+			if(_leafs >= _antCostW["leafs"] && _stone >= _antCostW["stone"] && _food >= _antCostW["food"])
+			{
+				if(posibleAnts == ants.length) {
+					alert("Sie können nicht mehr Ameisen in Auftrag geben.");
+					return false;
+				}
+				ants[ants.length] = {
+					end: Date.now() + (rate * 1000) + Math.floor(countDowns.ants.end * 1000)
+				};
+
+				countDowns.ants.end += (rate);
+
+				if(timer == null)
+					start();
+
+				_leafs -= _antCostW["leafs"];
+				_stone -= _antCostW["stone"];
+				_food -= _antCostW["food"];
+
+				updateViewBuilder();
 			}
-			ants[ants.length] = {
-				end: Date.now() + (rate * 1000) + Math.floor(countDowns.ants.end * 1000)
-			};
-
-			countDowns.ants.end += (rate);
-
-			if(timer == null)
-				start();
-
-			updateViewBuilder();
-			return true;
+			else {
+				alert("Sie haben nicht genügend Rohstoffe");
+			}
 		}
 		/*this.addS = function(rate) {
 			solders[solders.length] = {
@@ -805,7 +817,7 @@ function GameLoop (_options) {
 	    			if(typeof ants[i] != undefined) {
 	    				// Prüfen, ob fertig
 	    				if(ants[i].end <= Date.now()) {
-	    					_antW++;
+	    					unemployedAnts++;
 	   						ants.splice(i, 1);
 	   						updateViewBuilder();
 	   						

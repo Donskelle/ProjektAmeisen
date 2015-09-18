@@ -5,7 +5,39 @@ function NaturalDisasters() {
 			'description': 'Ein paar deiner Ameisen ist verschwunden. Sie sind nicht in dein Lager zurück gekommen.',
 			'image': 'http://img4.wikia.nocookie.net/__cb20140909155820/creepypasta/de/images/3/34/Atompilz.jpg',
 			'calculateFunction': function(values) {
-				values.antCount = Math.floor(values.antCount / 3 * 2) + 1;
+				var removedAnts = 0;
+
+				var antCount = values.ants.unemployed;
+				antCount += values.ants.jobLeaf;
+				antCount += values.ants.jobStone;
+				antCount += values.ants.jobHunt;
+				antCount += values.ants.jobHatch;
+				antCount += values.ants.jobClean;
+
+				// 1/3 Der Ameisen wird entfernt
+				var newAntCount = Math.floor(antCount / 3 * 2) + 1;
+				var antsToRemove = antCount - newAntCount;
+
+				for (var job in values.ants) {
+					values.ants[job] = removeAntsFromAnts(values.ants[job]);
+				}
+
+				function removeAntsFromAnts(jobCount) {
+					// Wenn fertig
+					if(removedAnts == antsToRemove) {
+						return jobCount;
+					}
+					// Wenn zuviele Angezogen würden
+					if(removedAnts + jobCount > antsToRemove){
+						jobCount -= antsToRemove - removedAnts;
+						return jobCount;
+					}
+					// Ameisen abziehen
+					else {
+						removedAnts += jobCount;
+						return 0;
+					}
+				}
 				return values;
 			}
 		},
@@ -14,7 +46,7 @@ function NaturalDisasters() {
 			'description': 'Deiner Königin geht es aktuell wirklich gut. Du erhälst 5 neue Ameisen.',
 			'image': 'http://img4.wikia.nocookie.net/__cb20140909155820/creepypasta/de/images/3/34/Atompilz.jpg',
 			'calculateFunction': function(values) {
-				values.antCount += 5;
+				values.ants.unemployedAnts += 5;
 				return values;
 			}
 		},
