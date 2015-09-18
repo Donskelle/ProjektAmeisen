@@ -2,6 +2,9 @@ function menuBarDragger (ele) {
 	var offsetLeft = 0;
 	var offsetTop = 0;
 	var timerId = null;
+	var visible = true;
+	var startClick = 0;
+
 	var click = {
 		x : null,
 		y : null
@@ -12,6 +15,10 @@ function menuBarDragger (ele) {
 
 		ele.addEventListener('mousedown', mouseDown, false);
 		window.addEventListener('mouseup', mouseUp, false);
+
+		// Fix für Faltmenu
+		// Größe würde sich verkleiner
+		ele.style.width = ele.parentNode.offsetWidth + "px";
 	})();
 
 	function mouseUp()
@@ -21,15 +28,34 @@ function menuBarDragger (ele) {
 	    	window.cancelAnimationFrame(timerId);
 	  		timerId = null;
 	    }
+
+	    if((Date.now() - startClick) <= 250)
+			changeDisplayContent();
 	}
 
-	function mouseDown(e){
-	  offsetTop = (ele.parentNode.offsetTop - e.clientY );
-	  offsetLeft = (ele.parentNode.offsetLeft - e.clientX ) ;
-	  newMousePos(e);
+	function changeDisplayContent() {
+		if(visible) {
+			ele.parentNode.querySelector(".hideContent").style.display = "none";
+			HelpFunction.toggleClassName(ele.parentNode, false, "visible");
+			visible = false;
+		}
+		else {
+			ele.parentNode.querySelector(".hideContent").style.display = "block";
+			HelpFunction.toggleClassName(ele.parentNode, true, "visible");
+			visible = true;
+		}
+	}
 
-	  timerId = window.requestAnimationFrame(divMove);
-	  window.addEventListener('mousemove', newMousePos, true);
+	function mouseDown(e) 
+	{
+		startClick = Date.now();
+
+		offsetTop = (ele.parentNode.offsetTop - e.clientY );
+		offsetLeft = (ele.parentNode.offsetLeft - e.clientX ) ;
+		newMousePos(e);
+
+		timerId = window.requestAnimationFrame(divMove);
+		window.addEventListener('mousemove', newMousePos, true);
 	}
 
 	function newMousePos(e) {

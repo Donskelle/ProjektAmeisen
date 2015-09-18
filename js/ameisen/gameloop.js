@@ -1,4 +1,4 @@
-function test (_options) {
+function GameLoop (_options) {
 	var options = _options;
 
 
@@ -115,11 +115,10 @@ function test (_options) {
 			connections: []
 	    }
     ];
-    var timerBuild = new antBuilder();
 
 
     //Kosten für neue Gebaeude(nicht Upgrades)
-    var _buildings = {
+    var buildingTypes = {
 	    1 : { //brood chamber
 	    	count: 0,
 	    	costLeafs: 20,
@@ -202,6 +201,9 @@ function test (_options) {
 	    	buildedBuildings : []
 	    }
 	};
+
+
+	var timerBuild = new antBuilder();
   	
   	function init() {
   		var dumpingForm = zid(options.forms.dumpingBuild);
@@ -225,7 +227,6 @@ function test (_options) {
 		dumpingForm.addEventListener("click", function(e) {
 			build(5);
 		});
-		
 		
 		
 		var addLeafs = zid("btn_addLeafs");
@@ -305,36 +306,36 @@ function test (_options) {
 		
 
 		for(var i=1; i<=5; i++) {
-			_buildings[i]["costLeafsHtml"].innerHTML = _buildings[i]["costLeafs"];
-			_buildings[i]["costStoneHtml"].innerHTML = _buildings[i]["costStone"];
+			buildingTypes[i]["costLeafsHtml"].innerHTML = buildingTypes[i]["costLeafs"];
+			buildingTypes[i]["costStoneHtml"].innerHTML = buildingTypes[i]["costStone"];
 		}
   	}
   	init();
   
 
     function gameLoop() {
-    	if(_leafs + _prodLeafs <= _buildings[3]["storeLeafs"]){
+    	if(_leafs + _prodLeafs <= buildingTypes[3]["storeLeafs"]){
     		_leafs += _prodLeafs;
     	}
     	else {
-    		_leafs = _buildings[3]["storeLeafs"];
+    		_leafs = buildingTypes[3]["storeLeafs"];
     	}
-    	if(_stone + _prodStone <= _buildings[3]["storeStone"]){
+    	if(_stone + _prodStone <= buildingTypes[3]["storeStone"]){
     		_stone += _prodStone;
     	}
     	else {
-    		_stone = _buildings[3]["storeStone"];
+    		_stone = buildingTypes[3]["storeStone"];
     	}
-    	if(_food + _prodFood <= _buildings[4]["storeFood"]){
+    	if(_food + _prodFood <= buildingTypes[4]["storeFood"]){
     		_food += _prodFood;
     	}
     	else {
-    		_food = _buildings[4]["storeFood"];
+    		_food = buildingTypes[4]["storeFood"];
     	}
     	
-    	if(_dump + _prodDump > _buildings[5]["storeDump"]) {
-    		_dump = _buildings[5]["storeDump"];
-    		_dumpHill -= (_dump) - (_buildings[5]["storeDump"] + (_antW + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean));
+    	if(_dump + _prodDump > buildingTypes[5]["storeDump"]) {
+    		_dump = buildingTypes[5]["storeDump"];
+    		_dumpHill -= (_dump) - (buildingTypes[5]["storeDump"] + (_antW + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean));
     		
     	}
     	else {
@@ -354,30 +355,30 @@ function test (_options) {
     }
 		
     function updateRes() {
-    	var connectedBuildingsLevel = getConnectedBuildingsLevelByType(3);
+    	var connectedBuildingsLevel = HelpFunction.getConnectedBuildingsLevelByType(buildingTypes, buildedBuildings, 3);
     	var maxRes = 15;
     	for (var i = 0; i < connectedBuildingsLevel; i++) {
     		maxRes = 10 + Math.floor(maxRes * 1.03);
     	};
 
-    	_buildings[3]["storeLeafs"] = maxRes;
-    	_buildings[3]["storeStone"] = maxRes;
+    	buildingTypes[3]["storeLeafs"] = maxRes;
+    	buildingTypes[3]["storeStone"] = maxRes;
 
 
-    	connectedBuildingsLevel = getConnectedBuildingsLevelByType(4);
+    	connectedBuildingsLevel = HelpFunction.getConnectedBuildingsLevelByType(buildingTypes, buildedBuildings, 4);
     	var maxFood = 25;
     	for (var i = 0; i < connectedBuildingsLevel; i++) {
     		maxFood = 10 + Math.floor(maxFood * 1.03);
     	};
-    	_buildings[4]["storeFood"] = maxFood;
+    	buildingTypes[4]["storeFood"] = maxFood;
 
 		
-    	connectedBuildingsLevel = getConnectedBuildingsLevelByType(2);
-    	var connectedBuildingsCount = getConnectedBuildingsCountByType(2);
+    	connectedBuildingsLevel = HelpFunction.getConnectedBuildingsLevelByType(buildingTypes, buildedBuildings, 2);
+    	var connectedBuildingsCount = HelpFunction.getConnectedBuildingsCountByType(buildingTypes, buildedBuildings, 2);
 
-    	_prodLeafs = (_jobLeafs * _ratioLeafs) - (_buildings[2]["leafConsume"] * connectedBuildingsLevel);
+    	_prodLeafs = (_jobLeafs * _ratioLeafs) - (buildingTypes[2]["leafConsume"] * connectedBuildingsLevel);
     	_prodStone = _jobStone * _ratioStone;
-    	_prodFood = (_jobHunt * _ratioHunt) + (_buildings[2]["foodProd"] * connectedBuildingsLevel) - (_antW + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean);
+    	_prodFood = (_jobHunt * _ratioHunt) + (buildingTypes[2]["foodProd"] * connectedBuildingsLevel) - (_antW + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean);
 	
     	
     	if(_dumpHill >= _jobClean * _jobCleanRatio){
@@ -440,15 +441,15 @@ function test (_options) {
     	
     	_dumpProd.innerHTML = _prodDump;
     	
-    	_leafStorage.innerHTML = _buildings[3]["storeLeafs"];
-		_stoneStorage.innerHTML = _buildings[3]["storeStone"];
-		_foodStorage.innerHTML = _buildings[4]["storeFood"];
-		_dumpStorage.innerHTML = _buildings[5]["storeDump"];
+    	_leafStorage.innerHTML = buildingTypes[3]["storeLeafs"];
+		_stoneStorage.innerHTML = buildingTypes[3]["storeStone"];
+		_foodStorage.innerHTML = buildingTypes[4]["storeFood"];
+		_dumpStorage.innerHTML = buildingTypes[5]["storeDump"];
 		
 		
-		leafBar.style.width = (_leafs/_buildings[3]["storeLeafs"])*100 + "%"; 
-		stoneBar.style.width = (_stone/_buildings[3]["storeStone"])*100 + "%"; ;
-		foodBar.style.width = (_food/_buildings[4]["storeFood"])*100 + "%"; ;
+		leafBar.style.width = (_leafs/buildingTypes[3]["storeLeafs"])*100 + "%"; 
+		stoneBar.style.width = (_stone/buildingTypes[3]["storeStone"])*100 + "%"; ;
+		foodBar.style.width = (_food/buildingTypes[4]["storeFood"])*100 + "%"; ;
 		dumpBar.style.width = "100%";
 
 
@@ -541,140 +542,7 @@ function test (_options) {
 	    updateRes();
     }
     
-    var countdownW = zid("countdownW");
-   function antBuilder () {
-    	var timer;
-    	var self = this;
-    	var countDowns = {
-    		ants: {
-    			end: null
-    		}
-    	}
-    	var ants = [];
-    	//var solders = [];
-    	var posibleAnts = 1;
-
-    	function updateViewBuilder() {
-    		var countsAnt = ants.length;
-    		//var countsSolders = solders.length;
-    		
-
-    		var countBuildingsLvl = getConnectedBuildingsLevelByType(1);
-    		var countBuildings = getConnectedBuildingsCountByType(1);
-
-    		var lvlWithoutBuildung = countBuildingsLvl - countBuildings;
-
-
-    		posibleAnts = countBuildings + (Math.floor( lvlWithoutBuildung /5 )) + 1;
-
-    		//zid("possibleSolderProduction").innerHTML = posibleAnts;
-    		zid("possibleAntProduction").innerHTML = posibleAnts;
-
-
-    		//zid("currentSolderProduction").innerHTML = countsSolders;
-    		zid("currentAntProduction").innerHTML = countsAnt;
-    	}
-
-    	this.update = function() {
-			updateViewBuilder();
-    	}
-
-    	this.addW = function(rate) {
-    		if(posibleAnts == ants.length) {
-    			alert("Sie können nicht mehr Ameisen in Auftrag geben.");
-    			return false;
-    		}
-    		ants[ants.length] = {
-    			end: Date.now() + (rate * 1000) + Math.floor(countDowns.ants.end * 1000)
-    		};
-
-    		countDowns.ants.end += (rate);
-
-    		if(timer == null)
-    			start();
-
-    		updateViewBuilder();
-    		return true;
-    	}
-    	/*this.addS = function(rate) {
-    		solders[solders.length] = {
-    			end: Date.now() + (rate * 1000) + Math.floor(countDowns.solders.end * 1000)
-    		}
-
-    		countDowns.solders.end += (rate);
-
-    		if(timer == null)
-    			start();
-    		
-    		updateViewBuilder();
-    	}*/
-
-
-    	function start() {
-    		timer = window.setInterval(function() {
-    			tick();
-	    	}, 100);
-    	}
-    	function end() {
-    		window.clearInterval(timer);
-    		timer = null;
-    	}
-
-    	function tick() {
-    		if(ants.length > 0) {
-    			countDowns.ants.end -= .1;
-
-	    		for (var i = 0; i < ants.length; i++) {
-	    			if(typeof ants[i] != undefined) {
-	    				// Prüfen, ob fertig
-	    				if(ants[i].end <= Date.now()) {
-	    					_antW++;
-	   						ants.splice(i, 1);
-	   						updateViewBuilder();
-	   						if(ants.length == 0)
-	   							countDowns.ants.end = 0;
-	    				}
-	    			}
-	    		};
-	    	}
-
-	    	/*if(solders.length > 0) {
-	    		countDowns.solders.end -= .1;
-
-	    		for (var i = 0; i < solders.length; i++) {
-	    			if(typeof solders[i] != undefined) {
-	    				// Prüfen, ob fertig
-	    				if(solders[i].end <= Date.now()) {
-	    					_antS++;
-	   						solders.splice(i, 1);
-	   						
-							updateViewBuilder();
-
-	   						if(ants.length == 0)
-	   							countDowns.solders.end = 0;
-	    				}
-	    			}
-	    		};
-    		}*/
-    		if(allDone())
-    			end();
-
-    		updateView();
-    		updateRes();
-    	}
-
-    	function allDone() {
-    		//if(solders.length > 0 || ants.length > 0)
-    		if(ants.length > 0)
-    			return false;
-
-    		return true;
-    	}
-
-    	function updateView() {
-    		countdownW.innerHTML = (Math.floor(countDowns.ants.end * 10) / 10).toFixed(2);
-    	}
-	}
+    
     gameLoop();
     
 
@@ -684,36 +552,36 @@ function test (_options) {
 	//type = {1,2,3,4,5}
 	function build(type) {
 		//Abfrage, ob die Ressourcen die Kosten uebersteigen
-		if(_leafs >= _buildings[type]["costLeafs"] && _stone >= _buildings[type]["costStone"] && _food >= _buildings[type]["costFood"])
+		if(_leafs >= buildingTypes[type]["costLeafs"] && _stone >= buildingTypes[type]["costStone"] && _food >= buildingTypes[type]["costFood"])
 		{
 			
 			//Abzug der Kosten
-			_leafs -= _buildings[type]["costLeafs"];
-			_stone -= _buildings[type]["costStone"];
-			_food -= _buildings[type]["costFood"];
+			_leafs -= buildingTypes[type]["costLeafs"];
+			_stone -= buildingTypes[type]["costStone"];
+			_food -= buildingTypes[type]["costFood"];
 			
 			//Neuberechnung der Kosten
-			_buildings[type]["costLeafs"] *= _buildingCostRatio;
-			_buildings[type]["costStone"] *= _buildingCostRatio;
-			_buildings[type]["costFood"] *= _buildingCostRatio;
+			buildingTypes[type]["costLeafs"] *= _buildingCostRatio;
+			buildingTypes[type]["costStone"] *= _buildingCostRatio;
+			buildingTypes[type]["costFood"] *= _buildingCostRatio;
 			
-			_buildings[type]["count"]++;
+			buildingTypes[type]["count"]++;
 			
-			_buildings[type]["upgradeCost"]["totalUpgrades"]++;
+			buildingTypes[type]["upgradeCost"]["totalUpgrades"]++;
 				
-			_buildings[type]["costLeafsHtml"].innerHTML = _buildings[type]["costLeafs"];
-			_buildings[type]["costStoneHtml"].innerHTML = _buildings[type]["costStone"];
+			buildingTypes[type]["costLeafsHtml"].innerHTML = buildingTypes[type]["costLeafs"];
+			buildingTypes[type]["costStoneHtml"].innerHTML = buildingTypes[type]["costStone"];
 			
 			if(type == 1) {
 				timerBuild.update();
 			}
 
 			else if(type == 3) {
-		    	_buildings[3]["storeLeafs"] = 10 + Math.floor(_buildings[3]["storeLeafs"] * (1.03));
-		    	_buildings[3]["storeStone"] = 10 + Math.floor(_buildings[3]["storeStone"] * (1.03));
+		    	buildingTypes[3]["storeLeafs"] = 10 + Math.floor(buildingTypes[3]["storeLeafs"] * (1.03));
+		    	buildingTypes[3]["storeStone"] = 10 + Math.floor(buildingTypes[3]["storeStone"] * (1.03));
 			}
 			else if(type == 4) {
-	    		_buildings[4]["storeFood"] = 10 + Math.floor(_buildings[4]["storeFood"] * (1.03));
+	    		buildingTypes[4]["storeFood"] = 10 + Math.floor(buildingTypes[4]["storeFood"] * (1.03));
 			}
 			
 			updateRes();
@@ -721,10 +589,10 @@ function test (_options) {
 			
 			var countBuildings = buildedBuildings.length;
 
-			_buildings[type].buildedBuildings[_buildings[type].buildedBuildings.length] = countBuildings;
+			buildingTypes[type].buildedBuildings[buildingTypes[type].buildedBuildings.length] = countBuildings;
 
 			buildedBuildings[countBuildings] = {};
-			buildedBuildings[countBuildings] = HelpFunction.clone(_buildings[type]);
+			buildedBuildings[countBuildings] = HelpFunction.clone(buildingTypes[type]);
 			buildedBuildings[countBuildings].connected = false;
 
 			buildedBuildings[countBuildings].connections = [];
@@ -761,7 +629,7 @@ function test (_options) {
 			_stone -= buildedBuildings[buildingId].upgradeCost.stone;
 			_food -= buildedBuildings[buildingId].upgradeCost.food;
 			
-			_buildings[buildedBuildings[buildingId].type]["upgradeCost"]["totalUpgrades"]++;
+			buildingTypes[buildedBuildings[buildingId].type]["upgradeCost"]["totalUpgrades"]++;
 			
 			
 			buildedBuildings[buildingId].lvl += 1;
@@ -829,8 +697,6 @@ function test (_options) {
 				arr.connected = true;
 			}
 		}
-
-		
 	}
 
 	/**
@@ -850,27 +716,141 @@ function test (_options) {
 	}
 
 
-	function getConnectedBuildingsLevelByType(type) {
-		var level = 0;
 
-		for (var i = 0; i < _buildings[type].buildedBuildings.length; i++) {
-			if(buildedBuildings[_buildings[type].buildedBuildings[i]].connected == true) {
-				level += buildedBuildings[_buildings[type].buildedBuildings[i]].lvl;
+	function antBuilder () {
+		var timer;
+		var countdownW = zid("countdownW");
+
+		var countDowns = {
+			ants: {
+				end: null
 			}
-		};
-
-		return level;
-	}
-
-	function getConnectedBuildingsCountByType(type) {
-		var count = 0;
-
-		for (var i = 0; i < _buildings[type].buildedBuildings.length; i++) {
-			if(buildedBuildings[_buildings[type].buildedBuildings[i]].connected == true)
-				count++;
-		};
+		}
+		var ants = [];
+		//var solders = [];
+		var posibleAnts = 1;
 
 
-		return count;
+		function updateViewBuilder() {
+			var countsAnt = ants.length;
+			//var countsSolders = solders.length;
+			
+
+			var countBuildingsLvl = HelpFunction.getConnectedBuildingsLevelByType(buildingTypes, buildedBuildings, 1);
+			var countBuildings = HelpFunction.getConnectedBuildingsCountByType(buildingTypes, buildedBuildings, 1);
+
+			var lvlWithoutBuildung = countBuildingsLvl - countBuildings;
+
+
+			posibleAnts = countBuildings + (Math.floor( lvlWithoutBuildung /5 )) + 1;
+
+			//zid("possibleSolderProduction").innerHTML = posibleAnts;
+			zid("possibleAntProduction").innerHTML = posibleAnts;
+
+
+			//zid("currentSolderProduction").innerHTML = countsSolders;
+			zid("currentAntProduction").innerHTML = countsAnt;
+		}
+
+		this.update = function() {
+			updateViewBuilder();
+		}
+
+		this.addW = function(rate) {
+			if(posibleAnts == ants.length) {
+				alert("Sie können nicht mehr Ameisen in Auftrag geben.");
+				return false;
+			}
+			ants[ants.length] = {
+				end: Date.now() + (rate * 1000) + Math.floor(countDowns.ants.end * 1000)
+			};
+
+			countDowns.ants.end += (rate);
+
+			if(timer == null)
+				start();
+
+			updateViewBuilder();
+			return true;
+		}
+		/*this.addS = function(rate) {
+			solders[solders.length] = {
+				end: Date.now() + (rate * 1000) + Math.floor(countDowns.solders.end * 1000)
+			}
+
+			countDowns.solders.end += (rate);
+
+			if(timer == null)
+				start();
+			
+			updateViewBuilder();
+		}*/
+
+
+		function start() {
+			timer = window.setInterval(function() {
+				tick();
+	    	}, 100);
+		}
+		function end() {
+			window.clearInterval(timer);
+			timer = null;
+		}
+
+		function tick() {
+			if(ants.length > 0) {
+				countDowns.ants.end -= .1;
+
+	    		for (var i = 0; i < ants.length; i++) {
+	    			if(typeof ants[i] != undefined) {
+	    				// Prüfen, ob fertig
+	    				if(ants[i].end <= Date.now()) {
+	    					_antW++;
+	   						ants.splice(i, 1);
+	   						updateViewBuilder();
+	   						
+	   						if(ants.length == 0)
+	   							countDowns.ants.end = 0;
+	    				}
+	    			}
+	    		};
+	    	}
+
+	    	/*if(solders.length > 0) {
+	    		countDowns.solders.end -= .1;
+
+	    		for (var i = 0; i < solders.length; i++) {
+	    			if(typeof solders[i] != undefined) {
+	    				// Prüfen, ob fertig
+	    				if(solders[i].end <= Date.now()) {
+	    					_antS++;
+	   						solders.splice(i, 1);
+	   						
+							updateViewBuilder();
+
+	   						if(ants.length == 0)
+	   							countDowns.solders.end = 0;
+	    				}
+	    			}
+	    		};
+			}*/
+			if(allDone())
+				end();
+
+			updateView();
+			updateRes();
+		}
+
+		function allDone() {
+			//if(solders.length > 0 || ants.length > 0)
+			if(ants.length > 0)
+				return false;
+
+			return true;
+		}
+
+		function updateView() {
+			countdownW.innerHTML = (Math.floor(countDowns.ants.end * 10) / 10).toFixed(2);
+		}
 	}
 }

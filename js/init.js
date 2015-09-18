@@ -2,7 +2,7 @@
 window.addEventListener('load', init);
 
 function init() {
-	history.pushState("", document.title, window.location.pathname);
+	//history.pushState("", document.title, window.location.pathname);
 	HelpFunction.closeLightbox();
 
 	// Menu Bars verschiebar machen

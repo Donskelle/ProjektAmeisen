@@ -157,6 +157,31 @@ function HelpFunction() {
         return fields;
     }
 
+
+    this.getConnectedBuildingsLevelByType = function(buildingTypes, buildedBuildings, type) {
+		var level = 0;
+
+		for (var i = 0; i < buildingTypes[type].buildedBuildings.length; i++) {
+			if(buildedBuildings[buildingTypes[type].buildedBuildings[i]].connected == true) {
+				level += buildedBuildings[buildingTypes[type].buildedBuildings[i]].lvl;
+			}
+		};
+
+		return level;
+	}
+
+	this.getConnectedBuildingsCountByType = function(buildingTypes, buildedBuildings, type) {
+		var count = 0;
+
+		for (var i = 0; i < buildingTypes[type].buildedBuildings.length; i++) {
+			if(buildedBuildings[buildingTypes[type].buildedBuildings[i]].connected == true)
+				count++;
+		};
+
+
+		return count;
+	}
+
 }).call(HelpFunction);
 
 

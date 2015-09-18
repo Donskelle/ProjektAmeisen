@@ -199,12 +199,22 @@ button:hover {
 	border: solid 1px #ccc;
 	top: 0;
 	left: 0;
-	
+}
+.draggable .handle {
+	padding-left: 50px;
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: 15px center;
+
+	background-image: url('../img/icons/Menu-Down.png');
+}
+.draggable.visible .handle {
+	background-image: url('../img/icons/Menu-Up.png');
 }
 .handle {
-	min-height: 20px;
-	color: #FFFFFF;
-	background: #2F2E30;
+	height: 40px;
+	line-height: 40px;
+	color: #000; 
 	border: solid 1px #ccc;
 	margin: 0;
 	padding: 0 0 0 10px;
