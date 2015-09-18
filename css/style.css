@@ -221,6 +221,9 @@ button:hover {
 	cursor: move;
 	font-family: 'BebasNeue';
 }
+#jobTable button{
+	width: auto;
+}
 .chamberTable th, .chamberTable td, #jobTable th, #jobTable td {
 	padding: 2px 5px 2px 5px;
 }

@@ -182,81 +182,148 @@
 					<table id="jobTable">
 						<tr>
 							<td><div class="tooltip" data-type="worker">?</div></td>
-							<td class="jobName">Arbeiter</td>
-							<td class="jobCount" id="workerCount"><span>0</span></td>
+							<td class="jobName">Verfügbare Arbeiter</td>
+							<td class="jobCount" id="workerCount">
+								<span>0</span>
+							</td>
 							<td>
 								<button id="btn_addAntW">
-									+
+									Ausbilden
 								</button>
 								<p class="antProduction"><span id="currentAntProduction">0</span>/<span id="possibleAntProduction">1</span></p>
 							</td>
-							<td id="countdownW"><span>0.00</span></td>
+							<td>
+								Bis Fertigstellung:<span id="countdownW">0.00</span>
+							</td>
 						</tr>
 					
 						<tr>
 							<td><div class="tooltip" data-type="jLeafs">?</div></td>
-							<td class="jobName">Bl&auml;tter sammeln</td>
+							<td class="jobName">
+								Bl&auml;tter sammeln
+							</td>
 							<td>
-							<button id="btn_subJobL">
+								<button id="btn_subJobL">
 								-
-							</button></td>
-							<td class="jobCount" id="jobCountL"><span>0</span></td>
+								</button>
+								<span id="jobCountL">0</span>
+								<button id="btn_addJobL">
+									+
+								</button>
+							</td>
+							<td class="jobCount" >
+								
+							</td>
 							<td>
-							<button id="btn_addJobL">
-								+
-							</button></td>
+								<form id="formSetLeafs">
+									<input type="text" placeholder="Wert" size="5" maxlength="5">
+									<button>Setzen</button>
+								</form>
+							</td>
 						</tr>
 						<tr>
-							<td><div class="tooltip" data-type="jStone">?</div></td>
-							<td class="jobName">Steine sammeln</td>
 							<td>
-							<button id="btn_subJobS">
-								-
-							</button></td>
-							<td class="jobCount" id="jobCountS"><span>0</span></td>
+								<div class="tooltip" data-type="jStone">?</div>
+							</td>
+							<td class="jobName">
+								Steine sammeln
+							</td>
 							<td>
-							<button id="btn_addJobS">
-								+
-							</button></td>
+								<button id="btn_subJobS">
+									-
+								</button>
+								<span  id="jobCountS">0</span>
+								<button id="btn_addJobS">
+									+
+								</button>
+							</td>
+							<td class="jobCount">
+								
+							</td>
+							<td>
+								<form id="formSetStone">
+									<input type="text" placeholder="Wert" size="5" maxlength="5">
+									<button>Setzen</button>
+								</form>
+							</td>
 						</tr>
 						<tr>
-							<td><div class="tooltip" data-type="jHunt">?</div></td>
-							<td class="jobName">Jagen</td>
 							<td>
-							<button id="btn_subJobHu">
-								-
-							</button></td>
-							<td class="jobCount" id="jobCountHu"><span>0</span></td>
+								<div class="tooltip" data-type="jHunt">?</div>
+							</td>
+							<td class="jobName">
+								Jagen
+							</td>
 							<td>
-							<button id="btn_addJobHu">
-								+
-							</button></td>
+								<button id="btn_subJobHu">
+									-
+								</button>
+								<span id="jobCountHu">0</span>
+								<button id="btn_addJobHu">
+									+
+								</button>
+							</td>
+							<td class="jobCount">
+								
+							</td>
+							<td>
+								<form id="formSetHunt">
+									<input type="text" placeholder="Wert" size="5" maxlength="5">
+									<button>Setzen</button>
+								</form>
+							</td>
 						</tr>
 						<tr>
-							<td><div class="tooltip" data-type="jHatch">?</div></td>
-							<td class="jobName">Brutpflege</td>
 							<td>
-							<button id="btn_subJobHa">
-								-
-							</button></td>
-							<td class="jobCount" id="jobCountHa"><span>0</span></td>
+								<div class="tooltip" data-type="jHatch">?</div>
+							</td>
+							<td class="jobName">
+								Brutpflege
+							</td>
 							<td>
-							<button id="btn_addJobHa">
+								<button id="btn_subJobHa">
+									-
+								</button>
+								<span id="jobCountHa">0</span>
+								<button id="btn_addJobHa">
 								+
-							</button></td>
+								</button>
+							</td>
+							<td class="jobCount">
+								
+							</td>
+							<td>
+								<form id="formSetBrood">
+									<input type="text" placeholder="Wert" size="5" maxlength="5">
+									<button>Setzen</button>
+								</form>
+							</td>
 						</tr>
 						<tr>
-							<td><div class="tooltip" data-type="jClean">?</div></td>
-							<td class="jobName">Bau s&auml;ubern</td>
 							<td>
-							<button id="btn_subJobC">
-								-
-							</button></td>
-							<td class="jobCount" id="jobCountC"><span>0</span></td>
+								<div class="tooltip" data-type="jClean">?</div>
+							</td>
+							<td class="jobName">
+								Bau s&auml;ubern
+							</td>
 							<td>
-							<button id="btn_addJobC">
-								+
-							</button></td>
+								<button id="btn_subJobC">
+									-
+								</button>
+								<span id="jobCountC">0</span>
+								<button id="btn_addJobC">
+									+
+								</button>
+							</td>
+							<td class="jobCount">
+								
+							</td>
+							<td>
+								<form id="formSetClean">
+									<input type="text" placeholder="Wert" size="5" maxlength="5">
+									<button>Setzen</button>
+								</form>
+							</td>
 						</tr>
 					</table>
 				</div>

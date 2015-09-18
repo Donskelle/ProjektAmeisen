@@ -228,6 +228,28 @@ function GameLoop (_options) {
 		dumpingForm.addEventListener("click", function(e) {
 			build(5);
 		});
+
+
+		zid("formSetLeafs").addEventListener("submit", function(e) {
+			antJob.setJobs(1,1);
+			return false;
+		});
+		zid("formSetStone").addEventListener("submit", function(e) {
+			antJob.setJobs(2,1);
+			return false;
+		});
+		zid("formSetHunt").addEventListener("submit", function(e) {
+			antJob.setJobs(3,1);
+			return false;
+		});
+		zid("formSetBrood").addEventListener("submit", function(e) {
+			antJob.setJobs(4,1);
+			return false;
+		});
+		zid("formSetClean").addEventListener("submit", function(e) {
+			antJob.setJobs(5,1);
+			return false;
+		});
 		
 		
 		var addLeafs = zid("btn_addLeafs");
