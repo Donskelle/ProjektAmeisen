@@ -405,7 +405,6 @@ function Canvas(_options) {
 
 			eles[_i].on("pressmove", function(e) 
 			{
-				console.log(e);
 				hitTesten();
 
 				for (var k = 0; k < eles.length; k++) {
@@ -422,7 +421,6 @@ function Canvas(_options) {
 				{
 					if (!hitTest) {
 					// if it was not hitting, now it is...
-						zog("circle " + _i + " hits Circle " + _j);
 						
 						eles[_i].connector[_j].updateLine();
 
@@ -435,18 +433,13 @@ function Canvas(_options) {
 						stage.update();
 					}
 					else {
-						/*HelpFunction.pushEvent("buidlingConnected", {
-							"from": _i,
-							"to": _j
-						});*/
 						eles[_i].connector[_j].updateLine();
 					}
 				}
 				else 
 				{
 					if (hitTest) {
-					// if it was hitting, now it is not...	
-						zog("circle " + _i + " unhids Circle " + _j);
+						// if it was hitting, now it is not...	
 
 						eles[_i].connector[_j].hideLine();
 

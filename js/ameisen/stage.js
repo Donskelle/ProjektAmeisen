@@ -112,13 +112,11 @@ function AmeisenStage(_options) {
 
 				// Gebäude nicht mehr verbunden
 				case "buidlingDisconnected":
-					zog(e.detail.eventData);
 					game.disconnectBuilding(e.detail.eventData);
 					break;
 				
 				// Gebäude verbunden
 				case "buidlingConnected":
-					zog(e.detail.eventData);
 					game.connectBuilding(e.detail.eventData);
 					break;
 			}

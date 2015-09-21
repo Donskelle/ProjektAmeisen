@@ -1,7 +1,6 @@
 function GameLoop (_options) {
 	var options = _options;
 
-
 	var _leafCount = zid("leafCount");
     var _stoneCount = zid("stoneCount");
     var _foodCount = zid("foodCount");
@@ -787,7 +786,6 @@ function GameLoop (_options) {
 			}
 		};
 
-		console.log(values);
 		return values;
 	}
 
