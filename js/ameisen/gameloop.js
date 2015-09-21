@@ -231,23 +231,38 @@ function GameLoop (_options) {
 
 
 		zid("formSetLeafs").addEventListener("submit", function(e) {
-			antJob.setJobs(1,1);
+			var fields = HelpFunction.readForm.apply(e.target);
+			antJob.setJobs(1, fields.count, true);
+
+			e.preventDefault();
 			return false;
 		});
 		zid("formSetStone").addEventListener("submit", function(e) {
-			antJob.setJobs(2,1);
+			var fields = HelpFunction.readForm.apply(e.target);
+			antJob.setJobs(2,fields.count,true);
+
+			e.preventDefault();
 			return false;
 		});
 		zid("formSetHunt").addEventListener("submit", function(e) {
-			antJob.setJobs(3,1);
+			var fields = HelpFunction.readForm.apply(e.target);
+			antJob.setJobs(3,fields.count,true);
+
+			e.preventDefault();
 			return false;
 		});
 		zid("formSetBrood").addEventListener("submit", function(e) {
-			antJob.setJobs(4,1);
+			var fields = HelpFunction.readForm.apply(e.target);
+			antJob.setJobs(4,fields.count,true);
+
+			e.preventDefault();
 			return false;
 		});
 		zid("formSetClean").addEventListener("submit", function(e) {
-			antJob.setJobs(5,1);
+			var fields = HelpFunction.readForm.apply(e.target);
+			antJob.setJobs(5,fields.count,true);
+
+			e.preventDefault();
 			return false;
 		});
 		
@@ -293,38 +308,38 @@ function GameLoop (_options) {
 
 		
 		addJobL.addEventListener("click", function(e) {
-			antJob.setJobs(1,1);
+			antJob.setJobs(1,1, false);
 		});	
 		subJobL.addEventListener("click", function(e) {
-			antJob.setJobs(1,-1);
+			antJob.setJobs(1,-1, false);
 		});
 		
 		addJobS.addEventListener("click", function(e) {
-			antJob.setJobs(2,1);
+			antJob.setJobs(2,1, false);
 		});	
 		subJobS.addEventListener("click", function(e) {
-			antJob.setJobs(2,-1);
+			antJob.setJobs(2,-1, false);
 		});
 		
 		addJobHu.addEventListener("click", function(e) {
-			antJob.setJobs(3,1);
+			antJob.setJobs(3,1, false);
 		});	
 		subJobHu.addEventListener("click", function(e) {
-			antJob.setJobs(3,-1);
+			antJob.setJobs(3,-1, false);
 		});
 		
 		addJobHa.addEventListener("click", function(e) {
-			antJob.setJobs(4,1);
+			antJob.setJobs(4,1, false);
 		});	
 		subJobHa.addEventListener("click", function(e) {
-			antJob.setJobs(4,-1);
+			antJob.setJobs(4,-1, false);
 		});
 		
 		addJobC.addEventListener("click", function(e) {
-			antJob.setJobs(5,1);
+			antJob.setJobs(5,1, false);
 		});	
 		subJobC.addEventListener("click", function(e) {
-			antJob.setJobs(5,-1);
+			antJob.setJobs(5,-1, false);
 		});
 		
 
@@ -494,50 +509,145 @@ function GameLoop (_options) {
 	    var _jobCountC = zid("jobCountC");
 
 
-    	this.setJobs = function (type, amount) {
-    		if(unemployedAnts >= 1 || amount == -1)
-	    	{
-		    	switch(type)
-		    	{
-		    		case 1: //collect leafs
-		    			if(_jobLeafs >= 1 || amount == 1){
-		    				_jobLeafs += amount;
-		    				_jobCountL.innerHTML = _jobLeafs;
-		    				unemployedAnts += -amount;
-		    			}
-		    			break;
-		    		case 2:	//collect stone
-		    			if(_jobStone >= 1 || amount == 1){
-		    				_jobStone += amount;
-		    				_jobCountS.innerHTML = _jobStone;
-		    				unemployedAnts += -amount;
-		    			}
-		    			break;
-		    		case 3: //hunt
-		    			if(_jobHunt >= 1 || amount == 1){
-		    				_jobHunt += amount;
-		    				_jobCountHu.innerHTML = _jobHunt;
-		    				unemployedAnts += -amount;
-		    			}
-		    			break;
-		    		case 4: //hatch
-		    			if(_jobHatch >= 1 || amount == 1){
-		    				_jobHatch += amount;
-		    				_hatchRateW = _HATCHW - (_hatchRatioW * _jobHatch);
+    	this.setJobs = function (type, amount, override) 
+    	{
+    		
+    		amount = parseInt(amount);
+
+    		if(!isNaN(amount)) 
+    		{
+	    		if(override && amount >= 0) 
+	    		{
+	    			switch(type)
+			    	{
+			    		case 1: //collect leafs
+			    			// Wird verringert
+			    			if(_jobLeafs >= amount) {
+			    				unemployedAnts += _jobLeafs - amount;
+			    				_jobLeafs = amount;
+			    			}
+			    			// Genug arbeiter
+			    			else if(_jobLeafs + unemployedAnts >= amount) {
+			    				unemployedAnts += _jobLeafs - amount;
+			    				_jobLeafs = amount;
+			    			}	
+			    			else {
+			    				alert("Nicht genug arbeiter")
+			    			}
+			    			_jobCountL.innerHTML = _jobLeafs;
+			    			break;
+			    		case 2:	// collect stone
+			    			if(_jobStone >= amount) {
+			    				unemployedAnts += _jobStone - amount;
+			    				_jobStone = amount;
+			    			}
+			    			// Genug arbeiter
+			    			else if(_jobStone + unemployedAnts >= amount) {
+			    				unemployedAnts += _jobStone - amount;
+			    				_jobStone = amount;
+			    			}	
+			    			else {
+			    				alert("Nicht genug arbeiter")
+			    			}
+			    			_jobCountS.innerHTML = _jobLeafs;
+
+			    			break;
+			    		case 3: // hunt
+			    			if(_jobHunt >= amount) {
+			    				unemployedAnts += _jobHunt - amount;
+			    				_jobHunt = amount;
+			    			}
+			    			// Genug arbeiter
+			    			else if(_jobHunt + unemployedAnts >= amount) {
+			    				unemployedAnts += _jobHunt - amount;
+			    				_jobHunt = amount;
+			    			}	
+			    			else {
+			    				alert("Nicht genug arbeiter")
+			    			}
+			    			_jobCountHu.innerHTML = _jobHunt;
+
+			    			break;
+			    		case 4: // hatch
+			    			if(_jobHatch >= amount) {
+			    				unemployedAnts += _jobHatch - amount;
+			    				_jobHatch = amount;
+			    			}
+			    			// Genug arbeiter
+			    			else if(_jobHatch + unemployedAnts >= amount) {
+			    				unemployedAnts += _jobHatch - amount;
+			    				_jobHatch = amount;
+			    			}	
+			    			else {
+			    				alert("Nicht genug arbeiter")
+			    			}
+			    			_hatchRateW = _HATCHW - (_hatchRatioW * _jobHatch);
 		    				_hatchRateS = _HATCHS - (_hatchRatioS * _jobHatch);
 		    				_jobCountHa.innerHTML = _jobHatch;
-		    				unemployedAnts += -amount;
-		    			}
-		    			break;
-		    		case 5:	//clean
-		    			if(_jobClean >= 1 || amount == 1){
-		    				_jobClean += amount;
-		    				_jobCountC.innerHTML = _jobClean;
-		    				unemployedAnts += -amount;
-		    			}
-		    			break;
-		    	}
-				updateRes();
+
+			    			break;
+			    		case 5:	//clean
+			    			if(_jobClean >= amount) {
+			    				unemployedAnts += _jobClean - amount;
+			    				_jobClean = amount;
+			    			}
+			    			// Genug arbeiter
+			    			else if(_jobClean + unemployedAnts >= amount) {
+			    				unemployedAnts += _jobClean - amount;
+			    				_jobClean = amount;
+			    			}	
+			    			else {
+			    				alert("Nicht genug arbeiter")
+			    			}
+			    			_jobCountC.innerHTML = _jobClean;
+
+			    			break;
+			    	}
+	    		}
+	    		else if(unemployedAnts 	>= amount || amount == -1 && override == false)
+		    	{
+			    	switch(type)
+			    	{
+			    		case 1: //collect leafs
+			    			if(_jobLeafs >= 1 || amount == 1) {
+			    				_jobLeafs += amount;
+			    				_jobCountL.innerHTML = _jobLeafs;
+			    				unemployedAnts += -amount;
+			    			}
+			    			break;
+			    		case 2:	//collect stone
+			    			if(_jobStone >= 1 || amount == 1) {
+			    				_jobStone += amount;
+			    				_jobCountS.innerHTML = _jobStone;
+			    				unemployedAnts += -amount;
+			    			}
+			    			break;
+			    		case 3: //hunt
+			    			if(_jobHunt >= 1 || amount == 1) {
+			    				_jobHunt += amount;
+			    				_jobCountHu.innerHTML = _jobHunt;
+			    				unemployedAnts += -amount;
+			    			}
+			    			break;
+			    		case 4: //hatch
+			    			if(_jobHatch >= 1 || amount == 1) {
+			    				_jobHatch += amount;
+			    				_hatchRateW = _HATCHW - (_hatchRatioW * _jobHatch);
+			    				_hatchRateS = _HATCHS - (_hatchRatioS * _jobHatch);
+			    				_jobCountHa.innerHTML = _jobHatch;
+			    				unemployedAnts += -amount;
+			    			}
+			    			break;
+			    		case 5:	//clean
+			    			if(_jobClean >= 1 || amount == 1) {
+			    				_jobClean += amount;
+			    				_jobCountC.innerHTML = _jobClean;
+			    				unemployedAnts += -amount;
+			    			}
+			    			break;
+			    	}
+			    }
+			    updateRes();
 		    }
     	}
 
@@ -561,7 +671,6 @@ function GameLoop (_options) {
 	
 	
 	
-	//type = {1,2,3,4,5}
 	function build(type) {
 		//Abfrage, ob die Ressourcen die Kosten uebersteigen
 		if(_leafs >= buildingTypes[type]["costLeafs"] && _stone >= buildingTypes[type]["costStone"] && _food >= buildingTypes[type]["costFood"])

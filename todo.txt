@@ -1,5 +1,5 @@
 Todo Fabian:
 - Ameisen sterben, wenn zu wenig Nahrung // 
 - Update Jobs durch ereignisse // done
-- Set Jobs //
+- Set Jobs // done
 - FoldingMenu // done
