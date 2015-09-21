@@ -555,9 +555,49 @@ function GameLoop (_options) {
 
 
 		antBuildTimer.update();
+		
+		updateButtons();
     }
  
-
+ 
+ 	var broodBuild = zid("broodBuild");
+ 	var mushroomBuild = zid("mushroomBuild");
+ 	var storageBuild = zid("storageBuild");
+ 	var pantryBuild = zid("pantryBuild");
+ 	var dumpingBuild = zid("dumpingBuild");
+ 	
+ 	var buildButtons = {
+ 		1 : broodBuild,
+ 		2: mushroomBuild,
+ 		3: storageBuild,
+ 		4: pantryBuild,
+ 		5: dumpingBuild
+ 	};
+ 	
+	function updateButtons(){
+		var i=1;
+		for(i=1; i<=5; i++){
+			
+			//alert(buildingTypes[i].costLeafs <= _leafs);
+			
+			if(_leafs >= buildingTypes[i].costLeafs && _stone >= buildingTypes[i].costStone && _food >= buildingTypes[i].costFood){
+				buildButtons[i].disabled = false;	
+				//alert(buildButtons[i]);	
+			}
+			else{
+				//alert(buildButtons[i]);
+				buildButtons[i].disabled = true;
+				
+			}
+			
+		}
+		
+		
+		
+		
+		
+		
+	}
 
 	
     function antJobs()

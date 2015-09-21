@@ -6,7 +6,16 @@
     font-family: 'SourceSansPro';
     src: url('../fonts/SourceSansPro-Regular.otf');
 }
-
+:disabled {
+	color: #ccc;
+	background-color: white;
+	border-color: #ccc;
+}
+:disabled:hover {
+	color: #ccc;
+	background-color: white;
+	border-color: #ccc;
+}
 html {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
