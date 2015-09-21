@@ -21,7 +21,7 @@ function AmeisenStage(_options) {
 			mushroomBuild: "mushroomBuild"	
 		}
 	};
-	var builder,canvasBuilder, tester, disasters;
+	var builder,canvasBuilder, game, disasters;
 
 	/**
 	 * [init description]
@@ -33,7 +33,7 @@ function AmeisenStage(_options) {
 		options = HelpFunction.merge(options, _options);
 
 
-		tester = new test(
+		game = new GameLoop(
 			options
 		);
 
@@ -82,14 +82,14 @@ function AmeisenStage(_options) {
 
 				// Upgrade Kosten werden angefragt
 				case "getUpgradeCosts": 
-					var costs = tester.getUpgradeCots(e.detail.eventData.buildingId);
+					var costs = game.getUpgradeCots(e.detail.eventData.buildingId);
 
 					canvasBuilder.setUpgradeCosts(e.detail.eventData.buildingId, costs, e.detail.eventData.updateView);
 					break;
 
 				// Upgrade wird angefragt
 				case "requestUpdate":
-					var updated = tester.requestUpdate(e.detail.eventData.buildingId);
+					var updated = game.requestUpdate(e.detail.eventData.buildingId);
 					if(updated) {
 						canvasBuilder.upgradeBuilding(e.detail.eventData.buildingId);
 						
@@ -106,20 +106,18 @@ function AmeisenStage(_options) {
 
 				// Katastrophe ausgebrochen
 				case "disaster":
-					var values = e.detail.eventData.calculateFunction(tester.getCurrentValues());
-					tester.setValues(values);
+					var values = e.detail.eventData.calculateFunction(game.getCurrentValues());
+					game.setValues(values);
 					break;
 
 				// Gebäude nicht mehr verbunden
 				case "buidlingDisconnected":
-					zog(e.detail.eventData);
-					tester.disconnectBuilding(e.detail.eventData);
+					game.disconnectBuilding(e.detail.eventData);
 					break;
 				
 				// Gebäude verbunden
 				case "buidlingConnected":
-					zog(e.detail.eventData);
-					tester.connectBuilding(e.detail.eventData);
+					game.connectBuilding(e.detail.eventData);
 					break;
 			}
 		});

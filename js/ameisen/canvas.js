@@ -20,14 +20,14 @@ function Canvas(_options) {
 
 	var buidlingsTypes = [
 		{
-			name: "Brood Chamber",
+			name: "Brutkammer",
 			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
 			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
 			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			lvl: 1,
-			text: "Ich mach die super Energie, byebye global warming",
+			text: "Durch ein Upgrade der Brutkammer, erhöhst du die Anzahl der Ameisen, die du bauen kannst. Alle 5 Upgradestufen erhählst du eine zusätzliche Warteschlangenposition.",
 			costs: {
 				leafs: null,
 		    	stone: null,
@@ -35,14 +35,14 @@ function Canvas(_options) {
 			}
 		},
 		{
-			name: "Mushroom Chamber",
+			name: "Pilzkammer",
 			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
 			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
 			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			lvl: 1,
-			text: "Ich mach die super Energie, byebye global warming",
+			text: "Die Pilzkammer wandelt Blätter in Nahrung um. Jede Upgradestufe erhöht die Anzahl der Blätter, welche zum Produzieren von Nahrung genutzt wird.",
 			costs: {
 				leafs: null,
 		    	stone: null,
@@ -50,14 +50,14 @@ function Canvas(_options) {
 			}
 		},
 		{
-			name: "Storage",
+			name: "Lager",
 			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
 			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
 			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			lvl: 1,
-			text: "Ich mach die SUPER ENERGIE. BYE BYE global warming",
+			text: "Im Lager werden deine Baumaterialien gespeichert, also Blätter und Steine. Je höher die Ausbaustufe, desto mehr Einheiten können gelagert werden.",
 			costs: {
 				leafs: null,
 		    	stone: null,
@@ -65,14 +65,14 @@ function Canvas(_options) {
 			}
 		},
 		{
-			name: "Pantry",
+			name: "Speisekammer",
 			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
 			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
 			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			lvl: 1,
-			text: "Ich mach die super Energie, byebye global warming",
+			text: "Hier werden Nahrungsmittel gelagert, die der Pilz produziert oder deine Arbeiterinnen bei der Jagt erbeutet haben. Auch hier bestimmt die Ausbaustufe die Größe des Speichers.",
 			costs: {
 				leafs: null,
 		    	stone: null,
@@ -80,14 +80,14 @@ function Canvas(_options) {
 			}
 		},
 		{
-			name: "Dumping Ground",
+			name: "Deponie",
 			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
 			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
 			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			lvl: 1,
-			text: "Ich mach die super Energie, byebye global warming",
+			text: "Dies ist der Ort wo Abfälle, die dein Volk produziert, entsorgt werden. Dazu zählen tote Ameisen, verdorbene Nahrungsreste und die Notdurft deines Volkes. Je höher die Kammer ausgebaut ist, desto mehr Platz bietet sie und desto schneller wird der Abfall abgebaut.",
 			costs: {
 				leafs: null,
 		    	stone: null,
@@ -102,7 +102,7 @@ function Canvas(_options) {
 			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
 			lvl: 1,
-			text: "Ich mach die super Energie, byebye global warming",
+			text: "",
 			costs: {
 				leafs: 2,
 		    	stone: 2,
@@ -208,7 +208,10 @@ function Canvas(_options) {
 	function Building(type, i) {
 		(function init() {
 			var c = new createjs.Shape();
+			var bitmapC = new createjs.Bitmap();
 			var g = c.graphics;
+			var number = i; 
+
 			c.buildingData = {}
 			c.buildingData = HelpFunction.clone(buidlingsTypes[type]);
 			c.connector = new Array();
@@ -216,10 +219,62 @@ function Canvas(_options) {
 
 			c.x = window.innerWidth/2 + ((i * 15) - 50);
 			c.y = window.innerHeight/2 + ((i * 15) - 50);
-			
-
 
 			c.radius = HelpFunction.getProcentValue(20, 80, c.buildingData.lvl);
+
+
+			g.f("#000").dc(0,0,c.radius);
+			c.setBounds(-c.radius, -c.radius, c.radius*2, c.radius*2);
+
+
+			eles[i] = c;
+
+			
+			addDrag(c);
+			stage.addChild(c);
+			// Startverbindunge nach oben
+			if(type == 5) {
+				var connector = createConnector(i, "top");
+				eles[i].topConnector = connector;
+
+				eles[i].on("pressmove", function(e) 
+				{
+					connector.updateLine();
+				});
+			}
+
+
+			var image = new Image();
+			switch(type)
+			{
+				// Brood
+				case 0: 
+					image.src = "img/icons/buildings/hatch_sm.png";
+					break;
+				// Mush
+				case 1: 
+					image.src = "img/icons/buildings/mushroom_sm.png";
+					break;
+				// Storage
+				case 2: 
+					image.src = "img/icons/buildings/storage_sm.png";
+					break;
+				// Pantry
+				case 3: 
+					image.src = "img/icons/buildings/speisekammer_sm.png";
+					break;
+				// Dumping
+				case 4: 
+					image.src = "img/icons/buildings/dump_sm.png";
+					break;
+				// Startegebäude
+				case 5: 
+					image.src = "img/icons/buildings/queen_sm.png";
+					break;
+			}
+			image.onload = handleImageLoad;
+
+
 			c.addHitTest = function (i, j) {
 				createHitTest(i,j);
 			}
@@ -234,48 +289,75 @@ function Canvas(_options) {
 				this.buildingData.costs = _costs;
 			}
 
-			g.f("#000").dc(0,0,c.radius);
-
-			/*var image = new Image();
-			image.src = "img/icons/buildings/mushroom.png";
-			image.onload = handleImageLoad;
 
 			function handleImageLoad (event) {
-				var logo = new createjs.Bitmap(event.target);		
-				logo.x = 20; logo.y = 20;		
+				var logo = new createjs.Bitmap(event.target);	
+
+				logo.x = eles[number].x - 25; 
+				logo.y = eles[number].y - 25;
+				
 				logo.alpha = .8;
 				logo.cursor = "pointer";
-				//var img = event.target;
-				//zog("driun");
-				//g.beginBitmapFill(img).s();
 
-stage.addChild(logo);
-				stage.update() 
-			}*/
-			
+				stage.addChild(logo);
+				stage.update();
+
+				addDragImage();
 
 
+				function addDragImage() {
+					logo.on("pressmove", function(e) {
+						eles[number].x = logo.x + 25;
+						eles[number].y = logo.y + 25;
 
-			c.setBounds(-c.radius, -c.radius, c.radius*2, c.radius*2);
-			eles[i] = c;
 
-			
-			addDrag(c);
-			stage.addChild(c);
-			// Startverbindunge nach oben
-			if(type == 5) {
-				var connector = createConnector(i, "top");
-				eles[i].on("pressmove", function(e) 
-				{
-					connector.updateLine();
-				});
+						if(number == 0) {
+							eles[number].topConnector.updateLine();
+						}
+
+						eles[number].connector.forEach(redraw); 
+					});
+
+
+					logo.on("mousedown", function(e) {
+						eles[number].dispatchEvent("mousedown");
+					}); 
+
+					logo.on("click", function(e){
+						eles[number].dispatchEvent("click");
+						eles[number].x = logo.x + 25;
+						eles[number].y = logo.y + 25;
+
+
+						/*if(number == 0) {
+							eles[number].topConnector.updateLine();
+						}
+
+						eles[number].connector.forEach(redraw); */
+
+						stage.update();
+					});
+
+					eles[number].on("pressmove", function(e) {
+						logo.x = eles[number].x - 25;
+						logo.y = eles[number].y - 25;
+					});
+
+					zim.drag(logo, bounds);
+
+
+					function redraw(element, index, array) {
+						element.hittesten();
+					}
+				}
+
 			}
 		})();
 
 		
 		
 
-		function addDrag(c) {		
+		function addDrag(c) {
 			c.on("mousedown",function(e){
 				c.clickStart = Date.now();
 
@@ -293,6 +375,8 @@ stage.addChild(logo);
 				if((Date.now() - c.clickStart) <= 250)
 					showInfoBox(i);
 			});
+
+			
 
 			zim.drag(c, bounds);
 
@@ -337,7 +421,6 @@ stage.addChild(logo);
 				{
 					if (!hitTest) {
 					// if it was not hitting, now it is...
-						zog("circle " + _i + " hits Circle " + _j);
 						
 						eles[_i].connector[_j].updateLine();
 
@@ -350,18 +433,13 @@ stage.addChild(logo);
 						stage.update();
 					}
 					else {
-						/*HelpFunction.pushEvent("buidlingConnected", {
-							"from": _i,
-							"to": _j
-						});*/
 						eles[_i].connector[_j].updateLine();
 					}
 				}
 				else 
 				{
 					if (hitTest) {
-					// if it was hitting, now it is not...	
-						zog("circle " + _i + " unhids Circle " + _j);
+						// if it was hitting, now it is not...	
 
 						eles[_i].connector[_j].hideLine();
 
@@ -378,7 +456,8 @@ stage.addChild(logo);
 		}
 	}
 
-	function showInfoBox(i) {
+	function showInfoBox(i)
+	{
 		//Startgebäude
 		if(i != 0)
 		{
@@ -421,7 +500,8 @@ stage.addChild(logo);
 		}
 	}
 
-	function createConnector(_i, _j) {
+	function createConnector(_i, _j) 
+	{
 		var connector = new createjs.Shape();
 		connector.visible = false;
 

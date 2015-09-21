@@ -1,10 +1,10 @@
 
 window.addEventListener('load', init);
 
-function init(){
+function init() {
+	//history.pushState("", document.title, window.location.pathname);
+	HelpFunction.closeLightbox();
 
-	var stage = new AmeisenStage({});
-	
 	// Menu Bars verschiebar machen
 	var bars = document.querySelectorAll(".handle");
 	for (var i = bars.length - 1; i >= 0; i--) {
@@ -23,4 +23,15 @@ function init(){
 
 	// Url zeile auf Handy entfernen
 	setTimeout(function() {window.scrollTo(0, 1);}, 100); 
+
+	zid("btn_toggleMenu").style.display = "none";
+
+	// Start gedrückt 
+	zid("gameStart").addEventListener("click", function(e) {
+		zid("btn_toggleMenu").style.display = "block";
+		zid("btn_toggleMenu").click();
+		zid("gameStart").style.display = "none";
+
+		new AmeisenStage({});
+	});
 }

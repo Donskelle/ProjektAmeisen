@@ -57,7 +57,7 @@ button:hover {
 	
 	width: 20px;
 	background-color: #FFFFFF;
-	
+	z-index: 101;
 	text-align: center;
 	float: left;
 	font-size: .8em;
@@ -199,17 +199,30 @@ button:hover {
 	border: solid 1px #ccc;
 	top: 0;
 	left: 0;
-	
+}
+.draggable .handle {
+	padding-left: 50px;
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: 15px center;
+
+	background-image: url('../img/icons/Menu-Down.png');
+}
+.draggable.visible .handle {
+	background-image: url('../img/icons/Menu-Up.png');
 }
 .handle {
-	min-height: 20px;
-	color: #FFFFFF;
-	background: #2F2E30;
+	height: 40px;
+	line-height: 40px;
+	color: #000; 
 	border: solid 1px #ccc;
 	margin: 0;
 	padding: 0 0 0 10px;
 	cursor: move;
 	font-family: 'BebasNeue';
+}
+#jobTable button{
+	width: auto;
 }
 .chamberTable th, .chamberTable td, #jobTable th, #jobTable td {
 	padding: 2px 5px 2px 5px;
@@ -225,8 +238,10 @@ button:hover {
 }
 #resTable tr th div {
 	position: absolute;
+
 	
 }
+
 .resIcons {
 	width: 100px;
 	height: 100px;
@@ -234,13 +249,16 @@ button:hover {
 	background-size: contain;
 }
 #resLeafs {
-	background-image: url("../img/icons/leafs.png");
+	background-image: url("../img/icons/Blätter.png");
 }
 #resStone {
-	background-image: url("../img/icons/stone.png");
+	background-image: url("../img/icons/Steine.png");
 }
 #resFood {
-	background-image: url("../img/icons/food.png");
+	background-image: url("../img/icons/Nahrung.png");
+}
+#resDump {
+	background-image: url("../img/icons/Deponie.png");
 }
 .resText {
 	position: absolute;
@@ -250,12 +268,12 @@ button:hover {
 	padding: 0 10px 0 10px;
 	
 }
-#leafFill, #stoneFill, #foodFill, #amberFill {
+#leafFill, #stoneFill, #foodFill, #dumpFill {
 	background-color: red;
 	width: 100%;
 	height: 5px;
 }
-#leafBar, #stoneBar, #foodBar, #amberBar {
+#leafBar, #stoneBar, #foodBar, #dumpBar {
 	background-color: green;
 	width: 50%;
 	height: 5px;
@@ -288,7 +306,7 @@ button:hover {
 	bottom: 0;
 	height: 100vh;
 	width: 100%;
-	z-index: 100;
+	z-index: 1000;
 
 	background-color: rgba(0, 0, 0, 0.6);
 }
