@@ -549,7 +549,7 @@ function GameLoop (_options) {
 			    			else {
 			    				alert("Nicht genug arbeiter")
 			    			}
-			    			_jobCountS.innerHTML = _jobLeafs;
+			    			_jobCountS.innerHTML = _jobStone;
 
 			    			break;
 			    		case 3: // hunt
