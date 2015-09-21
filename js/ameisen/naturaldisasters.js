@@ -46,7 +46,7 @@ function NaturalDisasters() {
 			'description': 'Deiner Königin geht es aktuell wirklich gut. Du erhälst 5 neue Ameisen.',
 			'image': 'http://img4.wikia.nocookie.net/__cb20140909155820/creepypasta/de/images/3/34/Atompilz.jpg',
 			'calculateFunction': function(values) {
-				values.ants.unemployedAnts += 5;
+				values.ants.unemployed += 5;
 				return values;
 			}
 		},

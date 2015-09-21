@@ -27,7 +27,7 @@ function GameLoop (_options) {
 	//Bestand von Rohstoffen
 	var _leafs = 100;
 	var _stone = 100;
-	var _food = 10;
+	var _food = 25;
 	var _dump = 10;
 	
 	var _prodDump = 0;
@@ -100,7 +100,7 @@ function GameLoop (_options) {
 	var _pantryRatio = 200;
 	var _garbageRatio = 500;
 	
-	
+	var enoughFood = true;
 	
 	//Buildings
     var _buildingCostRatio = 10; //balancing
@@ -377,7 +377,6 @@ function GameLoop (_options) {
     	else {
     		_dump += _prodDump;
     		_dumpHill -= _prodDump;
-    		
     	}
     	
       _dumpHill += unemployedAnts;
@@ -424,8 +423,6 @@ function GameLoop (_options) {
     		_prodDump = _dumpHill;
     	}
 
-
-
     	if(_prodLeafs < 0) {
     		_leafProd.style.color = "red";
     		_leafProd.innerHTML = _prodLeafs;
@@ -452,6 +449,74 @@ function GameLoop (_options) {
     	}
     	 
     	
+    	if(enoughFood && _food < 0) {
+			alert("Deine Nahrung ist leer.\nStell schnell wieder ein Gleichgewicht her! Deine Ameisen werden nun nach und nach sterben, außerdem kannst du keine Gebäude bauen oder upgraden.");
+			enoughFood = false;
+    	}
+    	else if(!enoughFood && _food >= 0) {
+			enoughFood = true;
+    	}
+    	else if(!enoughFood) {
+			var random = Math.random();
+			// Jeden 1000sten Durchlauf
+			if(random <= 0.1)
+			{
+				var reduced = false;
+				var antCount = unemployedAnts + _jobLeafs + _jobStone + _jobHatch + _jobHunt + _jobClean;
+
+				if(antCount>0) 
+				{ 
+					while (!reduced) 
+					{
+						var randomJob = Math.floor(Math.random() * 6);
+						switch(randomJob) {
+				    		case 0:
+				    			if(unemployedAnts > 0) {
+				    				unemployedAnts -= 1;
+				    				reduced = true;
+				    			}
+				    			break;
+				    		case 1:
+	 							if(_jobLeafs > 0) {
+				    				_jobLeafs -= 1;
+				    				reduced = true;
+				    			}
+				    			break;
+				    		case 2:
+	 							if(_jobStone > 0) {
+				    				_jobStone -= 1;
+				    				reduced = true;
+				    			}
+				    			break;
+				    		case 3:
+	 							if(_jobHatch > 0) {
+				    				_jobHatch -= 1;
+				    				reduced = true;
+				    			}
+				    			break;
+				    		case 4:
+	 							if(_jobHunt > 0) {
+				    				_jobHunt -= 1;
+				    				reduced = true;
+				    			}
+				    			break;
+				    		case 5:
+	 							if(_jobClean > 0) {
+				    				_jobClean -= 1;
+				    				reduced = true;
+				    			}
+				    			break;
+						}
+					}
+				}
+			}
+
+    		antJob.updateJobs();
+    	}
+
+
+
+
     	if(_prodFood < 0) {
     		_foodProd.style.color = "red";
     		_foodProd.innerHTML = _prodFood;
@@ -495,9 +560,6 @@ function GameLoop (_options) {
 
 
 	
-    
-    
-    //type = {1,2,3,4,5,6,7}, amount = {1,-1}
     function antJobs()
     {
     	var _jobAntW = zid("jobAntW");
