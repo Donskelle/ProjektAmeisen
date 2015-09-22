@@ -198,7 +198,7 @@ function GameLoop (_options) {
 	    	storeDump: 10,
 	    	removeDump: 1,
 	    	upgradeCost: {
-	    		totalUpgrades: 0,
+	    		totalUpgrades: 1,
 	    		leafs: 10,
 	    		stone: 10,
 	    		food: 0
@@ -421,7 +421,9 @@ function GameLoop (_options) {
 
     	buildingTypes[3]["storeLeafs"] = maxRes;
     	buildingTypes[3]["storeStone"] = maxRes;
-
+		buildingTypes[5]["storeDump"] =  Math.round(10 * buildingTypes[5]["upgradeCost"].totalUpgrades * 1.03);
+		
+		
 
     	connectedBuildingsLevel = HelpFunction.getConnectedBuildingsLevelByType(buildingTypes, buildedBuildings, 4);
     	var maxFood = 25;
