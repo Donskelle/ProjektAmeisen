@@ -23,6 +23,7 @@ function GameLoop (_options) {
 	var stoneBar = zid("stoneBar");
 	var foodBar = zid("foodBar");
 	var dumpBar = zid("dumpBar");
+	var dumpHillBar = zid("dumpHillBar");
 
 	//Bestand von Rohstoffen
 	var _leafs = 100;
@@ -32,7 +33,7 @@ function GameLoop (_options) {
 	
 	var _prodDump = 0;
 	
-	var _jobCleanRatio = 2;
+	var _jobCleanRatio = 1;
     var _dumpHill = 0;
 	
 	//Bestand und Kosten von Ameisen
@@ -104,6 +105,7 @@ function GameLoop (_options) {
 	var _garbageRatio = 500;
 	
 	var enoughFood = true;
+	var enoughDump = true;
 	
 	//Buildings
     var _buildingCostRatio = 10; //balancing
@@ -374,6 +376,10 @@ function GameLoop (_options) {
     	else {
     		_food = buildingTypes[4]["storeFood"];
     	}
+    	if(_food + _prodFood < 0){
+    		_food = 0;
+    		
+    	}
     	
     	if(_dump + _prodDump > buildingTypes[5]["storeDump"]) {
     		_dumpHill -= buildingTypes[5]["storeDump"] - _dump;
@@ -389,8 +395,8 @@ function GameLoop (_options) {
     	if((unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean) > 0){
     		_dumpHill += Math.floor((unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean)/10);
     	}
-    	if(_dump - buildingTypes[5]["removeDump"] * buildingTypes[5]["upgradeCost"].totalUpgrades >= 0){
-    		_dump -= buildingTypes[5]["removeDump"] * buildingTypes[5]["upgradeCost"].totalUpgrades;
+    	if(_dump - (2 + buildingTypes[5]["removeDump"] * buildingTypes[5]["upgradeCost"].totalUpgrades) >= 0){
+    		_dump -= 2 + buildingTypes[5]["removeDump"] * buildingTypes[5]["upgradeCost"].totalUpgrades;
     	}
     	else {
     		_dump = 0;
@@ -465,21 +471,29 @@ function GameLoop (_options) {
     		_stoneProd.innerHTML = _prodStone;
     	}
     	 
-    	
-    	if(enoughFood && _food < 0) {
+    	if(enoughDump && _dumpHill > (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean) * 10) {
+			alert("Warnung! In deinem Bau befinden sich zu viele Abfälle. Deine Ameisen werden krank und sterben. Du solltest deine Ameisen schnell den Bau säubern lassen und ggf. die Abfallkammer erweitern.");
+			enoughDump = false;
+    	}
+    	if(enoughFood && _food <= 0) {
 			alert("Deine Nahrung ist leer.\nStell schnell wieder ein Gleichgewicht her! Deine Ameisen werden nun nach und nach sterben, außerdem kannst du keine Gebäude bauen oder upgraden.");
 			enoughFood = false;
     	}
-    	else if(!enoughFood && _food >= 0) {
+    	else if(!enoughFood && _food > 0) {
 			enoughFood = true;
     	}
-    	else if(!enoughFood) {
+    	else if(!enoughDump && _dumpHill <= (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean) * 10) {
+			enoughDump = true;
+    	}
+    	else if(!enoughFood || _dumpHill > (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean) * 10) {
+    		var deathRate = Math.ceil((unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean)/100);
 			var random = Math.random();
 			// Jeden 1000sten Durchlauf
-			if(random <= 0.1)
+			if(random <= 0.03)
 			{
 				var reduced = false;
-				var antCount = unemployedAnts + _jobLeafs + _jobStone + _jobHatch + _jobHunt + _jobClean;
+				
+				var antCount = deathRate;
 
 				if(antCount>0) 
 				{ 
@@ -547,14 +561,15 @@ function GameLoop (_options) {
     		_foodProd.innerHTML = _prodFood;
     	}
     	
-    	
+    	var allAnts = Math.floor((unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean) * 10);
+
     	_workerCount.innerHTML = unemployedAnts;
     	
     	_leafCount.innerHTML = _leafs;
     	_stoneCount.innerHTML = _stone;
     	_foodCount.innerHTML = _food;
     	_dumpCount.innerHTML = _dump;
-    	_dumpHillhtml.innerHTML = _dumpHill;
+    	
     	
     	
     	_dumpProd.innerHTML = _prodDump;
@@ -566,10 +581,44 @@ function GameLoop (_options) {
 		
 		
 		leafBar.style.width = (_leafs/buildingTypes[3]["storeLeafs"])*100 + "%"; 
-		stoneBar.style.width = (_stone/buildingTypes[3]["storeStone"])*100 + "%"; ;
-		foodBar.style.width = (_food/buildingTypes[4]["storeFood"])*100 + "%"; ;
-		dumpBar.style.width = "100%";
-
+		stoneBar.style.width = (_stone/buildingTypes[3]["storeStone"])*100 + "%"; 
+		foodBar.style.width = (_food/buildingTypes[4]["storeFood"])*100 + "%"; 
+		dumpBar.style.width = (_dump/buildingTypes[5]["storeDump"])*100 + "%"; 
+		
+				
+		if(_dumpHill < allAnts * 10/100){
+			dumpHillBar.style.background = "green";
+		}
+		else if(_dumpHill < allAnts * 20/100){
+			dumpHillBar.style.background = "#4D960E";
+		}
+		else if(_dumpHill < allAnts * 30/100){
+			dumpHillBar.style.background = "#6B960E";
+		}
+		else if(_dumpHill < allAnts * 40/100){
+			dumpHillBar.style.background = "#82960E";
+		}
+		else if(_dumpHill < allAnts * 50/100){
+			dumpHillBar.style.background = "#968F0E";
+		}
+		else if(_dumpHill < allAnts * 60/100){
+			dumpHillBar.style.background = "#967C0E";
+		}
+		else if(_dumpHill < allAnts * 70/100){
+			dumpHillBar.style.background = "#965E0E";
+		}
+		else if(_dumpHill < allAnts * 80/100){
+			dumpHillBar.style.background = "#96550E";
+		}
+		else if(_dumpHill < allAnts * 90/100){
+			dumpHillBar.style.background = "#913F10";
+		}
+		else if(_dumpHill >= allAnts){
+			dumpHillBar.style.background = "#912C10";
+			_dumpHill = allAnts;
+		}
+		
+		_dumpHillhtml.innerHTML = _dumpHill + " / " + allAnts;
 
 		antBuildTimer.update();
 		
@@ -623,7 +672,7 @@ function GameLoop (_options) {
 			}	
 		}
 		
-		if(_antCostW["leafs"] <= _leafs && _antCostW["stone"] <= _stone && _antCostW["food"] <= _food && !posibleAnts == ants.length){
+		if(_antCostW["leafs"] <= _leafs && _antCostW["stone"] <= _stone && _antCostW["food"] <= _food && posibleAnts != ants.length){
 			zid("btn_addAntW").disabled = false;
 			
 		}

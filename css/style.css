@@ -277,18 +277,34 @@ button:hover {
 	padding: 0 10px 0 10px;
 	
 }
-#leafFill, #stoneFill, #foodFill, #dumpFill {
+#leafFill, #stoneFill, #foodFill {
 	background-color: red;
 	width: 100%;
 	height: 5px;
 }
-#leafBar, #stoneBar, #foodBar, #dumpBar {
+#dumpFill {
+	background-color: green;
+	width: 100%;
+	height: 5px;
+}
+#leafBar, #stoneBar, #foodBar {
 	background-color: green;
 	width: 50%;
 	height: 5px;
 }
-
-
+#dumpBar {
+	background-color: red;
+	width: 50%;
+	height: 5px;
+}
+#dumpHill {
+	
+}	
+#dumpHillBar {
+	
+	
+	background-color: green;
+}
 /*
  *	Menü Styles
  */
