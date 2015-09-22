@@ -36,7 +36,7 @@ function GameLoop (_options) {
     var _dumpHill = 0;
 	
 	//Bestand und Kosten von Ameisen
-	var unemployedAnts = 1;
+	var unemployedAnts = 10;
 	var _antS = 0;
 	
 	var _antCostW = {
@@ -49,6 +49,9 @@ function GameLoop (_options) {
 		stone: 10,
 		food: 10
 	};
+	
+	var ants = [];
+	var posibleAnts = 1;
 	
 	//belegte Jobs
 	var _jobLeafs = 0;
@@ -185,18 +188,20 @@ function GameLoop (_options) {
 	    },
 	    5 : { //dumping ground
 	    	count: 0,
-	    	costLeafs: 250,
-	    	costStone: 500,
+	    	costLeafs: 100,
+	    	costStone: 100,
 	    	costFood: 0,
 	    	costLeafsHtml: zid("dumpingCostL"),
 	    	costStoneHtml:	zid("dumpingCostS"),
-	    	storeDump: 15,
+	    	storeDump: 10,
+	    	removeDump: 1,
 	    	upgradeCost: {
 	    		totalUpgrades: 0,
 	    		leafs: 10,
 	    		stone: 10,
 	    		food: 0
 	    	},
+	    	
 	    	buildedBuildings : []
 	    }
 	};
@@ -371,15 +376,27 @@ function GameLoop (_options) {
     	}
     	
     	if(_dump + _prodDump > buildingTypes[5]["storeDump"]) {
+    		_dumpHill -= buildingTypes[5]["storeDump"] - _dump;
     		_dump = buildingTypes[5]["storeDump"];
-    		_dumpHill -= (_dump) - (buildingTypes[5]["storeDump"] + (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean));
+    		//_dumpHill -= _dump - (buildingTypes[5]["storeDump"] + (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean)-10);
+    		//alert(_dump - (buildingTypes[5]["storeDump"] + (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean)-10));
     	}
     	else {
     		_dump += _prodDump;
     		_dumpHill -= _prodDump;
     	}
     	
-      _dumpHill += unemployedAnts;
+    	if((unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean) > 0){
+    		_dumpHill += Math.floor((unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean)/10);
+    	}
+    	if(_dump - buildingTypes[5]["removeDump"] * buildingTypes[5]["upgradeCost"].totalUpgrades >= 0){
+    		_dump -= buildingTypes[5]["removeDump"] * buildingTypes[5]["upgradeCost"].totalUpgrades;
+    	}
+    	else {
+    		_dump = 0;
+    	}
+    	
+      
        
        
        updateRes();
@@ -566,6 +583,22 @@ function GameLoop (_options) {
  	var pantryBuild = zid("pantryBuild");
  	var dumpingBuild = zid("dumpingBuild");
  	
+ 	var jobButtons = {
+ 		1 : zid("btn_addJobL"),
+ 		2 : zid("btn_subJobL"),
+ 		3 : zid("btn_addJobS"),
+ 		4 : zid("btn_subJobS"),
+ 		5 : zid("btn_addJobHu"),
+ 		6 : zid("btn_subJobHu"),
+ 		7 : zid("btn_addJobHa"),
+ 		8 : zid("btn_subJobHa"),
+ 		9 : zid("btn_addJobC"),
+ 		10: zid("btn_subJobC")
+ 		
+ 	};
+ 	
+
+ 	
  	var buildButtons = {
  		1 : broodBuild,
  		2: mushroomBuild,
@@ -586,13 +619,66 @@ function GameLoop (_options) {
 			}
 			else{
 				//alert(buildButtons[i]);
-				buildButtons[i].disabled = true;
-				
-			}
+				buildButtons[i].disabled = true;	
+			}	
+		}
+		
+		if(_antCostW["leafs"] <= _leafs && _antCostW["stone"] <= _stone && _antCostW["food"] <= _food && !posibleAnts == ants.length){
+			zid("btn_addAntW").disabled = false;
 			
+		}
+		else {
+			zid("btn_addAntW").disabled = true;
 		}
 		
 		
+			
+			if(unemployedAnts <= 0){
+				jobButtons[1].disabled = true;
+				jobButtons[3].disabled = true;
+				jobButtons[5].disabled = true;
+				jobButtons[7].disabled = true;
+				jobButtons[9].disabled = true;
+			}
+			else {
+				jobButtons[1].disabled = false;
+				jobButtons[3].disabled = false;
+				jobButtons[5].disabled = false;
+				jobButtons[7].disabled = false;
+				jobButtons[9].disabled = false;
+			}
+			
+			if(_jobLeafs <= 0){
+				jobButtons[2].disabled = true;
+			}
+			else{
+				jobButtons[2].disabled = false;
+			}
+			if(_jobStone <= 0){
+				jobButtons[4].disabled = true;
+			}
+			else{
+				jobButtons[4].disabled = false;
+			}
+			if(_jobHunt <= 0){
+				jobButtons[6].disabled = true;
+			}
+			else{
+				jobButtons[6].disabled = false;
+			}
+			if(_jobHatch <= 0){
+				jobButtons[8].disabled = true;
+			}
+			else{
+				jobButtons[8].disabled = false;
+			}
+			if(_jobClean <= 0){
+				jobButtons[10].disabled = true;
+			}
+			else{
+				jobButtons[10].disabled = false;
+			}
+			
 		
 		
 		
@@ -960,9 +1046,7 @@ function GameLoop (_options) {
 				end: null
 			}
 		}
-		var ants = [];
-		//var solders = [];
-		var posibleAnts = 1;
+		
 
 
 		function updateViewBuilder() {
