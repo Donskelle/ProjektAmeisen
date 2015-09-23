@@ -100,7 +100,7 @@ button:hover {
 	margin: 0 0 0 0;
 	height: 100vh;
 	background-color: #2F2E30;
-	background-image: url("../img/menu_background.png");
+	background-image: url("../img/Startbild-01.png");
 	background-size: cover;
 	background-position: bottom;
 	background-repeat: no-repeat;
@@ -439,4 +439,100 @@ button:hover {
  */
 #buildingUpgradeView:target, #naturalDisasterView:target {
 	display:block;
+}
+
+/**
+ * 	Intro Box (Tutorial)
+ */
+
+#introBox {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	display: none;
+	z-index: 250;
+	background: rgba(255, 255, 255, .5);
+	
+}
+#toggleIntro {
+	position: fixed;
+	top: 0;
+	z-index: 300;
+}
+#pageOne, #pageTwo, #pageThree, #pageFour, #pageFive {
+	margin: 10vh auto;
+	max-width: 1080px;
+	max-height: 768px;
+	width: 100%;
+	height: 80vh;
+	background-color: #FFFFFF;
+	display: none;
+	padding: 1%;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	
+	
+}
+#prev, #next {
+	position: absolute;
+	bottom: 10%;	
+}
+#prev {
+	left: 50px;
+}
+#next {
+	right: 50px;
+}
+.introHead {
+	font-size: 1.6em;
+}
+.introSub {
+	font-size: 1.2em;
+}
+.introHead {
+	
+}
+.partOne, .partTwo, .partThree {
+	max-width: 31%;
+	border: solid 1px black;
+	float: left;
+	height: 100%;
+	margin: 1%;
+}
+.partOne img, .partTwo img, .partThree img {
+	width: 90%;
+	margin: 5% auto;
+	display: block;
+	cursor: pointer;
+	
+}
+.introTextOneA p {
+	padding: 30px 0 0 0;
+	
+}
+.introTextOneB p {
+	padding: 3% 5% 3% 5%;
+	
+}
+
+#imgView {
+	position: fixed;
+	z-index: 301;
+	width: 100%;
+	height: 100%;
+	background: rgba(255, 255, 255, .5);
+	display: none;
+}
+#imgSrc {
+	width: 90%;
+	height: 0;
+	padding-top: 60%;
+	max-width: 800px;
+	max-height: 600px;
+	background-color: #FFFFFF;
+	margin: 0% auto;
+	background-image: url("../img/test.jpg");
+	background-size: contain;
+	
 }

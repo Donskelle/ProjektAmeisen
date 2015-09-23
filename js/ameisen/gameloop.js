@@ -37,7 +37,7 @@ function GameLoop (_options) {
     var _dumpHill = 0;
 	
 	//Bestand und Kosten von Ameisen
-	var unemployedAnts = 10;
+	var unemployedAnts = 250;
 	var _antS = 0;
 	
 	var _antCostW = {
@@ -488,10 +488,10 @@ function GameLoop (_options) {
 			enoughDump = true;
     	}
     	else if(!enoughFood || _dumpHill > (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean) * 10) {
-    		var deathRate = Math.ceil((unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean)/100);
+    		var deathRate = Math.ceil((unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean)/25);
 			var random = Math.random();
 			// Jeden 1000sten Durchlauf
-			if(random <= 0.03)
+			if(random <= 0.05)
 			{
 				var reduced = false;
 				
@@ -543,7 +543,7 @@ function GameLoop (_options) {
 					}
 				}
 			}
-
+			
     		antJob.updateJobs();
     	}
 
@@ -885,6 +885,7 @@ function GameLoop (_options) {
 			    			break;
 			    	}
 			    }
+			    checkSize();
 			    updateRes();
 		    }
     	}
@@ -1231,4 +1232,30 @@ function GameLoop (_options) {
 			countdownW.innerHTML = (Math.floor(countDowns.ants.end * 10) / 10).toFixed(2);
 		}
 	}
+	
+	// Startbildschirm
+	var menuWrapper = zid("menuWrapper");
+	var screens = {
+		1 :  "url(./img/Startbild-01.png)",
+		2 :  "url(./img/Startbild-02.png)",
+		3 :  "url(./img/Startbild-03.png)",
+		4 :  "url(./img/Startbild-04.png)",
+	};
+	function checkSize() {
+		if(unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean > 1000){
+			menuWrapper.style.backgroundImage = screens[4];
+		}
+		else if(unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean > 500){
+			menuWrapper.style.backgroundImage = screens[3];
+		}
+		else if(unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean > 100){
+			menuWrapper.style.backgroundImage = screens[2];
+		}
+		else if(unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean < 100){
+			menuWrapper.style.backgroundImage = screens[1];
+		}
+		
+	}
+	
+	
 }
