@@ -437,7 +437,7 @@ button:hover {
 /**
  * Lightbox Klick Events
  */
-#buildingUpgradeView:target, #naturalDisasterView:target {
+#buildingUpgradeView:target, #incidentView:target {
 	display:block;
 }
 

@@ -1,5 +1,5 @@
-function incident() {
-	var incidentTimeout = 10000;
+function incidents() {
+	var incidentTimeout = 120000;
 
 	var incidentTypes = [
 		{
@@ -142,13 +142,13 @@ function incident() {
 
 
 	function showDisaster(type) {
-		var desaster = incidentTypes[type];
+		var incident = incidentTypes[type];
 
-		zid("naturalDisasterTitle").innerHTML = desaster.name;
-		zid("naturalDisasterImage").src = desaster.image;
-		zid("naturalDisasterText").innerHTML = desaster.description;
+		zid("incidentTitle").innerHTML = incident.name;
+		zid("incidentImage").src = incident.image;
+		zid("incidentText").innerHTML = incident.description;
 
 		//öffnet Lightbox
-		zid("openLightboxNaturalDisasterView").click();
+		zid("openLightboxincidentView").click();
 	}
 }
