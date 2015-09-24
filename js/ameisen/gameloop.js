@@ -484,7 +484,7 @@ function GameLoop (_options) {
     	else if(!enoughFood && _food > 0) {
 			enoughFood = true;
     	}
-    	else if(!enoughDump && _dumpHill <= (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean) * 10) {
+    	else if(!enoughDump && _dumpHill < (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean) * 10) {
 			enoughDump = true;
     	}
     	else if(!enoughFood || _dumpHill > (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean) * 10) {
