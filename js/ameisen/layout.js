@@ -32,7 +32,8 @@ function load() {
 	
 	
 	//Intro
-	var togIntro = zid("toggleIntro");
+	var togIntro = zid("menuHowToPlay");
+	var quitIntro = zid("quitIntro");
 	var introBox = zid("introBox");
 	var btnNext = zid("next");
 	var btnPrev = zid("prev");
@@ -63,7 +64,10 @@ function load() {
 		
 		
 	});
-	
+	quitIntro.addEventListener("click", function(e) {
+		introBox.style.display = "none";
+		introIsActive = false;
+	});
 	btnNext.addEventListener("click", function(e) {
 		
 		pages[curPage].style.display = "none";
@@ -85,19 +89,6 @@ function load() {
 	//Menu
 	htpToggle = false;
 	settingsToggle = false;
-	menuHowToPlay.addEventListener("click", function(e) {
-		if(htpToggle == true){
-			howToPlay.style.display = "none";
-			htpToggle = false;
-		}
-		else {
-			howToPlay.style.display = "block";
-			htpToggle = true;
-			settings.style.display = "none";
-			settingsToggle = false;
-		}
-		
-	});
 	
 	menuSettings.addEventListener("click", function(e) {
 		if(settingsToggle == true){

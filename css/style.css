@@ -459,6 +459,13 @@ button:hover {
 	top: 0;
 	z-index: 300;
 }
+#quitIntro {
+	position: fixed;
+	z-index: 300;
+	top: 5vh;
+	right: 5vh;
+	width: 30px;
+}
 #pageOne, #pageTwo, #pageThree, #pageFour, #pageFive {
 	margin: 5vh auto;
 	max-width: 1080px;
