@@ -37,7 +37,7 @@ function GameLoop (_options) {
     var _dumpHill = 0;
 	
 	//Bestand und Kosten von Ameisen
-	var unemployedAnts = 1;
+	var unemployedAnts = 100;
 	var _antS = 0;
 	
 	var _antCostW = {
