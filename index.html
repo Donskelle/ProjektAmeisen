@@ -144,125 +144,140 @@
 				<div class="handle">
 					Kammern
 				</div>
-				<div class="hideContent">
-					<table class="chamberTable">
-						<tr>
-							<th><div class="tooltip" data-type="broodChamber">?</div></th>
-							<th class="chamberName" colspan="2">Brutkammer</th>
-						</tr>
-						<tr>
-							<td></td>
-							<td>Bl&auml;tter</td>
-							<td class="buildCostLeafs" id="broodCostL">1502313</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>Steine</td>
-							<td class="buildCostStone" id="broodCostS">12011</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>
-							<button id="broodBuild" class="build" disabled>
-								Bauen
-							</button></td>
-						</tr>
-					</table>
+				<div class="hideContent buildMenu">
 
-					<table class="chamberTable">
-						<tr>
-							<th><div class="tooltip" data-type="mushroomChamber">?</div></th>
-							<th class="chamberName" colspan="2">Pilzkammer</th>
-						</tr>
-						<tr>
-							<td></td>
-							<td>Bl&auml;tter</td>
-							<td class="buildCostLeafs" id="mushCostL">1502313</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>Steine</td>
-							<td class="buildCostStone" id="mushCostS">12011</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>
-							<button id="mushroomBuild" class="build" disabled>
-								Bauen
-							</button></td>
-						</tr>
-					</table>
+					<div class="broodChamberWrapper buildMenuBuilding">
+						<h2 class="buildingName">
+							Brutkammer
+							<span class="tooltip" data-type="broodChamber"></span>
+						</h2>
+						<table>
+							<tr>
+								<td>Kosten: </td>
+								<td class="iconLeafs"></td>
+								<td class="buildCostLeafs" id="broodCostL">300</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td class="iconStone"></td>
+								<td class="buildCostStone" id="broodCostS">200</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+									<button id="broodBuild" class="build row" disabled>
+										Bauen
+									</button>
+								</td>
+							</tr>
+						</table>
+					</div>
 
-					<table class="chamberTable">
-						<tr>
-							<th><div class="tooltip" data-type="storage">?</div></th>
-							<th class="chamberName" colspan="2">Lager</th>
-						</tr>
-						<tr>
-							<td></td>
-							<td>Bl&auml;tter</td>
-							<td class="buildCostLeafs" id="storageCostL">1502313</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>Steine</td>
-							<td class="buildCostStone" id="storageCostS">12011</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>
-							<button id="storageBuild" class="build" disabled>
-								Bauen
-							</button></td>
-						</tr>
-					</table>
 
-					<table class="chamberTable">
-						<tr>
-							<th><div class="tooltip" data-type="pantry">?</div></th>
-							<th class="chamberName" colspan="2">Speisekammer</th>
-						</tr>
-						<tr>
-							<td></td>
-							<td>Bl&auml;tter</td>
-							<td class="buildCostLeafs" id="pantryCostL">1502313</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>Steine</td>
-							<td class="buildCostStone" id="pantryCostS">12011</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>
-							<button id="pantryBuild" class="build" disabled>
-								Bauen
-							</button></td>
-						</tr>
-					</table>
-					<table class="chamberTable">
-						<tr>
-							<th><div class="tooltip" data-type="dumpingGround">?</div></th>
-							<th class="chamberName" colspan="2">Deponie</th>
-						</tr>
-						<tr>
-							<td></td>
-							<td>Bl&auml;tter</td>
-							<td class="buildCostLeafs" id="dumpingCostL">1502313</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>Steine</td>
-							<td class="buildCostStone" id="dumpingCostS">12011</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>
-							<button id="dumpingBuild" class="build" disabled>
-								Bauen
-							</button></td>
-						</tr>
-					</table>
+					<div class="mushroomChamberWrapper buildMenuBuilding">
+						<h2 class="buildingName">
+							Pilzkammer
+							<span class="tooltip" data-type="mushroomChamber"></span>
+						</h2>
+						<table>
+							<tr>
+								<td>Kosten: </td>
+								<td class="iconLeafs"></td>
+								<td class="buildCostLeafs" id="mushCostL">300</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td class="iconStone"></td>
+								<td class="buildCostStone" id="mushCostS">200</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+									<button id="mushroomBuild" class="build row" disabled>
+										Bauen
+									</button>
+								</td>
+							</tr>
+						</table>
+					</div>
+
+
+					<div class="storageWrapper buildMenuBuilding">
+						<h2 class="buildingName">
+							Lager
+							<span class="tooltip" data-type="storage"></span>
+						</h2>
+						<table>
+							<tr>
+								<td>Kosten: </td>
+								<td class="iconLeafs"></td>
+								<td class="buildCostLeafs" id="storageCostL">300</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td class="iconStone"></td>
+								<td class="buildCostStone" id="storageCostS">200</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+									<button id="storageBuild" class="build row" disabled>
+										Bauen
+									</button>
+								</td>
+							</tr>
+						</table>
+					</div>
+
+
+					<div class="pantryWrapper buildMenuBuilding">
+						<h2 class="buildingName">
+							Speisekammer
+							<span class="tooltip" data-type="pantry"></span>
+						</h2>
+						<table>
+							<tr>
+								<td>Kosten: </td>
+								<td class="iconLeafs"></td>
+								<td class="buildCostLeafs" id="pantryCostL">300</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td class="iconStone"></td>
+								<td class="buildCostStone" id="pantryCostS">200</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+									<button id="pantryBuild" class="build row" disabled>
+										Bauen
+									</button>
+								</td>
+							</tr>
+						</table>
+					</div>
+
+					<div class="dumpingGroundWrapper buildMenuBuilding">
+						<h2 class="buildingName">
+							Deponie
+							<span class="tooltip" data-type="dumpingGround"></span>
+						</h2>
+						<table>
+							<tr>
+								<td>Kosten: </td>
+								<td class="iconLeafs"></td>
+								<td class="buildCostLeafs" id="dumpingCostL">300</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td class="iconStone"></td>
+								<td class="buildCostStone" id="dumpingCostS">200</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+									<button id="dumpingBuild" class="build row" disabled>
+										Bauen
+									</button>
+								</td>
+							</tr>
+						</table>
+					</div>
 				</div>
 			</div>
 
@@ -273,7 +288,7 @@
 				<div class="hideContent">
 					<table id="jobTable">
 						<tr>
-							<td><div class="tooltip" data-type="worker">?</div></td>
+							<td><div class="tooltip" data-type="worker"></div></td>
 							<td class="jobName">Verfügbare Arbeiter</td>
 							<td class="jobCount" id="workerCount">
 								<span>0</span>
@@ -290,7 +305,7 @@
 						</tr>
 					
 						<tr>
-							<td><div class="tooltip" data-type="jLeafs">?</div></td>
+							<td><div class="tooltip" data-type="jLeafs"></div></td>
 							<td class="jobName">
 								Bl&auml;tter sammeln
 							</td>
@@ -315,7 +330,7 @@
 						</tr>
 						<tr>
 							<td>
-								<div class="tooltip" data-type="jStone">?</div>
+								<div class="tooltip" data-type="jStone"></div>
 							</td>
 							<td class="jobName">
 								Steine sammeln
@@ -341,7 +356,7 @@
 						</tr>
 						<tr>
 							<td>
-								<div class="tooltip" data-type="jHunt">?</div>
+								<div class="tooltip" data-type="jHunt"></div>
 							</td>
 							<td class="jobName">
 								Jagen
@@ -367,7 +382,7 @@
 						</tr>
 						<tr>
 							<td>
-								<div class="tooltip" data-type="jHatch">?</div>
+								<div class="tooltip" data-type="jHatch"></div>
 							</td>
 							<td class="jobName">
 								Brutpflege
@@ -393,7 +408,7 @@
 						</tr>
 						<tr>
 							<td>
-								<div class="tooltip" data-type="jClean">?</div>
+								<div class="tooltip" data-type="jClean"></div>
 							</td>
 							<td class="jobName">
 								Bau s&auml;ubern
@@ -427,10 +442,10 @@
 					<table id="resTable">
 						
 						<tr>
-							<th><div class="tooltip" data-type="leafs">?</div><div class="resIcons" id="resLeafs"></div><div class="resText"> Bl&auml;tter:</div></th>
-							<th><div class="tooltip" data-type="stone">?</div><div class="resIcons" id="resStone"></div><div class="resText"> Steine:</div></th>
-							<th><div class="tooltip" data-type="food">?</div><div class="resIcons" id="resFood"></div><div class="resText"> Nahrung:</div></th>
-							<th><div class="tooltip" data-type="dump">?</div><div class="resIcons" id="resDump"></div><div class="resText"> Deponie:</div></th>
+							<th><div class="tooltip" data-type="leafs"></div><div class="resIcons" id="resLeafs"></div><div class="resText"> Bl&auml;tter:</div></th>
+							<th><div class="tooltip" data-type="stone"></div><div class="resIcons" id="resStone"></div><div class="resText"> Steine:</div></th>
+							<th><div class="tooltip" data-type="food"></div><div class="resIcons" id="resFood"></div><div class="resText"> Nahrung:</div></th>
+							<th><div class="tooltip" data-type="dump"></div><div class="resIcons" id="resDump"></div><div class="resText"> Deponie:</div></th>
 						</tr>
 						
 						<tr>
@@ -513,18 +528,23 @@
 
 			<!-- Lightbox Gebäude Click -->
 			<div id="incidentView" class="lightboxWrapper">
-				<div class="lightboxContent" id="">
-					<!-- Name des Gebäudes -->
-					<h1 id="incidentTitle"> Ereignis </h1>
-					<div class="lightboxImageWrapper">
-						<img id="incidentImage" class="lightboxImage">
+				<div class="backgroundBuildingUpgradeView" id="incidentViewContentBG">
+					<div class="lightboxContent" id="incidentViewContent">
+						<div class="upgradeContent clearAfter">
+							<div class="lightboxImageWrapper fl_left">
+								<img id="incidentImage" class="lightboxImage">
+							</div>
+							<div class="upgradeBuildingViewRight fl_left">
+								<!-- Name des Gebäudes -->
+								<h2 id="incidentTitle">Ereignis</h2>
+
+								<p id="incidentText">
+
+								</p>
+							</div>
+							<a href="#closeLightBox">Ok</a>
+						</div>
 					</div>
-
-					<p id="incidentText">
-
-					</p>
-
-					<a href="#closeLightBox">Ok</a>
 				</div>
 			</div>
 			<a id="openLightboxincidentView" href="#incidentView"></a>

@@ -651,7 +651,7 @@ function GameLoop (_options) {
 
  	
  	var buildButtons = {
- 		1 : broodBuild,
+ 		1 :broodBuild,
  		2: mushroomBuild,
  		3: storageBuild,
  		4: pantryBuild,
@@ -661,9 +661,6 @@ function GameLoop (_options) {
 	function updateButtons(){
 		var i=1;
 		for(i=1; i<=5; i++){
-			
-			//alert(buildingTypes[i].costLeafs <= _leafs);
-			
 			if(_leafs >= buildingTypes[i].costLeafs && _stone >= buildingTypes[i].costStone && _food >= buildingTypes[i].costFood){
 				buildButtons[i].disabled = false;	
 				//alert(buildButtons[i]);	
@@ -681,59 +678,52 @@ function GameLoop (_options) {
 		else {
 			zid("btn_addAntW").disabled = true;
 		}
-		
-		
 			
-			if(unemployedAnts <= 0){
-				jobButtons[1].disabled = true;
-				jobButtons[3].disabled = true;
-				jobButtons[5].disabled = true;
-				jobButtons[7].disabled = true;
-				jobButtons[9].disabled = true;
-			}
-			else {
-				jobButtons[1].disabled = false;
-				jobButtons[3].disabled = false;
-				jobButtons[5].disabled = false;
-				jobButtons[7].disabled = false;
-				jobButtons[9].disabled = false;
-			}
-			
-			if(_jobLeafs <= 0){
-				jobButtons[2].disabled = true;
-			}
-			else{
-				jobButtons[2].disabled = false;
-			}
-			if(_jobStone <= 0){
-				jobButtons[4].disabled = true;
-			}
-			else{
-				jobButtons[4].disabled = false;
-			}
-			if(_jobHunt <= 0){
-				jobButtons[6].disabled = true;
-			}
-			else{
-				jobButtons[6].disabled = false;
-			}
-			if(_jobHatch <= 0){
-				jobButtons[8].disabled = true;
-			}
-			else{
-				jobButtons[8].disabled = false;
-			}
-			if(_jobClean <= 0){
-				jobButtons[10].disabled = true;
-			}
-			else{
-				jobButtons[10].disabled = false;
-			}
-			
+		if(unemployedAnts <= 0){
+			jobButtons[1].disabled = true;
+			jobButtons[3].disabled = true;
+			jobButtons[5].disabled = true;
+			jobButtons[7].disabled = true;
+			jobButtons[9].disabled = true;
+		}
+		else {
+			jobButtons[1].disabled = false;
+			jobButtons[3].disabled = false;
+			jobButtons[5].disabled = false;
+			jobButtons[7].disabled = false;
+			jobButtons[9].disabled = false;
+		}
 		
-		
-		
-		
+		if(_jobLeafs <= 0){
+			jobButtons[2].disabled = true;
+		}
+		else{
+			jobButtons[2].disabled = false;
+		}
+		if(_jobStone <= 0){
+			jobButtons[4].disabled = true;
+		}
+		else{
+			jobButtons[4].disabled = false;
+		}
+		if(_jobHunt <= 0){
+			jobButtons[6].disabled = true;
+		}
+		else{
+			jobButtons[6].disabled = false;
+		}
+		if(_jobHatch <= 0){
+			jobButtons[8].disabled = true;
+		}
+		else{
+			jobButtons[8].disabled = false;
+		}
+		if(_jobClean <= 0){
+			jobButtons[10].disabled = true;
+		}
+		else{
+			jobButtons[10].disabled = false;
+		}
 	}
 
 	

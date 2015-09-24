@@ -63,33 +63,24 @@ button:hover {
 	margin: 0 0 10px 0;
 }
 .tooltip {
-	
-	width: 20px;
-	background-color: #FFFFFF;
 	z-index: 101;
 	text-align: center;
-	float: left;
 	font-size: .8em;
 	cursor: default;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-	border: solid 1px black;
-}
-.tooltip:hover {
-	background-color: #2F2E30;
-	color: #FFFFFF;
-}
+	display: inline-block;
+	margin-left: 10px;
 
+	width: 30px;
+	height: 30px;
+	background-image: url('../img/icons/Intro-Tooltip.png');
+	background-size: 30px 30px;
+}
 /*
- *	Grundklassen bereitstellen
+ *	Grundklassen 
  */
 .row {
 	display: block;
 }
-/*
- *	Lightbox Klassen
- */
 
 /*
  *	Drag Klassen
@@ -214,6 +205,7 @@ button:hover {
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
 	background-position: 15px center;
+	text-align: center;
 
 	background-image: url('../img/icons/Menu-Down.png');
 }
@@ -228,7 +220,14 @@ button:hover {
 	margin: 0;
 	padding: 0 0 0 10px;
 	cursor: move;
-	font-family: 'BebasNeue';
+	font-family: 'SourceSansPro';
+
+	font-size: 18px;
+	font-weight: bold;
+}
+.draggable .iconCost {
+	width: 10px;
+	height: 10px;
 }
 #jobTable button{
 	width: auto;
@@ -368,11 +367,13 @@ button:hover {
 	max-height: 100%;
 	margin: 0 auto;
 }
+.lightboxWrapper#incidentView .lightboxContent .upgradeContent ,
 .lightboxWrapper#buildingUpgradeView .lightboxContent .upgradeContent {
 	margin: 10px 0;
 	display: inline-block;
 	text-align: left;
 }
+.lightboxWrapper#incidentView .lightboxContent,
 .lightboxWrapper#buildingUpgradeView .lightboxContent {
 	bottom: 0;
 	left: 0;
@@ -385,11 +386,12 @@ button:hover {
 	text-align: center;
 	background: none;
 }
+.lightboxWrapper#incidentView .lightboxContent .lightboxImageWrapper, 
 .lightboxWrapper#buildingUpgradeView .lightboxContent .lightboxImageWrapper { 
 	height: 170px;
 }
 
-#buildingUpgradeViewBG {
+.backgroundBuildingUpgradeView{
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -404,10 +406,10 @@ button:hover {
 
 	font-size: 12px;
 }
-#buildingUpgradeView {
+#buildingUpgradeView, #incidentView {
 	background: none;
 }
-#buildingUpgradeViewTitle {
+#buildingUpgradeViewTitle, #incidentTitle{
 	font-size: 20px;
 	margin-bottom: 20px;
 }
@@ -563,3 +565,79 @@ button:hover {
 	background-repeat: no-repeat;
 	
 }
+
+/**
+ * Klassen zur Darstellung von des Build Menu
+ */
+.buildMenu .buildMenuBuilding{
+	padding-left: 50px;
+	padding-right: 20px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+
+	background-repeat: no-repeat;
+	background-position: 15px 20px;
+	background-size: 35px 35px;
+}
+.buildMenu button{
+	width: 100%;
+	height: 30px;
+	border-radius: 0;
+	border: solid 1px #000;
+
+	color: #000;
+
+
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-image: url('../img/icons/button_build.png');
+}
+.buildMenu button:hover{
+	color: #000;
+	border: solid 1px #000;
+	background-image: url('../img/icons/button_buildActive.png');
+}
+.buildMenu button:disabled{
+	background-image: url('../img/icons/button_buildDisabled.png');
+}
+.buildMenu .buildingName {
+	font-weight: bold;
+	font-size: 18px;
+	margin-bottom: 15px;
+}
+.buildMenu table td {
+	min-width: 50px;
+}
+.iconLeafs, .iconStone {
+	background-repeat: no-repeat;
+	background-size: 22px 22px;
+	background-position: right center;
+
+	width: 22px;
+	height: 22px;
+}
+.iconLeafs {
+	background-image: url('../img/icons/Blätter.png');
+}
+.iconStone {
+	background-image: url('../img/icons/Steine.png');
+}
+.broodChamberWrapper {
+	background: url('../img/icons/buildings/hatch.png');
+}
+.mushroomChamberWrapper {
+	background: url('../img/icons/Pilzkammer.png');
+}
+.storageWrapper {
+	background: url('../img/icons/buildings/storage.png');
+}
+.pantryWrapper {
+	background: url('../img/icons/Nahrung.png');
+}
+.dumpingGroundWrapper {
+	background: url('../img/icons/buildings/dump.png');
+}
+
+/**
+ * Ende Darstellung Build Menu
+ */

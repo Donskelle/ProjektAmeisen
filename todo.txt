@@ -9,9 +9,9 @@ Todo Fabian:
 - Rohstoffanzeige
 
 // Fabian
-- Upgradebilder
-- Menüs
-- Ereignisse in Consosle anzeigen
+- Upgradebilder // done
+- Menüs // 
+- Ereignisse in Console anzeigen // Done
 
 Zu wenig
 - Toolkit Texte

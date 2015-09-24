@@ -5,7 +5,7 @@ function incidents() {
 		{
 			'name': 'Ameisen verschwunden',
 			'description': 'Ein paar deiner Ameisen ist verschwunden. Sie sind nicht in dein Lager zurück gekommen.',
-			'image': 'http://img4.wikia.nocookie.net/__cb20140909155820/creepypasta/de/images/3/34/Atompilz.jpg',
+			'image': 'img/icons/Achtung-01.png',
 			'calculateFunction': function(values) {
 				var removedAnts = 0;
 
@@ -46,16 +46,16 @@ function incidents() {
 		{
 			'name': 'Ameisen Schub',
 			'description': 'Deiner Königin geht es aktuell wirklich gut. Du erhälst 5 neue Ameisen.',
-			'image': 'http://img4.wikia.nocookie.net/__cb20140909155820/creepypasta/de/images/3/34/Atompilz.jpg',
+			'image': 'img/icons/AchtungGut-01.png',
 			'calculateFunction': function(values) {
 				values.ants.unemployed += 5;
 				return values;
 			}
 		},
 		{
-			'name': 'Vorräte wurde gestohlen',
-			'description': 'Eine deiner Arbeitin endeckte, das viele deiner Vorräte geplündert wurden.',
-			'image': 'http://img4.wikia.nocookie.net/__cb20140909155820/creepypasta/de/images/3/34/Atompilz.jpg',
+			'name': 'Vorräte wurden gestohlen',
+			'description': 'Eine deiner Arbeitin endeckte, dass viele deiner Vorräte geplündert wurden.',
+			'image': 'img/icons/Achtung-01.png',
 			'calculateFunction': function(values) {
 				values.resources.leafs = Math.floor(values.resources.leafs / 2);
 				values.resources.stone -= Math.floor(values.resources.leafs / 2);
@@ -66,7 +66,7 @@ function incidents() {
 		{
 			'name': 'Schlechte Ausbaute',
 			'description': 'Viele deiner Blätter sind leider nicht brauchbar und werden aus deinem Lager entfernt.',
-			'image': 'http://img4.wikia.nocookie.net/__cb20140909155820/creepypasta/de/images/3/34/Atompilz.jpg',
+			'image': 'img/icons/Achtung-01.png',
 			'calculateFunction': function(values) {
 				values.resources.leafs -= 15;
 				return values;
@@ -75,7 +75,7 @@ function incidents() {
 		{
 			'name': 'Rohstoff Schub',
 			'description': 'Deine Ameisen haben ein leeres Ameisenlager in der Nähe gefunden und füllen damit all deine Rohstoff aufs Maximum auf.',
-			'image': 'http://img4.wikia.nocookie.net/__cb20140909155820/creepypasta/de/images/3/34/Atompilz.jpg',
+			'image': 'img/icons/AchtungGut-01.png',
 			'calculateFunction': function(values) {
 				// 2147483647 = Safe Max Int
 				values.resources.leafs = Number.MAX_VALUE;
@@ -150,5 +150,7 @@ function incidents() {
 
 		//öffnet Lightbox
 		zid("openLightboxincidentView").click();
+
+		zid("incidentViewContentBG").style.height = zid("incidentViewContent").offsetHeight + "px";
 	}
 }
