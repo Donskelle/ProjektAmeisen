@@ -1,5 +1,7 @@
-function NaturalDisasters() {
-	var disastersTypes = [
+function incidents() {
+	var incidentTimeout = 120000;
+
+	var incidentTypes = [
 		{
 			'name': 'Ameisen verschwunden',
 			'description': 'Ein paar deiner Ameisen ist verschwunden. Sie sind nicht in dein Lager zurück gekommen.',
@@ -86,65 +88,67 @@ function NaturalDisasters() {
 
 	(function init(){
 
-		window.setTimeout(randomDisasters, 120000);
+		window.setTimeout(randomDisasters, incidentTimeout);
 	})();
 
 	function randomDisasters() {
 		/**
 		 * 50 % Chance -> Zeit(ms) * 10 / 5 = Durschnittszeit
 		 */
-		switch (HelpFunction.getRandomInt(0,10))
+		var incidentTypeInt = HelpFunction.getRandomInt(0,10);
+		switch (incidentTypeInt)
 		{
 			case 0: 
-				showDisaster(0);
+				showDisaster(incidentTypeInt);
 
 				HelpFunction.pushEvent("disaster", {
-					'calculateFunction': disastersTypes[0].calculateFunction
+					'calculateFunction': incidentTypes[incidentTypeInt].calculateFunction
 				});
 				break;
 			case 1: 
-				showDisaster(1);
+				showDisaster(incidentTypeInt);
+
 				HelpFunction.pushEvent("disaster", {
-					'calculateFunction': disastersTypes[1].calculateFunction
+					'calculateFunction': incidentTypes[incidentTypeInt].calculateFunction
 				});
 				break;
 			case 2: 
-				showDisaster(2);
+				showDisaster(incidentTypeInt);
 
 				HelpFunction.pushEvent("disaster", {
-					'calculateFunction': disastersTypes[2].calculateFunction
+					'calculateFunction': incidentTypes[incidentTypeInt].calculateFunction
 				});
 				break;
 			case 3: 
-				showDisaster(3);
+				showDisaster(incidentTypeInt);
 
 				HelpFunction.pushEvent("disaster", {
-					'calculateFunction': disastersTypes[3].calculateFunction
+					'calculateFunction': incidentTypes[incidentTypeInt].calculateFunction
 				});
 				break;
 			case 4: 
-				showDisaster(4);
+				showDisaster(incidentTypeInt);
 
 				HelpFunction.pushEvent("disaster", {
-					'calculateFunction': disastersTypes[4].calculateFunction
+					'calculateFunction': incidentTypes[incidentTypeInt].calculateFunction
 				});
 				break;
 			default: 
-				//console.log("Kein Event");
+				// Kein Auslösen
 				break;
 		}
-		window.setTimeout(randomDisasters, 120000);
+		window.setTimeout(randomDisasters, incidentTimeout);
 	}
 
 
 	function showDisaster(type) {
-		var desaster = disastersTypes[type];
+		var incident = incidentTypes[type];
 
-		zid("naturalDisasterTitle").innerHTML = desaster.name;
-		zid("naturalDisasterImage").src = desaster.image;
-		zid("naturalDisasterText").innerHTML = desaster.description;
+		zid("incidentTitle").innerHTML = incident.name;
+		zid("incidentImage").src = incident.image;
+		zid("incidentText").innerHTML = incident.description;
 
 		//öffnet Lightbox
-		zid("openLightboxNaturalDisasterView").click();
+		zid("openLightboxincidentView").click();
 	}
 }

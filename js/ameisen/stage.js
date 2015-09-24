@@ -41,7 +41,7 @@ function AmeisenStage(_options) {
 			options
 		);
 
-		disasters = new NaturalDisasters();
+		disasters = new incidents();
 
 		/**
 		 * Hier findet die Kommunikation zwischen den Klassen statt.
