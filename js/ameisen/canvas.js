@@ -21,11 +21,12 @@ function Canvas(_options) {
 	var buidlingsTypes = [
 		{
 			name: "Brutkammer",
-			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
-			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
-			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			images: [
+				"img/buildings/Brutkammer-01.png",
+				"img/buildings/Brutkammer-02.png",
+				"img/buildings/Brutkammer-03.png",
+				"img/buildings/Brutkammer-04.png"
+			],
 			lvl: 1,
 			text: "Durch ein Upgrade der Brutkammer, erhöhst du die Anzahl der Ameisen, die du bauen kannst. Alle 5 Upgradestufen erhählst du eine zusätzliche Warteschlangenposition.",
 			costs: {
@@ -36,11 +37,12 @@ function Canvas(_options) {
 		},
 		{
 			name: "Pilzkammer",
-			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
-			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
-			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			images: [
+				"img/buildings/Pilzkammer-01.png",
+				"img/buildings/Pilzkammer-02.png",
+				"img/buildings/Pilzkammer-03.png",
+				"img/buildings/Pilzkammer-04.png"
+			],
 			lvl: 1,
 			text: "Die Pilzkammer wandelt Blätter in Nahrung um. Jede Upgradestufe erhöht die Anzahl der Blätter, welche zum Produzieren von Nahrung genutzt wird.",
 			costs: {
@@ -51,11 +53,12 @@ function Canvas(_options) {
 		},
 		{
 			name: "Lager",
-			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
-			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
-			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			images: [
+				"img/buildings/Rohstofflager-01.png",
+				"img/buildings/Rohstofflager-02.png",
+				"img/buildings/Rohstofflager-03.png",
+				"img/buildings/Rohstofflager-04.png"
+			],
 			lvl: 1,
 			text: "Im Lager werden deine Baumaterialien gespeichert, also Blätter und Steine. Je höher die Ausbaustufe, desto mehr Einheiten können gelagert werden.",
 			costs: {
@@ -66,11 +69,12 @@ function Canvas(_options) {
 		},
 		{
 			name: "Speisekammer",
-			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
-			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
-			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			images: [
+				"img/buildings/Vorratskammer-01.png",
+				"img/buildings/Vorratskammer-02.png",
+				"img/buildings/Vorratskammer-03.png",
+				"img/buildings/Vorratskammer-04.png"
+			],
 			lvl: 1,
 			text: "Hier werden Nahrungsmittel gelagert, die der Pilz produziert oder deine Arbeiterinnen bei der Jagt erbeutet haben. Auch hier bestimmt die Ausbaustufe die Größe des Speichers.",
 			costs: {
@@ -81,11 +85,12 @@ function Canvas(_options) {
 		},
 		{
 			name: "Deponie",
-			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
-			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
-			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			images: [
+				"img/buildings/Deponie-01.png",
+				"img/buildings/Deponie-02.png",
+				"img/buildings/Deponie-03.png",
+				"img/buildings/Deponie-04.png"
+			],
 			lvl: 1,
 			text: "Dies ist der Ort wo Abfälle, die dein Volk produziert, entsorgt werden. Dazu zählen tote Ameisen, verdorbene Nahrungsreste und die Notdurft deines Volkes. Je höher die Kammer ausgebaut ist, desto mehr Platz bietet sie und desto schneller wird der Abfall abgebaut.",
 			costs: {
@@ -96,11 +101,7 @@ function Canvas(_options) {
 		},
 		{
 			name: "Start",
-			image1: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image2: "https://org.de/wp-content/uploads/2012/11/Atomkraftwerk.jpg",
-			image3: "http://images.zeit.de/politik/deutschland/2010-07/akw-schwarz-gelb-010710/akw-schwarz-gelb-010710-540x304.jpg",
-			image4: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
-			image5: "http://www.handelsblatt.com/images/france-politics-energy-company-edf-privatisation/6483362/2-format2010.jpg",
+			images: {},
 			lvl: 1,
 			text: "",
 			costs: {
@@ -465,16 +466,14 @@ function Canvas(_options) {
 			zid("buildingUpgradeViewFormBuildingName").innerHTML = eles[i].buildingData.name;
 
 			var img = "";
-			if(eles[i].buildingData.lvl <= 9)
-				img = eles[i].buildingData.image1;
-			else if (eles[i].buildingData.lvl <= 19)
-				img = eles[i].buildingData.image2;
-			else if(eles[i].buildingData.lvl <= 29)
-				img = eles[i].buildingData.image3;
-			else if(eles[i].buildingData.lvl <= 39)
-				img = eles[i].buildingData.image4;
+			if(eles[i].buildingData.lvl <= 14)
+				img = eles[i].buildingData.images[0];
+			else if (eles[i].buildingData.lvl <= 29)
+				img = eles[i].buildingData.images[1];
+			else if(eles[i].buildingData.lvl <= 45)
+				img = eles[i].buildingData.images[2];
 			else 
-				img = eles[i].buildingData.image5;
+				img = eles[i].buildingData.images[3];
 
 			zid("buildingUpgradeViewImage").src = img;
 

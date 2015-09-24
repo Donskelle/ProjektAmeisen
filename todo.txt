@@ -3,3 +3,16 @@ Todo Fabian:
 - Update Jobs durch ereignisse // done
 - Set Jobs // done
 - FoldingMenu // done
+
+// Ole
+- Intro
+- Rohstoffanzeige
+
+// Fabian
+- Upgradebilder
+- Menüs
+- Ereignisse in Consosle anzeigen
+
+Zu wenig
+- Toolkit Texte
+-  Evtl. menu aneinander snappen
