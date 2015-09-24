@@ -230,14 +230,12 @@ var imgSrc = zid("imgSrc");
 var imgView = zid("imgView");
 
 imgIntro1.addEventListener("click", function(e) {
+	
 	imgView.style.display = "block";
 	imgSrc.style.backgroundImage = "url(img/intro1.png)"; 
 			 
 });
-imgIntro2.addEventListener("click", function(e) {
-	imgView.style.display = "block";
-	imgSrc.style.backgroundImage = "url(img/intro2.png)"; 
-});	
+
 imgView.addEventListener("click", function(e) {
 	imgView.style.display = "none";
 	
