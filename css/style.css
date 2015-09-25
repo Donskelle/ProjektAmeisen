@@ -436,6 +436,17 @@ button:hover {
 	padding: 8px 25px;
 	font-size: 20px;
 }
+
+.lightboxContent .antButton {
+	width: 300px;
+	height: 40px;
+	display: inline-block;
+	text-align: center;
+	line-height: 40px;
+	margin: 10px auto;
+
+}
+
 /**
  * Lightbox Klick Events
  */
@@ -579,11 +590,14 @@ button:hover {
 	background-position: 15px 20px;
 	background-size: 35px 35px;
 }
-.buildMenu button{
+.antButton {
 	width: 100%;
 	height: 30px;
 	border-radius: 0;
 	border: solid 1px #000;
+	font-size: 1em;
+	line-height: 1em;
+	text-decoration: none;
 
 	color: #000;
 
@@ -592,12 +606,12 @@ button:hover {
 	background-repeat: no-repeat;
 	background-image: url('../img/icons/button_build.png');
 }
-.buildMenu button:hover{
+.antButton:hover{
 	color: #000;
 	border: solid 1px #000;
 	background-image: url('../img/icons/button_buildActive.png');
 }
-.buildMenu button:disabled{
+.antButton:disabled{
 	background-image: url('../img/icons/button_buildDisabled.png');
 }
 .buildMenu .buildingName {
