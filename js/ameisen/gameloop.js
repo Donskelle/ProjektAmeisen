@@ -682,6 +682,11 @@ function GameLoop (_options) {
  		}
  	};
  	
+
+ 	/**
+ 	 * [updateButtons description]
+ 	 * Diese Funktion prüft, ob unterschiedliche Aktionen durchführbar sind und ggf. die Buttons auf disabled
+ 	 */
 	function updateButtons(){
 		
 		for(var i=1; i<=5; i++){
@@ -751,6 +756,10 @@ function GameLoop (_options) {
 	}
 
 	
+	/**
+	 * [antJobs description]
+	 * Dieses Object ist für die Einstellung der Jobs zuständig. Sollte Aktionen nicht möglich sein, werden diese per Alert ausgeben.
+	 */
     function antJobs()
     {
     	var _jobAntW = zid("jobAntW");
@@ -760,7 +769,17 @@ function GameLoop (_options) {
 		var _jobCountHa = zid("jobCountHa");
 	    var _jobCountC = zid("jobCountC");
 
-
+	    /**
+	     * [setJobs description]
+	     * Diese public Methode stellt die Schnittstelle zum eigentlichen Einstellen der Ameisen dar.
+	     * Sie prüft, ob Ameisen entfernt oder hinzugefügt werden können.
+	     * @param {[number]} type     [description]
+	     * Art des Jobs der Verändert werden soll
+	     * @param {[number]} amount   [description]
+	     * Anzahl der Ameisen für diesen Job
+	     * @param {[boolean]} override [description]
+	     * Boolean der angibt, ob der aktuelle Wert überschrieben werden soll.
+	     */
     	this.setJobs = function (type, amount, override) 
     	{
     		
@@ -904,6 +923,10 @@ function GameLoop (_options) {
 		    }
     	}
 
+    	/**
+    	 * [updateJobs description]
+    	 * Diese public Methode updatet die dargestellten Jobs, entsprechend der aktuellen Variablen
+    	 */
     	this.updateJobs = function() {
     		_jobCountL.innerHTML = _jobLeafs;
     		_jobCountS.innerHTML = _jobStone;
@@ -923,7 +946,17 @@ function GameLoop (_options) {
 
 	
 	
-	
+	/**
+	 * [build description]
+	 * Diese Methode erstellt ein neues Gebäude des angebenen Typs
+	 * @param  {[number]} type [description]
+	 * Art des Gebäudes
+	 * 1: brood
+	 * 2: mush
+	 * 3: storage
+	 * 4: pantry
+	 * 5: dumping
+	 */
 	function build(type) {
 		//Abfrage, ob die Ressourcen die Kosten uebersteigen
 		if(_leafs >= buildingTypes[type]["costLeafs"] && _stone >= buildingTypes[type]["costStone"] && _food >= buildingTypes[type]["costFood"])
@@ -992,7 +1025,12 @@ function GameLoop (_options) {
 		}
 	}
 	
-	
+	/**
+	 * [requestUpdate description]
+	 * Public Mehtode überprüft, ob genügend Rohstoffe für ein Upgrade verfügbar sind.
+	 * @param  {[number]} buildingId [description]
+	 * Id des Gebäudes, welches upgedrated werden soll
+	 */
 	this.requestUpdate = function(buildingId) {
 		if(buildedBuildings[buildingId].upgradeCost.stone <= _stone
 			&& buildedBuildings[buildingId].upgradeCost.leafs <= _leafs
@@ -1019,10 +1057,21 @@ function GameLoop (_options) {
 		}
 	}
 
+	/**
+	 * [getUpgradeCots description]
+	 * Public Methode zur Abfrage der aktuellen Upgradekosten für ein Gebäude
+	 * @param  {[number]} buildingId [description]
+	 * Id des abzufragenden Gebäudes
+	 */
 	this.getUpgradeCots = function(buildingId) {
 		return buildedBuildings[buildingId].upgradeCost;
 	}
 
+	/**
+	 * [getCurrentValues description]
+	 * Public Mehtode zur Abfrage der aktuellen Rohstoffe und Jobs
+	 * @return {[object]} [description]
+	 */
 	this.getCurrentValues = function() {
 		var values = {
 			'resources': {
@@ -1043,6 +1092,12 @@ function GameLoop (_options) {
 		return values;
 	}
 
+	/**
+	 * [setValues description]
+	 * Public Methode zum Überschreiben der Rohstoffe und Jobs
+	 * @param {[object]} values [description]
+	 * Siehe getCurrentValues
+	 */
 	this.setValues = function(values) {
 		_leafs = values.resources.leafs;
 		_stone = values.resources.stone;
@@ -1072,6 +1127,12 @@ function GameLoop (_options) {
 		buildedBuildings[eventData.to].connected = true;
 	}
 
+	/**
+	 * [checkConnection description]
+	 * Prüft, ob eine Gebäude noch eine Verbindung zu einem anderen hat
+	 * @param  {[object]} arr [description]
+	 * Gebäude welches durchsucht werden soll
+	 */
 	function checkConnection(arr) { 
 		arr.connected = false;
 		
@@ -1102,7 +1163,10 @@ function GameLoop (_options) {
 	}
 
 
-
+	/**
+	 * [antBuilder description]
+	 * @return {[type]} [description]
+	 */
 	function antBuilder () {
 		var timer;
 		var countdownW = zid("countdownW");
