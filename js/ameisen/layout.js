@@ -29,22 +29,66 @@ function load() {
 		}
 		
 	});
+	
+	
+	//Intro
+	var togIntro = zid("menuHowToPlay");
+	var quitIntro = zid("quitIntro");
+	var introBox = zid("introBox");
+	var btnNext = zid("next");
+	var btnPrev = zid("prev");
+	var curPage = 1;
+	var pageAmount = 5;
+	var pages = {
+		1 : pageOne,
+		2 : pageTwo,
+		3 : pageThree,
+		4 : pageFour,
+		5 : pageFive
+	};
+	
+	var introIsActive = false;
+	togIntro.addEventListener("click", function(e) {
+		if(introIsActive == false){
+			introBox.style.display = "block";
+			pages[curPage].style.display = "block";
+			introIsActive = true;
+		}
+		else {
+			introBox.style.display = "none";
+			pages[curPage].style.display = "none";	
+			introIsActive = false;
+		}
+		
+		
+		
+		
+	});
+	quitIntro.addEventListener("click", function(e) {
+		introBox.style.display = "none";
+		introIsActive = false;
+	});
+	btnNext.addEventListener("click", function(e) {
+		
+		pages[curPage].style.display = "none";
+		curPage++;
+		if(curPage > pageAmount){
+			curPage = 1;
+		}
+		pages[curPage].style.display = "block";
+	});
+	btnPrev.addEventListener("click", function(e) {
+		pages[curPage].style.display = "none";
+		curPage--;
+		if(curPage < 1){
+			curPage = pageAmount;
+		}
+		pages[curPage].style.display = "block";
+	});
+	
 	//Menu
 	htpToggle = false;
 	settingsToggle = false;
-	menuHowToPlay.addEventListener("click", function(e) {
-		if(htpToggle == true){
-			howToPlay.style.display = "none";
-			htpToggle = false;
-		}
-		else {
-			howToPlay.style.display = "block";
-			htpToggle = true;
-			settings.style.display = "none";
-			settingsToggle = false;
-		}
-		
-	});
 	
 	menuSettings.addEventListener("click", function(e) {
 		if(settingsToggle == true){
@@ -169,8 +213,21 @@ $(".tooltip").on( "mousemove", function( event ) {
 });
 
 
+// Image View
 
+var imgIntro1 = zid("imgIntro1");
+var imgIntro2 = zid("imgIntro2");
+var imgSrc = zid("imgSrc");
+var imgView = zid("imgView");
 
-
-
+imgIntro1.addEventListener("click", function(e) {
 	
+	imgView.style.display = "block";
+	imgSrc.style.backgroundImage = "url(img/intro1.png)"; 
+			 
+});
+
+imgView.addEventListener("click", function(e) {
+	imgView.style.display = "none";
+	
+});	

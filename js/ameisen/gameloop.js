@@ -23,6 +23,7 @@ function GameLoop (_options) {
 	var stoneBar = zid("stoneBar");
 	var foodBar = zid("foodBar");
 	var dumpBar = zid("dumpBar");
+	var dumpHillBar = zid("dumpHillBar");
 
 	//Bestand von Rohstoffen
 	var _leafs = 100;
@@ -32,11 +33,11 @@ function GameLoop (_options) {
 	
 	var _prodDump = 0;
 	
-	var _jobCleanRatio = 2;
+	var _jobCleanRatio = 1;
     var _dumpHill = 0;
 	
 	//Bestand und Kosten von Ameisen
-	var unemployedAnts = 1;
+	var unemployedAnts = 100;
 	var _antS = 0;
 	
 	var _antCostW = {
@@ -49,6 +50,9 @@ function GameLoop (_options) {
 		stone: 10,
 		food: 10
 	};
+	
+	var ants = [];
+	var posibleAnts = 1;
 	
 	//belegte Jobs
 	var _jobLeafs = 0;
@@ -101,6 +105,7 @@ function GameLoop (_options) {
 	var _garbageRatio = 500;
 	
 	var enoughFood = true;
+	var enoughDump = true;
 	
 	//Buildings
     var _buildingCostRatio = 10; //balancing
@@ -185,18 +190,20 @@ function GameLoop (_options) {
 	    },
 	    5 : { //dumping ground
 	    	count: 0,
-	    	costLeafs: 250,
-	    	costStone: 500,
+	    	costLeafs: 100,
+	    	costStone: 100,
 	    	costFood: 0,
 	    	costLeafsHtml: zid("dumpingCostL"),
 	    	costStoneHtml:	zid("dumpingCostS"),
-	    	storeDump: 15,
+	    	storeDump: 10,
+	    	removeDump: 1,
 	    	upgradeCost: {
-	    		totalUpgrades: 0,
+	    		totalUpgrades: 1,
 	    		leafs: 10,
 	    		stone: 10,
 	    		food: 0
 	    	},
+	    	
 	    	buildedBuildings : []
 	    }
 	};
@@ -369,17 +376,33 @@ function GameLoop (_options) {
     	else {
     		_food = buildingTypes[4]["storeFood"];
     	}
+    	if(_food + _prodFood < 0){
+    		_food = 0;
+    		
+    	}
     	
     	if(_dump + _prodDump > buildingTypes[5]["storeDump"]) {
+    		_dumpHill -= buildingTypes[5]["storeDump"] - _dump;
     		_dump = buildingTypes[5]["storeDump"];
-    		_dumpHill -= (_dump) - (buildingTypes[5]["storeDump"] + (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean));
+    		//_dumpHill -= _dump - (buildingTypes[5]["storeDump"] + (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean)-10);
+    		//alert(_dump - (buildingTypes[5]["storeDump"] + (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean)-10));
     	}
     	else {
     		_dump += _prodDump;
     		_dumpHill -= _prodDump;
     	}
     	
-      _dumpHill += unemployedAnts;
+    	if((unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean) > 0){
+    		_dumpHill += Math.floor((unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean)/10);
+    	}
+    	if(_dump - (2 + buildingTypes[5]["removeDump"] * buildingTypes[5]["upgradeCost"].totalUpgrades) >= 0){
+    		_dump -= 2 + buildingTypes[5]["removeDump"] * buildingTypes[5]["upgradeCost"].totalUpgrades;
+    	}
+    	else {
+    		_dump = 0;
+    	}
+    	
+      
        
        
        updateRes();
@@ -398,7 +421,9 @@ function GameLoop (_options) {
 
     	buildingTypes[3]["storeLeafs"] = maxRes;
     	buildingTypes[3]["storeStone"] = maxRes;
-
+		buildingTypes[5]["storeDump"] =  Math.round(10 * buildingTypes[5]["upgradeCost"].totalUpgrades * 1.03);
+		
+		
 
     	connectedBuildingsLevel = HelpFunction.getConnectedBuildingsLevelByType(buildingTypes, buildedBuildings, 4);
     	var maxFood = 25;
@@ -448,21 +473,29 @@ function GameLoop (_options) {
     		_stoneProd.innerHTML = _prodStone;
     	}
     	 
-    	
-    	if(enoughFood && _food < 0) {
+    	if(enoughDump && _dumpHill > (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean) * 10) {
+			alert("Warnung! In deinem Bau befinden sich zu viele Abfälle. Deine Ameisen werden krank und sterben. Du solltest deine Ameisen schnell den Bau säubern lassen und ggf. die Abfallkammer erweitern.");
+			enoughDump = false;
+    	}
+    	if(enoughFood && _food <= 0) {
 			alert("Deine Nahrung ist leer.\nStell schnell wieder ein Gleichgewicht her! Deine Ameisen werden nun nach und nach sterben, außerdem kannst du keine Gebäude bauen oder upgraden.");
 			enoughFood = false;
     	}
-    	else if(!enoughFood && _food >= 0) {
+    	else if(!enoughFood && _food > 0) {
 			enoughFood = true;
     	}
-    	else if(!enoughFood) {
+    	else if(!enoughDump && _dumpHill < (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean) * 10) {
+			enoughDump = true;
+    	}
+    	else if(!enoughFood || _dumpHill > (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean) * 10) {
+    		var deathRate = Math.ceil((unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean)/25);
 			var random = Math.random();
 			// Jeden 1000sten Durchlauf
-			if(random <= 0.1)
+			if(random <= 0.05)
 			{
 				var reduced = false;
-				var antCount = unemployedAnts + _jobLeafs + _jobStone + _jobHatch + _jobHunt + _jobClean;
+				
+				var antCount = deathRate;
 
 				if(antCount>0) 
 				{ 
@@ -510,7 +543,7 @@ function GameLoop (_options) {
 					}
 				}
 			}
-
+			
     		antJob.updateJobs();
     	}
 
@@ -530,14 +563,15 @@ function GameLoop (_options) {
     		_foodProd.innerHTML = _prodFood;
     	}
     	
-    	
+    	var allAnts = Math.floor((unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean) * 10);
+
     	_workerCount.innerHTML = unemployedAnts;
     	
     	_leafCount.innerHTML = _leafs;
     	_stoneCount.innerHTML = _stone;
     	_foodCount.innerHTML = _food;
     	_dumpCount.innerHTML = _dump;
-    	_dumpHillhtml.innerHTML = _dumpHill;
+    	
     	
     	
     	_dumpProd.innerHTML = _prodDump;
@@ -549,15 +583,148 @@ function GameLoop (_options) {
 		
 		
 		leafBar.style.width = (_leafs/buildingTypes[3]["storeLeafs"])*100 + "%"; 
-		stoneBar.style.width = (_stone/buildingTypes[3]["storeStone"])*100 + "%"; ;
-		foodBar.style.width = (_food/buildingTypes[4]["storeFood"])*100 + "%"; ;
-		dumpBar.style.width = "100%";
-
+		stoneBar.style.width = (_stone/buildingTypes[3]["storeStone"])*100 + "%"; 
+		foodBar.style.width = (_food/buildingTypes[4]["storeFood"])*100 + "%"; 
+		dumpBar.style.width = (_dump/buildingTypes[5]["storeDump"])*100 + "%"; 
+		
+				
+		if(_dumpHill < allAnts * 10/100){
+			dumpHillBar.style.background = "green";
+		}
+		else if(_dumpHill < allAnts * 20/100){
+			dumpHillBar.style.background = "#4D960E";
+		}
+		else if(_dumpHill < allAnts * 30/100){
+			dumpHillBar.style.background = "#6B960E";
+		}
+		else if(_dumpHill < allAnts * 40/100){
+			dumpHillBar.style.background = "#82960E";
+		}
+		else if(_dumpHill < allAnts * 50/100){
+			dumpHillBar.style.background = "#968F0E";
+		}
+		else if(_dumpHill < allAnts * 60/100){
+			dumpHillBar.style.background = "#967C0E";
+		}
+		else if(_dumpHill < allAnts * 70/100){
+			dumpHillBar.style.background = "#965E0E";
+		}
+		else if(_dumpHill < allAnts * 80/100){
+			dumpHillBar.style.background = "#96550E";
+		}
+		else if(_dumpHill < allAnts * 90/100){
+			dumpHillBar.style.background = "#913F10";
+		}
+		else if(_dumpHill >= allAnts){
+			dumpHillBar.style.background = "#912C10";
+			_dumpHill = allAnts;
+		}
+		
+		_dumpHillhtml.innerHTML = _dumpHill + " / " + allAnts;
 
 		antBuildTimer.update();
+		
+		updateButtons();
     }
  
+ 
+ 	var broodBuild = zid("broodBuild");
+ 	var mushroomBuild = zid("mushroomBuild");
+ 	var storageBuild = zid("storageBuild");
+ 	var pantryBuild = zid("pantryBuild");
+ 	var dumpingBuild = zid("dumpingBuild");
+ 	
+ 	var jobButtons = {
+ 		1 : zid("btn_addJobL"),
+ 		2 : zid("btn_subJobL"),
+ 		3 : zid("btn_addJobS"),
+ 		4 : zid("btn_subJobS"),
+ 		5 : zid("btn_addJobHu"),
+ 		6 : zid("btn_subJobHu"),
+ 		7 : zid("btn_addJobHa"),
+ 		8 : zid("btn_subJobHa"),
+ 		9 : zid("btn_addJobC"),
+ 		10: zid("btn_subJobC")
+ 		
+ 	};
+ 	
 
+ 	
+ 	var buildButtons = {
+ 		1 :broodBuild,
+ 		2: mushroomBuild,
+ 		3: storageBuild,
+ 		4: pantryBuild,
+ 		5: dumpingBuild
+ 	};
+ 	
+	function updateButtons(){
+		var i=1;
+		for(i=1; i<=5; i++){
+			if(_leafs >= buildingTypes[i].costLeafs && _stone >= buildingTypes[i].costStone && _food >= buildingTypes[i].costFood){
+				buildButtons[i].disabled = false;	
+				//alert(buildButtons[i]);	
+			}
+			else{
+				//alert(buildButtons[i]);
+				buildButtons[i].disabled = true;	
+			}	
+		}
+		
+		if(_antCostW["leafs"] <= _leafs && _antCostW["stone"] <= _stone && _antCostW["food"] <= _food && posibleAnts != ants.length){
+			zid("btn_addAntW").disabled = false;
+			
+		}
+		else {
+			zid("btn_addAntW").disabled = true;
+		}
+			
+		if(unemployedAnts <= 0){
+			jobButtons[1].disabled = true;
+			jobButtons[3].disabled = true;
+			jobButtons[5].disabled = true;
+			jobButtons[7].disabled = true;
+			jobButtons[9].disabled = true;
+		}
+		else {
+			jobButtons[1].disabled = false;
+			jobButtons[3].disabled = false;
+			jobButtons[5].disabled = false;
+			jobButtons[7].disabled = false;
+			jobButtons[9].disabled = false;
+		}
+		
+		if(_jobLeafs <= 0){
+			jobButtons[2].disabled = true;
+		}
+		else{
+			jobButtons[2].disabled = false;
+		}
+		if(_jobStone <= 0){
+			jobButtons[4].disabled = true;
+		}
+		else{
+			jobButtons[4].disabled = false;
+		}
+		if(_jobHunt <= 0){
+			jobButtons[6].disabled = true;
+		}
+		else{
+			jobButtons[6].disabled = false;
+		}
+		if(_jobHatch <= 0){
+			jobButtons[8].disabled = true;
+		}
+		else{
+			jobButtons[8].disabled = false;
+		}
+		if(_jobClean <= 0){
+			jobButtons[10].disabled = true;
+		}
+		else{
+			jobButtons[10].disabled = false;
+		}
+	}
 
 	
     function antJobs()
@@ -708,6 +875,7 @@ function GameLoop (_options) {
 			    			break;
 			    	}
 			    }
+			    checkSize();
 			    updateRes();
 		    }
     	}
@@ -920,9 +1088,7 @@ function GameLoop (_options) {
 				end: null
 			}
 		}
-		var ants = [];
-		//var solders = [];
-		var posibleAnts = 1;
+		
 
 
 		function updateViewBuilder() {
@@ -1056,4 +1222,30 @@ function GameLoop (_options) {
 			countdownW.innerHTML = (Math.floor(countDowns.ants.end * 10) / 10).toFixed(2);
 		}
 	}
+	
+	// Startbildschirm
+	var menuWrapper = zid("menuWrapper");
+	var screens = {
+		1 :  "url(./img/Startbild-01.png)",
+		2 :  "url(./img/Startbild-02.png)",
+		3 :  "url(./img/Startbild-03.png)",
+		4 :  "url(./img/Startbild-04.png)",
+	};
+	function checkSize() {
+		if(unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean > 1000){
+			menuWrapper.style.backgroundImage = screens[4];
+		}
+		else if(unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean > 500){
+			menuWrapper.style.backgroundImage = screens[3];
+		}
+		else if(unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean > 100){
+			menuWrapper.style.backgroundImage = screens[2];
+		}
+		else if(unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean < 100){
+			menuWrapper.style.backgroundImage = screens[1];
+		}
+		
+	}
+	
+	
 }

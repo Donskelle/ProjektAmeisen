@@ -1,9 +1,11 @@
-function NaturalDisasters() {
-	var disastersTypes = [
+function incidents() {
+	var incidentTimeout = 120000;
+
+	var incidentTypes = [
 		{
 			'name': 'Ameisen verschwunden',
 			'description': 'Ein paar deiner Ameisen ist verschwunden. Sie sind nicht in dein Lager zurück gekommen.',
-			'image': 'http://img4.wikia.nocookie.net/__cb20140909155820/creepypasta/de/images/3/34/Atompilz.jpg',
+			'image': 'img/icons/Achtung-01.png',
 			'calculateFunction': function(values) {
 				var removedAnts = 0;
 
@@ -44,16 +46,16 @@ function NaturalDisasters() {
 		{
 			'name': 'Ameisen Schub',
 			'description': 'Deiner Königin geht es aktuell wirklich gut. Du erhälst 5 neue Ameisen.',
-			'image': 'http://img4.wikia.nocookie.net/__cb20140909155820/creepypasta/de/images/3/34/Atompilz.jpg',
+			'image': 'img/icons/AchtungGut-01.png',
 			'calculateFunction': function(values) {
 				values.ants.unemployed += 5;
 				return values;
 			}
 		},
 		{
-			'name': 'Vorräte wurde gestohlen',
-			'description': 'Eine deiner Arbeitin endeckte, das viele deiner Vorräte geplündert wurden.',
-			'image': 'http://img4.wikia.nocookie.net/__cb20140909155820/creepypasta/de/images/3/34/Atompilz.jpg',
+			'name': 'Vorräte wurden gestohlen',
+			'description': 'Eine deiner Arbeitin endeckte, dass viele deiner Vorräte geplündert wurden.',
+			'image': 'img/icons/Achtung-01.png',
 			'calculateFunction': function(values) {
 				values.resources.leafs = Math.floor(values.resources.leafs / 2);
 				values.resources.stone -= Math.floor(values.resources.leafs / 2);
@@ -64,7 +66,7 @@ function NaturalDisasters() {
 		{
 			'name': 'Schlechte Ausbaute',
 			'description': 'Viele deiner Blätter sind leider nicht brauchbar und werden aus deinem Lager entfernt.',
-			'image': 'http://img4.wikia.nocookie.net/__cb20140909155820/creepypasta/de/images/3/34/Atompilz.jpg',
+			'image': 'img/icons/Achtung-01.png',
 			'calculateFunction': function(values) {
 				values.resources.leafs -= 15;
 				return values;
@@ -73,7 +75,7 @@ function NaturalDisasters() {
 		{
 			'name': 'Rohstoff Schub',
 			'description': 'Deine Ameisen haben ein leeres Ameisenlager in der Nähe gefunden und füllen damit all deine Rohstoff aufs Maximum auf.',
-			'image': 'http://img4.wikia.nocookie.net/__cb20140909155820/creepypasta/de/images/3/34/Atompilz.jpg',
+			'image': 'img/icons/AchtungGut-01.png',
 			'calculateFunction': function(values) {
 				// 2147483647 = Safe Max Int
 				values.resources.leafs = Number.MAX_VALUE;
@@ -86,65 +88,69 @@ function NaturalDisasters() {
 
 	(function init(){
 
-		window.setTimeout(randomDisasters, 120000);
+		window.setTimeout(randomDisasters, incidentTimeout);
 	})();
 
 	function randomDisasters() {
 		/**
 		 * 50 % Chance -> Zeit(ms) * 10 / 5 = Durschnittszeit
 		 */
-		switch (HelpFunction.getRandomInt(0,10))
+		var incidentTypeInt = HelpFunction.getRandomInt(0,10);
+		switch (incidentTypeInt)
 		{
 			case 0: 
-				showDisaster(0);
+				showDisaster(incidentTypeInt);
 
 				HelpFunction.pushEvent("disaster", {
-					'calculateFunction': disastersTypes[0].calculateFunction
+					'calculateFunction': incidentTypes[incidentTypeInt].calculateFunction
 				});
 				break;
 			case 1: 
-				showDisaster(1);
+				showDisaster(incidentTypeInt);
+
 				HelpFunction.pushEvent("disaster", {
-					'calculateFunction': disastersTypes[1].calculateFunction
+					'calculateFunction': incidentTypes[incidentTypeInt].calculateFunction
 				});
 				break;
 			case 2: 
-				showDisaster(2);
+				showDisaster(incidentTypeInt);
 
 				HelpFunction.pushEvent("disaster", {
-					'calculateFunction': disastersTypes[2].calculateFunction
+					'calculateFunction': incidentTypes[incidentTypeInt].calculateFunction
 				});
 				break;
 			case 3: 
-				showDisaster(3);
+				showDisaster(incidentTypeInt);
 
 				HelpFunction.pushEvent("disaster", {
-					'calculateFunction': disastersTypes[3].calculateFunction
+					'calculateFunction': incidentTypes[incidentTypeInt].calculateFunction
 				});
 				break;
 			case 4: 
-				showDisaster(4);
+				showDisaster(incidentTypeInt);
 
 				HelpFunction.pushEvent("disaster", {
-					'calculateFunction': disastersTypes[4].calculateFunction
+					'calculateFunction': incidentTypes[incidentTypeInt].calculateFunction
 				});
 				break;
 			default: 
-				//console.log("Kein Event");
+				// Kein Auslösen
 				break;
 		}
-		window.setTimeout(randomDisasters, 120000);
+		window.setTimeout(randomDisasters, incidentTimeout);
 	}
 
 
 	function showDisaster(type) {
-		var desaster = disastersTypes[type];
+		var incident = incidentTypes[type];
 
-		zid("naturalDisasterTitle").innerHTML = desaster.name;
-		zid("naturalDisasterImage").src = desaster.image;
-		zid("naturalDisasterText").innerHTML = desaster.description;
+		zid("incidentTitle").innerHTML = incident.name;
+		zid("incidentImage").src = incident.image;
+		zid("incidentText").innerHTML = incident.description;
 
 		//öffnet Lightbox
-		zid("openLightboxNaturalDisasterView").click();
+		zid("openLightboxincidentView").click();
+
+		zid("incidentViewContentBG").style.height = zid("incidentViewContent").offsetHeight + "px";
 	}
 }

@@ -6,7 +6,16 @@
     font-family: 'SourceSansPro';
     src: url('../fonts/SourceSansPro-Regular.otf');
 }
-
+:disabled {
+	color: #ccc;
+	background-color: white;
+	border-color: #ccc;
+}
+:disabled:hover {
+	color: #ccc;
+	background-color: white;
+	border-color: #ccc;
+}
 html {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -54,33 +63,24 @@ button:hover {
 	margin: 0 0 10px 0;
 }
 .tooltip {
-	
-	width: 20px;
-	background-color: #FFFFFF;
 	z-index: 101;
 	text-align: center;
-	float: left;
 	font-size: .8em;
 	cursor: default;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-	border: solid 1px black;
-}
-.tooltip:hover {
-	background-color: #2F2E30;
-	color: #FFFFFF;
-}
+	display: inline-block;
+	margin-left: 10px;
 
+	width: 30px;
+	height: 30px;
+	background-image: url('../img/icons/Intro-Tooltip.png');
+	background-size: 30px 30px;
+}
 /*
- *	Grundklassen bereitstellen
+ *	Grundklassen 
  */
 .row {
 	display: block;
 }
-/*
- *	Lightbox Klassen
- */
 
 /*
  *	Drag Klassen
@@ -91,7 +91,7 @@ button:hover {
 	margin: 0 0 0 0;
 	height: 100vh;
 	background-color: #2F2E30;
-	background-image: url("../img/menu_background.png");
+	background-image: url("../img/Startbild-01.png");
 	background-size: cover;
 	background-position: bottom;
 	background-repeat: no-repeat;
@@ -205,6 +205,7 @@ button:hover {
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
 	background-position: 15px center;
+	text-align: center;
 
 	background-image: url('../img/icons/Menu-Down.png');
 }
@@ -219,7 +220,14 @@ button:hover {
 	margin: 0;
 	padding: 0 0 0 10px;
 	cursor: move;
-	font-family: 'BebasNeue';
+	font-family: 'SourceSansPro';
+
+	font-size: 18px;
+	font-weight: bold;
+}
+.draggable .iconCost {
+	width: 10px;
+	height: 10px;
 }
 #jobTable button{
 	width: auto;
@@ -268,18 +276,34 @@ button:hover {
 	padding: 0 10px 0 10px;
 	
 }
-#leafFill, #stoneFill, #foodFill, #dumpFill {
+#leafFill, #stoneFill, #foodFill {
 	background-color: red;
 	width: 100%;
 	height: 5px;
 }
-#leafBar, #stoneBar, #foodBar, #dumpBar {
+#dumpFill {
+	background-color: green;
+	width: 100%;
+	height: 5px;
+}
+#leafBar, #stoneBar, #foodBar {
 	background-color: green;
 	width: 50%;
 	height: 5px;
 }
-
-
+#dumpBar {
+	background-color: red;
+	width: 50%;
+	height: 5px;
+}
+#dumpHill {
+	
+}	
+#dumpHillBar {
+	
+	
+	background-color: green;
+}
 /*
  *	Menü Styles
  */
@@ -343,11 +367,13 @@ button:hover {
 	max-height: 100%;
 	margin: 0 auto;
 }
+.lightboxWrapper#incidentView .lightboxContent .upgradeContent ,
 .lightboxWrapper#buildingUpgradeView .lightboxContent .upgradeContent {
 	margin: 10px 0;
 	display: inline-block;
 	text-align: left;
 }
+.lightboxWrapper#incidentView .lightboxContent,
 .lightboxWrapper#buildingUpgradeView .lightboxContent {
 	bottom: 0;
 	left: 0;
@@ -360,11 +386,12 @@ button:hover {
 	text-align: center;
 	background: none;
 }
+.lightboxWrapper#incidentView .lightboxContent .lightboxImageWrapper, 
 .lightboxWrapper#buildingUpgradeView .lightboxContent .lightboxImageWrapper { 
 	height: 170px;
 }
 
-#buildingUpgradeViewBG {
+.backgroundBuildingUpgradeView{
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -379,10 +406,10 @@ button:hover {
 
 	font-size: 12px;
 }
-#buildingUpgradeView {
+#buildingUpgradeView, #incidentView {
 	background: none;
 }
-#buildingUpgradeViewTitle {
+#buildingUpgradeViewTitle, #incidentTitle{
 	font-size: 20px;
 	margin-bottom: 20px;
 }
@@ -412,6 +439,205 @@ button:hover {
 /**
  * Lightbox Klick Events
  */
-#buildingUpgradeView:target, #naturalDisasterView:target {
+#buildingUpgradeView:target, #incidentView:target {
 	display:block;
 }
+
+/**
+ * 	Intro Box (Tutorial)
+ */
+
+#introBox {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	display: none;
+	z-index: 250;
+	background: rgba(255, 255, 255, .5);
+	
+}
+#toggleIntro {
+	position: fixed;
+	top: 0;
+	z-index: 300;
+}
+#quitIntro {
+	float: right;
+	z-index: 300;
+	top: 5vh;
+	right: 10vh;
+	width: 30px;
+}
+#pageOne, #pageTwo, #pageThree, #pageFour, #pageFive {
+	margin: 0vh auto;
+	max-width: 1080px;
+	max-height: 768px;
+	width: 100%;
+	height: 90vh;
+	background-color: rgba(255, 255, 255, .8);
+	display: none;
+	padding: 1%;
+	
+	
+	
+}
+#pagesWrapper {
+	margin: 5vh auto;
+	max-width: 1080px;
+	max-height: 768px;
+	width: 100%;
+	height: 90vh;
+	
+	
+}
+#prev, #next {
+	position: fixed;
+	bottom: 5px;
+}
+#prev {
+	left: 5px;
+}
+#next {
+	right: 5px;
+}
+.introHead {
+	font-size: 1.6em;
+}
+.introSub {
+	font-size: 1.2em;
+}
+.introHead {
+	
+}
+.partOne {
+	max-width: 36%;
+	
+	float: left;
+	height: 100%;
+	margin: 1%;
+}
+.partTwo {
+	max-width: 60%;
+	
+	float: left;
+	height: 100%;
+	margin: 1%;
+}
+.partOne img, .partTwo img {
+	width: 90%;
+	margin: 0% auto;
+	display: block;
+	cursor: pointer;
+	
+}
+.introTextOneA p {
+	padding: 30px 0 0 0;
+	
+}
+.introTextOneB p {
+	padding: 3% 5% 3% 5%;
+	
+}
+.introTextHead {
+	font-size: 1.6em;
+}
+.introTextSub {
+	
+}
+#imgView {
+	position: fixed;
+	z-index: 301;
+	width: 100%;
+	height: 100%;
+	background: rgba(255, 255, 255, .5);
+	display: none;
+}
+#imgSrc {
+	width: 150vh;
+	height: 90vh;
+	
+	max-width: 800px;
+	max-height: 600px;
+	background-color: #FFFFFF;
+	margin: 5vh auto;
+	background-image: url("../img/test.jpg");
+	background-size: contain;
+	background-repeat: no-repeat;
+	
+}
+
+/**
+ * Klassen zur Darstellung von des Build Menu
+ */
+.buildMenu .buildMenuBuilding{
+	padding-left: 50px;
+	padding-right: 20px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+
+	background-repeat: no-repeat;
+	background-position: 15px 20px;
+	background-size: 35px 35px;
+}
+.buildMenu button{
+	width: 100%;
+	height: 30px;
+	border-radius: 0;
+	border: solid 1px #000;
+
+	color: #000;
+
+
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-image: url('../img/icons/button_build.png');
+}
+.buildMenu button:hover{
+	color: #000;
+	border: solid 1px #000;
+	background-image: url('../img/icons/button_buildActive.png');
+}
+.buildMenu button:disabled{
+	background-image: url('../img/icons/button_buildDisabled.png');
+}
+.buildMenu .buildingName {
+	font-weight: bold;
+	font-size: 18px;
+	margin-bottom: 15px;
+}
+.buildMenu table td {
+	min-width: 50px;
+}
+.iconLeafs, .iconStone {
+	background-repeat: no-repeat;
+	background-size: 22px 22px;
+	background-position: right center;
+
+	width: 22px;
+	height: 22px;
+}
+.iconLeafs {
+	background-image: url('../img/icons/Blätter.png');
+}
+.iconStone {
+	background-image: url('../img/icons/Steine.png');
+}
+.broodChamberWrapper {
+	background: url('../img/icons/buildings/hatch.png');
+}
+.mushroomChamberWrapper {
+	background: url('../img/icons/Pilzkammer.png');
+}
+.storageWrapper {
+	background: url('../img/icons/buildings/storage.png');
+}
+.pantryWrapper {
+	background: url('../img/icons/Nahrung.png');
+}
+.dumpingGroundWrapper {
+	background: url('../img/icons/buildings/dump.png');
+}
+
+/**
+ * Ende Darstellung Build Menu
+ */
