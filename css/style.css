@@ -589,6 +589,11 @@ button:hover {
 	background-repeat: no-repeat;
 	background-position: 15px 20px;
 	background-size: 35px 35px;
+	background-color: #DEF2BF;
+}
+
+.buildMenu .buildMenuBuilding.disabled{
+	background-color: white;
 }
 .antButton {
 	width: 100%;

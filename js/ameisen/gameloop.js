@@ -634,6 +634,12 @@ function GameLoop (_options) {
  	var pantryBuild = zid("pantryBuild");
  	var dumpingBuild = zid("dumpingBuild");
  	
+ 	var broodBuildWrapper = zid("broodChamberWrapper");
+ 	var mushroomBuildWrapper = zid("mushroomChamberWrapper");
+ 	var storageBuildWrapper = zid("storageWrapper");
+ 	var pantryBuildWrapper = zid("pantryWrapper");
+ 	var dumpingBuildWrapper = zid("dumpingGroundWrapper");
+ 	
  	var jobButtons = {
  		1 : zid("btn_addJobL"),
  		2 : zid("btn_subJobL"),
@@ -645,41 +651,59 @@ function GameLoop (_options) {
  		8 : zid("btn_subJobHa"),
  		9 : zid("btn_addJobC"),
  		10: zid("btn_subJobC")
- 		
  	};
  	
 
- 	
- 	var buildButtons = {
- 		1 :broodBuild,
- 		2: mushroomBuild,
- 		3: storageBuild,
- 		4: pantryBuild,
- 		5: dumpingBuild
+ 	var buildFormElements = {
+ 		//brood: 
+ 		1: {
+ 			wrapper: broodBuildWrapper,
+ 			button: broodBuild 
+ 		},
+ 		// mushroom: {
+ 		2: {
+ 			wrapper: mushroomBuildWrapper,
+ 			button: mushroomBuild
+ 		},
+ 		//storage: {
+ 		3: {
+ 			wrapper: storageBuildWrapper,
+ 			button: storageBuild
+ 		},
+ 		//pantry: {
+ 		4: {
+ 			wrapper: pantryBuildWrapper,
+ 			button: pantryBuild
+ 		},
+ 		//dumping {
+ 		5: {
+ 			wrapper: dumpingBuildWrapper,
+ 			button: dumpingBuild
+ 		}
  	};
  	
 	function updateButtons(){
-		var i=1;
-		for(i=1; i<=5; i++){
+		
+		for(var i=1; i<=5; i++){
 			if(_leafs >= buildingTypes[i].costLeafs && _stone >= buildingTypes[i].costStone && _food >= buildingTypes[i].costFood){
-				buildButtons[i].disabled = false;	
-				//alert(buildButtons[i]);	
+				buildFormElements[i].button.disabled = false;	
+				HelpFunction.toggleClassName(buildFormElements[i].wrapper, false, "disabled");	
 			}
 			else{
 				//alert(buildButtons[i]);
-				buildButtons[i].disabled = true;	
-			}	
+				buildFormElements[i].button.disabled = true;
+				HelpFunction.toggleClassName(buildFormElements[i].wrapper, true, "disabled");
+			}
 		}
 		
 		if(_antCostW["leafs"] <= _leafs && _antCostW["stone"] <= _stone && _antCostW["food"] <= _food && posibleAnts != ants.length){
 			zid("btn_addAntW").disabled = false;
-			
 		}
 		else {
 			zid("btn_addAntW").disabled = true;
 		}
 			
-		if(unemployedAnts <= 0){
+		if(unemployedAnts <= 0) {
 			jobButtons[1].disabled = true;
 			jobButtons[3].disabled = true;
 			jobButtons[5].disabled = true;
