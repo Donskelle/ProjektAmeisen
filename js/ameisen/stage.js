@@ -1,10 +1,10 @@
 /**
- * [amaeisenStage description]
+ * [AntGame description]
  * Der eigentliche Controller, welcher die Kommunikation zwischen den Klassen abbildet.
  * @param  {[type]} options [description]
  * @return {[type]}         [description]
  */
-function AmeisenStage(_options) {
+function AntGame(_options) {
 	/**
 	 * [options description]
 	 * Die standart Optionen
@@ -32,6 +32,37 @@ function AmeisenStage(_options) {
 		canvasResize();
 		options = HelpFunction.merge(options, _options);
 
+		
+
+		/**
+		 * Klick Listener zum Starten des Spiels anlegen
+		 */
+		zid("gameStart").addEventListener("click", function(e) {
+			zid("btn_toggleMenu").style.display = "block";
+			zid("btn_toggleMenu").click();
+			zid("gameStart").style.display = "none";
+
+			startGame();
+		});
+
+
+		/**
+         * Alle lightboxWrapper Klassen werden mit einem Click oder Touch Listener belegt,
+         * um bei offener Lightbox auch durch Berührung des dunklen Feldes die Lightbox zu schließen.
+         * Lightbox bei Canvas erstellen oder Gruppe erstellen
+         */
+        var lightboxWrapper = document.querySelectorAll(".lightboxWrapper");
+        for (var i = lightboxWrapper.length - 1; i >= 0; i--) {
+            lightboxWrapper[i].addEventListener("click", HelpFunction.closeLightbox);
+        };
+	}
+
+	/**
+	 * [startGame description]
+	 * Spiel wird gestartet
+	 * @return {[type]} [description]
+	 */
+	function startGame() {
 
 		game = new GameLoop(
 			options
@@ -49,17 +80,6 @@ function AmeisenStage(_options) {
 		initController();
 
 		canvasBuilder.createDefaults();
-
-
-		/**
-         * Alle lightboxWrapper Klassen werden mit einem Click oder Touch Listener belegt,
-         * um bei offener Lightbox auch durch Berührung des dunklen Feldes die Lightbox zu schließen.
-         * Lightbox bei Canvas erstellen oder Gruppe erstellen
-         */
-        var lightboxWrapper = document.querySelectorAll(".lightboxWrapper");
-        for (var i = lightboxWrapper.length - 1; i >= 0; i--) {
-            lightboxWrapper[i].addEventListener("click", HelpFunction.closeLightbox);
-        };
 	}
 
 	var canvasResize = function() {

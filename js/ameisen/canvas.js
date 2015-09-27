@@ -101,9 +101,14 @@ function Canvas(_options) {
 		},
 		{
 			name: "Start",
-			images: {},
+			images: [
+				"img/buildings/Deponie-01.png",
+				"img/buildings/Deponie-02.png",
+				"img/buildings/Deponie-03.png",
+				"img/buildings/Deponie-04.png"
+			],
 			lvl: 1,
-			text: "",
+			text: "In diesem Gebäude lebt deine Königin.",
 			costs: {
 				leafs: 2,
 		    	stone: 2,
@@ -357,7 +362,11 @@ function Canvas(_options) {
 
 		
 		
-
+		/**
+		 * [addDrag description]
+		 * 
+		 * @param {[object]} c [description]
+		 */
 		function addDrag(c) {
 			c.on("mousedown",function(e){
 				c.clickStart = Date.now();
@@ -555,7 +564,6 @@ function Canvas(_options) {
 
 		return connector;
 	}
-
 
 	init();
 }
