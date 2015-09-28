@@ -1,3 +1,8 @@
+/**
+ * [incidents description]
+ * Incidents Klasse dient zur Erstellung von Ereignissen, welche Zufällig ausgelöst werden.
+ * @return {[type]} [description]
+ */
 function incidents() {
 	var incidentTimeout = 120000;
 
@@ -88,10 +93,15 @@ function incidents() {
 
 	(function init(){
 
-		window.setTimeout(randomDisasters, incidentTimeout);
+		window.setTimeout(randomIncident, incidentTimeout);
 	})();
 
-	function randomDisasters() {
+	/**
+	 * [randomIncident description]
+	 * Diese Funktion wird entsprechend des incidentTimers ausgeführt und löst in 50% der Fälle ein Ereiggnis aus. 
+	 * Die Ereignisse können sowohl positiv und Negativ sein
+	 */
+	function randomIncident() {
 		/**
 		 * 50 % Chance -> Zeit(ms) * 10 / 5 = Durschnittszeit
 		 */
@@ -99,37 +109,37 @@ function incidents() {
 		switch (incidentTypeInt)
 		{
 			case 0: 
-				showDisaster(incidentTypeInt);
+				showIncident(incidentTypeInt);
 
-				HelpFunction.pushEvent("disaster", {
+				HelpFunction.pushEvent("incident", {
 					'calculateFunction': incidentTypes[incidentTypeInt].calculateFunction
 				});
 				break;
 			case 1: 
-				showDisaster(incidentTypeInt);
+				showIncident(incidentTypeInt);
 
-				HelpFunction.pushEvent("disaster", {
+				HelpFunction.pushEvent("incident", {
 					'calculateFunction': incidentTypes[incidentTypeInt].calculateFunction
 				});
 				break;
 			case 2: 
-				showDisaster(incidentTypeInt);
+				showIncident(incidentTypeInt);
 
-				HelpFunction.pushEvent("disaster", {
+				HelpFunction.pushEvent("incident", {
 					'calculateFunction': incidentTypes[incidentTypeInt].calculateFunction
 				});
 				break;
 			case 3: 
-				showDisaster(incidentTypeInt);
+				showIncident(incidentTypeInt);
 
-				HelpFunction.pushEvent("disaster", {
+				HelpFunction.pushEvent("incident", {
 					'calculateFunction': incidentTypes[incidentTypeInt].calculateFunction
 				});
 				break;
 			case 4: 
-				showDisaster(incidentTypeInt);
+				showIncident(incidentTypeInt);
 
-				HelpFunction.pushEvent("disaster", {
+				HelpFunction.pushEvent("incident", {
 					'calculateFunction': incidentTypes[incidentTypeInt].calculateFunction
 				});
 				break;
@@ -137,11 +147,16 @@ function incidents() {
 				// Kein Auslösen
 				break;
 		}
-		window.setTimeout(randomDisasters, incidentTimeout);
+		window.setTimeout(randomIncident, incidentTimeout);
 	}
 
-
-	function showDisaster(type) {
+	/**
+	 * [showIncident description]
+	 * Stellt ein Ereignis des übergebenen Typs da.
+	 * @param  {[number]} type [description]
+	 * Type des Ereignisses
+	 */
+	function showIncident(type) {
 		var incident = incidentTypes[type];
 
 		zid("incidentTitle").innerHTML = incident.name;

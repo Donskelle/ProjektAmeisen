@@ -162,14 +162,6 @@ function Canvas(_options) {
 	}
 
 	/**
-	 * [createDefaults description]
-	 * Erstellt Standart Gebäude
-	 */
-	this.createDefaults = function() {
-		stage.update();
-	}
-
-	/**
 	 * [createBuilding description]
 	 * Erstellt eine Instanz des Objects Building und fragt die Upgradekosten ab. 
 	 * @param  {[number]} type [description]
@@ -202,7 +194,6 @@ function Canvas(_options) {
 	 * Id des Gebäudes
 	 * @param {[object]} costs      [description]
 	 * Object mit allen Werten
-	 * @param {[boolean]} updateView [description]
 	 */
 	this.setUpgradeCosts = function(id, costs, updateView) {
 		eles[id].setUpgradeCost(costs);
@@ -210,7 +201,14 @@ function Canvas(_options) {
 			showInfoBox(id);
 	}
 
-
+	/**
+	 * [Building description]
+	 * Erstellt ein Shape Object zur Darstellung eines Gebäudes
+	 * @param {[number]} type [description]
+	 * Art des Gebäudes
+	 * @param {[number]} i    [description]
+	 * Index im Ele Array. Hier wird es eingefügt
+	 */
 	function Building(type, i) {
 		(function init() {
 			var c = new createjs.Shape();
@@ -280,10 +278,18 @@ function Canvas(_options) {
 			}
 			image.onload = handleImageLoad;
 
-
+			/**
+			 * [addHitTest description]
+			 * @param {[type]} i [description]
+			 * @param {[type]} j [description]
+			 */
 			c.addHitTest = function (i, j) {
 				createHitTest(i,j);
 			}
+			/**
+			 * [upgradeBuilding description]
+			 * @return {[type]} [description]
+			 */
 			c.upgradeBuilding = function() {
 				this.buildingData.lvl += 1;
 				this.radius = HelpFunction.getProcentValue(20, 80, c.buildingData.lvl);
@@ -291,11 +297,20 @@ function Canvas(_options) {
 				this.graphics.c().f("#000").dc(0,0,this.radius);
 				stage.update();
 			}
+			/**
+			 * [setUpgradeCost description]
+			 * @param {[type]} _costs [description]
+			 */
 			c.setUpgradeCost = function(_costs) {
 				this.buildingData.costs = _costs;
 			}
 
-
+			/**
+			 * [handleImageLoad description]
+			 * 
+			 * @param  {[type]} event [description]
+			 * @return {[type]}       [description]
+			 */
 			function handleImageLoad (event) {
 				var logo = new createjs.Bitmap(event.target);	
 
@@ -366,6 +381,7 @@ function Canvas(_options) {
 		 * [addDrag description]
 		 * 
 		 * @param {[object]} c [description]
+		 * Shape
 		 */
 		function addDrag(c) {
 			c.on("mousedown",function(e){
@@ -401,14 +417,23 @@ function Canvas(_options) {
 			};
 		}
 
+		/**
+		 * [createHitTest description]
+		 * Erstellt ein Hittest zwischen den übergebenen Index Elementen
+		 * @param  {[number]} _i [description]
+		 * Index des zu verbindenden Elements
+		 * @param  {[number]} _j [description]
+		 * Index des zu verbindenden Elements
+		 */
 		function createHitTest(_i, _j) {
 			var hitTest = false;
-			if(_j == "top") {
+			
 
-			}
-			eles[_i].connector[_j] = createConnector(_i, _j);
-			eles[_i].connector[_j].hittesten = function() {
-				hitTesten();
+			if(_j != "top") {
+				eles[_i].connector[_j] = createConnector(_i, _j);
+				eles[_i].connector[_j].hittesten = function() {
+					hitTesten();
+				}
 			}
 
 			hitTesten();
@@ -426,6 +451,11 @@ function Canvas(_options) {
 				};
 			});
 
+			/**
+			 * [hitTesten description]
+			 * Stellt den Hittest zwischen 2 Shapes her und 
+			 * @return {[type]} [description]
+			 */
 			function hitTesten() {
 				if ( zim.hitTestCircle(eles[_i], eles[_j]) ) 
 				{
@@ -466,6 +496,12 @@ function Canvas(_options) {
 		}
 	}
 
+	/**
+	 * [showInfoBox description]
+	 * Stellt das Gebäude des übergebenen Gebäude Indexes dar.
+	 * @param  {[number]} i [description]
+	 * Index des Gebäudes
+	 */
 	function showInfoBox(i)
 	{
 		//Startgebäude
@@ -508,6 +544,15 @@ function Canvas(_options) {
 		}
 	}
 
+	/**
+	 * [createConnector description]
+	 * Erstellt eine Linie ziwschen den übergebenen Shape Objekten
+	 * @param  {[number]} _i [description]
+	 * Index des 1. Elements
+	 * @param  {[number]} _j [description]
+	 * Index des zu verbindenen Elements
+	 * @return {[object]}    [description]
+	 */
 	function createConnector(_i, _j) 
 	{
 		var connector = new createjs.Shape();
@@ -516,6 +561,10 @@ function Canvas(_options) {
 		if(_j == "top")
 			drawTop();
 
+		/**
+		 * [draw description]
+		 * Stellt Verbindungslinie da und korrigiert Position der Verbindung
+		 */
 		function draw() {
 			connector.visible = true;
 			connector.graphics.c().setStrokeStyle(6, 'round', 'round').beginStroke("black").moveTo(eles[_i].x, eles[_i].y).lineTo(eles[_j].x, eles[_j].y);
@@ -523,17 +572,29 @@ function Canvas(_options) {
 			stage.addChildAt(connector,0);
 		}
 
+		/**
+		 * [drawTop description]
+		 * Erstellt eine Verbindung für das Startgebäude, welche nach oben geht
+		 */
 		function drawTop() {
 			connector.visible = true;
 			connector.graphics.c().setStrokeStyle(6, 'round', 'round').beginStroke("black").moveTo(eles[_i].x, eles[_i].y).lineTo(stageW/2, 0);
 			stage.addChildAt(connector,0);
 		}
 
+		/**
+		 * [hide description]
+		 * Blendet den Connector aus
+		 */
 		function hide() {
 			connector.visible = false;
 			connector.graphics.c();
 		}
 
+		/**
+		 * [updateLine description]
+		 * Public Mehtode um Verbindungslinie zu aktualsieren und darzustellen.
+		 */
 		connector.updateLine = function() {
 			if(_j == "top")
 				drawTop();
@@ -551,6 +612,10 @@ function Canvas(_options) {
 			}
 		}
 
+		/**
+		 * [hideLine description]
+		 * Public Mehtode zum Verbergen der Gebäudeverbindugn
+		 */
 		connector.hideLine = function() {
 			if(eles[_j].connector[_i].visible == true) {
 				eles[_j].connector[_i].hideLine();

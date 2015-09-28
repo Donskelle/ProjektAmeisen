@@ -1,6 +1,7 @@
 /**
  * [load description]
- * @return {[type]} [description]
+ * Die Load Funktion wird beim Aufruf der Webseite ausgeführt.
+ * Sie legt grundlegende Styles an, erstellt Menüs und erstellt die Tooltips
  */
 function load() {
 	var isClicked = false;
@@ -50,6 +51,12 @@ function load() {
 		}
 	});
 	
+	// Canvas der Größe des Bildschirms anpassen
+	var canv = zid(options.canvas);
+		canv.style.width = window.innerWidth + "px";
+		canv.style.height = window.innerHeight + "px";
+		canv.height = window.innerHeight;
+		canv.width = window.innerWidth;
 	
 	/**
 	 * Initialiserung Spieleinführung
