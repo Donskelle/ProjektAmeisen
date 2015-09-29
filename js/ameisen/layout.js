@@ -252,8 +252,8 @@ function layout(options) {
 				});
 
 				$(eles[i]).mousemove(function(e) {
-					zid("tipBox").style.left = event.pageX + 10 + "px";
-			 		zid("tipBox").style.top =  event.pageY + 10 + "px";
+					zid("tipBox").style.left = e.pageX + 10 + "px";
+			 		zid("tipBox").style.top =  e.pageY + 10 + "px";
 			 	});
 			};
 		})();
