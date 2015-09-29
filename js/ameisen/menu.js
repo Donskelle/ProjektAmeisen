@@ -53,7 +53,7 @@ function menuBarDragger (ele) {
 		startClick = Date.now();
 
 		offsetTop = (ele.parentNode.offsetTop - e.clientY );
-		offsetLeft = (ele.parentNode.offsetLeft - e.clientX ) ;
+		offsetLeft = (ele.parentNode.offsetLeft - e.clientX );
 		newMousePos(e);
 
 		timerId = window.requestAnimationFrame(divMove);

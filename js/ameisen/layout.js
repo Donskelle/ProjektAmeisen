@@ -9,11 +9,26 @@ function load() {
 	var menuWrapper = zid("menuWrapper");
 	var gameWrapper = zid("gameWrapper");
 
-	var menuHowToPlay = zid("menuHowToPlay");
-	var menuSettings = zid("menuSettings");
-	var howToPlay = zid("howToPlay");
-	var settings = zid("settings");
-
+	
+	/**
+	 * Menüleiste
+	 */
+	var introIsActive = false;
+	btnTutorial = zid("btn_tutorial");
+	btnPause = zid("btn_pause");
+	btnPause.addEventListener("click", function(e) {
+		alert(
+			"Das Spiel ist nun pausiert. Klicke auf ok um fortzufahren."
+		);	
+	});
+	btnTutorial.addEventListener("click", function(e) {
+		if(introIsActive == false){
+			introBox.style.display = "block";
+			pages[curPage].style.display = "block";
+			introIsActive = true;
+		}	
+	});
+	
 	/**
 	 * Wechsel zwischen Spiel und Menü
 	 */
@@ -23,23 +38,31 @@ function load() {
 			isClicked = true;
 			menuWrapper.style.margin = "-100vh 0 0 0";
 			gameWrapper.style.margin = "0 0 0 0";
-			menuButton.style.top = "92%";
-			menuButton.style.backgroundImage = "url(img/menu.png)";
+			
+			menuButton.style.backgroundImage = "url(img/icons/arrow_up.png)";
 		}
 		else {
 			isClicked = false;
 			menuWrapper.style.margin = "0 0 0 0";
 			gameWrapper.style.margin = "100vh 0 0 0";
-			menuButton.style.top = "5px";
-			menuButton.style.backgroundImage = "url('img/play.png')";
+			
+			menuButton.style.backgroundImage = "url('img/icons/arrow_down.png')";
 		}
 	});
 	
 	
 	/**
-	 * Intzialiserung Spieleinführung
+	 * Initialiserung Spieleinführung
 	 */
-	var togIntro = zid("menuHowToPlay");
+	
+	var loginBox = zid("loginBox");
+	var login = zid("login");
+	var start = zid("start");
+	var btnlogin = zid("btn_login");
+	var btnStartTut = zid("btn_startTut");
+	var btnStartGame = zid("btn_startGame");
+	
+	
 	var quitIntro = zid("quitIntro");
 	var introBox = zid("introBox");
 	var btnNext = zid("next");
@@ -54,19 +77,24 @@ function load() {
 		5 : pageFive
 	};
 	
-	var introIsActive = false;
-	togIntro.addEventListener("click", function(e) {
-		if(introIsActive == false){
-			introBox.style.display = "block";
-			pages[curPage].style.display = "block";
-			introIsActive = true;
-		}
-		else {
-			introBox.style.display = "none";
-			pages[curPage].style.display = "none";	
-			introIsActive = false;
-		}
+	btnlogin.addEventListener("click", function(e) {
+		login.style.display = "none";
+		start.style.display = "block";
+		
 	});
+	btnStartTut.addEventListener("click", function(e) {
+		loginBox.style.display = "none";
+		introBox.style.display = "block";
+		pages[curPage].style.display = "block";
+		introIsActive = true;
+		
+	});
+	btnStartGame.addEventListener("click", function(e) {
+		loginBox.style.display = "none";
+	});
+	
+	
+	
 
 	quitIntro.addEventListener("click", function(e) {
 		introBox.style.display = "none";
@@ -79,6 +107,15 @@ function load() {
 		if(curPage > pageAmount){
 			curPage = 1;
 		}
+		if(curPage == pageAmount){
+			btnNext.style.display = "none";
+		}
+		else {
+			btnNext.style.display = "block";
+		}
+		if(curPage != 1){
+			btnPrev.style.display = "block";
+		}
 		pages[curPage].style.display = "block";
 	});
 	btnPrev.addEventListener("click", function(e) {
@@ -87,44 +124,20 @@ function load() {
 		if(curPage < 1){
 			curPage = pageAmount;
 		}
+		
+		if(curPage == 1){
+			btnPrev.style.display = "none";
+		}
+		else {
+			btnPrev.style.display = "block";
+		}
+		if(curPage != pageAmount){
+			btnNext.style.display = "block";
+		}
 		pages[curPage].style.display = "block";
 	});
 	
-	/**
-	 * Init Menu 
-	 */
-	htpToggle = false;
-	settingsToggle = false;
 	
-	menuSettings.addEventListener("click", function(e) {
-		if(settingsToggle == true){
-			settings.style.display = "none";
-			settingsToggle = false;
-		}
-		else {
-			settings.style.display = "block";
-			settingsToggle = true;
-			howToPlay.style.display = "none";
-			htpToggle = false;
-		}
-	});
-	$(document).on('click', function(event){length
-	  	if(!$(event.target).closest('#howToPlay')){
-	  		if(!$(event.target).closest('#menuHowToPlay').length){
-	  			howToPlay.style.display = "none";
-				htpToggle = false;
-	  		}
-	  	}
-	  	if(!$(event.target).closest('#settings').length){
-	  		if(!$(event.target).closest('#menuSettings').length){
-	  			settings.style.display = "none";
-				settingsToggle = false;
-	  		}
-	  	}
-	});
-	/**
-	 * Ende Spieleinführung
-	 */
 
 
 

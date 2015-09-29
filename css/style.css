@@ -49,6 +49,9 @@ button:hover {
 	background-color: #2F2E30;
 	color: #FFFFFF;
 }
+input {
+	width: 200px;
+}
 #tipBox {
 	position: absolute;
 	width: 200px;
@@ -100,83 +103,44 @@ button:hover {
 	-o-transition: margin 1s;
 	transition: margin 1s;
 }
-#menuBox {
-	position: absolute;
-	
-	right: 15%;
-	top: 20%;
-}
-#menuBox ul {
-	
-}
-#menuBox ul li {
-	padding: 15px 25px 15px 25px;
-	margin: 5px 0 5px 0;
-	cursor: pointer;
-	background-color: #FFFFFF;
-	text-align: center;
-	border: solid 1px #CCCCCC;
-	-webkit-transition: all .2s;
-	-moz-transition: all .2s;
-	-o-transition: all .2s;
-	transition: all .2s;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	
-}
-#menuBox ul li:hover {
-	background-color: #2F2E30;
-	color: #FFFFFF;
-	
-		
-}
-#btn_toggleMenu {
+#menuBar {
 	position: fixed;
 	top: 5px;
 	right: 5px;
 	z-index: 1;
+
+}
+#menuBar ul li {
+	display: inline-block;
 	width: 40px;
 	height: 40px;
-	background-image: url("../img/play.png");
 	background-size: contain;
-	background-color: #FFFFFF;
 	-webkit-transition: top 1s, background-color .2s;
 	-moz-transition: top 1s, background-color .2s;
 	-o-transition: top 1s, background-color .2s;
 	transition: top 1s, background-color .2s;
-	border: solid 1px #000000;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	
 }
-#btn_toggleMenu:hover {
+
+#btn_toggleMenu {
+	background-image: url("../img/icons/arrow_down.png");
+}
+#btn_tutorial {
+	background-image: url("../img/icons/tutorial.png");
+}
+#btn_toggleSound {
+	background-image: url("../img/icons/soundOn.png");
+}
+#btn_profile {
+	background-image: url("../img/icons/profile.png");
+}
+#btn_pause {
+	background-image: url("../img/icons/pause.png");
+}
+#menuBar ul li:hover {
 	background-color: #2F2E30;
 }
-#howToPlay, #settings {
-	width: 700px;
-	height: 500px;
-	background-color: #FFFFFF;
-	position: absolute;
-	right: 30%;
-	top: 5%;
-	display: none;
-	padding: 20px;
-	-webkit-border-radius: 20px;
-	-moz-border-radius: 20px;
-	border-radius: 20px;
-	
-}
-#howToPlayTitle, #settingsTitle {
-	padding: 20px 0 20px 0;
-}
+
+
 
 #gameWrapper {
 	margin: 100vh 0 0 0;
@@ -213,7 +177,7 @@ button:hover {
 	background-image: url('../img/icons/Menu-Up.png');
 }
 .handle {
-	height: 40px;
+	height: 30px;
 	line-height: 40px;
 	color: #000; 
 	border: solid 1px #ccc;
@@ -221,8 +185,8 @@ button:hover {
 	padding: 0 0 0 10px;
 	cursor: move;
 	font-family: 'SourceSansPro';
-
-	font-size: 18px;
+	background-color: #A0D9F4;
+	font-size: 1em;
 	font-weight: bold;
 }
 .draggable .iconCost {
@@ -457,6 +421,71 @@ button:hover {
 /**
  * 	Intro Box (Tutorial)
  */
+#loginBox {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 300;
+	background: rgba(255, 255, 255, .5);
+	text-align: center;
+	
+}
+#login, #start, #pageOne, #pageTwo, #pageThree, #pageFour, #pageFive{
+	margin: 10vh auto;
+	max-width: 600px;
+	max-height: 600px;
+	width: 70%;
+	height: 80vh;
+	background-color: rgba(255, 255, 255, .8);
+	padding: 2% 3% 0 3%;	
+	text-align: center;
+	
+}
+.tutBox {
+	width: 50%;
+	height: 25%;
+	float: left;
+	border: solid 1px black;
+	font-size: .8em;
+	text-align: left;
+}
+.tutImgBox {
+	width: 30%;
+	height: 100%;
+	float: left;
+}
+.tutImages {
+	
+	height: 100%;
+	padding: 15% 0% 15% 0%;
+}
+.tutText {
+	width: 70%;
+	padding: 15px 0px 0px 0px;
+	float: left;
+}
+#start {
+	display: none;
+	text-align: left;
+}
+#btnWrapper {
+	text-align: center;
+}
+.boxHead{
+	width: 100%;
+	padding: 0 0 30px 0;
+}
+#willkommen, .tutorial {
+	max-height: 50px;
+	height: 100%;
+	width: auto;
+	margin: 0 auto;
+	display: block;
+}
+
+#login_form {
+	padding: 30px 0 30px 0;
+}
 
 #introBox {
 	position: fixed;
@@ -472,44 +501,49 @@ button:hover {
 	top: 0;
 	z-index: 300;
 }
+#quitIntroBox {
+	max-width: 600px;
+	width: 80%;
+	margin: 0 auto;
+}
 #quitIntro {
 	float: right;
 	z-index: 300;
-	top: 5vh;
-	right: 10vh;
-	width: 30px;
+	width: 40px;
+	height: 40px;
+	background-image: url("../img/icons/close.png");
+	background-size: contain;
 }
-#pageOne, #pageTwo, #pageThree, #pageFour, #pageFive {
-	margin: 0vh auto;
-	max-width: 1080px;
-	max-height: 768px;
-	width: 100%;
-	height: 90vh;
-	background-color: rgba(255, 255, 255, .8);
-	display: none;
-	padding: 1%;
-	
-	
-	
-}
+
 #pagesWrapper {
 	margin: 5vh auto;
-	max-width: 1080px;
-	max-height: 768px;
 	width: 100%;
-	height: 90vh;
-	
-	
+	height: 100%;
+}
+#prevNextWrapper {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 45%;
+}
+#prevNextRelative {
+	max-width: 680px;
+	width: 80%;
+	margin: 0 auto;
 }
 #prev, #next {
-	position: fixed;
-	bottom: 5px;
+	width: 40px;
+	height: 40px;
+	background-size: contain;
 }
 #prev {
-	left: 5px;
+	background-image: url("../img/icons/arrow_left.png");
+	display: none;
+	float: left;
 }
 #next {
-	right: 5px;
+	background-image: url("../img/icons/arrow_right.png");
+	float: right;
 }
 .introHead {
 	font-size: 1.6em;
@@ -517,44 +551,10 @@ button:hover {
 .introSub {
 	font-size: 1.2em;
 }
-.introHead {
-	
-}
-.partOne {
-	max-width: 36%;
-	
-	float: left;
-	height: 100%;
-	margin: 1%;
-}
-.partTwo {
-	max-width: 60%;
-	
-	float: left;
-	height: 100%;
-	margin: 1%;
-}
-.partOne img, .partTwo img {
-	width: 90%;
-	margin: 0% auto;
-	display: block;
-	cursor: pointer;
-	
-}
-.introTextOneA p {
-	padding: 30px 0 0 0;
-	
-}
-.introTextOneB p {
-	padding: 3% 5% 3% 5%;
-	
-}
-.introTextHead {
-	font-size: 1.6em;
-}
-.introTextSub {
-	
-}
+
+
+
+
 #imgView {
 	position: fixed;
 	z-index: 301;

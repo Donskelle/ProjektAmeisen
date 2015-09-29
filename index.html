@@ -10,6 +10,59 @@
 	</head>
 
 	<body>
+		
+		<div id="menuBar">
+			<ul>
+				<li id="btn_toggleMenu"></li>
+				<li id="btn_tutorial"></li>
+				<li id="btn_toggleSound"></li>
+				<li id="btn_profile"></li>
+				<li id="btn_pause"></li>
+			</ul>
+		</div>
+		<div id="loginBox">
+			<div id="login">
+				<div class="boxHead">
+					<img id="willkommen" src="img/Willkommen.png" alt="">
+					<p>in deinem Ameisenreich!</p>
+					
+				</div>
+					<p>hast du dich schon registriert?</p>
+				
+				<form id="login_form" action="">
+	  				Nickname: <br/><input type="text" name="name" value="test"><br/><br/>
+	  				Passwort: <br/><input type="password" name="pass" value="test"><br/>  				
+				</form> 
+				
+				<button id="btn_login" class="antButton">Login</button>
+				<button id="btn_register" class="antButton" disabled>Jetzt registrieren</button>
+				
+			</div>
+			<div id="register">
+				
+			</div>
+			<div id="start">
+				<div class="boxHead">
+					<img class="tutorial" src="img/Tutorial.png" alt="">
+					<br/>
+					<p>
+						Du bist der Herrscher eines ganzen Ameisenvolkes! Baue dein eigenes Reich, zeuge Nachkommen und organisiere Unterkunft und Verpflegung für tausende Untertanen.
+						Aber baue Vorausschauend, denn andere Ameisenvölker haben es auf deine Vorräte abgesehen, und sintflutartige Regengüsse drohen deine Kammern zu überschwemmen.
+					</p>
+					<br/><br/>
+					<p>
+						Dieses Tutorial erklärt dir die wichtigsten Funktionen des Spiels. Du kannst das Tutorial oder Tips zu den einzelnen Funktionen jederzeit durch einen Klick auf das Fragezeichen abrufen.
+					</p>
+					<br/><br/>
+					<div id="btnWrapper">
+						<button id="btn_startTut" class="antButton">Tutorial Starten</button>
+						<button id="btn_startGame" class="antButton">Spielen!</button>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
 		<div id="imgView">
 			<div id="imgSrc"></div>
 		</div>
@@ -17,114 +70,49 @@
 		
 		<div id="introBox">
 			<div id="pagesWrapper">
-
-				<button id="quitIntro">x</button>
+				<div id="quitIntroBox">
+					<div id="quitIntro"></div>
+				</div>
+				
 				<div id="pageOne">
-					<div class="partOne">
-						<div class="introHead">Willkommen bei Antventure</div>
-						<div class="introSub">Der Ameisen Simulation</div>
-						<div class="introContent">
-							<div class="introTextOneA">
-								<p>Du entscheidest über den Erfolg einer Ameisenkolonie. <br/>Entwickle dich langsam weiter und achte auf die Bedürfnisse deiner Ameisen. Wachse zum größten Ameisenvolk heran, das die Welt je gesehen hat.</p>
-								<p>In diesem Intro werden dir die Grundelemente des Spiels erklärt.</p>							
-							</div>
+					<img class="tutorial" src="img/Tutorial.png" alt="">
+					<p>Startbildschirm</p><br/>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/arrow_down.png" alt="">
 						</div>
+						<p class="tutText">
+							Wechseln der Ebene:<br/>
+							Auf der unteren Ebene verwaltest du dein Imperium, während du dich oben vor Gefahren schützt.
+						</p>
 					</div>
-					<div class="partTwo">
-						<img id="imgIntro1" src="img/intro1.png" alt="">
-						<div class="introTextOneB">
-								<p>Rohstoffe sind wichtig für das Wachstum und den Erhalt deines Volkes. Achte außerdem darauf, dass dein Bau sauber bleibt.</p>
-							</div>
-					</div>
-					
+				
 				</div>
 				<div id ="pageTwo">
-					<div class="partOne">
-						<div class="introHead">Willkommen bei Antventure</div>
-						<div class="introSub">Der Ameisen Simulation</div>
-						<div class="introContent">
-							<div class="introTextOneA">
-								<p class="introTextHead">Wichtig:</p>
-								<p class="introTextSub">Trial and Error ist Teil des Spiels und es kann passieren, dass deine Ameisen zu Beginn häufiger sterben. Allerdings sind die Grundelemente des Spiels schnell erlernt und nach kurzer Eingewöhnung sollte es dir möglich sein einen stabilen Kreislauf aufzubauen.</p>
-								<p class="introTextHead">Achtung:</p>
-								<p class="introTextSub">Lade während des Spielens nicht die Seite neu, da der Spielstand momentan nicht gespeichert wird.</p>
-							</div>
-						</div>
-					</div>
-					<div class="partTwo">
-						<img id="imgIntro1" src="img/intro2.png" alt="">
-						<div class="introTextOneB">
-								<p>Arbeiterinnen sind dein wichtigstes Werkzeug, da sie Sammelvorgänge automatisieren, die du sonst manuell ausführen müsstest.</p>
-							</div>
-					</div>
+					
 				</div>
 				<div id="pageThree">
-					<div class="partOne">
-						<div class="introHead">Willkommen bei Antventure</div>
-						<div class="introSub">Der Ameisen Simulation</div>
-						<div class="introContent">
-							<div class="introTextOneA">
-								<p class="introTextHead">Abhängigkeiten:</p>
-								<p class="introTextSub">
-									<ul>
-										<li>Die Pilzkammer verbraucht pro Level und Runde eine Nahrungseinheit und produziert drei Nahrungseinheiten</li>
-										<li>Jede Ameise verbraucht eine Nahrungseinheit pro Runde</li>
-										<li>Jede Ameise Produziert eine Abfalleinheit pro Runde</li>
-										<li>Die Deponie </li>
-									</ul>
-								</p>
-								<p class="introTextHead">Achtung:</p>
-								<p class="introTextSub">Lade während des Spielens nicht die Seite neu, da der Spielstand momentan nicht gespeichert wird.</p>
-							</div>
-						</div>
-					</div>
-					<div class="partTwo">
-						<img id="imgIntro1" src="img/intro1.png" alt="">
-						<div class="introTextOneB">
-								<p>Die Rohstoffanzeige</p>
-							</div>
-					</div>
+					
 				</div>
 				<div id ="pageFour">
-					<div class="introHead">Willkommen bei Antventure</div>
-					<div class="introSub"></div>
-					<div class="introContent">
-						
-					</div>
+					
 				</div>
 				<div id="pageFive">
-					<div class="introHead">Willkommen bei Antventure</div>
-					<div class="introSub"></div>
-					<div class="introContent">
-						
+					
+				</div>
+				<div id="prevNextWrapper">
+					<div id="prevNextRelative">
+						<div id="next"></div>
+						<div id="prev"></div>
 					</div>
 				</div>
-				<button id="next">></button>
-				<button id="prev"><</button>
+				
 			</div>
 		</div>
-		<div id="menuWrapper">
-			<div id="menuBox">
-				<ul>
-					<li id="gameStart">Spiel starten</li>
-					<li id="menuHowToPlay">Spieleinf&uuml;hrung</li>
-					<li id="menuSettings">Einstellungen</li>
-					<li id="menuQuit">Beenden</li>
-				</ul>
-			</div>
-			<div id="btn_toggleMenu" style="display:none;"></div>
-			<div id="howToPlay">
-				<div id="howToPlayTitle">Spieleinf&uuml;hrung</div>
-				<div id="menuText">Herzlich willkommen bei "SPIELNAME". <br/> In diesem Spiel ist es deine Aufgabe ein eigenes Ameisenimperium zu errichten und zu verwalten. Deine Königin hat bereits eine kleine Erdhöhle ausgehoben, die als Start für dein Königreich dient. 
-									<br/> Zu Beginn des Spiels kannst du manuell Rohstoffe sammeln. Dies geschieht über die Buttons unterhalb der Rohstoffanzeige. Dein erstes Ziel sollte es sein neue Ameisen auszubilden, die dir bei der Beschaffung neuer Materialien behilflich sind.
-											Du musst dafür sorgen, dass dein Volk immer genug zu fressen hat, da deine Arbeiterinnen sonst verhungern. Zunächst solltest du Ameisen auf die Jagt schicken, um deinen Nahrungsvorrat kurzfristig aufzubessern. Später im Spiel ist es effektiver die Pilzkammer zu bauen und zu erweitern. 
-											Diese wandelt Bl&auml;tter in Nahrung um und versorgt dein Volk. <br/> Das Spielziel ist es den größten Ameisenhügel zu errichten, den die Welt je gesehen hat. <br/> Viel Erfolg!</div>
-			</div>
-			<div id="settings">
-				<div id="settingsTitle">Einstellungen</div>
-				<div id="menuText">Here you will find settings to personalize your game experience.</div>
-			</div>
+		
+		<div id="menuWrapper">	
 		</div>
+		
 		<div id="gameWrapper">
 			
 			<div id="tipBox">
@@ -283,7 +271,7 @@
 
 			<div class="visible draggable">
 				<div class="handle">
-					Jobs
+					Aufgaben
 				</div>
 				<div class="hideContent">
 					<table id="jobTable">
@@ -303,7 +291,32 @@
 								Bis Fertigstellung: <span id="countdownW">0.00</span>
 							</td>
 						</tr>
-					
+						<tr>
+							<td>
+								<div class="tooltip" data-type="jHunt"></div>
+							</td>
+							<td class="jobName">
+								Jagen
+							</td>
+							<td>
+								<button id="btn_subJobHu">
+									-
+								</button>
+								<span id="jobCountHu">0</span>
+								<button id="btn_addJobHu">
+									+
+								</button>
+							</td>
+							<td class="jobCount">
+								
+							</td>
+							<td>
+								<form id="formSetHunt">
+									<input type="number" name="count" placeholder="Wert" max="999" min="0">
+									<button>Setzen</button>
+								</form>
+							</td>
+						</tr>
 						<tr>
 							<td><div class="tooltip" data-type="jLeafs"></div></td>
 							<td class="jobName">
@@ -354,32 +367,7 @@
 								</form>
 							</td>
 						</tr>
-						<tr>
-							<td>
-								<div class="tooltip" data-type="jHunt"></div>
-							</td>
-							<td class="jobName">
-								Jagen
-							</td>
-							<td>
-								<button id="btn_subJobHu">
-									-
-								</button>
-								<span id="jobCountHu">0</span>
-								<button id="btn_addJobHu">
-									+
-								</button>
-							</td>
-							<td class="jobCount">
-								
-							</td>
-							<td>
-								<form id="formSetHunt">
-									<input type="number" name="count" placeholder="Wert" max="999" min="0">
-									<button>Setzen</button>
-								</form>
-							</td>
-						</tr>
+						
 						<tr>
 							<td>
 								<div class="tooltip" data-type="jHatch"></div>

@@ -37,10 +37,10 @@ function AntGame(_options) {
 		/**
 		 * Klick Listener zum Starten des Spiels anlegen
 		 */
-		zid("gameStart").addEventListener("click", function(e) {
-			zid("btn_toggleMenu").style.display = "block";
-			zid("btn_toggleMenu").click();
-			zid("gameStart").style.display = "none";
+		zid("btn_toggleMenu").addEventListener("click", function(e) {
+			//zid("btn_toggleMenu").style.display = "block";
+			//zid("btn_toggleMenu").click();
+			//zid("gameStart").style.display = "none";
 
 			startGame();
 		});
