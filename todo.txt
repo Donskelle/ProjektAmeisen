@@ -1,18 +1,21 @@
-Todo Fabian:
-- Ameisen sterben, wenn zu wenig Nahrung // 
-- Update Jobs durch ereignisse // done
-- Set Jobs // done
-- FoldingMenu // done
-
 // Ole
-- Intro
-- Rohstoffanzeige
+- Intro / Tooltips
+- 
 
 // Fabian
-- Upgradebilder // done
-- Menüs // 
-- Ereignisse in Console anzeigen // Done
+- Ameisenbau anpassen
+- Fehler rgba
+- Mögliche Erweiterungsporgrammierung
+- gebäudewachstum verkleinern / Icons Gebäude verkleinern
+- Upgradepositinierung
+- Startzahl Ameisen auf 0
+- steine auf 0
+- blätter auf 0
+- nahrung auf 0
 
-Zu wenig
-- Toolkit Texte
--  Evtl. menu aneinander snappen
+
+// Wiebke
+- Doku
+
+
+// Usertests, Evtl. 

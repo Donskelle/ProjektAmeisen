@@ -58,6 +58,7 @@ button:hover {
 	font-size: .8em;
 	cursor: default;
 	display: inline-block;
+	margin-left: 10px;
 	width: 30px;
 	height: 30px;
 	background-image: url('../img/icons/Fragezeichen-01.png');
@@ -213,9 +214,6 @@ button:hover {
 #resDump {
 	background-image: url("../img/icons/Deponie.png");
 }
-#jobImgAll {
-	background-image: url('../img/icons/Ameisen_Gesamt.png');
-}
 #jobImgHunt {
 	background-image: url('../img/icons/Ameisen_jagen.png');
 }
@@ -267,6 +265,7 @@ button:hover {
 }
 .plus, .minus {
 	background-size: contain;
+	background-repeat: no-repeat;
 }
 .plus {
 	background-image: url("../img/icons/Plus.png");
@@ -495,7 +494,6 @@ button:hover {
 }
 #willkommen, .tutorial {
 	max-height: 50px;
-	height: 100%;
 	width: auto;
 	margin: 0 auto;
 	display: block;

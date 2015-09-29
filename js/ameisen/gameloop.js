@@ -26,9 +26,9 @@ function GameLoop (_options) {
 	var dumpHillBar = zid("dumpHillBar");
 
 	//Bestand von Rohstoffen
-	var _leafs = 100;
-	var _stone = 100;
-	var _food = 25;
+	var _leafs = 5;
+	var _stone = 5;
+	var _food = 5;
 	var _dump = 10;
 	
 	var _prodDump = 0;
@@ -37,7 +37,7 @@ function GameLoop (_options) {
     var _dumpHill = 0;
 	
 	//Bestand und Kosten von Ameisen
-	var unemployedAnts = 100;
+	var unemployedAnts = 0;
 	var _antS = 0;
 	
 	var _antCostW = {
@@ -797,7 +797,7 @@ function GameLoop (_options) {
 			    				_jobLeafs = amount;
 			    			}	
 			    			else {
-			    				alert("Nicht genug arbeiter")
+			    				//alert("Nicht genug arbeiter")
 			    			}
 			    			_jobCountL.value = _jobLeafs;
 			    			break;
@@ -812,7 +812,7 @@ function GameLoop (_options) {
 			    				_jobStone = amount;
 			    			}	
 			    			else {
-			    				alert("Nicht genug arbeiter");
+			    				//alert("Nicht genug arbeiter");
 			    			}
 			    			_jobCountS.value = _jobStone;
 
@@ -828,7 +828,7 @@ function GameLoop (_options) {
 			    				_jobHunt = amount;
 			    			}	
 			    			else {
-			    				alert("Nicht genug arbeiter")
+			    				//alert("Nicht genug arbeiter")
 			    			}
 			    			_jobCountHu.value = _jobHunt;
 
@@ -844,7 +844,7 @@ function GameLoop (_options) {
 			    				_jobHatch = amount;
 			    			}	
 			    			else {
-			    				alert("Nicht genug arbeiter")
+			    				//alert("Nicht genug arbeiter")
 			    			}
 			    			_hatchRateW = _HATCHW - (_hatchRatioW * _jobHatch);
 		    				_hatchRateS = _HATCHS - (_hatchRatioS * _jobHatch);
@@ -862,7 +862,7 @@ function GameLoop (_options) {
 			    				_jobClean = amount;
 			    			}	
 			    			else {
-			    				alert("Nicht genug arbeiter")
+			    				//alert("Nicht genug arbeiter")
 			    			}
 			    			_jobCountC.value = _jobClean;
 
@@ -1202,7 +1202,7 @@ function GameLoop (_options) {
 			if(_leafs >= _antCostW["leafs"] && _stone >= _antCostW["stone"] && _food >= _antCostW["food"])
 			{
 				if(posibleAnts == ants.length) {
-					alert("Sie können nicht mehr Ameisen in Auftrag geben.");
+					//alert("Sie können nicht mehr Ameisen in Auftrag geben.");
 					return false;
 				}
 				ants[ants.length] = {
@@ -1221,7 +1221,7 @@ function GameLoop (_options) {
 				updateViewBuilder();
 			}
 			else {
-				alert("Sie haben nicht genügend Rohstoffe");
+				//alert("Sie haben nicht genügend Rohstoffe");
 			}
 		}
 		/*this.addS = function(rate) {
