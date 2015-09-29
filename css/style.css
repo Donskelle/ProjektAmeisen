@@ -29,7 +29,7 @@ body {
 button {
 	background-color: transparent;
 	border: none;
-	width: 60px;
+	
 	font-size: 1em;
 	font-family: 'BebasNeue';
 }
@@ -124,10 +124,16 @@ button:hover {
 #btn_pause {
 	background-image: url("../img/icons/pause.png");
 }
-
-
-
-
+#btn_addLeafs, #btn_addStone, #btn_addFood {
+	width: 25px;
+	height: 25px;
+	background-image: url("../img/icons/plus.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+#btn_addLeafs:hover, #btn_addStone:hover, #btn_addFood:hover {
+	background-image: url("../img/icons/plusActive.png");
+}
 #gameWrapper {
 	margin: 100vh 0 0 0;
 	width: 100%;
@@ -163,8 +169,8 @@ button:hover {
 	background-image: url('../img/icons/Menu-Up.png');
 }
 .handle, .handleSub {
-	height: 30px;
-	line-height: 30px;
+	height: 20px;
+	line-height: 20px;
 	color: #000; 
 	border: solid 1px #ccc;
 	margin: 0;
@@ -179,16 +185,18 @@ button:hover {
 	width: 10px;
 	height: 10px;
 }
-#jobTable button {
-	width: auto;
-}
+
 .chamberTable th, .chamberTable td, #jobTable th, #jobTable td {
 	padding: 2px 5px 2px 5px;
+}
+#jobTable input {
+	width: 80px;
 }
 #resTable th, #resTable td {
 	width: 180px;
 	text-align: center;
 	border-right: solid .5px #ccc;
+	
 }
 #resTable th {
 	padding: 5px;
@@ -235,27 +243,45 @@ button:hover {
 }
 .jobName {
 	padding: 0 10px 0 10px;
+}
+.setButtons {
+	background-image: url("../img/icons/button_build.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	width: 100px;
+}
+.setButtons:hover {
+	background-image: url("../img/icons/button_buildActive.png");
 	
+}
+.resBarWrapper {
+	width: 150px;
 }
 #leafFill, #stoneFill, #foodFill {
 	background-color: red;
-	width: 100%;
-	height: 5px;
+	width: 90%;
+	margin: 0 auto;
+	height: 15px;
+	border: solid 1px black;
 }
 #dumpFill {
 	background-color: green;
-	width: 100%;
-	height: 5px;
+	width: 90%;
+	margin: 0 auto;
+	height: 15px;
+	border: solid 1px black;
 }
 #leafBar, #stoneBar, #foodBar {
 	background-color: green;
 	width: 50%;
-	height: 5px;
+	height: 14px;
+	
 }
 #dumpBar {
 	background-color: red;
 	width: 50%;
-	height: 5px;
+	height: 14px;
+	
 }
 #dumpHill {
 	
