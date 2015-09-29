@@ -58,7 +58,6 @@ button:hover {
 	font-size: .8em;
 	cursor: default;
 	display: inline-block;
-	margin-left: 10px;
 	width: 30px;
 	height: 30px;
 	background-image: url('../img/icons/Fragezeichen-01.png');
@@ -714,7 +713,25 @@ button:hover {
 .dumpingGroundWrapper {
 	background: url('../img/icons/buildings/dump.png');
 }
-
+#broodIcon, #mushroomIcon, #storageIcon, #pantryIcon, #dumpIcon {
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+#broodIcon {
+	background: url('../img/icons/buildings/hatch.png');
+}
+#mushroomIcon {
+	background: url('../img/icons/Pilzkammer.png');
+}
+#storageIcon {
+	background: url('../img/icons/buildings/storage.png');
+}
+#pantryIcon {
+	background: url('../img/icons/Nahrung.png');
+}
+#dumpIcon {
+	background: url('../img/icons/buildings/dump.png');
+}
 /**
  * Ende Darstellung Build Menu
  */
