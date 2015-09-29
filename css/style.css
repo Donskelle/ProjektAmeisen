@@ -1,11 +1,3 @@
-@font-face {
-    font-family: 'BebasNeue';
-    src: url('../fonts/Neuton-Bold.ttf');
-}
-@font-face {
-    font-family: 'SourceSansPro';
-    src: url('../fonts/Neuton-Regular.ttf');
-}
 :disabled {
 	color: #ccc;
 	border-color: #ccc;
