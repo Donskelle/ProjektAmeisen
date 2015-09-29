@@ -471,7 +471,7 @@ function GameLoop (_options) {
 			wasNegativDumpProd = false;
 		else if(!wasNegativDumpProd && _prodDump < 0){
 			wasNegativDumpProd = true;
-			notifier.setContent("Dein Müll steigt. Beginn ihn abzubauen.");
+			notifier.setContent("Dein Müll steigt. Beginne ihn abzubauen.");
 		}
 
     	if(_prodLeafs < 0) {
