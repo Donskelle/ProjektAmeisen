@@ -31,6 +31,7 @@ function menuBarDragger (ele, sub) {
 					sub.parentNode.querySelector(".subHideContent").style.display = "block";
 					HelpFunction.toggleClassName(sub, true, "visible");
 					subVisible = true;
+					divMove();
 				}
 			})
 		}
