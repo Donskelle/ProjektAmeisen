@@ -292,16 +292,22 @@ function GameLoop (_options) {
 		var subJobC = zid("btn_subJobC");
 		
 		addLeafs.addEventListener("click", function(e) {
-			_leafs++;
-			updateRes();
+			if(_leafs < buildingTypes[3]["storeLeafs"]){
+				_leafs++;
+				updateRes();
+			}
 		});
 		addStone.addEventListener("click", function(e) {
-			_stone++;
-			updateRes();
+			if(_stone < buildingTypes[3]["storeStone"]){
+				_stone++;
+				updateRes();
+			}
 		});
 		addFood.addEventListener("click", function(e) {
-			_food++;
-			updateRes();
+			if(_food < buildingTypes[4]["storeFood"]){
+				_food++;
+				updateRes();
+			}
 		});
 		
 		addAntW.addEventListener("click", function(e) {
@@ -578,11 +584,21 @@ function GameLoop (_options) {
 		_foodStorage.innerHTML = buildingTypes[4]["storeFood"];
 		_dumpStorage.innerHTML = buildingTypes[5]["storeDump"];
 		
+		if(_leafs/buildingTypes[3]["storeLeafs"]*100 <= 100){
+			leafBar.style.width = (_leafs/buildingTypes[3]["storeLeafs"])*100 + "%"; 
+		}
+		if(_stone/buildingTypes[3]["storeStone"]*100 <= 100){
+			stoneBar.style.width = (_stone/buildingTypes[3]["storeStone"])*100 + "%"; 
+		}
+		if(_food/buildingTypes[4]["storeFood"]*100 <= 100){
+			foodBar.style.width = (_food/buildingTypes[4]["storeFood"])*100 + "%"; 
+		}
+		if(_dump/buildingTypes[5]["storeDump"]*100 <= 100){
+			dumpBar.style.width = (_dump/buildingTypes[5]["storeDump"])*100 + "%"; 
+		}
 		
-		leafBar.style.width = (_leafs/buildingTypes[3]["storeLeafs"])*100 + "%"; 
-		stoneBar.style.width = (_stone/buildingTypes[3]["storeStone"])*100 + "%"; 
-		foodBar.style.width = (_food/buildingTypes[4]["storeFood"])*100 + "%"; 
-		dumpBar.style.width = (_dump/buildingTypes[5]["storeDump"])*100 + "%"; 
+		
+		
 		
 				
 		if(_dumpHill < allAnts * 10/100){

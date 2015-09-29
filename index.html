@@ -219,7 +219,7 @@
 					<div id="broodChamberWrapper" class="broodChamberWrapper buildMenuBuilding">
 						<h2 class="buildingName">
 							Brutkammer
-							<span class="tooltip" data-type="broodChamber"></span>
+							<div class="tooltip" id="broodIcon" data-type="broodChamber"></div>
 						</h2>
 						<table>
 							<tr>
@@ -246,7 +246,7 @@
 					<div id="mushroomChamberWrapper" class="mushroomChamberWrapper buildMenuBuilding">
 						<h2 class="buildingName">
 							Pilzkammer
-							<span class="tooltip" data-type="mushroomChamber"></span>
+							<div class="tooltip" id="mushroomIcon" data-type="mushroomChamber"></div>
 						</h2>
 						<table>
 							<tr>
@@ -273,7 +273,7 @@
 					<div id="storageWrapper" class="storageWrapper buildMenuBuilding">
 						<h2 class="buildingName">
 							Lager
-							<span class="tooltip" data-type="storage"></span>
+							<div class="tooltip" id="storageIcon" data-type="storage"></div>
 						</h2>
 						<table>
 							<tr>
@@ -300,7 +300,7 @@
 					<div id="pantryWrapper" class="pantryWrapper buildMenuBuilding">
 						<h2 class="buildingName">
 							Speisekammer
-							<span class="tooltip" data-type="pantry"></span>
+							<div class="tooltip" id="pantryIcon" data-type="pantry"></div>
 						</h2>
 						<table>
 							<tr>
@@ -325,8 +325,8 @@
 
 					<div id="dumpingGroundWrapper" class="dumpingGroundWrapper buildMenuBuilding">
 						<h2 class="buildingName">
-							Deponie
-							<span class="tooltip" data-type="dumpingGround"></span>
+							Kompost
+							<div class="tooltip" id="dumpIcon" data-type="dumpingGround"></div>
 						</h2>
 						<table>
 							<tr>
@@ -425,7 +425,7 @@
 									<button id="btn_addJobHu" class="plus">
 										+
 									</button>
-									<button id="formSetHunt">Setzen</button>
+									<button id="formSetHunt" class="setButtons">Setzen</button>
 								</td>
 							</tr>
 							<tr>
@@ -441,7 +441,7 @@
 									<button id="btn_addJobL"  class="plus">
 										+
 									</button>
-									<button id="formSetLeafs">Setzen</button>
+									<button id="formSetLeafs" class="setButtons">Setzen</button>
 								</td>
 							</tr>
 							<tr>
@@ -459,7 +459,7 @@
 									<button id="btn_addJobS" class="plus">
 										+
 									</button>
-									<button id="formSetStone">Setzen</button>
+									<button id="formSetStone" class="setButtons">Setzen</button>
 								</td>
 							</tr>
 							
@@ -478,7 +478,7 @@
 									<button id="btn_addJobHa"  class="plus">
 									+
 									</button>
-									<button id="formSetBrood">Setzen</button>
+									<button id="formSetBrood" class="setButtons">Setzen</button>
 								</td>
 							</tr>
 							<tr>
@@ -496,7 +496,7 @@
 									<button id="btn_addJobC" class="plus">
 										+
 									</button>
-									<button id="formSetClean">Setzen</button>
+									<button id="formSetClean" class="setButtons">Setzen</button>
 								</td>
 							</tr>
 						</table>
@@ -513,14 +513,14 @@
 							<th><div class="tooltip" id="resLeafs" data-type="leafs"></div><div class="resText"> Bl&auml;tter:</div></th>
 							<th><div class="tooltip" id="resStone" data-type="stone"></div><div class="resText"> Steine:</div></th>
 							<th><div class="tooltip" id="resFood" data-type="food"></div><div class="resText"> Nahrung:</div></th>
-							<th><div class="tooltip" id="resDump" data-type="dump"></div><div class="resText"> Deponie:</div></th>
+							<th><div class="tooltip" id="resDump" data-type="dump"></div><div class="resText"> Kompost:</div></th>
 						</tr>
 						
 						<tr>
-							<td id="leafFill"><div id="leafBar"></div></td>
-							<td id="stoneFill"><div id="stoneBar"></div></td>
-							<td id="foodFill"><div id="foodBar"></div></td>
-							<td id="dumpFill"><div id="dumpBar"></div></td>
+							<td class="resBarWrapper"><div id="leafFill"><div id="leafBar"></div></div></td>
+							<td class="resBarWrapper"><div id="stoneFill"><div id="stoneBar"></div></div></td>
+							<td class="resBarWrapper"><div id="foodFill"><div id="foodBar"></div></div></td>
+							<td class="resBarWrapper"><div id="dumpFill"><div id="dumpBar"></div></div></td>
 						</tr>
 						<tr>
 							<td><span id="leafCount">xxx</span> / <span id="leafStorage">xxx</span></td>
@@ -535,9 +535,9 @@
 							<td id="dumpProd"><span>xxx</span></td>
 						</tr>
 						<tr>
-							<td><button id="btn_addLeafs">+</button></td>
-							<td><button id="btn_addStone">+</button></td>
-							<td><button id="btn_addFood">+</button></td>
+							<td><button id="btn_addLeafs">+1</button></td>
+							<td><button id="btn_addStone">+1</button></td>
+							<td><button id="btn_addFood">+1</button></td>
 							<td id="dumpHillBar"><div id="dumpHill"></div><div></div></td>
 						</tr>
 						
