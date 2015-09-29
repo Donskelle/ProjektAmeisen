@@ -1,19 +1,19 @@
 @font-face {
     font-family: 'BebasNeue';
-    src: url('../fonts/BebasNeue Regular.otf');
+    src: url('../fonts/Neuton-Bold.ttf');
 }
 @font-face {
     font-family: 'SourceSansPro';
-    src: url('../fonts/SourceSansPro-Regular.otf');
+    src: url('../fonts/Neuton-Regular.ttf');
 }
 :disabled {
 	color: #ccc;
-	background-color: white;
 	border-color: #ccc;
+	
 }
 :disabled:hover {
 	color: #ccc;
-	background-color: white;
+	background-color: transparent;
 	border-color: #ccc;
 }
 html {
@@ -35,8 +35,8 @@ body {
     clear: both;
 }
 button {
-	background-color: #FFFFFF;
-	border: solid 1px black;
+	
+	border: none;
 	width: 60px;
 	
 	-webkit-border-radius: 10px;
@@ -596,10 +596,10 @@ input {
 	background-color: white;
 }
 .antButton {
-	width: 100%;
-	height: 30px;
+	width: 150px;
+	height: 35px;
 	border-radius: 0;
-	border: solid 1px #000;
+	
 	font-size: 1em;
 	line-height: 1em;
 	text-decoration: none;
@@ -607,13 +607,12 @@ input {
 	color: #000;
 
 
-	background-size: cover;
+	background-size: contain;
 	background-repeat: no-repeat;
 	background-image: url('../img/icons/button_build.png');
 }
 .antButton:hover{
 	color: #000;
-	border: solid 1px #000;
 	background-image: url('../img/icons/button_buildActive.png');
 }
 .antButton:disabled{
