@@ -356,21 +356,52 @@
 					Ameisen
 				</div>
 				<div class="hideContent">
-					<table>
+					<table id="antTable">
+						<tr class="headingTableRow">
+							<td>
+								<div class="tooltip" id="antsAll" data-type="worker"></div>
+							</td>
+							<td class="jobName">Ameisen gesamt</td>
+							<td class="jobCount" id="antAllCount">
+								0
+							</td>
+						</tr>
 						<tr>
-							<td><div class="tooltip" id="jobImgAll" data-type="worker"></div></td>
-							<td class="jobName">Verfügbare Arbeiter</td>
+							<td>
+								
+							</td>
+							<td class="jobName">davon arbeitslos</td>
 							<td class="jobCount" id="workerCount">
 								<span>0</span>
 							</td>
+						</tr>
+						<tr class="headingTableRow">
 							<td>
-								<button id="btn_addAntW" disabled>
-									Ausbilden
+								
+							</td>
+							<td class="jobName">Ameisen ausbilden</td>
+							<td class="jobCount" id="workerCount">
+								<button id="btn_addAntW" class="plus">
+									+
 								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								
+							</td>
+							<td class="jobName">Auslastung</td>
+							<td>
 								<p class="antProduction"><span id="currentAntProduction">0</span>/<span id="possibleAntProduction">1</span></p>
 							</td>
+						</tr>
+						<tr>
 							<td>
-								Bis Fertigstellung: <span id="countdownW">0.00</span>
+								
+							</td>
+							<td class="jobName">Bis Fertigstellung:</td>
+							<td>
+								 <span id="countdownW">0.00</span>
 							</td>
 						</tr>
 					</table>
@@ -396,14 +427,6 @@
 									</button>
 									<button id="formSetHunt">Setzen</button>
 								</td>
-								<td class="jobCount">
-									
-								</td>
-								<td>
-									<form>
-										
-									</form>
-								</td>
 							</tr>
 							<tr>
 								<td><div class="tooltip" id="jobImgLeafs" data-type="jLeafs"></div></td>
@@ -419,11 +442,6 @@
 										+
 									</button>
 									<button id="formSetLeafs">Setzen</button>
-								</td>
-								<td class="jobCount" >
-									
-								</td>
-								<td>
 								</td>
 							</tr>
 							<tr>
@@ -442,14 +460,6 @@
 										+
 									</button>
 									<button id="formSetStone">Setzen</button>
-								</td>
-								<td class="jobCount">
-									
-								</td>
-								<td>
-									<form>
-										
-									</form>
 								</td>
 							</tr>
 							
@@ -470,11 +480,6 @@
 									</button>
 									<button id="formSetBrood">Setzen</button>
 								</td>
-								<td class="jobCount">
-									
-								</td>
-								<td>
-								</td>
 							</tr>
 							<tr>
 								<td>
@@ -492,11 +497,6 @@
 										+
 									</button>
 									<button id="formSetClean">Setzen</button>
-								</td>
-								<td class="jobCount">
-									
-								</td>
-								<td>
 								</td>
 							</tr>
 						</table>
@@ -620,7 +620,15 @@
 			</div>
 			<a id="openLightboxincidentView" href="#incidentView"></a>
 			
+			<!--
+			Autoplay Hintergrundmusik
 			
+			<audio autoplay preload loop id="backgroundAudio">
+			-->
+			<audio  preload loop id="backgroundAudio">
+			  <source src="sounds/Sitting-on-fields.mp3" type="audio/mpeg">
+			</audio>
+		
 
 			<!--
 			Notwendige Javascript Datein
@@ -632,10 +640,11 @@
 
 			<script type="text/javascript" src="js/ameisen/menu.js"></script>
 			<script type="text/javascript" src="js/ameisen/incidents.js"></script>
-			<script type="text/javascript" src="js/ameisen/stage.js"></script>
+			<script type="text/javascript" src="js/ameisen/antgame.js"></script>
 			<script type="text/javascript" src="js/ameisen/canvas.js"></script>
-			<script type="text/javascript" src="js/ameisen/gameloop.js"></script>
 			<script type="text/javascript" src="js/ameisen/layout.js"></script>
+			<script type="text/javascript" src="js/ameisen/backgroundplayer.js"></script>
+			<script type="text/javascript" src="js/ameisen/gameloop.js"></script>
 
 			<!--
 			Spiel erstellen

@@ -5,6 +5,7 @@ function GameLoop (_options) {
     var _stoneCount = zid("stoneCount");
     var _foodCount = zid("foodCount");
     var _dumpCount = zid("dumpCount");
+    var _antAllCount = zid("antAllCount");
     var _workerCount = zid("workerCount");
    
     var _leafProd = zid("leafProd");
@@ -26,9 +27,9 @@ function GameLoop (_options) {
 	var dumpHillBar = zid("dumpHillBar");
 
 	//Bestand von Rohstoffen
-	var _leafs = 5;
-	var _stone = 5;
-	var _food = 5;
+	var _leafs = 25;
+	var _stone = 25;
+	var _food = 25;
 	var _dump = 10;
 	
 	var _prodDump = 0;
@@ -37,7 +38,7 @@ function GameLoop (_options) {
     var _dumpHill = 0;
 	
 	//Bestand und Kosten von Ameisen
-	var unemployedAnts = 0;
+	var unemployedAnts = 5;
 	var _antS = 0;
 	
 	var _antCostW = {
@@ -557,8 +558,10 @@ function GameLoop (_options) {
     		_foodProd.innerHTML = _prodFood;
     	}
     	
-    	var allAnts = Math.floor((unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean) * 10);
+    	var antsComplete = (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean);
+    	var allAnts = Math.floor(antsComplete * 10);
 
+    	_antAllCount.innerHTML = antsComplete;
     	_workerCount.innerHTML = unemployedAnts;
     	
     	_leafCount.innerHTML = _leafs;

@@ -214,6 +214,9 @@ button:hover {
 #resDump {
 	background-image: url("../img/icons/Deponie.png");
 }
+#antsAll {
+	background-image: url('../img/icons/Ameisen_Gesamt.png');
+}
 #jobImgHunt {
 	background-image: url('../img/icons/Ameisen_jagen.png');
 }
@@ -266,6 +269,7 @@ button:hover {
 .plus, .minus {
 	background-size: contain;
 	background-repeat: no-repeat;
+	background-position: center;
 }
 .plus {
 	background-image: url("../img/icons/Plus.png");
@@ -692,3 +696,33 @@ button:hover {
 /**
  * Ende Darstellung Build Menu
  */
+
+/**
+ * Darstellung Tables Ant & Jobs
+ */
+#antTable {
+	width:90%;
+	margin-bottom: 10px;
+}
+#antTable tr.headingTableRow td:nth-child(2){
+	padding-left: 10px;
+}
+#antTable tr td:nth-child(2){
+	padding-left: 20px;
+}
+#antTable tr td:last-child{
+	font-weight: bold;
+	text-align: right;
+}
+#antTable #btn_addAntW{
+	width: auto;
+}
+#jobTable {
+	
+}
+#jobTable input{
+	width: 70px;
+}
+tr.headingTableRow {
+	font-weight: bold;
+}

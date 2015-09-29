@@ -31,6 +31,7 @@ function AntGame(_options) {
 		var that = this;
 		options = HelpFunction.merge(options, _options);
 		new layout(options);
+		new backgroundPlayer();
 
 		/**
 		 * Klick Listener zum Starten des Spiels anlegen

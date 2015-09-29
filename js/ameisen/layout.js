@@ -11,7 +11,7 @@ function layout(options) {
 		var menuWrapper = zid("menuWrapper");
 		var gameWrapper = zid("gameWrapper");
 
-		
+
 		/**
 		 * Menüleiste
 		 */

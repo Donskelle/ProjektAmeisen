@@ -72,6 +72,9 @@ function menuBarDragger (ele, sub) {
 		offsetLeft = (ele.parentNode.offsetLeft - e.clientX );
 		newMousePos(e);
 
+		// Eine Aktualisierugn des Views (der Dom) bei mousemove ist unglücklich, da es sehr häufig aufgerufen werden kann
+		// Deshalb wird beim Mousemove Event lediglich die Position der Maus gespeichert und in einer anderen Loop, welche sich der Geschwindigkeit des Geräts anpasst,
+		// die View aktualisiert.
 		timerId = window.requestAnimationFrame(divMove);
 		window.addEventListener('mousemove', newMousePos, true);
 	}
