@@ -35,10 +35,9 @@ body {
     clear: both;
 }
 button {
-	
+	background-color: transparent;
 	border: none;
 	width: 60px;
-	
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
@@ -46,7 +45,6 @@ button {
 	font-family: 'BebasNeue';
 }
 button:hover {
-	background-color: #2F2E30;
 	color: #FFFFFF;
 }
 #login input {
@@ -119,6 +117,7 @@ button:hover {
 	-moz-transition: top 1s, background-color .2s;
 	-o-transition: top 1s, background-color .2s;
 	transition: top 1s, background-color .2s;
+	cursor: pointer;
 }
 
 #btn_toggleMenu {
@@ -136,9 +135,7 @@ button:hover {
 #btn_pause {
 	background-image: url("../img/icons/pause.png");
 }
-#menuBar ul li:hover {
-	background-color: #2F2E30;
-}
+
 
 
 
@@ -193,7 +190,7 @@ button:hover {
 	width: 10px;
 	height: 10px;
 }
-#jobTable button{
+#jobTable button {
 	width: auto;
 }
 .chamberTable th, .chamberTable td, #jobTable th, #jobTable td {
@@ -595,18 +592,35 @@ button:hover {
 .buildMenu .buildMenuBuilding.disabled{
 	background-color: white;
 }
+#btn_startTut {
+	width: 150px;
+	height: 65px;
+	background-image: url('../img/icons/ButtonTutorial.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+#btn_startTut:hover {
+	background-image: url('../img/icons/ButtonTutorialActive.png');
+}
+#btn_startGame {
+	width: 150px;
+	height: 65px;
+	background-image: url('../img/icons/ButtonSpielen.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	
+}
+#btn_startGame:hover {
+	background-image: url('../img/icons/ButtonSpielenActive.png');
+}
 .antButton {
 	width: 150px;
 	height: 35px;
 	border-radius: 0;
-	
 	font-size: 1em;
 	line-height: 1em;
 	text-decoration: none;
-
 	color: #000;
-
-
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-image: url('../img/icons/button_build.png');
