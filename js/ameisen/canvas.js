@@ -224,7 +224,7 @@ function Canvas(_options) {
 			c.x = window.innerWidth/2 + ((i * 15) - 50);
 			c.y = window.innerHeight/2 + ((i * 15) - 50);
 
-			c.radius = HelpFunction.getProcentValue(30, 70, c.buildingData.lvl);
+			c.radius = HelpFunction.getProcentValue(25, 65, c.buildingData.lvl);
 
 
 			g.f("#000").dc(0,0,c.radius);
@@ -292,7 +292,7 @@ function Canvas(_options) {
 			 */
 			c.upgradeBuilding = function() {
 				this.buildingData.lvl += 1;
-				this.radius = HelpFunction.getProcentValue(30, 70, c.buildingData.lvl);
+				this.radius = HelpFunction.getProcentValue(25, 65, c.buildingData.lvl);
 
 				this.graphics.c().f("#000").dc(0,0,this.radius);
 				stage.update();

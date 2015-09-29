@@ -18,6 +18,9 @@ function GameLoop (_options) {
     var _dumpStorage = zid("dumpStorage");
     var _dumpHillhtml = zid("dumpHill");
 
+    var notifier = document.getElementsByTagName("x-notifier")[0];
+    var wasNegativFoodProd = false;
+    var wasNegativDumpProd = false;
 
 	//Fuellstand der Vorratslager
 	var leafBar = zid("leafBar");
@@ -38,7 +41,7 @@ function GameLoop (_options) {
     var _dumpHill = 0;
 	
 	//Bestand und Kosten von Ameisen
-	var unemployedAnts = 5;
+	var unemployedAnts = 8;
 	var _antS = 0;
 	
 	var _antCostW = {
@@ -441,7 +444,8 @@ function GameLoop (_options) {
     	_prodLeafs = (_jobLeafs * _ratioLeafs) - (buildingTypes[2]["leafConsume"] * connectedBuildingsLevel);
     	_prodStone = _jobStone * _ratioStone;
     	_prodFood = (_jobHunt * _ratioHunt) + (buildingTypes[2]["foodProd"] * connectedBuildingsLevel) - (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean);
-	
+		
+		
     	
     	if(_dumpHill >= _jobClean * _jobCleanRatio){
     		_prodDump = (_jobClean * _jobCleanRatio);
@@ -449,6 +453,26 @@ function GameLoop (_options) {
     	else {
     		_prodDump = _dumpHill;
     	}
+
+    	/**
+    	 * Notifier Meldungen Negative Nahrungsproduktion
+    	 */
+    	if(wasNegativFoodProd && _prodFood > 0)
+			wasNegativFoodProd = false;
+		else if(!wasNegativFoodProd && _prodFood < 0){
+			wasNegativFoodProd = true;
+			notifier.setContent("Deine Nahrung sinkt. Stell schnell wieder ein Gleichgewicht her.");
+		}
+
+		/**
+		 * Notifer Meldungen Negative Müllproduktion
+		 */
+    	if(wasNegativDumpProd && _prodDump > 0)
+			wasNegativDumpProd = false;
+		else if(!wasNegativDumpProd && _prodDump < 0){
+			wasNegativDumpProd = true;
+			notifier.setContent("Dein Müll steigt. Beginn ihn abzubauen.");
+		}
 
     	if(_prodLeafs < 0) {
     		_leafProd.style.color = "red";

@@ -14,7 +14,8 @@ Morgen
 - steine auf 0
 - blätter auf 0
 - nahrung auf 0
-- icon auf upgradefeld
+- icon auf building upgrade
+- trennlinie
 
 
 // Wiebke
