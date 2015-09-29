@@ -161,7 +161,10 @@ function layout(options) {
 		for (var i = 0; i < bars.length; i++) {
 			bars[i].parentNode.style.left = width + "px";
 			width += bars[i].parentNode.offsetWidth + 3;
-			new menuBarDragger(bars[i]);
+			if(bars[i].parentNode.querySelector(".handleSub"))
+				new menuBarDragger(bars[i], bars[i].parentNode.querySelector(".handleSub"));
+			else
+				new menuBarDragger(bars[i]);
 		};
 
 

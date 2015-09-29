@@ -49,7 +49,7 @@ button:hover {
 	background-color: #2F2E30;
 	color: #FFFFFF;
 }
-input {
+#login input {
 	width: 200px;
 }
 #tipBox {
@@ -164,21 +164,21 @@ input {
 	top: 0;
 	left: 0;
 }
-.draggable .handle {
+.draggable .handle, .draggable .handleSub{
 	padding-left: 50px;
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
 	background-position: 15px center;
-	text-align: center;
+	text-align: left;
 
 	background-image: url('../img/icons/Menu-Down.png');
 }
-.draggable.visible .handle {
+.draggable.visible .handle, .draggable .handleSub.visible {
 	background-image: url('../img/icons/Menu-Up.png');
 }
-.handle {
+.handle, .handleSub {
 	height: 30px;
-	line-height: 40px;
+	line-height: 30px;
 	color: #000; 
 	border: solid 1px #ccc;
 	margin: 0;

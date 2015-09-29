@@ -1,4 +1,4 @@
-function menuBarDragger (ele) {
+function menuBarDragger (ele, sub) {
 	var offsetLeft = 0;
 	var offsetTop = 0;
 	var timerId = null;
@@ -19,6 +19,21 @@ function menuBarDragger (ele) {
 		// Fix für Faltmenu
 		// Größe würde sich verkleiner
 		ele.style.width = ele.parentNode.offsetWidth + "px";
+		if(typeof sub != "undefined"){
+			var subVisible = true;
+			sub.addEventListener("click", function (e) {
+				if(subVisible) {
+					sub.parentNode.querySelector(".subHideContent").style.display = "none";
+					HelpFunction.toggleClassName(sub, false, "visible");
+					subVisible = false;
+				}
+				else {
+					sub.parentNode.querySelector(".subHideContent").style.display = "block";
+					HelpFunction.toggleClassName(sub, true, "visible");
+					subVisible = true;
+				}
+			})
+		}
 	})();
 
 	function mouseUp()

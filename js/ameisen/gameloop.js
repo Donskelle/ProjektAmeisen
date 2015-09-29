@@ -236,37 +236,32 @@ function GameLoop (_options) {
 		});
 
 
-		zid("formSetLeafs").addEventListener("submit", function(e) {
-			var fields = HelpFunction.readForm.apply(e.target);
-			antJob.setJobs(1, fields.count, true);
+		zid("formSetLeafs").addEventListener("click", function(e) {
+			antJob.setJobs(1, zid("jobCountL").value, true);
 
 			e.preventDefault();
 			return false;
 		});
-		zid("formSetStone").addEventListener("submit", function(e) {
-			var fields = HelpFunction.readForm.apply(e.target);
-			antJob.setJobs(2,fields.count,true);
+		zid("formSetStone").addEventListener("click", function(e) {
+			antJob.setJobs(2, zid("jobCountS").value, true);
 
 			e.preventDefault();
 			return false;
 		});
-		zid("formSetHunt").addEventListener("submit", function(e) {
-			var fields = HelpFunction.readForm.apply(e.target);
-			antJob.setJobs(3,fields.count,true);
+		zid("formSetHunt").addEventListener("click", function(e) {
+			antJob.setJobs(3, zid("jobCountHu").value, true);
 
 			e.preventDefault();
 			return false;
 		});
-		zid("formSetBrood").addEventListener("submit", function(e) {
-			var fields = HelpFunction.readForm.apply(e.target);
-			antJob.setJobs(4,fields.count,true);
+		zid("formSetBrood").addEventListener("click", function(e) {
+			antJob.setJobs(4, zid("jobCountHa").value, true);
 
 			e.preventDefault();
 			return false;
 		});
-		zid("formSetClean").addEventListener("submit", function(e) {
-			var fields = HelpFunction.readForm.apply(e.target);
-			antJob.setJobs(5,fields.count,true);
+		zid("formSetClean").addEventListener("click", function(e) {
+			antJob.setJobs(5, zid("jobCountC").value, true);
 
 			e.preventDefault();
 			return false;
@@ -490,7 +485,7 @@ function GameLoop (_options) {
     	else if(!enoughFood || _dumpHill > (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean) * 10) {
     		var deathRate = Math.ceil((unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean)/25);
 			var random = Math.random();
-			// Jeden 1000sten Durchlauf
+			// Jeden 20sten Durchlauf
 			if(random <= 0.05)
 			{
 				var reduced = false;
@@ -542,9 +537,8 @@ function GameLoop (_options) {
 						}
 					}
 				}
+				antJob.updateJobs();
 			}
-			
-    		antJob.updateJobs();
     	}
 
 
@@ -805,7 +799,7 @@ function GameLoop (_options) {
 			    			else {
 			    				alert("Nicht genug arbeiter")
 			    			}
-			    			_jobCountL.innerHTML = _jobLeafs;
+			    			_jobCountL.value = _jobLeafs;
 			    			break;
 			    		case 2:	// collect stone
 			    			if(_jobStone >= amount) {
@@ -818,9 +812,9 @@ function GameLoop (_options) {
 			    				_jobStone = amount;
 			    			}	
 			    			else {
-			    				alert("Nicht genug arbeiter")
+			    				alert("Nicht genug arbeiter");
 			    			}
-			    			_jobCountS.innerHTML = _jobStone;
+			    			_jobCountS.value = _jobStone;
 
 			    			break;
 			    		case 3: // hunt
@@ -836,7 +830,7 @@ function GameLoop (_options) {
 			    			else {
 			    				alert("Nicht genug arbeiter")
 			    			}
-			    			_jobCountHu.innerHTML = _jobHunt;
+			    			_jobCountHu.value = _jobHunt;
 
 			    			break;
 			    		case 4: // hatch
@@ -854,7 +848,7 @@ function GameLoop (_options) {
 			    			}
 			    			_hatchRateW = _HATCHW - (_hatchRatioW * _jobHatch);
 		    				_hatchRateS = _HATCHS - (_hatchRatioS * _jobHatch);
-		    				_jobCountHa.innerHTML = _jobHatch;
+		    				_jobCountHa.value = _jobHatch;
 
 			    			break;
 			    		case 5:	//clean
@@ -870,7 +864,7 @@ function GameLoop (_options) {
 			    			else {
 			    				alert("Nicht genug arbeiter")
 			    			}
-			    			_jobCountC.innerHTML = _jobClean;
+			    			_jobCountC.value = _jobClean;
 
 			    			break;
 			    	}
@@ -882,21 +876,21 @@ function GameLoop (_options) {
 			    		case 1: //collect leafs
 			    			if(_jobLeafs >= 1 || amount == 1) {
 			    				_jobLeafs += amount;
-			    				_jobCountL.innerHTML = _jobLeafs;
+			    				_jobCountL.value = _jobLeafs;
 			    				unemployedAnts += -amount;
 			    			}
 			    			break;
 			    		case 2:	//collect stone
 			    			if(_jobStone >= 1 || amount == 1) {
 			    				_jobStone += amount;
-			    				_jobCountS.innerHTML = _jobStone;
+			    				_jobCountS.value = _jobStone;
 			    				unemployedAnts += -amount;
 			    			}
 			    			break;
 			    		case 3: //hunt
 			    			if(_jobHunt >= 1 || amount == 1) {
 			    				_jobHunt += amount;
-			    				_jobCountHu.innerHTML = _jobHunt;
+			    				_jobCountHu.value = _jobHunt;
 			    				unemployedAnts += -amount;
 			    			}
 			    			break;
@@ -905,14 +899,14 @@ function GameLoop (_options) {
 			    				_jobHatch += amount;
 			    				_hatchRateW = _HATCHW - (_hatchRatioW * _jobHatch);
 			    				_hatchRateS = _HATCHS - (_hatchRatioS * _jobHatch);
-			    				_jobCountHa.innerHTML = _jobHatch;
+			    				_jobCountHa.value = _jobHatch;
 			    				unemployedAnts += -amount;
 			    			}
 			    			break;
 			    		case 5:	//clean
 			    			if(_jobClean >= 1 || amount == 1) {
 			    				_jobClean += amount;
-			    				_jobCountC.innerHTML = _jobClean;
+			    				_jobCountC.value = _jobClean;
 			    				unemployedAnts += -amount;
 			    			}
 			    			break;
@@ -928,15 +922,15 @@ function GameLoop (_options) {
     	 * Diese public Methode updatet die dargestellten Jobs, entsprechend der aktuellen Variablen
     	 */
     	this.updateJobs = function() {
-    		_jobCountL.innerHTML = _jobLeafs;
-    		_jobCountS.innerHTML = _jobStone;
-    		_jobCountHu.innerHTML = _jobHunt;
+    		_jobCountL.value = _jobLeafs;
+    		_jobCountS.value = _jobStone;
+    		_jobCountHu.value = _jobHunt;
 
     		_hatchRateW = _HATCHW - (_hatchRatioW * _jobHatch);
 			_hatchRateS = _HATCHS - (_hatchRatioS * _jobHatch);
-			_jobCountHa.innerHTML = _jobHatch;
+			_jobCountHa.value = _jobHatch;
 
-			_jobCountC.innerHTML = _jobClean;
+			_jobCountC.value = _jobClean;
     	}
     }
     

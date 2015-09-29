@@ -271,10 +271,10 @@
 
 			<div class="visible draggable">
 				<div class="handle">
-					Aufgaben
+					Ameisen
 				</div>
 				<div class="hideContent">
-					<table id="jobTable">
+					<table>
 						<tr>
 							<td><div class="tooltip" data-type="worker"></div></td>
 							<td class="jobName">Verfügbare Arbeiter</td>
@@ -291,136 +291,134 @@
 								Bis Fertigstellung: <span id="countdownW">0.00</span>
 							</td>
 						</tr>
-						<tr>
-							<td>
-								<div class="tooltip" data-type="jHunt"></div>
-							</td>
-							<td class="jobName">
-								Jagen
-							</td>
-							<td>
-								<button id="btn_subJobHu">
-									-
-								</button>
-								<span id="jobCountHu">0</span>
-								<button id="btn_addJobHu">
-									+
-								</button>
-							</td>
-							<td class="jobCount">
-								
-							</td>
-							<td>
-								<form id="formSetHunt">
-									<input type="number" name="count" placeholder="Wert" max="999" min="0">
-									<button>Setzen</button>
-								</form>
-							</td>
-						</tr>
-						<tr>
-							<td><div class="tooltip" data-type="jLeafs"></div></td>
-							<td class="jobName">
-								Bl&auml;tter sammeln
-							</td>
-							<td>
-								<button id="btn_subJobL">
-								-
-								</button>
-								<span id="jobCountL">0</span>
-								<button id="btn_addJobL">
-									+
-								</button>
-							</td>
-							<td class="jobCount" >
-								
-							</td>
-							<td>
-								<form id="formSetLeafs">
-									<input type="number" name="count" max="999" min="0" placeholder="Wert">
-									<button>Setzen</button>
-								</form>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="tooltip" data-type="jStone"></div>
-							</td>
-							<td class="jobName">
-								Steine sammeln
-							</td>
-							<td>
-								<button id="btn_subJobS">
-									-
-								</button>
-								<span  id="jobCountS">0</span>
-								<button id="btn_addJobS">
-									+
-								</button>
-							</td>
-							<td class="jobCount">
-								
-							</td>
-							<td>
-								<form id="formSetStone">
-									<input type="number"  name="count" placeholder="Wert" max="999" min="0">
-									<button>Setzen</button>
-								</form>
-							</td>
-						</tr>
-						
-						<tr>
-							<td>
-								<div class="tooltip" data-type="jHatch"></div>
-							</td>
-							<td class="jobName">
-								Brutpflege
-							</td>
-							<td>
-								<button id="btn_subJobHa">
-									-
-								</button>
-								<span id="jobCountHa">0</span>
-								<button id="btn_addJobHa">
-								+
-								</button>
-							</td>
-							<td class="jobCount">
-								
-							</td>
-							<td>
-								<form id="formSetBrood">
-									<input type="number" name="count" placeholder="Wert" max="999" min="0">
-									<button>Setzen</button>
-								</form>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="tooltip" data-type="jClean"></div>
-							</td>
-							<td class="jobName">
-								Bau s&auml;ubern
-							</td>
-							<td>
-								<button id="btn_subJobC">
-									-
-								</button>
-								<span id="jobCountC">0</span>
-								<button id="btn_addJobC">
-									+
-								</button>
-							</td>
-							<td class="jobCount">
-								
-							</td>
-							<td>
-								<form id="formSetClean">
-									<input type="number" name="count" placeholder="Wert" max="999" min="0">
-									<button>Setzen</button>
-								</form>
-							</td>
-						</tr>
 					</table>
+					<div class="handleSub visible">
+						Aufgabenverteilung
+					</div>
+					<div class="subHideContent">
+						<table id="jobTable">
+							<tr>
+								<td>
+									<div class="tooltip" data-type="jHunt"></div>
+								</td>
+								<td class="jobName">
+									Jagen
+								</td>
+								<td>
+									<button id="btn_subJobHu">
+										-
+									</button>
+									<input id="jobCountHu" type="number" name="count" placeholder="Wert" max="999" min="0" value="0">
+									<button id="btn_addJobHu">
+										+
+									</button>
+									<button id="formSetHunt">Setzen</button>
+								</td>
+								<td class="jobCount">
+									
+								</td>
+								<td>
+									<form>
+										
+									</form>
+								</td>
+							</tr>
+							<tr>
+								<td><div class="tooltip" data-type="jLeafs"></div></td>
+								<td class="jobName">
+									Bl&auml;tter sammeln
+								</td>
+								<td>
+									<button id="btn_subJobL">
+									-
+									</button>
+									<input id="jobCountL" type="number" name="count" max="999" min="0" placeholder="Wert" value="0">
+									<button id="btn_addJobL">
+										+
+									</button>
+									<button id="formSetLeafs">Setzen</button>
+								</td>
+								<td class="jobCount" >
+									
+								</td>
+								<td>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="tooltip" data-type="jStone"></div>
+								</td>
+								<td class="jobName">
+									Steine sammeln
+								</td>
+								<td>
+									<button id="btn_subJobS">
+										-
+									</button>
+									<input type="number" id="jobCountS" name="count" placeholder="" max="999" min="0" value="0">
+									<button id="btn_addJobS">
+										+
+									</button>
+									<button id="formSetStone">Setzen</button>
+								</td>
+								<td class="jobCount">
+									
+								</td>
+								<td>
+									<form>
+										
+									</form>
+								</td>
+							</tr>
+							
+							<tr>
+								<td>
+									<div class="tooltip" data-type="jHatch"></div>
+								</td>
+								<td class="jobName">
+									Brutpflege
+								</td>
+								<td>
+									<button id="btn_subJobHa">
+										-
+									</button>
+									<input id="jobCountHa" type="number" name="count" value="0" max="999" min="0" value="0">
+									<button id="btn_addJobHa">
+									+
+									</button>
+									<button id="formSetBrood">Setzen</button>
+								</td>
+								<td class="jobCount">
+									
+								</td>
+								<td>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="tooltip" data-type="jClean"></div>
+								</td>
+								<td class="jobName">
+									Bau s&auml;ubern
+								</td>
+								<td>
+									<button id="btn_subJobC">
+										-
+									</button>
+									<input id="jobCountC" type="number" name="count" placeholder="Wert" max="999" min="0" value="0">
+									<button id="btn_addJobC">
+										+
+									</button>
+									<button id="formSetClean">Setzen</button>
+								</td>
+								<td class="jobCount">
+									
+								</td>
+								<td>
+								</td>
+							</tr>
+						</table>
+					</div>
 				</div>
 			</div>
 
