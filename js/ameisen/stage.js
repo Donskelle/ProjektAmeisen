@@ -21,7 +21,7 @@ function AntGame(_options) {
 			mushroomBuild: "mushroomBuild"	
 		}
 	};
-	var builder,canvasBuilder, game, disasters;
+	var builder,canvasBuilder, game;
 
 	/**
 	 * [init description]
@@ -29,10 +29,8 @@ function AntGame(_options) {
 	 */
 	function init() {
 		var that = this;
-		canvasResize();
 		options = HelpFunction.merge(options, _options);
-
-		
+		new layout(options);
 
 		/**
 		 * Klick Listener zum Starten des Spiels anlegen
@@ -72,23 +70,14 @@ function AntGame(_options) {
 			options
 		);
 
-		disasters = new incidents();
+		var incidentClass = new incidents();
 
 		/**
 		 * Hier findet die Kommunikation zwischen den Klassen statt.
 		 */
 		initController();
-
-		canvasBuilder.createDefaults();
 	}
 
-	var canvasResize = function() {
-		var canv = zid(options.canvas);
-		canv.style.width = window.innerWidth + "px";
-		canv.style.height = window.innerHeight + "px";
-		canv.height = window.innerHeight;
-		canv.width = window.innerWidth;
-	}
 
 	function initController() {
 		zid("canvas").addEventListener("ant", function(e) 
@@ -125,7 +114,7 @@ function AntGame(_options) {
 					break;
 
 				// Katastrophe ausgebrochen
-				case "disaster":
+				case "incident":
 					var values = e.detail.eventData.calculateFunction(game.getCurrentValues());
 					game.setValues(values);
 					break;
