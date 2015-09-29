@@ -1,17 +1,20 @@
 // Ole
 - Intro / Tooltips
-- 
 
 // Fabian
-- Ameisenbau anpassen
+- Ameisenbau anpassen // done
+- gebäudewachstum verkleinern / Icons Gebäude verkleinern // done
+- Upgradepositinierung // done
+
+
+Morgen
 - Fehler rgba
-- Mögliche Erweiterungsporgrammierung
-- gebäudewachstum verkleinern / Icons Gebäude verkleinern
-- Upgradepositinierung
+- Sound autostart
 - Startzahl Ameisen auf 0
 - steine auf 0
 - blätter auf 0
 - nahrung auf 0
+- icon auf upgradefeld
 
 
 // Wiebke
@@ -19,3 +22,4 @@
 
 
 // Usertests, Evtl. 
+Rohstoffanzeige

@@ -541,6 +541,7 @@ function Canvas(_options) {
 
 
 			zid("buildingUpgradeViewBG").style.height = zid("lightboxContentbuildingUpgradeView").offsetHeight + "px";
+			zid("buildingUpgradeViewBG").style.marginTop = (- zid("lightboxContentbuildingUpgradeView").offsetHeight)/2 + "px";
 		}
 	}
 
