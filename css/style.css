@@ -29,6 +29,7 @@ body {
 button {
 	background-color: transparent;
 	border: none;
+	outline: none;
 	
 	font-size: 1em;
 	font-family: 'BebasNeue';
@@ -647,7 +648,7 @@ button:hover {
 	padding-left: 50px;
 	padding-right: 20px;
 	padding-top: 15px;
-	padding-bottom: 15px;
+	padding-bottom: 5px;
 
 	background-repeat: no-repeat;
 	background-position: 5px 5px;
