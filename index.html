@@ -381,17 +381,17 @@
 						<table id="jobTable">
 							<tr>
 								<td>
-									<div class="tooltip" data-type="jHunt"></div>
+									<div class="tooltip" id="jobImgHunt" data-type="jHunt"></div>
 								</td>
 								<td class="jobName">
 									Jagen
 								</td>
 								<td>
-									<button id="btn_subJobHu">
+									<button id="btn_subJobHu"  class="minus">
 										-
 									</button>
-									<input id="jobCountHu" type="number" name="count" placeholder="Wert" max="999" min="0" value="0">
-									<button id="btn_addJobHu">
+									<input id="jobCountHu" type="text" name="count" value="0">
+									<button id="btn_addJobHu" class="plus">
 										+
 									</button>
 									<button id="formSetHunt">Setzen</button>
@@ -406,16 +406,16 @@
 								</td>
 							</tr>
 							<tr>
-								<td><div class="tooltip" data-type="jLeafs"></div></td>
+								<td><div class="tooltip" id="jobImgLeafs" data-type="jLeafs"></div></td>
 								<td class="jobName">
 									Bl&auml;tter sammeln
 								</td>
 								<td>
-									<button id="btn_subJobL">
+									<button id="btn_subJobL" class="minus">
 									-
 									</button>
-									<input id="jobCountL" type="number" name="count" max="999" min="0" placeholder="Wert" value="0">
-									<button id="btn_addJobL">
+									<input id="jobCountL" type="text" name="count" value="0">
+									<button id="btn_addJobL"  class="plus">
 										+
 									</button>
 									<button id="formSetLeafs">Setzen</button>
@@ -428,17 +428,17 @@
 							</tr>
 							<tr>
 								<td>
-									<div class="tooltip" data-type="jStone"></div>
+									<div class="tooltip" id="jobImgStone" data-type="jStone"></div>
 								</td>
 								<td class="jobName">
 									Steine sammeln
 								</td>
 								<td>
-									<button id="btn_subJobS">
+									<button id="btn_subJobS" class="minus">
 										-
 									</button>
-									<input type="number" id="jobCountS" name="count" placeholder="" max="999" min="0" value="0">
-									<button id="btn_addJobS">
+									<input type="text" id="jobCountS" name="count" value="0">
+									<button id="btn_addJobS" class="plus">
 										+
 									</button>
 									<button id="formSetStone">Setzen</button>
@@ -455,17 +455,17 @@
 							
 							<tr>
 								<td>
-									<div class="tooltip" data-type="jHatch"></div>
+									<div class="tooltip" id="jobImgHatch" data-type="jHatch"></div>
 								</td>
 								<td class="jobName">
 									Brutpflege
 								</td>
 								<td>
-									<button id="btn_subJobHa">
+									<button id="btn_subJobHa"  class="minus">
 										-
 									</button>
-									<input id="jobCountHa" type="number" name="count" value="0" max="999" min="0" value="0">
-									<button id="btn_addJobHa">
+									<input id="jobCountHa" type="text" name="count" value="0">
+									<button id="btn_addJobHa"  class="plus">
 									+
 									</button>
 									<button id="formSetBrood">Setzen</button>
@@ -478,17 +478,17 @@
 							</tr>
 							<tr>
 								<td>
-									<div class="tooltip" data-type="jClean"></div>
+									<div class="tooltip" id="jobImgClean" data-type="jClean"></div>
 								</td>
 								<td class="jobName">
 									Bau s&auml;ubern
 								</td>
 								<td>
-									<button id="btn_subJobC">
+									<button id="btn_subJobC" class="minus">
 										-
 									</button>
-									<input id="jobCountC" type="number" name="count" placeholder="Wert" max="999" min="0" value="0">
-									<button id="btn_addJobC">
+									<input id="jobCountC" type="text" name="count" value="0">
+									<button id="btn_addJobC" class="plus">
 										+
 									</button>
 									<button id="formSetClean">Setzen</button>
@@ -510,10 +510,10 @@
 					<table id="resTable">
 						
 						<tr>
-							<th><div class="tooltip" data-type="leafs"></div><div class="resIcons" id="resLeafs"></div><div class="resText"> Bl&auml;tter:</div></th>
-							<th><div class="tooltip" data-type="stone"></div><div class="resIcons" id="resStone"></div><div class="resText"> Steine:</div></th>
-							<th><div class="tooltip" data-type="food"></div><div class="resIcons" id="resFood"></div><div class="resText"> Nahrung:</div></th>
-							<th><div class="tooltip" data-type="dump"></div><div class="resIcons" id="resDump"></div><div class="resText"> Deponie:</div></th>
+							<th><div class="tooltip" id="resLeafs" data-type="leafs"></div><div class="resText"> Bl&auml;tter:</div></th>
+							<th><div class="tooltip" id="resStone" data-type="stone"></div><div class="resText"> Steine:</div></th>
+							<th><div class="tooltip" id="resFood" data-type="food"></div><div class="resText"> Nahrung:</div></th>
+							<th><div class="tooltip" id="resDump" data-type="dump"></div><div class="resText"> Deponie:</div></th>
 						</tr>
 						
 						<tr>
@@ -632,7 +632,7 @@
 
 			<script type="text/javascript" src="js/ameisen/menu.js"></script>
 			<script type="text/javascript" src="js/ameisen/incidents.js"></script>
-			<script type="text/javascript" src="js/ameisen/antgame.js"></script>
+			<script type="text/javascript" src="js/ameisen/stage.js"></script>
 			<script type="text/javascript" src="js/ameisen/canvas.js"></script>
 			<script type="text/javascript" src="js/ameisen/gameloop.js"></script>
 			<script type="text/javascript" src="js/ameisen/layout.js"></script>

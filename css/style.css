@@ -30,9 +30,6 @@ button {
 	background-color: transparent;
 	border: none;
 	width: 60px;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
 	font-size: 1em;
 	font-family: 'BebasNeue';
 }
@@ -62,11 +59,11 @@ button:hover {
 	cursor: default;
 	display: inline-block;
 	margin-left: 10px;
-
 	width: 30px;
 	height: 30px;
 	background-image: url('../img/icons/Fragezeichen-01.png');
 	background-size: 30px 30px;
+	background-position: center;
 }
 /*
  *	Grundklassen 
@@ -195,13 +192,9 @@ button:hover {
 }
 #resTable th {
 	padding: 5px;
-	height: 100px;
-}
-#resTable tr th div {
-	position: absolute;
-
 	
 }
+
 
 .resIcons {
 	width: 100px;
@@ -221,9 +214,24 @@ button:hover {
 #resDump {
 	background-image: url("../img/icons/Deponie.png");
 }
+#jobImgHunt {
+	background-image: url('../img/icons/Ameisen_jagen.png');
+}
+#jobImgLeafs {
+	background-image: url('../img/icons/Ameisen_Blätter.png');
+}
+#jobImgStone {
+	background-image: url('../img/icons/Ameisen_Steine.png');
+}
+#jobImgHatch {
+	background-image: url('../img/icons/Ameisen_brüten.png');
+}
+#jobImgClean {
+	background-image: url('../img/icons/Ameisen_putzen.png');
+}
 .resText {
-	position: absolute;
-	margin: 50px 0 0 100px;
+
+
 }
 .jobName {
 	padding: 0 10px 0 10px;
@@ -253,9 +261,28 @@ button:hover {
 	
 }	
 #dumpHillBar {
-	
-	
 	background-color: green;
+}
+.plus, .minus {
+	background-size: contain;
+}
+.plus {
+	background-image: url("../img/icons/Plus.png");
+}
+.plus:hover {
+	background-image: url("../img/icons/PlusActive.png");
+}
+.plus:disabled {
+	background-image: url("../img/icons/PlusDisabled.png");
+}
+.minus {
+	background-image: url("../img/icons/Minus.png");
+}
+.minus:hover {
+	background-image: url("../img/icons/MinusActive.png");
+}
+.minus:disabled {
+	background-image: url("../img/icons/MinusDisabled.png");
 }
 /*
  *	Menü Styles
@@ -576,7 +603,7 @@ button:hover {
 	padding-bottom: 15px;
 
 	background-repeat: no-repeat;
-	background-position: 15px 20px;
+	background-position: 5px 5px;
 	background-size: 35px 35px;
 	background-color: #DEF2BF;
 }
