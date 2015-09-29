@@ -251,7 +251,7 @@ function layout(options) {
 					zid("tipBox").style.display = "none";
 				});
 
-				eles[i].addEventListener("mousemove", function(e) {
+				$(eles[i]).mousemove(function(e) {
 					zid("tipBox").style.left = event.pageX + 10 + "px";
 			 		zid("tipBox").style.top =  event.pageY + 10 + "px";
 			 	});
