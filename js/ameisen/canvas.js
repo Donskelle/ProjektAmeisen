@@ -253,27 +253,27 @@ function Canvas(_options) {
 			{
 				// Brood
 				case 0: 
-					image.src = "img/icons/buildings/hatch_sm.png";
+					image.src = "img/icons/buildings/Brutkammer-01.png";
 					break;
 				// Mush
 				case 1: 
-					image.src = "img/icons/buildings/mushroom_sm.png";
+					image.src = "img/icons/buildings/Pilzkammer-01.png";
 					break;
 				// Storage
 				case 2: 
-					image.src = "img/icons/buildings/storage_sm.png";
+					image.src = "img/icons/buildings/Lager-01.png";
 					break;
 				// Pantry
 				case 3: 
-					image.src = "img/icons/buildings/speisekammer_sm.png";
+					image.src = "img/icons/buildings/Speisekammer-01.png";
 					break;
 				// Dumping
 				case 4: 
-					image.src = "img/icons/buildings/dump_sm.png";
+					image.src = "img/icons/buildings/Deponie-01.png";
 					break;
 				// Startegebäude
 				case 5: 
-					image.src = "img/icons/buildings/queen_sm.png";
+					image.src = "img/icons/buildings/Thronsaal-01.png";
 					break;
 			}
 			image.onload = handleImageLoad;
@@ -316,7 +316,7 @@ function Canvas(_options) {
 
 				logo.x = eles[number].x - 25; 
 				logo.y = eles[number].y - 25;
-				
+
 				logo.alpha = .8;
 				logo.cursor = "pointer";
 
