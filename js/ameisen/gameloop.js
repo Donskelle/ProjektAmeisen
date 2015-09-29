@@ -679,7 +679,7 @@ function GameLoop (_options) {
 
  	/**
  	 * [updateButtons description]
- 	 * Diese Funktion prüft, ob unterschiedliche Aktionen durchführbar sind und ggf. die Buttons auf disabled
+ 	 * Diese Funktion prüft, ob unterschiedliche Aktionen durchführbar sind und setzt ggf. die Buttons auf disabled
  	 */
 	function updateButtons(){
 		
