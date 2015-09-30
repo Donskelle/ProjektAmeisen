@@ -503,7 +503,7 @@ function GameLoop (_options) {
 			alert("Warnung! In deinem Bau befinden sich zu viele Abfälle. Deine Ameisen werden krank und sterben. Du solltest deine Ameisen schnell den Bau säubern lassen und ggf. die Abfallkammer erweitern.");
 			enoughDump = false;
     	}
-    	if(enoughFood && _food <= 0) {
+    	if(enoughFood && _food <= 0 && (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean) != 0) {
 			alert("Deine Nahrung ist leer.\nStell schnell wieder ein Gleichgewicht her! Deine Ameisen werden nun nach und nach sterben, außerdem kannst du keine Gebäude bauen oder upgraden.");
 			enoughFood = false;
     	}

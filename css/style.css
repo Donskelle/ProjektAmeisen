@@ -132,7 +132,7 @@ button:hover {
 	background-repeat: no-repeat;
 }
 #btn_addLeafs:hover, #btn_addStone:hover, #btn_addFood:hover {
-	background-image: url('../img/icons/plusActive.png');
+	background-image: url('../img/icons/PlusActive.png');
 }
 #gameWrapper {
 	margin: 100vh 0 0 0;
