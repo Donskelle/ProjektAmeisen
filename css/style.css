@@ -127,7 +127,7 @@ button:hover {
 #btn_addLeafs, #btn_addStone, #btn_addFood {
 	width: 25px;
 	height: 25px;
-	background-image: url('../img/icons/plus.png');
+	background-image: url('../img/icons/Plus.png');
 	background-size: contain;
 	background-repeat: no-repeat;
 }
