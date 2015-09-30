@@ -114,7 +114,7 @@ function HelpFunction() {
 	    if (visbility == false && ~className.indexOf(' ' + toggleName + ' ') ) {
 	        ele.className = className.replace(' ' + toggleName + ' ', ' ');
 	    } 
-	    else if(visbility == true){
+	    else if(visbility == true && className.indexOf(' ' + toggleName + ' ') < 0){
 	        ele.className += ' ' + toggleName;
 	    }
 	}

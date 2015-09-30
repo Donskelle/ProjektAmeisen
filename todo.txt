@@ -1,0 +1,28 @@
+// Ole
+- Intro / Tooltips
+
+// Fabian
+- Ameisenbau anpassen // done
+- gebäudewachstum verkleinern / Icons Gebäude verkleinern // done
+- Upgradepositinierung // done
+
+
+Morgen
+- Fehler rgba // done
+- Sound autostart // done
+- Startzahl Ameisen auf 0 // done
+- steine auf 0 // done
+- blätter auf 0 // done
+- nahrung auf 0 // done
+- icon auf building upgrade // done
+- trennlinie ressourcen
+- das upgrade fenster außerhalb des screens ist. // done
+- ereignissen tippfehler // done
+
+
+// Wiebke
+- Doku
+
+
+// Usertests, Evtl. 
+Rohstoffanzeige

@@ -5,6 +5,7 @@ function GameLoop (_options) {
     var _stoneCount = zid("stoneCount");
     var _foodCount = zid("foodCount");
     var _dumpCount = zid("dumpCount");
+    var _antAllCount = zid("antAllCount");
     var _workerCount = zid("workerCount");
    
     var _leafProd = zid("leafProd");
@@ -17,6 +18,9 @@ function GameLoop (_options) {
     var _dumpStorage = zid("dumpStorage");
     var _dumpHillhtml = zid("dumpHill");
 
+    var notifier = document.getElementsByTagName("x-notifier")[0];
+    var wasNegativFoodProd = false;
+    var wasNegativDumpProd = false;
 
 	//Fuellstand der Vorratslager
 	var leafBar = zid("leafBar");
@@ -26,9 +30,9 @@ function GameLoop (_options) {
 	var dumpHillBar = zid("dumpHillBar");
 
 	//Bestand von Rohstoffen
-	var _leafs = 100;
-	var _stone = 100;
-	var _food = 25;
+	var _leafs = 0;
+	var _stone = 0;
+	var _food = 0;
 	var _dump = 10;
 	
 	var _prodDump = 0;
@@ -37,7 +41,7 @@ function GameLoop (_options) {
     var _dumpHill = 0;
 	
 	//Bestand und Kosten von Ameisen
-	var unemployedAnts = 1;
+	var unemployedAnts = 0;
 	var _antS = 0;
 	
 	var _antCostW = {
@@ -236,37 +240,32 @@ function GameLoop (_options) {
 		});
 
 
-		zid("formSetLeafs").addEventListener("submit", function(e) {
-			var fields = HelpFunction.readForm.apply(e.target);
-			antJob.setJobs(1, fields.count, true);
+		zid("formSetLeafs").addEventListener("click", function(e) {
+			antJob.setJobs(1, zid("jobCountL").value, true);
 
 			e.preventDefault();
 			return false;
 		});
-		zid("formSetStone").addEventListener("submit", function(e) {
-			var fields = HelpFunction.readForm.apply(e.target);
-			antJob.setJobs(2,fields.count,true);
+		zid("formSetStone").addEventListener("click", function(e) {
+			antJob.setJobs(2, zid("jobCountS").value, true);
 
 			e.preventDefault();
 			return false;
 		});
-		zid("formSetHunt").addEventListener("submit", function(e) {
-			var fields = HelpFunction.readForm.apply(e.target);
-			antJob.setJobs(3,fields.count,true);
+		zid("formSetHunt").addEventListener("click", function(e) {
+			antJob.setJobs(3, zid("jobCountHu").value, true);
 
 			e.preventDefault();
 			return false;
 		});
-		zid("formSetBrood").addEventListener("submit", function(e) {
-			var fields = HelpFunction.readForm.apply(e.target);
-			antJob.setJobs(4,fields.count,true);
+		zid("formSetBrood").addEventListener("click", function(e) {
+			antJob.setJobs(4, zid("jobCountHa").value, true);
 
 			e.preventDefault();
 			return false;
 		});
-		zid("formSetClean").addEventListener("submit", function(e) {
-			var fields = HelpFunction.readForm.apply(e.target);
-			antJob.setJobs(5,fields.count,true);
+		zid("formSetClean").addEventListener("click", function(e) {
+			antJob.setJobs(5, zid("jobCountC").value, true);
 
 			e.preventDefault();
 			return false;
@@ -296,16 +295,22 @@ function GameLoop (_options) {
 		var subJobC = zid("btn_subJobC");
 		
 		addLeafs.addEventListener("click", function(e) {
-			_leafs++;
-			updateRes();
+			if(_leafs < buildingTypes[3]["storeLeafs"]){
+				_leafs++;
+				updateRes();
+			}
 		});
 		addStone.addEventListener("click", function(e) {
-			_stone++;
-			updateRes();
+			if(_stone < buildingTypes[3]["storeStone"]){
+				_stone++;
+				updateRes();
+			}
 		});
 		addFood.addEventListener("click", function(e) {
-			_food++;
-			updateRes();
+			if(_food < buildingTypes[4]["storeFood"]){
+				_food++;
+				updateRes();
+			}
 		});
 		
 		addAntW.addEventListener("click", function(e) {
@@ -439,7 +444,8 @@ function GameLoop (_options) {
     	_prodLeafs = (_jobLeafs * _ratioLeafs) - (buildingTypes[2]["leafConsume"] * connectedBuildingsLevel);
     	_prodStone = _jobStone * _ratioStone;
     	_prodFood = (_jobHunt * _ratioHunt) + (buildingTypes[2]["foodProd"] * connectedBuildingsLevel) - (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean);
-	
+		
+		
     	
     	if(_dumpHill >= _jobClean * _jobCleanRatio){
     		_prodDump = (_jobClean * _jobCleanRatio);
@@ -447,6 +453,26 @@ function GameLoop (_options) {
     	else {
     		_prodDump = _dumpHill;
     	}
+
+    	/**
+    	 * Notifier Meldungen Negative Nahrungsproduktion
+    	 */
+    	if(wasNegativFoodProd && _prodFood > 0)
+			wasNegativFoodProd = false;
+		else if(!wasNegativFoodProd && _prodFood < 0){
+			wasNegativFoodProd = true;
+			notifier.setContent("Deine Nahrung sinkt. Stell schnell wieder ein Gleichgewicht her. Schicke deine Ameisen dafür zum Jagen.");
+		}
+
+		/**
+		 * Notifer Meldungen Negative Müllproduktion
+		 */
+    	if(wasNegativDumpProd && _prodDump > 0)
+			wasNegativDumpProd = false;
+		else if(!wasNegativDumpProd && _dumpHill >= (buildingTypes[5]["storeDump"] / 2)){
+			wasNegativDumpProd = true;
+			notifier.setContent("Dein Müll steigt. Schicke mehr Ameisen zum Bau säubern oder erweitere deinen Kompost, um die Abbaurate zu erhöhen.");
+		}
 
     	if(_prodLeafs < 0) {
     		_leafProd.style.color = "red";
@@ -490,7 +516,7 @@ function GameLoop (_options) {
     	else if(!enoughFood || _dumpHill > (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean) * 10) {
     		var deathRate = Math.ceil((unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean)/25);
 			var random = Math.random();
-			// Jeden 1000sten Durchlauf
+			// Jeden 20sten Durchlauf
 			if(random <= 0.05)
 			{
 				var reduced = false;
@@ -542,9 +568,8 @@ function GameLoop (_options) {
 						}
 					}
 				}
+				antJob.updateJobs();
 			}
-			
-    		antJob.updateJobs();
     	}
 
 
@@ -563,8 +588,10 @@ function GameLoop (_options) {
     		_foodProd.innerHTML = _prodFood;
     	}
     	
-    	var allAnts = Math.floor((unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean) * 10);
+    	var antsComplete = (unemployedAnts + _jobLeafs + _jobStone + _jobHunt + _jobHatch + _jobClean);
+    	var allAnts = Math.floor(antsComplete * 10);
 
+    	_antAllCount.innerHTML = antsComplete;
     	_workerCount.innerHTML = unemployedAnts;
     	
     	_leafCount.innerHTML = _leafs;
@@ -581,11 +608,21 @@ function GameLoop (_options) {
 		_foodStorage.innerHTML = buildingTypes[4]["storeFood"];
 		_dumpStorage.innerHTML = buildingTypes[5]["storeDump"];
 		
+		if(_leafs/buildingTypes[3]["storeLeafs"]*100 <= 100){
+			leafBar.style.width = (_leafs/buildingTypes[3]["storeLeafs"])*100 + "%"; 
+		}
+		if(_stone/buildingTypes[3]["storeStone"]*100 <= 100){
+			stoneBar.style.width = (_stone/buildingTypes[3]["storeStone"])*100 + "%"; 
+		}
+		if(_food/buildingTypes[4]["storeFood"]*100 <= 100){
+			foodBar.style.width = (_food/buildingTypes[4]["storeFood"])*100 + "%"; 
+		}
+		if(_dump/buildingTypes[5]["storeDump"]*100 <= 100){
+			dumpBar.style.width = (_dump/buildingTypes[5]["storeDump"])*100 + "%"; 
+		}
 		
-		leafBar.style.width = (_leafs/buildingTypes[3]["storeLeafs"])*100 + "%"; 
-		stoneBar.style.width = (_stone/buildingTypes[3]["storeStone"])*100 + "%"; 
-		foodBar.style.width = (_food/buildingTypes[4]["storeFood"])*100 + "%"; 
-		dumpBar.style.width = (_dump/buildingTypes[5]["storeDump"])*100 + "%"; 
+		
+		
 		
 				
 		if(_dumpHill < allAnts * 10/100){
@@ -634,6 +671,12 @@ function GameLoop (_options) {
  	var pantryBuild = zid("pantryBuild");
  	var dumpingBuild = zid("dumpingBuild");
  	
+ 	var broodBuildWrapper = zid("broodChamberWrapper");
+ 	var mushroomBuildWrapper = zid("mushroomChamberWrapper");
+ 	var storageBuildWrapper = zid("storageWrapper");
+ 	var pantryBuildWrapper = zid("pantryWrapper");
+ 	var dumpingBuildWrapper = zid("dumpingGroundWrapper");
+ 	
  	var jobButtons = {
  		1 : zid("btn_addJobL"),
  		2 : zid("btn_subJobL"),
@@ -645,41 +688,64 @@ function GameLoop (_options) {
  		8 : zid("btn_subJobHa"),
  		9 : zid("btn_addJobC"),
  		10: zid("btn_subJobC")
- 		
  	};
  	
 
- 	
- 	var buildButtons = {
- 		1 :broodBuild,
- 		2: mushroomBuild,
- 		3: storageBuild,
- 		4: pantryBuild,
- 		5: dumpingBuild
+ 	var buildFormElements = {
+ 		//brood: 
+ 		1: {
+ 			wrapper: broodBuildWrapper,
+ 			button: broodBuild 
+ 		},
+ 		// mushroom: {
+ 		2: {
+ 			wrapper: mushroomBuildWrapper,
+ 			button: mushroomBuild
+ 		},
+ 		//storage: {
+ 		3: {
+ 			wrapper: storageBuildWrapper,
+ 			button: storageBuild
+ 		},
+ 		//pantry: {
+ 		4: {
+ 			wrapper: pantryBuildWrapper,
+ 			button: pantryBuild
+ 		},
+ 		//dumping {
+ 		5: {
+ 			wrapper: dumpingBuildWrapper,
+ 			button: dumpingBuild
+ 		}
  	};
  	
+
+ 	/**
+ 	 * [updateButtons description]
+ 	 * Diese Funktion prüft, ob unterschiedliche Aktionen durchführbar sind und setzt ggf. die Buttons auf disabled
+ 	 */
 	function updateButtons(){
-		var i=1;
-		for(i=1; i<=5; i++){
+		
+		for(var i=1; i<=5; i++){
 			if(_leafs >= buildingTypes[i].costLeafs && _stone >= buildingTypes[i].costStone && _food >= buildingTypes[i].costFood){
-				buildButtons[i].disabled = false;	
-				//alert(buildButtons[i]);	
+				buildFormElements[i].button.disabled = false;	
+				HelpFunction.toggleClassName(buildFormElements[i].wrapper, false, "disabled");	
 			}
 			else{
 				//alert(buildButtons[i]);
-				buildButtons[i].disabled = true;	
-			}	
+				buildFormElements[i].button.disabled = true;
+				HelpFunction.toggleClassName(buildFormElements[i].wrapper, true, "disabled");
+			}
 		}
 		
 		if(_antCostW["leafs"] <= _leafs && _antCostW["stone"] <= _stone && _antCostW["food"] <= _food && posibleAnts != ants.length){
 			zid("btn_addAntW").disabled = false;
-			
 		}
 		else {
 			zid("btn_addAntW").disabled = true;
 		}
 			
-		if(unemployedAnts <= 0){
+		if(unemployedAnts <= 0) {
 			jobButtons[1].disabled = true;
 			jobButtons[3].disabled = true;
 			jobButtons[5].disabled = true;
@@ -727,6 +793,10 @@ function GameLoop (_options) {
 	}
 
 	
+	/**
+	 * [antJobs description]
+	 * Dieses Object ist für die Einstellung der Jobs zuständig. Sollte Aktionen nicht möglich sein, werden diese per Alert ausgeben.
+	 */
     function antJobs()
     {
     	var _jobAntW = zid("jobAntW");
@@ -736,7 +806,17 @@ function GameLoop (_options) {
 		var _jobCountHa = zid("jobCountHa");
 	    var _jobCountC = zid("jobCountC");
 
-
+	    /**
+	     * [setJobs description]
+	     * Diese public Methode stellt die Schnittstelle zum eigentlichen Einstellen der Ameisen dar.
+	     * Sie prüft, ob Ameisen entfernt oder hinzugefügt werden können.
+	     * @param {[number]} type     [description]
+	     * Art des Jobs der Verändert werden soll
+	     * @param {[number]} amount   [description]
+	     * Anzahl der Ameisen für diesen Job
+	     * @param {[boolean]} override [description]
+	     * Boolean der angibt, ob der aktuelle Wert überschrieben werden soll.
+	     */
     	this.setJobs = function (type, amount, override) 
     	{
     		
@@ -760,9 +840,9 @@ function GameLoop (_options) {
 			    				_jobLeafs = amount;
 			    			}	
 			    			else {
-			    				alert("Nicht genug arbeiter")
+			    				//alert("Nicht genug arbeiter")
 			    			}
-			    			_jobCountL.innerHTML = _jobLeafs;
+			    			_jobCountL.value = _jobLeafs;
 			    			break;
 			    		case 2:	// collect stone
 			    			if(_jobStone >= amount) {
@@ -775,9 +855,9 @@ function GameLoop (_options) {
 			    				_jobStone = amount;
 			    			}	
 			    			else {
-			    				alert("Nicht genug arbeiter")
+			    				//alert("Nicht genug arbeiter");
 			    			}
-			    			_jobCountS.innerHTML = _jobStone;
+			    			_jobCountS.value = _jobStone;
 
 			    			break;
 			    		case 3: // hunt
@@ -791,9 +871,9 @@ function GameLoop (_options) {
 			    				_jobHunt = amount;
 			    			}	
 			    			else {
-			    				alert("Nicht genug arbeiter")
+			    				//alert("Nicht genug arbeiter")
 			    			}
-			    			_jobCountHu.innerHTML = _jobHunt;
+			    			_jobCountHu.value = _jobHunt;
 
 			    			break;
 			    		case 4: // hatch
@@ -807,11 +887,11 @@ function GameLoop (_options) {
 			    				_jobHatch = amount;
 			    			}	
 			    			else {
-			    				alert("Nicht genug arbeiter")
+			    				//alert("Nicht genug arbeiter")
 			    			}
 			    			_hatchRateW = _HATCHW - (_hatchRatioW * _jobHatch);
 		    				_hatchRateS = _HATCHS - (_hatchRatioS * _jobHatch);
-		    				_jobCountHa.innerHTML = _jobHatch;
+		    				_jobCountHa.value = _jobHatch;
 
 			    			break;
 			    		case 5:	//clean
@@ -825,9 +905,9 @@ function GameLoop (_options) {
 			    				_jobClean = amount;
 			    			}	
 			    			else {
-			    				alert("Nicht genug arbeiter")
+			    				//alert("Nicht genug arbeiter")
 			    			}
-			    			_jobCountC.innerHTML = _jobClean;
+			    			_jobCountC.value = _jobClean;
 
 			    			break;
 			    	}
@@ -839,21 +919,21 @@ function GameLoop (_options) {
 			    		case 1: //collect leafs
 			    			if(_jobLeafs >= 1 || amount == 1) {
 			    				_jobLeafs += amount;
-			    				_jobCountL.innerHTML = _jobLeafs;
+			    				_jobCountL.value = _jobLeafs;
 			    				unemployedAnts += -amount;
 			    			}
 			    			break;
 			    		case 2:	//collect stone
 			    			if(_jobStone >= 1 || amount == 1) {
 			    				_jobStone += amount;
-			    				_jobCountS.innerHTML = _jobStone;
+			    				_jobCountS.value = _jobStone;
 			    				unemployedAnts += -amount;
 			    			}
 			    			break;
 			    		case 3: //hunt
 			    			if(_jobHunt >= 1 || amount == 1) {
 			    				_jobHunt += amount;
-			    				_jobCountHu.innerHTML = _jobHunt;
+			    				_jobCountHu.value = _jobHunt;
 			    				unemployedAnts += -amount;
 			    			}
 			    			break;
@@ -862,14 +942,14 @@ function GameLoop (_options) {
 			    				_jobHatch += amount;
 			    				_hatchRateW = _HATCHW - (_hatchRatioW * _jobHatch);
 			    				_hatchRateS = _HATCHS - (_hatchRatioS * _jobHatch);
-			    				_jobCountHa.innerHTML = _jobHatch;
+			    				_jobCountHa.value = _jobHatch;
 			    				unemployedAnts += -amount;
 			    			}
 			    			break;
 			    		case 5:	//clean
 			    			if(_jobClean >= 1 || amount == 1) {
 			    				_jobClean += amount;
-			    				_jobCountC.innerHTML = _jobClean;
+			    				_jobCountC.value = _jobClean;
 			    				unemployedAnts += -amount;
 			    			}
 			    			break;
@@ -880,16 +960,20 @@ function GameLoop (_options) {
 		    }
     	}
 
+    	/**
+    	 * [updateJobs description]
+    	 * Diese public Methode updatet die dargestellten Jobs, entsprechend der aktuellen Variablen
+    	 */
     	this.updateJobs = function() {
-    		_jobCountL.innerHTML = _jobLeafs;
-    		_jobCountS.innerHTML = _jobStone;
-    		_jobCountHu.innerHTML = _jobHunt;
+    		_jobCountL.value = _jobLeafs;
+    		_jobCountS.value = _jobStone;
+    		_jobCountHu.value = _jobHunt;
 
     		_hatchRateW = _HATCHW - (_hatchRatioW * _jobHatch);
 			_hatchRateS = _HATCHS - (_hatchRatioS * _jobHatch);
-			_jobCountHa.innerHTML = _jobHatch;
+			_jobCountHa.value = _jobHatch;
 
-			_jobCountC.innerHTML = _jobClean;
+			_jobCountC.value = _jobClean;
     	}
     }
     
@@ -899,7 +983,17 @@ function GameLoop (_options) {
 
 	
 	
-	
+	/**
+	 * [build description]
+	 * Diese Methode erstellt ein neues Gebäude des angebenen Typs
+	 * @param  {[number]} type [description]
+	 * Art des Gebäudes
+	 * 1: brood
+	 * 2: mush
+	 * 3: storage
+	 * 4: pantry
+	 * 5: dumping
+	 */
 	function build(type) {
 		//Abfrage, ob die Ressourcen die Kosten uebersteigen
 		if(_leafs >= buildingTypes[type]["costLeafs"] && _stone >= buildingTypes[type]["costStone"] && _food >= buildingTypes[type]["costFood"])
@@ -968,7 +1062,12 @@ function GameLoop (_options) {
 		}
 	}
 	
-	
+	/**
+	 * [requestUpdate description]
+	 * Public Mehtode überprüft, ob genügend Rohstoffe für ein Upgrade verfügbar sind.
+	 * @param  {[number]} buildingId [description]
+	 * Id des Gebäudes, welches upgedrated werden soll
+	 */
 	this.requestUpdate = function(buildingId) {
 		if(buildedBuildings[buildingId].upgradeCost.stone <= _stone
 			&& buildedBuildings[buildingId].upgradeCost.leafs <= _leafs
@@ -995,10 +1094,21 @@ function GameLoop (_options) {
 		}
 	}
 
+	/**
+	 * [getUpgradeCots description]
+	 * Public Methode zur Abfrage der aktuellen Upgradekosten für ein Gebäude
+	 * @param  {[number]} buildingId [description]
+	 * Id des abzufragenden Gebäudes
+	 */
 	this.getUpgradeCots = function(buildingId) {
 		return buildedBuildings[buildingId].upgradeCost;
 	}
 
+	/**
+	 * [getCurrentValues description]
+	 * Public Mehtode zur Abfrage der aktuellen Rohstoffe und Jobs
+	 * @return {[object]} [description]
+	 */
 	this.getCurrentValues = function() {
 		var values = {
 			'resources': {
@@ -1019,6 +1129,12 @@ function GameLoop (_options) {
 		return values;
 	}
 
+	/**
+	 * [setValues description]
+	 * Public Methode zum Überschreiben der Rohstoffe und Jobs
+	 * @param {[object]} values [description]
+	 * Siehe getCurrentValues
+	 */
 	this.setValues = function(values) {
 		_leafs = values.resources.leafs;
 		_stone = values.resources.stone;
@@ -1048,6 +1164,12 @@ function GameLoop (_options) {
 		buildedBuildings[eventData.to].connected = true;
 	}
 
+	/**
+	 * [checkConnection description]
+	 * Prüft, ob eine Gebäude noch eine Verbindung zu einem anderen hat
+	 * @param  {[object]} arr [description]
+	 * Gebäude welches durchsucht werden soll
+	 */
 	function checkConnection(arr) { 
 		arr.connected = false;
 		
@@ -1078,7 +1200,10 @@ function GameLoop (_options) {
 	}
 
 
-
+	/**
+	 * [antBuilder description]
+	 * @return {[type]} [description]
+	 */
 	function antBuilder () {
 		var timer;
 		var countdownW = zid("countdownW");
@@ -1120,7 +1245,7 @@ function GameLoop (_options) {
 			if(_leafs >= _antCostW["leafs"] && _stone >= _antCostW["stone"] && _food >= _antCostW["food"])
 			{
 				if(posibleAnts == ants.length) {
-					alert("Sie können nicht mehr Ameisen in Auftrag geben.");
+					//alert("Sie können nicht mehr Ameisen in Auftrag geben.");
 					return false;
 				}
 				ants[ants.length] = {
@@ -1139,7 +1264,7 @@ function GameLoop (_options) {
 				updateViewBuilder();
 			}
 			else {
-				alert("Sie haben nicht genügend Rohstoffe");
+				//alert("Sie haben nicht genügend Rohstoffe");
 			}
 		}
 		/*this.addS = function(rate) {

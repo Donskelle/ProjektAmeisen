@@ -1,233 +1,264 @@
+function layout(options) {
+	/**
+	 * [load description]
+	 * Die Load Funktion wird beim Aufruf der Webseite ausgeführt.
+	 * Sie legt grundlegende Styles an, erstellt Menüs und erstellt die Tooltips
+	 */
+	function load() {
+		var isClicked = false;
 
-var menuButton = zid("btn_toggleMenu");
-var menuWrapper = zid("menuWrapper");
-var gameWrapper = zid("gameWrapper");
+		var menuButton = zid("btn_toggleMenu");
+		var menuWrapper = zid("menuWrapper");
+		var gameWrapper = zid("gameWrapper");
 
-var menuHowToPlay = zid("menuHowToPlay");
-var menuSettings = zid("menuSettings");
-var howToPlay = zid("howToPlay");
-var settings = zid("settings");
 
-var isClicked = false;
-function load() {
-	menuButton.addEventListener("click", function(e) {
-		
-		if(isClicked == false){
-			isClicked = true;
-			menuWrapper.style.margin = "-100vh 0 0 0";
-			gameWrapper.style.margin = "0 0 0 0";
-			menuButton.style.top = "92%";
-			menuButton.style.backgroundImage = "url(img/menu.png)";
+		/**
+		 * Menüleiste
+		 */
+		var introIsActive = false;
+		btnTutorial = zid("btn_tutorial");
+		btnPause = zid("btn_pause");
+		btnPause.addEventListener("click", function(e) {
+			alert(
+				"Das Spiel ist nun pausiert. Klicke auf ok um fortzufahren."
+			);	
+		});
+		btnTutorial.addEventListener("click", function(e) {
+			if(introIsActive == false){
+				introBox.style.display = "block";
+				pages[curPage].style.display = "block";
+				introIsActive = true;
+			}	
 			
-		}
-		else {
-			isClicked = false;
-			menuWrapper.style.margin = "0 0 0 0";
-			gameWrapper.style.margin = "100vh 0 0 0";
-			menuButton.style.top = "5px";
-			menuButton.style.backgroundImage = "url('img/play.png')";
-		}
+		});
 		
-	});
-	
-	
-	//Intro
-	var togIntro = zid("menuHowToPlay");
-	var quitIntro = zid("quitIntro");
-	var introBox = zid("introBox");
-	var btnNext = zid("next");
-	var btnPrev = zid("prev");
-	var curPage = 1;
-	var pageAmount = 5;
-	var pages = {
-		1 : pageOne,
-		2 : pageTwo,
-		3 : pageThree,
-		4 : pageFour,
-		5 : pageFive
-	};
-	
-	var introIsActive = false;
-	togIntro.addEventListener("click", function(e) {
-		if(introIsActive == false){
+		/**
+		 * Wechsel zwischen Spiel und Menü
+		 */
+		menuButton.addEventListener("click", function(e) {
+			
+			if(isClicked == false) {
+				isClicked = true;
+				menuWrapper.style.margin = "-100vh 0 0 0";
+				gameWrapper.style.margin = "0 0 0 0";
+				
+				menuButton.style.backgroundImage = "url(img/icons/arrow_up.png)";
+			}
+			else {
+				isClicked = false;
+				menuWrapper.style.margin = "0 0 0 0";
+				gameWrapper.style.margin = "100vh 0 0 0";
+				
+				menuButton.style.backgroundImage = "url('img/icons/arrow_down.png')";
+			}
+		});
+		
+		// Canvas der Größe des Bildschirms anpassen
+		var canv = zid(options.canvas);
+			canv.style.width = window.innerWidth + "px";
+			canv.style.height = window.innerHeight + "px";
+			canv.height = window.innerHeight;
+			canv.width = window.innerWidth;
+		
+		/**
+		 * Initialiserung Spieleinführung
+		 */
+		
+		var loginBox = zid("loginBox");
+		var login = zid("login");
+		var start = zid("start");
+		var btnlogin = zid("btn_login");
+		var btnStartTut = zid("btn_startTut");
+		var btnStartGame = zid("btn_startGame");
+		
+		
+		var quitIntro = zid("quitIntro");
+		var introBox = zid("introBox");
+		var btnNext = zid("next");
+		var btnPrev = zid("prev");
+		var curPage = 1;
+		var pageAmount = 6;
+		var pages = {
+			1 : pageOne,
+			2 : pageTwo,
+			3 : pageThree,
+			4 : pageFour,
+			5 : pageFive,
+			6 : pageSix
+		};
+		
+		btnlogin.addEventListener("click", function(e) {
+			login.style.display = "none";
+			start.style.display = "block";
+			
+		});
+		btnStartTut.addEventListener("click", function(e) {
+			loginBox.style.display = "none";
 			introBox.style.display = "block";
 			pages[curPage].style.display = "block";
 			introIsActive = true;
-		}
-		else {
+			
+		});
+		btnStartGame.addEventListener("click", function(e) {
+			loginBox.style.display = "none";
+		});
+		
+		
+		
+
+		quitIntro.addEventListener("click", function(e) {
 			introBox.style.display = "none";
-			pages[curPage].style.display = "none";	
 			introIsActive = false;
-		}
+		});
+		btnNext.addEventListener("click", function(e) {
+			
+			pages[curPage].style.display = "none";
+			curPage++;
+			if(curPage > pageAmount){
+				curPage = 1;
+			}
+			if(curPage == pageAmount){
+				btnNext.style.display = "none";
+			}
+			else {
+				btnNext.style.display = "block";
+			}
+			if(curPage != 1){
+				btnPrev.style.display = "block";
+			}
+			pages[curPage].style.display = "block";
+		});
+		btnPrev.addEventListener("click", function(e) {
+			pages[curPage].style.display = "none";
+			curPage--;
+			if(curPage < 1){
+				curPage = pageAmount;
+			}
+			
+			if(curPage == 1){
+				btnPrev.style.display = "none";
+			}
+			else {
+				btnPrev.style.display = "block";
+			}
+			if(curPage != pageAmount){
+				btnNext.style.display = "block";
+			}
+			pages[curPage].style.display = "block";
+		});
 		
 		
-		
-		
-	});
-	quitIntro.addEventListener("click", function(e) {
-		introBox.style.display = "none";
-		introIsActive = false;
-	});
-	btnNext.addEventListener("click", function(e) {
-		
-		pages[curPage].style.display = "none";
-		curPage++;
-		if(curPage > pageAmount){
-			curPage = 1;
-		}
-		pages[curPage].style.display = "block";
-	});
-	btnPrev.addEventListener("click", function(e) {
-		pages[curPage].style.display = "none";
-		curPage--;
-		if(curPage < 1){
-			curPage = pageAmount;
-		}
-		pages[curPage].style.display = "block";
-	});
-	
-	//Menu
-	htpToggle = false;
-	settingsToggle = false;
-	
-	menuSettings.addEventListener("click", function(e) {
-		if(settingsToggle == true){
-			settings.style.display = "none";
-			settingsToggle = false;
-		}
-		else {
-			settings.style.display = "block";
-			settingsToggle = true;
-			howToPlay.style.display = "none";
-			htpToggle = false;
-		}
-	});
-	$(document).on('click', function(event){
-	  	if(!$(event.target).closest('#howToPlay').length){
-	  		if(!$(event.target).closest('#menuHowToPlay').length){
-	  			howToPlay.style.display = "none";
-				htpToggle = false;
-	  		}
-	    	
-	  	}
-	  	if(!$(event.target).closest('#settings').length){
-	  		if(!$(event.target).closest('#menuSettings').length){
-	  			settings.style.display = "none";
-				settingsToggle = false;
-	  		}
-	  	}
-	});
-}
-load();
-
-//tooltip
-var target;
-var toolType;
-function handler(e) {
-	
-    target = $(e.target);
-    toolType = target.attr('data-type');
-    if( target.is(".tooltip") ) {
-       //alert('The mouse was over'+ toolType );
-    }
-}
-$(".tooltip").mouseenter(handler);
 
 
-var tipArray = {
-	broodChamber : {
-		title : "Brutkammer",
-		text : "Hier werden neue Arbeiterinnen ausgebildet. Die Ausbaustufe entscheidet darüber, wie viele Larven sich gleichzeitig in der Warteschleife befinden können."
-	},
-	mushroomChamber : {
-		title : "Pilzkammer",
-		text : "In der Pilzkammer gedeiht ein Speisepilz, der hervorragend auf Blättern und anderen Pflanzenteilen wächst. Deine Ameisen ernähren sich von ihm. Du solltest dafür sorgen, dass immer genug Blätter vorhanden sind, da der Pilz sich sonst zurück entwickelt."
-	},
-	storage : {
-		title : "Lager",
-		text : "Im Lager werden deine Baumaterialien gespeichert, also Blätter und Steine. Je höher die Ausbaustufe, desto mehr Einheiten können gelagert werden."
-	},
-	pantry : {
-		title : "Speisekammer",
-		text : "Hier werden Nahrungsmittel gelagert, die der Pilz produziert oder deine Arbeiterinnen bei der Jagt erbeutet haben. Auch hier bestimmt die Ausbaustufe die Größe des Speichers."
-	},
-	dumpingGround : {
-		title : "Deponie",
-		text : "Dies ist der Ort wo Abfälle, die dein Volk produziert, entsorgt werden. Dazu zählen tote Ameisen, verdorbene Nahrungsreste und die Notdurft deines Volkes. Je höher die Kammer ausgebaut ist, desto mehr Platz bietet sie und desto schneller wird der Abfall abgebaut."
-	},
-	worker : {
-		title : "Arbeiter",
-		text : "Hier kannst du neue Arbeiterinnen ausbrüten. Sie bilden das Rückrat deines Volkes und übernehmen sämtliche Aufgaben. Jede Ameise muss fressen und verbraucht pro Spielrunde (Tick) eine Nahrungseinheit. Sorge dafür, dass immer genug Nahrung vorhanden ist oder deine Ameisen verhungern."
-	},
-	jLeafs : {
-		title : "Blätter sammeln",
-		text : "Ameisen auf diesem Posten sammeln eifrig Blätter. Pro Spielrunde (Tick) sammelt jede Ameise auf diesem Posten ein Blatt."
-	},
-	jStone : {
-		title : "Steine sammeln",
-		text : "Steine zu sammeln ist keine einfache Aufgabe. Jede Ameise sammelt pro Spielrunde (Tick) einen Stein."
-	},
-	jHunt : {
-		title : "Jagen",
-		text : "Du kannst deine Ameisen auf die Jagt schicken, um Insekten und andere Kleintiere zu erbeuten. Es gibt Ameisenarten, die sogar Jungvögel erlegen."
-	},
-	jHatch : {
-		title : "Brutpflege",
-		text : "Die Brutpflege ist ein wichtiger Bestandteil einer florierenden Kolonie. Je mehr Ameisen sich um den Nachwuchs kümmern, desto schneller wächst dieser heran."
-	},
-	jClean : {
-		title : "Bau säubern",
-		text : "Ist dein Nest nicht gepflegt, können deine Ameisen krank werden. Sorge also dafür, dass sich immer genug Arbeiterinnen um die Sauberkeit im Bau kümmern."
-	},
-	leafs : {
-		title : "Blätter",
-		text : "Blätter sind äußerst wichtig für die Entwicklung deines Volkes. Du kannst sie entweder zum Bau von neuen Kammern oder zum speisen deines Pilzes verwenden."
-	},
-	stone : {
-		title : "Steine",
-		text : "Steine dienen ebenfalls als Baumaterial, das erforderlich ist, um Kammern zu erweitern oder neue zu bauen. Dieser Rohstoff ist unabdingbar und du solltest den Füllstand ständig im Auge behalten, damit das Wachstum nicht stagniert."
-	},
-	food : {
-		title : "Nahrung",
-		text : "Nahrung ist die Basis, damit dein Volk existieren kann. Es gibt verschiedene Möglichkeiten um Nahrung zu gewinnen. Du kannst entweder über den Pilz Blätter in Nahrung umwandeln oder deine Ameisen auf die Jagt schicken."
-	},
-	amber : {
-		title : "Bernstein",
-		text : "Die antibakteriellen Eigenschaften von Harz sind sogar den Ameisen bekannt. Besonders Waldameisen machen sich diese zunutze, indem sie Baumharzstücke in den Bau schleppen und so die Vermehrung von Keimen unterbinden bzw. erschweren."
+
+		// Menu Bars verschiebar machen
+		var bars = document.querySelectorAll(".handle");
+		for (var i = bars.length - 1; i >= 0; i--) {
+			new menuBarDragger(bars[i]);
+		};
+
+		// Lightbox schließen via Klick auf Rand
+		var bars = document.querySelectorAll(".handle");
+		var width = 0;
+		for (var i = 0; i < bars.length; i++) {
+			bars[i].parentNode.style.left = width + "px";
+			width += bars[i].parentNode.offsetWidth + 3;
+			if(bars[i].parentNode.querySelector(".handleSub"))
+				new menuBarDragger(bars[i], bars[i].parentNode.querySelector(".handleSub"));
+			else
+				new menuBarDragger(bars[i]);
+		};
+
+
+		/** 
+		 * Inizialiserung Tooltips
+		 */
+		(function initTooltip () {
+			var tipArray = {
+				broodChamber : {
+					title : "Brutkammer",
+					text : "Alle Fünf Stufen wird die Warteschleife für neu zu produzierende Larven um 1 erweitert."
+				},
+				mushroomChamber : {
+					title : "Pilzkammer",
+					text : "Je Stufe wird ein Blatt in drei Einheiten Nahrung umgewandelt."
+				},
+				storage : {
+					title : "Lager",
+					text : "Jede Stufe erweitert die maximale Speicherkapazität von Blättern und Steinen."
+				},
+				pantry : {
+					title : "Speisekammer",
+					text : "Jede Stufe erweitert deinen Nahrungsspeicher."
+				},
+				dumpingGround : {
+					title : "Kompost",
+					text : "Jede Stufe erweitert die Speicherkapazität deines Komposts, sowie die Abbaurate von eingelagerten Abfällen um eine Einheit pro Runde."
+				},
+				worker : {
+					title : "ohne Aufgabe",
+					text : "Diese Ameisen produzieren nichts, jedoch bewachen sie deinen Bau."
+				},
+				jLeafs : {
+					title : "Blätter sammeln",
+					text : "Jede Ameise auf diesem Posten sammelt ein Blatt pro Runde."
+				},
+				jStone : {
+					title : "Steine sammeln",
+					text : "Jede Ameise auf diesem Posten sammelt einen Stein pro Runde."
+				},
+				jHunt : {
+					title : "Jagen",
+					text : "Jede Ameise auf der Jagt sammelt zwei Einheiten Nahrung pro Runde."
+				},
+				jHatch : {
+					title : "Brutpflege",
+					text : "Je mehr Ameisen sich um den Nachwuchs kümmern, desto schneller entwickeln sich die Larven."
+				},
+				jClean : {
+					title : "Bau säubern",
+					text : "Ameisen, die den Bau säubern, bringen pro Runde eine Einheit Abfall zur Deponie, wo sie vergammelt."
+				},
+				leafs : {
+					title : "Blätter",
+					text : "Ein wichtiger Rohstoff zur Entwicklung deiner Kammern und zur Produktion von Nahrung über die Pilzkammer."
+				},
+				stone : {
+					title : "Steine",
+					text : "Steine dienen als Baumaterial für neue Kammern und deren Ausbau."
+				},
+				food : {
+					title : "Nahrung",
+					text : "Dein wichtigster Rohstoff. Ohne Nahrung kann dein Volk nicht überleben!"
+				},
+				dump : {
+					title : "Kompost",
+					text : "Der Kreislauf der Kompostierung muss stets im Auge behalten werden. Der untere Balken zeigt links die Verschmutzung im Bau und rechts den Höchstwert. Wenn dieser erreicht ist, fangen Ameisen an krank zu werden und zu sterben."
+				}
+			};
+
+
+			var eles = document.querySelectorAll(".tooltip");
+
+			for (var i = 0; i < eles.length; i++) {
+				eles[i].addEventListener("mouseenter", function(e) {
+				    var toolType = e.target.attributes["data-type"].value;
+
+					zid("tipTitle").innerHTML = tipArray[toolType].title;
+					zid("tipText").innerHTML = tipArray[toolType].text;
+					zid("tipBox").style.display = "block";
+				});
+
+				eles[i].addEventListener("mouseleave", function(e) {
+					zid("tipBox").style.display = "none";
+				});
+
+				$(eles[i]).mousemove(function(e) {
+					zid("tipBox").style.left = e.pageX + 10 + "px";
+			 		zid("tipBox").style.top =  e.pageY + 10 + "px";
+			 	});
+			};
+		})();
 	}
-};
-
-$( ".tooltip" ).mouseenter(function() {
-	
-	$("#tipTitle").text(tipArray[toolType].title);
-	$("#tipText").text(tipArray[toolType].text);
-	$("#tipBox").css("display", "block");
-});
-$( ".tooltip" ).mouseleave(function() {
-	$("#tipBox").css("display", "none");
-});
-
-$(".tooltip").on( "mousemove", function( event ) {
-  $("#tipBox").css("left", event.pageX + 10);
-  $("#tipBox").css("top", event.pageY + 10);
-});
-
-
-// Image View
-
-var imgIntro1 = zid("imgIntro1");
-var imgIntro2 = zid("imgIntro2");
-var imgSrc = zid("imgSrc");
-var imgView = zid("imgView");
-
-imgIntro1.addEventListener("click", function(e) {
-	
-	imgView.style.display = "block";
-	imgSrc.style.backgroundImage = "url(img/intro1.png)"; 
-			 
-});
-
-imgView.addEventListener("click", function(e) {
-	imgView.style.display = "none";
-	
-});	
+	load();
+}

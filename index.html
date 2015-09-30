@@ -6,10 +6,64 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 		<link rel="stylesheet" media="screen" href="css/reset.css"/>
+		<link rel="stylesheet" media="screen" href="css/fonts.css"/>
 		<link rel="stylesheet" media="screen" href="css/style.css"/>
 	</head>
 
 	<body>
+		
+		<div id="menuBar">
+			<ul>
+				<li id="btn_toggleMenu"></li>
+				<li id="btn_tutorial"></li>
+				<li id="btn_toggleSound"></li>
+				<li id="btn_profile"></li>
+				<li id="btn_pause"></li>
+			</ul>
+		</div>
+		<div id="loginBox">
+			<div id="login">
+				<div class="boxHead">
+					<img id="willkommen" src="img/Willkommen.png" alt="">
+					<p>in deinem Ameisenreich!</p>
+					
+				</div>
+					<p>hast du dich schon registriert?</p>
+				
+				<form id="login_form" action="">
+	  				Nickname: <br/><input type="text" name="name" value="test"><br/><br/>
+	  				Passwort: <br/><input type="password" name="pass" value="test"><br/>  				
+				</form> 
+				
+				<button id="btn_login" class="antButton">Login</button>
+				<button id="btn_register" class="antButton" disabled>Jetzt registrieren</button>
+				
+			</div>
+			<div id="register">
+				
+			</div>
+			<div id="start">
+				<div class="boxHead">
+					<img class="tutorial" src="img/Tutorial.png" alt="">
+					<br/>
+					<p>
+						Du bist der Herrscher eines ganzen Ameisenvolkes! Baue dein eigenes Reich, zeuge Nachkommen und organisiere Unterkunft und Verpflegung für tausende Untertanen.
+						Aber baue vorausschauend, denn andere Ameisenvölker haben es auf deine Vorräte abgesehen, und sintflutartige Regengüsse drohen deine Kammern zu überschwemmen.
+					</p>
+					<br/><br/>
+					<p>
+						Dieses Tutorial erklärt dir die wichtigsten Funktionen des Spiels. Du kannst das Tutorial oder Tips zu den einzelnen Funktionen jederzeit durch einen Klick auf das Fragezeichen abrufen.
+					</p>
+					<br/><br/>
+					<div id="btnWrapper">
+						<button id="btn_startTut"></button>
+						<button id="btn_startGame"></button>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
 		<div id="imgView">
 			<div id="imgSrc"></div>
 		</div>
@@ -17,114 +71,291 @@
 		
 		<div id="introBox">
 			<div id="pagesWrapper">
-
-				<button id="quitIntro">x</button>
+				<div id="quitIntroBox">
+					<div id="quitIntro"></div>
+				</div>
+				
 				<div id="pageOne">
-					<div class="partOne">
-						<div class="introHead">Willkommen bei Antventure</div>
-						<div class="introSub">Der Ameisen Simulation</div>
-						<div class="introContent">
-							<div class="introTextOneA">
-								<p>Du entscheidest über den Erfolg einer Ameisenkolonie. <br/>Entwickle dich langsam weiter und achte auf die Bedürfnisse deiner Ameisen. Wachse zum größten Ameisenvolk heran, das die Welt je gesehen hat.</p>
-								<p>In diesem Intro werden dir die Grundelemente des Spiels erklärt.</p>							
-							</div>
+					<img class="tutorial" src="img/Tutorial.png" alt="">
+					<p>Startbildschirm</p><br/>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/arrow_down.png" alt="">
 						</div>
+						<p class="tutText">
+							Wechseln der Ebene:<br/>
+							Auf der unteren Ebene verwaltest du dein Imperium, während du dich oben vor Gefahren schützt.
+						</p>
 					</div>
-					<div class="partTwo">
-						<img id="imgIntro1" src="img/intro1.png" alt="">
-						<div class="introTextOneB">
-								<p>Rohstoffe sind wichtig für das Wachstum und den Erhalt deines Volkes. Achte außerdem darauf, dass dein Bau sauber bleibt.</p>
-							</div>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/tutorial.png" alt="">
+						</div>
+						<p class="tutText">
+							Spieleinführung:<br/>
+							Hier kannst du jederzeit dieses Tutorial aufrufen, falls du Hilfe benötigst.
+						</p>
+					</div>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/soundOn.png" alt="">
+						</div>
+						<p class="tutText">
+							Hintergrundmusik:<br/>
+							Du kannst hier die Musik an- oder ausschalten.
+						</p>
+					</div>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/profile.png" alt="">
+						</div>
+						<p class="tutText">
+							Spielerprofil:<br/>
+							Hier kannst du Statistiken über dein Volk abrufen und persönliche Daten ändern.
+						</p>
+					</div>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/pause.png" alt="">
+						</div>
+						<p class="tutText">
+							Spiel unterbrechen:<br/>
+							Per Klick auf dieses Symbol wird das Spiel unterbrochen.
+						</p>
 					</div>
 					
 				</div>
 				<div id ="pageTwo">
-					<div class="partOne">
-						<div class="introHead">Willkommen bei Antventure</div>
-						<div class="introSub">Der Ameisen Simulation</div>
-						<div class="introContent">
-							<div class="introTextOneA">
-								<p class="introTextHead">Wichtig:</p>
-								<p class="introTextSub">Trial and Error ist Teil des Spiels und es kann passieren, dass deine Ameisen zu Beginn häufiger sterben. Allerdings sind die Grundelemente des Spiels schnell erlernt und nach kurzer Eingewöhnung sollte es dir möglich sein einen stabilen Kreislauf aufzubauen.</p>
-								<p class="introTextHead">Achtung:</p>
-								<p class="introTextSub">Lade während des Spielens nicht die Seite neu, da der Spielstand momentan nicht gespeichert wird.</p>
-							</div>
+					<img class="tutorial" src="img/Tutorial.png" alt="">
+					<p>Rohstoffe</p><br/>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/Blätter.png" alt="">
 						</div>
+						<p class="tutText">
+							Blätter:<br/>
+							Blätter, Äste und andere Pflanzenteile bilden die Basis der Rohstoffe. Sie werden sowohl für den Bau, als auch zur Nahrungsmittelherstellung benötigt.
+						</p>
 					</div>
-					<div class="partTwo">
-						<img id="imgIntro1" src="img/intro2.png" alt="">
-						<div class="introTextOneB">
-								<p>Arbeiterinnen sind dein wichtigstes Werkzeug, da sie Sammelvorgänge automatisieren, die du sonst manuell ausführen müsstest.</p>
-							</div>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/Steine.png" alt="">
+						</div>
+						<p class="tutText">
+							Steine:<br/>
+							Kleine Steine werden zur Befestigung deiner Kammern benötigt. Ohne sie kannst du deinen Bau nicht erweitern.
+						</p>
+					</div>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/Nahrung.png" alt="">
+						</div>
+						<p class="tutText">
+							Nahrung:<br/>
+							Nahrung ist die wichtigste Ressource, denn dein Volk benötigt sie zum Überleben.
+						</p>
+					</div>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/Deponie.png" alt="">
+						</div>
+						<p class="tutText">
+							Kompost:<br/>
+							Die Abfallentsorgung ist äußerst wichtig für die Gesundheit deines Volkes. Ameisen sterben, wenn der Bau zu sehr verschmutzt ist.
+						</p>
 					</div>
 				</div>
 				<div id="pageThree">
-					<div class="partOne">
-						<div class="introHead">Willkommen bei Antventure</div>
-						<div class="introSub">Der Ameisen Simulation</div>
-						<div class="introContent">
-							<div class="introTextOneA">
-								<p class="introTextHead">Abhängigkeiten:</p>
-								<p class="introTextSub">
-									<ul>
-										<li>Die Pilzkammer verbraucht pro Level und Runde eine Nahrungseinheit und produziert drei Nahrungseinheiten</li>
-										<li>Jede Ameise verbraucht eine Nahrungseinheit pro Runde</li>
-										<li>Jede Ameise Produziert eine Abfalleinheit pro Runde</li>
-										<li>Die Deponie </li>
-									</ul>
-								</p>
-								<p class="introTextHead">Achtung:</p>
-								<p class="introTextSub">Lade während des Spielens nicht die Seite neu, da der Spielstand momentan nicht gespeichert wird.</p>
-							</div>
+					<img class="tutorial" src="img/Tutorial.png" alt="">
+					<p>Aufgaben</p><br/>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/Ameisen_arbeitslos.png" alt="">
 						</div>
+						<p class="tutText">
+							ohne Aufgabe<br/>
+							Diese Ameisen warten darauf von dir eine Aufgabe zu bekommen und dein Volk zu unterstützen.
+						</p>
 					</div>
-					<div class="partTwo">
-						<img id="imgIntro1" src="img/intro1.png" alt="">
-						<div class="introTextOneB">
-								<p>Die Rohstoffanzeige</p>
-							</div>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/Ameisen_jagen.png" alt="">
+						</div>
+						<p class="tutText">
+							Jagen<br/>
+							Dies ist zu Beginn des Spiels dein wichtigster Posten, da es die erste und einfachste Form der Nahrungsbeschaffung darstellt.
+						</p>
+					</div>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/Ameisen_Blätter.png" alt="">
+						</div>
+						<p class="tutText">
+							Blätter Sammeln<br/>
+							Diese Ameisen sammeln Blätter, die du über die Pilzkammer in Nahrung umwandeln oder zum bauen und erweitern von Kammern nutzen kannst.
+						</p>
+					</div>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/Ameisen_Steine.png" alt="">
+						</div>
+						<p class="tutText">
+							Steine Sammeln<br/>
+							Steine zu sammeln ist ebenfalls für das Bauen und Erweitern von Kammern wichtig.
+						</p>
+					</div>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/Ameisen_brüten.png" alt="">
+						</div>
+						<p class="tutText">
+							Brutpflege<br/>
+							Je mehr Ameisen deine Brut pflegen, desto schneller schlüpfen neue Larven.
+						</p>
+					</div>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/Ameisen_putzen.png" alt="">
+						</div>
+						<p class="tutText">
+							Bau säubern<br/>
+							Deinen Bau sauber zu halten ist essenziell für den Erhalt deines Volkes.
+						</p>
 					</div>
 				</div>
 				<div id ="pageFour">
-					<div class="introHead">Willkommen bei Antventure</div>
-					<div class="introSub"></div>
-					<div class="introContent">
-						
+					<img class="tutorial" src="img/Tutorial.png" alt="">
+					<p>Kammern</p><br/>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/buildings/hatch.png" alt="">
+						</div>
+						<p class="tutText">
+							Brutkammer<br/>
+							Für die Produktion von Ameisen gibt es eine Warteschleife. Die Brutkammer erweitert diese.
+						</p>
+					</div>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/buildings/mushroom.png" alt="">
+						</div>
+						<p class="tutText">
+							Pilzkammer<br/>
+							Die Pilzkammer wandelt Blätter in Nahrung um und ist besonders im späteren Spielverlauf wichtig, da der Kosten-Nutzen-Faktor besser ist, als bei der Jagd.
+						</p>
+					</div>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/buildings/storage.png" alt="">
+						</div>
+						<p class="tutText">
+							Lager<br/>
+							Im Lager werden Blätter und Steine untergebracht. Diese Kammer ist nicht überlebenswichtig, aber dennoch essenziell, damit dein Volk wachsen kann.
+						</p>
+					</div>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/buildings/Speisekammer.png" alt="">
+						</div>
+						<p class="tutText">
+							Speisekammer<br/>
+							Hier werden deine Nahrungsmittel eingelagert. Auch diese Kammer ist für das Wachstum deines Baus wichtig.
+						</p>
+					</div>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/buildings/dump.png" alt="">
+						</div>
+						<p class="tutText">
+							Kompost<br/>
+							Der Kompost is äußerst wichtig für das Überleben deiner Ameisen. Sie produzieren Abfälle, die entsorgt und kompostiert werden müssen, sonst stirbt dein Volk.
+						</p>
 					</div>
 				</div>
 				<div id="pageFive">
-					<div class="introHead">Willkommen bei Antventure</div>
-					<div class="introSub"></div>
-					<div class="introContent">
-						
+					<img class="tutorial" src="img/Tutorial.png" alt="">
+					<p>Tips und Tricks</p><br/>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/Achtung-01.png" alt="">
+						</div>
+						<p class="tutText">
+							Spielbeginn<br/>
+							Du besitzt zu Beginn weder Ameisen, noch Rohstoffe. Lediglich eine funktionslose Kammer, in der deine Königin lebt, besitzt du bereits.
+						</p>
+					</div>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/AchtungGut-01.png" alt="">
+						</div>
+						<p class="tutText">
+							Spielbeginn<br/>
+							Deine ersten Rohstoffe sammelst du noch manuell durch einen Klick auf die "+1" Buttons. Später sammeln übernehmen deine Ameisen diese Aufgabe.
+						</p>
+					</div>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/Achtung-01.png" alt="">
+						</div>
+						<p class="tutText">
+							Nahrungsmittel<br/>
+							Sobald deine erste Ameise geschlüpft ist fängt diese auch an zu fressen. Ist keine Nahrung mehr vorhanden, stirbt sie früher oder später.
+						</p>
+					</div>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/AchtungGut-01.png" alt="">
+						</div>
+						<p class="tutText">
+							Nahrungsmittel<br/>
+							Du sorgst für eine positive Nahrungsbilanz, indem du deine ersten Ameisen auf die Jagd schickst. So sammeln sie mehr Nahrung, als sie verbrauchen.
+						</p>
+					</div>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/Achtung-01.png" alt="">
+						</div>
+						<p class="tutText">
+							Kompost<br/>
+							Sobald du 10 Ameisen besitzt, fangen diese an Abfälle zu produzieren. Stelle unbedingt sicher, dass du diesen abtransportiest.
+						</p>
+					</div>
+					<div class="tutBox">
+						<div class="tutImgBox">
+							<img class="tutImages" src="img/icons/AchtungGut-01.png" alt="">
+						</div>
+						<p class="tutText">
+							Kompost<br/>
+							Kommandiere Ameisen zum Bau säubern ab und erweitere deinen Kompost sobald mehr Abfälle eingelagert, als abgebaut werden.
+						</p>
 					</div>
 				</div>
-				<button id="next">></button>
-				<button id="prev"><</button>
+				<div id="pageSix">
+					<img class="tutorial" src="img/Tutorial.png" alt="">
+					<p>Viel Erfolg!</p><br/>
+					<div id="tutEnde">
+						<p>Die Spieleinführung ist nun beendet. Du kannst sie jederzeit über das Fragezeichen Symbol erneut aufrufen. Außerdem kannst du im Spiel zusätzliche Informationen erhalten indem du die Maus auf eines der Symbole bewegst.</p>
+						<br/><br/>
+						<p>
+							Noch ein Wort zum Schluss: <br/>
+							Trial and Error ist Teil des Spiels und soll nicht frustrieren, sondern dazu anregen durch Ausprobieren eine erfolgreiche Strategie zu entwickeln. <br/><br/>
+							Lass dich nicht unterkriegen!
+						</p>
+					</div>
+				</div>
+				<div id="prevNextWrapper">
+					<div id="prevNextRelative">
+						<div id="next"></div>
+						<div id="prev"></div>
+					</div>
+				</div>
+				
 			</div>
 		</div>
-		<div id="menuWrapper">
-			<div id="menuBox">
-				<ul>
-					<li id="gameStart">Spiel starten</li>
-					<li id="menuHowToPlay">Spieleinf&uuml;hrung</li>
-					<li id="menuSettings">Einstellungen</li>
-					<li id="menuQuit">Beenden</li>
-				</ul>
-			</div>
-			<div id="btn_toggleMenu"></div>
-			<div id="howToPlay">
-				<div id="howToPlayTitle">Spieleinf&uuml;hrung</div>
-				<div id="menuText">Herzlich willkommen bei "SPIELNAME". <br/> In diesem Spiel ist es deine Aufgabe ein eigenes Ameisenimperium zu errichten und zu verwalten. Deine Königin hat bereits eine kleine Erdhöhle ausgehoben, die als Start für dein Königreich dient. 
-									<br/> Zu Beginn des Spiels kannst du manuell Rohstoffe sammeln. Dies geschieht über die Buttons unterhalb der Rohstoffanzeige. Dein erstes Ziel sollte es sein neue Ameisen auszubilden, die dir bei der Beschaffung neuer Materialien behilflich sind.
-											Du musst dafür sorgen, dass dein Volk immer genug zu fressen hat, da deine Arbeiterinnen sonst verhungern. Zunächst solltest du Ameisen auf die Jagt schicken, um deinen Nahrungsvorrat kurzfristig aufzubessern. Später im Spiel ist es effektiver die Pilzkammer zu bauen und zu erweitern. 
-											Diese wandelt Bl&auml;tter in Nahrung um und versorgt dein Volk. <br/> Das Spielziel ist es den größten Ameisenhügel zu errichten, den die Welt je gesehen hat. <br/> Viel Erfolg!</div>
-			</div>
-			<div id="settings">
-				<div id="settingsTitle">Einstellungen</div>
-				<div id="menuText">Here you will find settings to personalize your game experience.</div>
-			</div>
+		
+		<div id="menuWrapper">	
 		</div>
+		
 		<div id="gameWrapper">
 			
 			<div id="tipBox">
@@ -146,10 +377,10 @@
 				</div>
 				<div class="hideContent buildMenu">
 
-					<div class="broodChamberWrapper buildMenuBuilding">
+					<div id="broodChamberWrapper" class="broodChamberWrapper buildMenuBuilding">
 						<h2 class="buildingName">
 							Brutkammer
-							<span class="tooltip" data-type="broodChamber"></span>
+							<div class="tooltip" id="broodIcon" data-type="broodChamber"></div>
 						</h2>
 						<table>
 							<tr>
@@ -164,7 +395,7 @@
 							</tr>
 							<tr>
 								<td colspan="3">
-									<button id="broodBuild" class="build row" disabled>
+									<button id="broodBuild" class="build antButton" disabled>
 										Bauen
 									</button>
 								</td>
@@ -173,10 +404,10 @@
 					</div>
 
 
-					<div class="mushroomChamberWrapper buildMenuBuilding">
+					<div id="mushroomChamberWrapper" class="mushroomChamberWrapper buildMenuBuilding">
 						<h2 class="buildingName">
 							Pilzkammer
-							<span class="tooltip" data-type="mushroomChamber"></span>
+							<div class="tooltip" id="mushroomIcon" data-type="mushroomChamber"></div>
 						</h2>
 						<table>
 							<tr>
@@ -191,7 +422,7 @@
 							</tr>
 							<tr>
 								<td colspan="3">
-									<button id="mushroomBuild" class="build row" disabled>
+									<button id="mushroomBuild" class="build antButton" disabled>
 										Bauen
 									</button>
 								</td>
@@ -200,10 +431,10 @@
 					</div>
 
 
-					<div class="storageWrapper buildMenuBuilding">
+					<div id="storageWrapper" class="storageWrapper buildMenuBuilding">
 						<h2 class="buildingName">
 							Lager
-							<span class="tooltip" data-type="storage"></span>
+							<div class="tooltip" id="storageIcon" data-type="storage"></div>
 						</h2>
 						<table>
 							<tr>
@@ -218,7 +449,7 @@
 							</tr>
 							<tr>
 								<td colspan="3">
-									<button id="storageBuild" class="build row" disabled>
+									<button id="storageBuild" class="build antButton" disabled>
 										Bauen
 									</button>
 								</td>
@@ -227,10 +458,10 @@
 					</div>
 
 
-					<div class="pantryWrapper buildMenuBuilding">
+					<div id="pantryWrapper" class="pantryWrapper buildMenuBuilding">
 						<h2 class="buildingName">
 							Speisekammer
-							<span class="tooltip" data-type="pantry"></span>
+							<div class="tooltip" id="pantryIcon" data-type="pantry"></div>
 						</h2>
 						<table>
 							<tr>
@@ -245,7 +476,7 @@
 							</tr>
 							<tr>
 								<td colspan="3">
-									<button id="pantryBuild" class="build row" disabled>
+									<button id="pantryBuild" class="build antButton" disabled>
 										Bauen
 									</button>
 								</td>
@@ -253,10 +484,10 @@
 						</table>
 					</div>
 
-					<div class="dumpingGroundWrapper buildMenuBuilding">
+					<div id="dumpingGroundWrapper" class="dumpingGroundWrapper buildMenuBuilding">
 						<h2 class="buildingName">
-							Deponie
-							<span class="tooltip" data-type="dumpingGround"></span>
+							Kompost
+							<div class="tooltip" id="dumpIcon" data-type="dumpingGround"></div>
 						</h2>
 						<table>
 							<tr>
@@ -271,7 +502,7 @@
 							</tr>
 							<tr>
 								<td colspan="3">
-									<button id="dumpingBuild" class="build row" disabled>
+									<button id="dumpingBuild" class="build antButton" disabled>
 										Bauen
 									</button>
 								</td>
@@ -283,156 +514,154 @@
 
 			<div class="visible draggable">
 				<div class="handle">
-					Jobs
+					Ameisen
 				</div>
 				<div class="hideContent">
-					<table id="jobTable">
+					<table id="antTable">
+						<tr class="headingTableRow">
+							<td>
+								<div class="tooltip" id="antsAll" data-type="worker"></div>
+							</td>
+							<td class="jobName">Ameisen gesamt</td>
+							<td class="jobCount" id="antAllCount">
+								0
+							</td>
+						</tr>
 						<tr>
-							<td><div class="tooltip" data-type="worker"></div></td>
-							<td class="jobName">Verfügbare Arbeiter</td>
+							<td>
+								
+							</td>
+							<td class="jobName">davon arbeitslos</td>
 							<td class="jobCount" id="workerCount">
 								<span>0</span>
 							</td>
+						</tr>
+						<tr class="headingTableRow">
 							<td>
-								<button id="btn_addAntW" disabled>
-									Ausbilden
+								
+							</td>
+							<td class="jobName">Ameisen ausbilden</td>
+							<td class="jobCount" id="workerCount">
+								<button id="btn_addAntW" class="plus">
+									+
 								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								
+							</td>
+							<td class="jobName">Auslastung</td>
+							<td>
 								<p class="antProduction"><span id="currentAntProduction">0</span>/<span id="possibleAntProduction">1</span></p>
 							</td>
-							<td>
-								Bis Fertigstellung: <span id="countdownW">0.00</span>
-							</td>
-						</tr>
-					
-						<tr>
-							<td><div class="tooltip" data-type="jLeafs"></div></td>
-							<td class="jobName">
-								Bl&auml;tter sammeln
-							</td>
-							<td>
-								<button id="btn_subJobL">
-								-
-								</button>
-								<span id="jobCountL">0</span>
-								<button id="btn_addJobL">
-									+
-								</button>
-							</td>
-							<td class="jobCount" >
-								
-							</td>
-							<td>
-								<form id="formSetLeafs">
-									<input type="number" name="count" max="999" min="0" placeholder="Wert">
-									<button>Setzen</button>
-								</form>
-							</td>
 						</tr>
 						<tr>
 							<td>
-								<div class="tooltip" data-type="jStone"></div>
-							</td>
-							<td class="jobName">
-								Steine sammeln
-							</td>
-							<td>
-								<button id="btn_subJobS">
-									-
-								</button>
-								<span  id="jobCountS">0</span>
-								<button id="btn_addJobS">
-									+
-								</button>
-							</td>
-							<td class="jobCount">
 								
 							</td>
+							<td class="jobName">Bis Fertigstellung:</td>
 							<td>
-								<form id="formSetStone">
-									<input type="number"  name="count" placeholder="Wert" max="999" min="0">
-									<button>Setzen</button>
-								</form>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="tooltip" data-type="jHunt"></div>
-							</td>
-							<td class="jobName">
-								Jagen
-							</td>
-							<td>
-								<button id="btn_subJobHu">
-									-
-								</button>
-								<span id="jobCountHu">0</span>
-								<button id="btn_addJobHu">
-									+
-								</button>
-							</td>
-							<td class="jobCount">
-								
-							</td>
-							<td>
-								<form id="formSetHunt">
-									<input type="number" name="count" placeholder="Wert" max="999" min="0">
-									<button>Setzen</button>
-								</form>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="tooltip" data-type="jHatch"></div>
-							</td>
-							<td class="jobName">
-								Brutpflege
-							</td>
-							<td>
-								<button id="btn_subJobHa">
-									-
-								</button>
-								<span id="jobCountHa">0</span>
-								<button id="btn_addJobHa">
-								+
-								</button>
-							</td>
-							<td class="jobCount">
-								
-							</td>
-							<td>
-								<form id="formSetBrood">
-									<input type="number" name="count" placeholder="Wert" max="999" min="0">
-									<button>Setzen</button>
-								</form>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="tooltip" data-type="jClean"></div>
-							</td>
-							<td class="jobName">
-								Bau s&auml;ubern
-							</td>
-							<td>
-								<button id="btn_subJobC">
-									-
-								</button>
-								<span id="jobCountC">0</span>
-								<button id="btn_addJobC">
-									+
-								</button>
-							</td>
-							<td class="jobCount">
-								
-							</td>
-							<td>
-								<form id="formSetClean">
-									<input type="number" name="count" placeholder="Wert" max="999" min="0">
-									<button>Setzen</button>
-								</form>
+								 <span id="countdownW">0.00</span>
 							</td>
 						</tr>
 					</table>
+					<div class="handleSub visible">
+						Aufgabenverteilung
+					</div>
+					<div class="subHideContent">
+						<table id="jobTable">
+							<tr>
+								<td>
+									<div class="tooltip" id="jobImgHunt" data-type="jHunt"></div>
+								</td>
+								<td class="jobName">
+									Jagen
+								</td>
+								<td>
+									<button id="btn_subJobHu"  class="minus">
+										-
+									</button>
+									<input id="jobCountHu" type="text" name="count" value="0">
+									<button id="btn_addJobHu" class="plus">
+										+
+									</button>
+									<button id="formSetHunt" class="setButtons">Setzen</button>
+								</td>
+							</tr>
+							<tr>
+								<td><div class="tooltip" id="jobImgLeafs" data-type="jLeafs"></div></td>
+								<td class="jobName">
+									Bl&auml;tter sammeln
+								</td>
+								<td>
+									<button id="btn_subJobL" class="minus">
+									-
+									</button>
+									<input id="jobCountL" type="text" name="count" value="0">
+									<button id="btn_addJobL"  class="plus">
+										+
+									</button>
+									<button id="formSetLeafs" class="setButtons">Setzen</button>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="tooltip" id="jobImgStone" data-type="jStone"></div>
+								</td>
+								<td class="jobName">
+									Steine sammeln
+								</td>
+								<td>
+									<button id="btn_subJobS" class="minus">
+										-
+									</button>
+									<input type="text" id="jobCountS" name="count" value="0">
+									<button id="btn_addJobS" class="plus">
+										+
+									</button>
+									<button id="formSetStone" class="setButtons">Setzen</button>
+								</td>
+							</tr>
+							
+							<tr>
+								<td>
+									<div class="tooltip" id="jobImgHatch" data-type="jHatch"></div>
+								</td>
+								<td class="jobName">
+									Brutpflege
+								</td>
+								<td>
+									<button id="btn_subJobHa"  class="minus">
+										-
+									</button>
+									<input id="jobCountHa" type="text" name="count" value="0">
+									<button id="btn_addJobHa"  class="plus">
+									+
+									</button>
+									<button id="formSetBrood" class="setButtons">Setzen</button>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="tooltip" id="jobImgClean" data-type="jClean"></div>
+								</td>
+								<td class="jobName">
+									Bau s&auml;ubern
+								</td>
+								<td>
+									<button id="btn_subJobC" class="minus">
+										-
+									</button>
+									<input id="jobCountC" type="text" name="count" value="0">
+									<button id="btn_addJobC" class="plus">
+										+
+									</button>
+									<button id="formSetClean" class="setButtons">Setzen</button>
+								</td>
+							</tr>
+						</table>
+					</div>
 				</div>
 			</div>
 
@@ -442,17 +671,17 @@
 					<table id="resTable">
 						
 						<tr>
-							<th><div class="tooltip" data-type="leafs"></div><div class="resIcons" id="resLeafs"></div><div class="resText"> Bl&auml;tter:</div></th>
-							<th><div class="tooltip" data-type="stone"></div><div class="resIcons" id="resStone"></div><div class="resText"> Steine:</div></th>
-							<th><div class="tooltip" data-type="food"></div><div class="resIcons" id="resFood"></div><div class="resText"> Nahrung:</div></th>
-							<th><div class="tooltip" data-type="dump"></div><div class="resIcons" id="resDump"></div><div class="resText"> Deponie:</div></th>
+							<th><div class="tooltip" id="resLeafs" data-type="leafs"></div><div class="resText"> Bl&auml;tter:</div></th>
+							<th><div class="tooltip" id="resStone" data-type="stone"></div><div class="resText"> Steine:</div></th>
+							<th><div class="tooltip" id="resFood" data-type="food"></div><div class="resText"> Nahrung:</div></th>
+							<th><div class="tooltip" id="resDump" data-type="dump"></div><div class="resText"> Kompost:</div></th>
 						</tr>
 						
 						<tr>
-							<td id="leafFill"><div id="leafBar"></div></td>
-							<td id="stoneFill"><div id="stoneBar"></div></td>
-							<td id="foodFill"><div id="foodBar"></div></td>
-							<td id="dumpFill"><div id="dumpBar"></div></td>
+							<td class="resBarWrapper"><div id="leafFill"><div id="leafBar"></div></div></td>
+							<td class="resBarWrapper"><div id="stoneFill"><div id="stoneBar"></div></div></td>
+							<td class="resBarWrapper"><div id="foodFill"><div id="foodBar"></div></div></td>
+							<td class="resBarWrapper"><div id="dumpFill"><div id="dumpBar"></div></div></td>
 						</tr>
 						<tr>
 							<td><span id="leafCount">xxx</span> / <span id="leafStorage">xxx</span></td>
@@ -467,9 +696,9 @@
 							<td id="dumpProd"><span>xxx</span></td>
 						</tr>
 						<tr>
-							<td><button id="btn_addLeafs">+</button></td>
-							<td><button id="btn_addStone">+</button></td>
-							<td><button id="btn_addFood">+</button></td>
+							<td><button id="btn_addLeafs">+1</button></td>
+							<td><button id="btn_addStone">+1</button></td>
+							<td><button id="btn_addFood">+1</button></td>
 							<td id="dumpHillBar"><div id="dumpHill"></div><div></div></td>
 						</tr>
 						
@@ -482,23 +711,19 @@
 			<div id="buildingUpgradeView" class="lightboxWrapper">
 				<div class="backgroundBuildingUpgradeView" id="buildingUpgradeViewBG">
 					<div class="lightboxContent" id="lightboxContentbuildingUpgradeView">
-						<div class="upgradeContent clearAfter">
-							
-							<div class="lightboxImageWrapper fl_left">
+						<div class="upgradeContent">
+							<h2 id="buildingUpgradeViewTitle">
+										Geb&auml;ude
+							</h2>
+							<p class="buildingUpgradeViewLevelDiv">
+								Level: <span id="buildingUpgradeViewLevel"></span>
+							</p>
+						
+							<div class="lightboxImageWrapper ">
 								<img id="buildingUpgradeViewImage" class="lightboxImage">
 							</div>
 
-							<div class="fl_left upgradeBuildingViewRight">
-								<!-- Name des Gebäudes -->
-								<h2 id="buildingUpgradeViewTitle">
-										Geb&auml;ude
-								</h2>
-								
-								<p class="buildingUpgradeViewLevelDiv">
-									Level: <span id="buildingUpgradeViewLevel"></span>
-								</p>
-								
-
+							<div class="upgradeBuildingViewRight">
 								<p id="buildingUpgradeViewTextUpgrade">
 
 								</p>
@@ -510,7 +735,7 @@
 									<span id="buildingUpgradeViewCostStone"></span> Stein,
 									<span id="buildingUpgradeViewCostFood"></span> Nahrung
 									<div class="row">
-										<button class="antGreenButton">
+										<button class="antButton">
 											Upgraden !
 										</button>
 									</div>
@@ -539,17 +764,26 @@
 								<h2 id="incidentTitle">Ereignis</h2>
 
 								<p id="incidentText">
-
+									
 								</p>
+								<a href="#closeLightBox" class="antButton">Ok</a>
 							</div>
-							<a href="#closeLightBox">Ok</a>
+							<!--<button id="dumpingBuild" class="build antButton" disabled>
+								Bauen
+							</button>-->
 						</div>
 					</div>
 				</div>
 			</div>
 			<a id="openLightboxincidentView" href="#incidentView"></a>
 			
-			
+			<!--
+			Autoplay Hintergrundmusik
+			-->
+			<audio autoplay preload loop id="backgroundAudio">
+			  <source src="sounds/Sitting-on-fields.mp3" type="audio/mpeg">
+			</audio>
+		
 
 			<!--
 			Notwendige Javascript Datein
@@ -557,14 +791,17 @@
 			<script type="text/javascript" src="js/plugins/jquery-1.9.1.js"></script>
 			<script type="text/javascript" src="js/plugins/zim_1.3.js"></script>
 			<script type="text/javascript" src="js/plugins/createjs-2015.05.21.min.js"></script>
+			<script type="text/javascript" src="js/plugins/customElement.js"></script>
 			<script type="text/javascript" src="js/helpFunctions.js"></script>
-			<script type="text/javascript" src="js/menu.js"></script>
 
+			<script type="text/javascript" src="js/ameisen/menu.js"></script>
 			<script type="text/javascript" src="js/ameisen/incidents.js"></script>
-			<script type="text/javascript" src="js/ameisen/stage.js"></script>
+			<script type="text/javascript" src="js/ameisen/antgame.js"></script>
 			<script type="text/javascript" src="js/ameisen/canvas.js"></script>
-			<script type="text/javascript" src="js/ameisen/gameloop.js"></script>
 			<script type="text/javascript" src="js/ameisen/layout.js"></script>
+			<script type="text/javascript" src="js/ameisen/backgroundplayer.js"></script>
+			<script type="text/javascript" src="js/ameisen/gameloop.js"></script>
+			<script type="text/javascript" src="js/ameisen/customNotifierElement.js"></script>
 
 			<!--
 			Spiel erstellen

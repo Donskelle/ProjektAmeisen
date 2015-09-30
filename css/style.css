@@ -1,19 +1,11 @@
-@font-face {
-    font-family: 'BebasNeue';
-    src: url('../fonts/BebasNeue Regular.otf');
-}
-@font-face {
-    font-family: 'SourceSansPro';
-    src: url('../fonts/SourceSansPro-Regular.otf');
-}
 :disabled {
 	color: #ccc;
-	background-color: white;
 	border-color: #ccc;
+	
 }
 :disabled:hover {
 	color: #ccc;
-	background-color: white;
+	background-color: transparent;
 	border-color: #ccc;
 }
 html {
@@ -35,19 +27,18 @@ body {
     clear: both;
 }
 button {
-	background-color: #FFFFFF;
-	border: solid 1px black;
-	width: 60px;
+	background-color: transparent;
+	border: none;
+	outline: none;
 	
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
 	font-size: 1em;
 	font-family: 'BebasNeue';
 }
 button:hover {
-	background-color: #2F2E30;
 	color: #FFFFFF;
+}
+#login input {
+	width: 200px;
 }
 #tipBox {
 	position: absolute;
@@ -67,13 +58,11 @@ button:hover {
 	text-align: center;
 	font-size: .8em;
 	cursor: default;
-	display: inline-block;
-	margin-left: 10px;
-
 	width: 30px;
 	height: 30px;
-	background-image: url('../img/icons/Intro-Tooltip.png');
+	background-image: url('../img/icons/Fragezeichen-01.png');
 	background-size: 30px 30px;
+	background-position: center;
 }
 /*
  *	Grundklassen 
@@ -100,84 +89,51 @@ button:hover {
 	-o-transition: margin 1s;
 	transition: margin 1s;
 }
-#menuBox {
-	position: absolute;
-	
-	right: 15%;
-	top: 20%;
-}
-#menuBox ul {
-	
-}
-#menuBox ul li {
-	padding: 15px 25px 15px 25px;
-	margin: 5px 0 5px 0;
-	cursor: pointer;
-	background-color: #FFFFFF;
-	text-align: center;
-	border: solid 1px #CCCCCC;
-	-webkit-transition: all .2s;
-	-moz-transition: all .2s;
-	-o-transition: all .2s;
-	transition: all .2s;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	
-}
-#menuBox ul li:hover {
-	background-color: #2F2E30;
-	color: #FFFFFF;
-	
-		
-}
-#btn_toggleMenu {
+#menuBar {
 	position: fixed;
 	top: 5px;
 	right: 5px;
 	z-index: 1;
+
+}
+#menuBar ul li {
+	display: inline-block;
 	width: 40px;
 	height: 40px;
-	background-image: url("../img/play.png");
 	background-size: contain;
-	background-color: #FFFFFF;
 	-webkit-transition: top 1s, background-color .2s;
 	-moz-transition: top 1s, background-color .2s;
 	-o-transition: top 1s, background-color .2s;
 	transition: top 1s, background-color .2s;
-	border: solid 1px #000000;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	
-}
-#btn_toggleMenu:hover {
-	background-color: #2F2E30;
-}
-#howToPlay, #settings {
-	width: 700px;
-	height: 500px;
-	background-color: #FFFFFF;
-	position: absolute;
-	right: 30%;
-	top: 5%;
-	display: none;
-	padding: 20px;
-	-webkit-border-radius: 20px;
-	-moz-border-radius: 20px;
-	border-radius: 20px;
-	
-}
-#howToPlayTitle, #settingsTitle {
-	padding: 20px 0 20px 0;
+	cursor: pointer;
 }
 
+#btn_toggleMenu {
+	background-image: url("../img/icons/arrow_down.png");
+}
+#btn_tutorial {
+	background-image: url("../img/icons/tutorial.png");
+}
+#btn_toggleSound {
+	background-image: url("../img/icons/soundOn.png");
+}
+#btn_profile {
+	background-image: url("../img/icons/profile.png");
+}
+#btn_pause {
+	background-image: url("../img/icons/pause.png");
+}
+
+#btn_addLeafs, #btn_addStone, #btn_addFood {
+	width: 25px;
+	height: 25px;
+	background-image: url("../img/icons/plus.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+#btn_addLeafs:hover, #btn_addStone:hover, #btn_addFood:hover {
+	background-image: url("../img/icons/plusActive.png");
+}
 #gameWrapper {
 	margin: 100vh 0 0 0;
 	width: 100%;
@@ -200,54 +156,57 @@ button:hover {
 	top: 0;
 	left: 0;
 }
-.draggable .handle {
+.draggable .handle, .draggable .handleSub{
 	padding-left: 50px;
 	background-size: 30px 30px;
 	background-repeat: no-repeat;
 	background-position: 15px center;
-	text-align: center;
+	text-align: left;
 
 	background-image: url('../img/icons/Menu-Down.png');
 }
-.draggable.visible .handle {
+.draggable.visible .handle, .draggable .handleSub.visible {
 	background-image: url('../img/icons/Menu-Up.png');
 }
-.handle {
-	height: 40px;
-	line-height: 40px;
+.handle, .handleSub {
+	height: 20px;
+	line-height: 20px;
 	color: #000; 
 	border: solid 1px #ccc;
 	margin: 0;
 	padding: 0 0 0 10px;
 	cursor: move;
 	font-family: 'SourceSansPro';
-
-	font-size: 18px;
+	background-color: #A0D9F4;
+	font-size: 1em;
 	font-weight: bold;
 }
 .draggable .iconCost {
 	width: 10px;
 	height: 10px;
 }
-#jobTable button{
-	width: auto;
-}
+
 .chamberTable th, .chamberTable td, #jobTable th, #jobTable td {
 	padding: 2px 5px 2px 5px;
 }
+#jobTable input {
+	width: 80px;
+}
 #resTable th, #resTable td {
-	width: 180px;
+	
 	text-align: center;
 	border-right: solid .5px #ccc;
+	
 }
 #resTable th {
 	padding: 5px;
-	height: 100px;
-}
-#resTable tr th div {
-	position: absolute;
-
 	
+}
+#resLeafs, #resStone, #resFood, #resDump {
+	width: 50px;
+	height: 50px;
+	background-size: contain;
+	background-repeat: no-repeat;
 }
 
 .resIcons {
@@ -268,41 +227,100 @@ button:hover {
 #resDump {
 	background-image: url("../img/icons/Deponie.png");
 }
+#antsAll {
+	background-image: url('../img/icons/Ameisen_Gesamt.png');
+}
+#jobImgHunt {
+	background-image: url('../img/icons/Ameisen_jagen.png');
+}
+#jobImgLeafs {
+	background-image: url('../img/icons/Ameisen_Blätter.png');
+}
+#jobImgStone {
+	background-image: url('../img/icons/Ameisen_Steine.png');
+}
+#jobImgHatch {
+	background-image: url('../img/icons/Ameisen_brüten.png');
+}
+#jobImgClean {
+	background-image: url('../img/icons/Ameisen_putzen.png');
+}
 .resText {
 	position: absolute;
-	margin: 50px 0 0 100px;
+	top: 40px;
+	margin: 0 0 0 60px;
+
 }
 .jobName {
 	padding: 0 10px 0 10px;
+}
+.setButtons {
+	background-image: url("../img/icons/button_build.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	width: 100px;
+}
+.setButtons:hover {
+	background-image: url("../img/icons/button_buildActive.png");
 	
+}
+.resBarWrapper {
+	width: 150px;
 }
 #leafFill, #stoneFill, #foodFill {
 	background-color: red;
-	width: 100%;
-	height: 5px;
+	width: 90%;
+	margin: 0 auto;
+	height: 15px;
+	border: solid 1px black;
 }
 #dumpFill {
 	background-color: green;
-	width: 100%;
-	height: 5px;
+	width: 90%;
+	margin: 0 auto;
+	height: 15px;
+	border: solid 1px black;
 }
 #leafBar, #stoneBar, #foodBar {
 	background-color: green;
 	width: 50%;
-	height: 5px;
+	height: 14px;
+	
 }
 #dumpBar {
 	background-color: red;
 	width: 50%;
-	height: 5px;
+	height: 14px;
+	
 }
 #dumpHill {
 	
 }	
 #dumpHillBar {
-	
-	
 	background-color: green;
+}
+.plus, .minus {
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.plus {
+	background-image: url("../img/icons/Plus.png");
+}
+.plus:hover {
+	background-image: url("../img/icons/PlusActive.png");
+}
+.plus:disabled {
+	background-image: url("../img/icons/PlusDisabled.png");
+}
+.minus {
+	background-image: url("../img/icons/Minus.png");
+}
+.minus:hover {
+	background-image: url("../img/icons/MinusActive.png");
+}
+.minus:disabled {
+	background-image: url("../img/icons/MinusDisabled.png");
 }
 /*
  *	Menü Styles
@@ -409,9 +427,16 @@ button:hover {
 #buildingUpgradeView, #incidentView {
 	background: none;
 }
+#buildingUpgradeViewTitle {
+	background-size: 28px;
+    background-repeat: no-repeat;
+    padding-left: 30px;
+}
+
 #buildingUpgradeViewTitle, #incidentTitle{
 	font-size: 20px;
 	margin-bottom: 20px;
+	line-height: 30px;
 }
 .buildingUpgradeViewLevelDiv {
 	margin: 15px 0;
@@ -436,6 +461,16 @@ button:hover {
 	padding: 8px 25px;
 	font-size: 20px;
 }
+
+.lightboxContent .antButton {
+	height: 40px;
+	display: inline-block;
+	text-align: center;
+	line-height: 40px;
+	margin: 10px auto;
+
+}
+
 /**
  * Lightbox Klick Events
  */
@@ -446,6 +481,69 @@ button:hover {
 /**
  * 	Intro Box (Tutorial)
  */
+#loginBox {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 300;
+	background: rgba(255, 255, 255, .5);
+	text-align: center;
+	
+}
+#login, #start, #pageOne, #pageTwo, #pageThree, #pageFour, #pageFive, #pageSix{
+	margin: 10vh auto;
+	max-width: 600px;
+	max-height: 600px;
+	width: 70%;
+	height: 80vh;
+	background-color: rgba(255, 255, 255, .8);
+	padding: 2% 3% 0 3%;	
+	text-align: center;
+	
+}
+.tutBox {
+	width: 50%;
+	height: 25%;
+	float: left;
+	font-size: .8em;
+	text-align: left;
+}
+.tutImgBox {
+	width: 30%;
+	height: 100%;
+	float: left;
+}
+.tutImages {
+	
+	height: 100%;
+	padding: 15% 0% 15% 0%;
+}
+.tutText {
+	width: 70%;
+	padding: 15px 0px 0px 5px;
+	float: left;
+}
+#start {
+	display: none;
+	text-align: left;
+}
+#btnWrapper {
+	text-align: center;
+}
+.boxHead{
+	width: 100%;
+	padding: 0 0 30px 0;
+}
+#willkommen, .tutorial {
+	max-height: 50px;
+	width: auto;
+	margin: 0 auto;
+	display: block;
+}
+
+#login_form {
+	padding: 30px 0 30px 0;
+}
 
 #introBox {
 	position: fixed;
@@ -461,44 +559,49 @@ button:hover {
 	top: 0;
 	z-index: 300;
 }
+#quitIntroBox {
+	max-width: 600px;
+	width: 80%;
+	margin: 0 auto;
+}
 #quitIntro {
 	float: right;
 	z-index: 300;
-	top: 5vh;
-	right: 10vh;
 	width: 30px;
+	height: 30px;
+	background-image: url("../img/icons/close.png");
+	background-size: contain;
 }
-#pageOne, #pageTwo, #pageThree, #pageFour, #pageFive {
-	margin: 0vh auto;
-	max-width: 1080px;
-	max-height: 768px;
-	width: 100%;
-	height: 90vh;
-	background-color: rgba(255, 255, 255, .8);
-	display: none;
-	padding: 1%;
-	
-	
-	
-}
+
 #pagesWrapper {
 	margin: 5vh auto;
-	max-width: 1080px;
-	max-height: 768px;
 	width: 100%;
-	height: 90vh;
-	
-	
+	height: 100%;
+}
+#prevNextWrapper {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 45%;
+}
+#prevNextRelative {
+	max-width: 680px;
+	width: 80%;
+	margin: 0 auto;
 }
 #prev, #next {
-	position: fixed;
-	bottom: 5px;
+	width: 40px;
+	height: 40px;
+	background-size: contain;
 }
 #prev {
-	left: 5px;
+	background-image: url("../img/icons/arrow_left.png");
+	display: none;
+	float: left;
 }
 #next {
-	right: 5px;
+	background-image: url("../img/icons/arrow_right.png");
+	float: right;
 }
 .introHead {
 	font-size: 1.6em;
@@ -506,44 +609,10 @@ button:hover {
 .introSub {
 	font-size: 1.2em;
 }
-.introHead {
-	
-}
-.partOne {
-	max-width: 36%;
-	
-	float: left;
-	height: 100%;
-	margin: 1%;
-}
-.partTwo {
-	max-width: 60%;
-	
-	float: left;
-	height: 100%;
-	margin: 1%;
-}
-.partOne img, .partTwo img {
-	width: 90%;
-	margin: 0% auto;
-	display: block;
-	cursor: pointer;
-	
-}
-.introTextOneA p {
-	padding: 30px 0 0 0;
-	
-}
-.introTextOneB p {
-	padding: 3% 5% 3% 5%;
-	
-}
-.introTextHead {
-	font-size: 1.6em;
-}
-.introTextSub {
-	
-}
+
+
+
+
 #imgView {
 	position: fixed;
 	z-index: 301;
@@ -573,37 +642,61 @@ button:hover {
 	padding-left: 50px;
 	padding-right: 20px;
 	padding-top: 15px;
-	padding-bottom: 15px;
+	padding-bottom: 5px;
 
 	background-repeat: no-repeat;
-	background-position: 15px 20px;
+	background-position: 5px 5px;
 	background-size: 35px 35px;
+	background-color: #DEF2BF;
 }
-.buildMenu button{
-	width: 100%;
-	height: 30px;
+
+.buildMenu .buildMenuBuilding.disabled{
+	background-color: white;
+}
+#btn_startTut {
+	width: 150px;
+	height: 65px;
+	background-image: url('../img/icons/ButtonTutorial.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+#btn_startTut:hover {
+	background-image: url('../img/icons/ButtonTutorialActive.png');
+}
+#btn_startGame {
+	width: 150px;
+	height: 65px;
+	background-image: url('../img/icons/ButtonSpielen.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	
+}
+#btn_startGame:hover {
+	background-image: url('../img/icons/ButtonSpielenActive.png');
+}
+.antButton {
+	width: 150px;
+	height: 35px;
 	border-radius: 0;
-	border: solid 1px #000;
-
+	font-size: 1em;
+	line-height: 1em;
+	text-decoration: none;
 	color: #000;
-
-
-	background-size: cover;
+	background-size: contain;
 	background-repeat: no-repeat;
 	background-image: url('../img/icons/button_build.png');
 }
-.buildMenu button:hover{
+.antButton:hover{
 	color: #000;
-	border: solid 1px #000;
 	background-image: url('../img/icons/button_buildActive.png');
 }
-.buildMenu button:disabled{
+.antButton:disabled{
 	background-image: url('../img/icons/button_buildDisabled.png');
 }
 .buildMenu .buildingName {
 	font-weight: bold;
 	font-size: 18px;
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 }
 .buildMenu table td {
 	min-width: 50px;
@@ -622,22 +715,85 @@ button:hover {
 .iconStone {
 	background-image: url('../img/icons/Steine.png');
 }
-.broodChamberWrapper {
+
+
+#broodIcon {
 	background: url('../img/icons/buildings/hatch.png');
 }
-.mushroomChamberWrapper {
+#mushroomIcon {
 	background: url('../img/icons/Pilzkammer.png');
 }
-.storageWrapper {
+#storageIcon {
 	background: url('../img/icons/buildings/storage.png');
 }
-.pantryWrapper {
+#pantryIcon {
 	background: url('../img/icons/Nahrung.png');
 }
-.dumpingGroundWrapper {
+#dumpIcon {
 	background: url('../img/icons/buildings/dump.png');
 }
-
+#broodIcon, #mushroomIcon, #storageIcon, #pantryIcon, #dumpIcon {
+	background-size: contain;
+	background-repeat: no-repeat;
+	position: absolute;
+	left: 5px;
+	margin-top: -30px;
+	width: 40px;
+	height: 40px;
+}
 /**
  * Ende Darstellung Build Menu
  */
+
+/**
+ * Darstellung Tables Ant & Jobs
+ */
+#antTable {
+	width:90%;
+	margin-bottom: 10px;
+}
+#antTable tr.headingTableRow td:nth-child(2){
+	padding-left: 10px;
+}
+#antTable tr td:nth-child(2){
+	padding-left: 20px;
+}
+#antTable tr td:last-child{
+	font-weight: bold;
+	text-align: right;
+}
+#antTable #btn_addAntW{
+	width: auto;
+}
+#jobTable {
+	
+}
+#jobTable input{
+	width: 70px;
+}
+tr.headingTableRow {
+	font-weight: bold;
+}
+/**
+ * buildingUpgrade 
+ */
+#buildingUpgradeViewBG {
+	top: 50%;
+	left: 50%;
+	margin-left: -197px;
+	width: 394px;
+}
+.lightboxWrapper#buildingUpgradeView #buildingUpgradeViewBG .lightboxContent .lightboxImageWrapper {
+	width: 100%;
+	height: 250px;
+}
+.lightboxWrapper #buildingUpgradeViewBG .lightboxContent .antButton{
+	display: block;
+ }
+.lightboxWrapper #buildingUpgradeViewBG .lightboxContent{
+	position: inherit;
+}
+.lightboxWrapper #buildingUpgradeViewBG .lightboxContent .upgradeContent {
+	padding: 30px;
+	margin: 0;
+}

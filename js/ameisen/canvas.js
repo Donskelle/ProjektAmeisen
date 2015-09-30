@@ -27,6 +27,7 @@ function Canvas(_options) {
 				"img/buildings/Brutkammer-03.png",
 				"img/buildings/Brutkammer-04.png"
 			],
+			icon: "img/icons/buildings/Brutkammer-01.png",
 			lvl: 1,
 			text: "Durch ein Upgrade der Brutkammer, erhöhst du die Anzahl der Ameisen, die du bauen kannst. Alle 5 Upgradestufen erhählst du eine zusätzliche Warteschlangenposition.",
 			costs: {
@@ -43,6 +44,7 @@ function Canvas(_options) {
 				"img/buildings/Pilzkammer-03.png",
 				"img/buildings/Pilzkammer-04.png"
 			],
+			icon: "img/icons/buildings/Pilzkammer-01.png",
 			lvl: 1,
 			text: "Die Pilzkammer wandelt Blätter in Nahrung um. Jede Upgradestufe erhöht die Anzahl der Blätter, welche zum Produzieren von Nahrung genutzt wird.",
 			costs: {
@@ -59,6 +61,7 @@ function Canvas(_options) {
 				"img/buildings/Rohstofflager-03.png",
 				"img/buildings/Rohstofflager-04.png"
 			],
+			icon: "img/icons/buildings/Lager-01.png",
 			lvl: 1,
 			text: "Im Lager werden deine Baumaterialien gespeichert, also Blätter und Steine. Je höher die Ausbaustufe, desto mehr Einheiten können gelagert werden.",
 			costs: {
@@ -75,6 +78,7 @@ function Canvas(_options) {
 				"img/buildings/Vorratskammer-03.png",
 				"img/buildings/Vorratskammer-04.png"
 			],
+			icon: "img/icons/buildings/Speisekammer-01.png",
 			lvl: 1,
 			text: "Hier werden Nahrungsmittel gelagert, die der Pilz produziert oder deine Arbeiterinnen bei der Jagt erbeutet haben. Auch hier bestimmt die Ausbaustufe die Größe des Speichers.",
 			costs: {
@@ -91,6 +95,7 @@ function Canvas(_options) {
 				"img/buildings/Deponie-03.png",
 				"img/buildings/Deponie-04.png"
 			],
+			icon: "img/icons/buildings/Deponie-01.png",
 			lvl: 1,
 			text: "Dies ist der Ort wo Abfälle, die dein Volk produziert, entsorgt werden. Dazu zählen tote Ameisen, verdorbene Nahrungsreste und die Notdurft deines Volkes. Je höher die Kammer ausgebaut ist, desto mehr Platz bietet sie und desto schneller wird der Abfall abgebaut.",
 			costs: {
@@ -101,9 +106,15 @@ function Canvas(_options) {
 		},
 		{
 			name: "Start",
-			images: {},
+			images: [
+				"img/buildings/Deponie-01.png",
+				"img/buildings/Deponie-02.png",
+				"img/buildings/Deponie-03.png",
+				"img/buildings/Deponie-04.png"
+			],
+			icon: "img/icons/buildings/Thronsaal-01.png",
 			lvl: 1,
-			text: "",
+			text: "In diesem Gebäude lebt deine Königin.",
 			costs: {
 				leafs: 2,
 		    	stone: 2,
@@ -111,7 +122,6 @@ function Canvas(_options) {
 			}
 		}
 	]
-
 
 	/**
 	 * [init description]
@@ -157,14 +167,6 @@ function Canvas(_options) {
 	}
 
 	/**
-	 * [createDefaults description]
-	 * Erstellt Standart Gebäude
-	 */
-	this.createDefaults = function() {
-		stage.update();
-	}
-
-	/**
 	 * [createBuilding description]
 	 * Erstellt eine Instanz des Objects Building und fragt die Upgradekosten ab. 
 	 * @param  {[number]} type [description]
@@ -197,7 +199,6 @@ function Canvas(_options) {
 	 * Id des Gebäudes
 	 * @param {[object]} costs      [description]
 	 * Object mit allen Werten
-	 * @param {[boolean]} updateView [description]
 	 */
 	this.setUpgradeCosts = function(id, costs, updateView) {
 		eles[id].setUpgradeCost(costs);
@@ -205,7 +206,14 @@ function Canvas(_options) {
 			showInfoBox(id);
 	}
 
-
+	/**
+	 * [Building description]
+	 * Erstellt ein Shape Object zur Darstellung eines Gebäudes
+	 * @param {[number]} type [description]
+	 * Art des Gebäudes
+	 * @param {[number]} i    [description]
+	 * Index im Ele Array. Hier wird es eingefügt
+	 */
 	function Building(type, i) {
 		(function init() {
 			var c = new createjs.Shape();
@@ -221,7 +229,7 @@ function Canvas(_options) {
 			c.x = window.innerWidth/2 + ((i * 15) - 50);
 			c.y = window.innerHeight/2 + ((i * 15) - 50);
 
-			c.radius = HelpFunction.getProcentValue(20, 80, c.buildingData.lvl);
+			c.radius = HelpFunction.getProcentValue(25, 65, c.buildingData.lvl);
 
 
 			g.f("#000").dc(0,0,c.radius);
@@ -246,57 +254,49 @@ function Canvas(_options) {
 
 
 			var image = new Image();
-			switch(type)
-			{
-				// Brood
-				case 0: 
-					image.src = "img/icons/buildings/hatch_sm.png";
-					break;
-				// Mush
-				case 1: 
-					image.src = "img/icons/buildings/mushroom_sm.png";
-					break;
-				// Storage
-				case 2: 
-					image.src = "img/icons/buildings/storage_sm.png";
-					break;
-				// Pantry
-				case 3: 
-					image.src = "img/icons/buildings/speisekammer_sm.png";
-					break;
-				// Dumping
-				case 4: 
-					image.src = "img/icons/buildings/dump_sm.png";
-					break;
-				// Startegebäude
-				case 5: 
-					image.src = "img/icons/buildings/queen_sm.png";
-					break;
-			}
+			image.src = c.buildingData.icon;
+
 			image.onload = handleImageLoad;
 
-
+			/**
+			 * [addHitTest description]
+			 * @param {[type]} i [description]
+			 * @param {[type]} j [description]
+			 */
 			c.addHitTest = function (i, j) {
 				createHitTest(i,j);
 			}
+			/**
+			 * [upgradeBuilding description]
+			 * @return {[type]} [description]
+			 */
 			c.upgradeBuilding = function() {
 				this.buildingData.lvl += 1;
-				this.radius = HelpFunction.getProcentValue(20, 80, c.buildingData.lvl);
+				this.radius = HelpFunction.getProcentValue(25, 65, c.buildingData.lvl);
 
 				this.graphics.c().f("#000").dc(0,0,this.radius);
 				stage.update();
 			}
+			/**
+			 * [setUpgradeCost description]
+			 * @param {[type]} _costs [description]
+			 */
 			c.setUpgradeCost = function(_costs) {
 				this.buildingData.costs = _costs;
 			}
 
-
+			/**
+			 * [handleImageLoad description]
+			 * 
+			 * @param  {[type]} event [description]
+			 * @return {[type]}       [description]
+			 */
 			function handleImageLoad (event) {
 				var logo = new createjs.Bitmap(event.target);	
 
 				logo.x = eles[number].x - 25; 
 				logo.y = eles[number].y - 25;
-				
+
 				logo.alpha = .8;
 				logo.cursor = "pointer";
 
@@ -357,7 +357,12 @@ function Canvas(_options) {
 
 		
 		
-
+		/**
+		 * [addDrag description]
+		 * 
+		 * @param {[object]} c [description]
+		 * Shape
+		 */
 		function addDrag(c) {
 			c.on("mousedown",function(e){
 				c.clickStart = Date.now();
@@ -392,14 +397,23 @@ function Canvas(_options) {
 			};
 		}
 
+		/**
+		 * [createHitTest description]
+		 * Erstellt ein Hittest zwischen den übergebenen Index Elementen
+		 * @param  {[number]} _i [description]
+		 * Index des zu verbindenden Elements
+		 * @param  {[number]} _j [description]
+		 * Index des zu verbindenden Elements
+		 */
 		function createHitTest(_i, _j) {
 			var hitTest = false;
-			if(_j == "top") {
+			
 
-			}
-			eles[_i].connector[_j] = createConnector(_i, _j);
-			eles[_i].connector[_j].hittesten = function() {
-				hitTesten();
+			if(_j != "top") {
+				eles[_i].connector[_j] = createConnector(_i, _j);
+				eles[_i].connector[_j].hittesten = function() {
+					hitTesten();
+				}
 			}
 
 			hitTesten();
@@ -417,6 +431,11 @@ function Canvas(_options) {
 				};
 			});
 
+			/**
+			 * [hitTesten description]
+			 * Stellt den Hittest zwischen 2 Shapes her und 
+			 * @return {[type]} [description]
+			 */
 			function hitTesten() {
 				if ( zim.hitTestCircle(eles[_i], eles[_j]) ) 
 				{
@@ -457,12 +476,20 @@ function Canvas(_options) {
 		}
 	}
 
+	/**
+	 * [showInfoBox description]
+	 * Stellt das Gebäude des übergebenen Gebäude Indexes dar.
+	 * @param  {[number]} i [description]
+	 * Index des Gebäudes
+	 */
 	function showInfoBox(i)
 	{
 		//Startgebäude
 		if(i != 0)
 		{
 			zid("buildingUpgradeViewTitle").innerHTML = eles[i].buildingData.name;
+			zid("buildingUpgradeViewTitle").style.backgroundImage  = 'url(\'' +  eles[i].buildingData.icon + '\')';
+
 			zid("buildingUpgradeViewFormBuildingName").innerHTML = eles[i].buildingData.name;
 
 			var img = "";
@@ -494,11 +521,29 @@ function Canvas(_options) {
 
 			zid("openLightboxBuildingUpgradeView").click();
 
+			// resize
+			window.setTimeout(function() { 
+				console.log("drin");
+				var height = zid("lightboxContentbuildingUpgradeView").clientHeight || zid("lightboxContentbuildingUpgradeView").offsetHeight;
+				zid("buildingUpgradeViewBG").style.height = height + "px";
+				if(height>window.innerHeight)
+					zid("buildingUpgradeViewBG").style.top = "0px";
+				else 
+					zid("buildingUpgradeViewBG").style.top = ((window.innerHeight - height) / 2) + "px";
 
-			zid("buildingUpgradeViewBG").style.height = zid("lightboxContentbuildingUpgradeView").offsetHeight + "px";
+			}, 10);
 		}
 	}
 
+	/**
+	 * [createConnector description]
+	 * Erstellt eine Linie ziwschen den übergebenen Shape Objekten
+	 * @param  {[number]} _i [description]
+	 * Index des 1. Elements
+	 * @param  {[number]} _j [description]
+	 * Index des zu verbindenen Elements
+	 * @return {[object]}    [description]
+	 */
 	function createConnector(_i, _j) 
 	{
 		var connector = new createjs.Shape();
@@ -507,6 +552,10 @@ function Canvas(_options) {
 		if(_j == "top")
 			drawTop();
 
+		/**
+		 * [draw description]
+		 * Stellt Verbindungslinie da und korrigiert Position der Verbindung
+		 */
 		function draw() {
 			connector.visible = true;
 			connector.graphics.c().setStrokeStyle(6, 'round', 'round').beginStroke("black").moveTo(eles[_i].x, eles[_i].y).lineTo(eles[_j].x, eles[_j].y);
@@ -514,17 +563,29 @@ function Canvas(_options) {
 			stage.addChildAt(connector,0);
 		}
 
+		/**
+		 * [drawTop description]
+		 * Erstellt eine Verbindung für das Startgebäude, welche nach oben geht
+		 */
 		function drawTop() {
 			connector.visible = true;
 			connector.graphics.c().setStrokeStyle(6, 'round', 'round').beginStroke("black").moveTo(eles[_i].x, eles[_i].y).lineTo(stageW/2, 0);
 			stage.addChildAt(connector,0);
 		}
 
+		/**
+		 * [hide description]
+		 * Blendet den Connector aus
+		 */
 		function hide() {
 			connector.visible = false;
 			connector.graphics.c();
 		}
 
+		/**
+		 * [updateLine description]
+		 * Public Mehtode um Verbindungslinie zu aktualsieren und darzustellen.
+		 */
 		connector.updateLine = function() {
 			if(_j == "top")
 				drawTop();
@@ -542,6 +603,10 @@ function Canvas(_options) {
 			}
 		}
 
+		/**
+		 * [hideLine description]
+		 * Public Mehtode zum Verbergen der Gebäudeverbindugn
+		 */
 		connector.hideLine = function() {
 			if(eles[_j].connector[_i].visible == true) {
 				eles[_j].connector[_i].hideLine();
@@ -555,7 +620,6 @@ function Canvas(_options) {
 
 		return connector;
 	}
-
 
 	init();
 }
