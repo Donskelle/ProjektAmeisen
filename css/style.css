@@ -127,12 +127,12 @@ button:hover {
 #btn_addLeafs, #btn_addStone, #btn_addFood {
 	width: 25px;
 	height: 25px;
-	background-image: url("../img/icons/plus.png");
+	background-image: url('../img/icons/plus.png');
 	background-size: contain;
 	background-repeat: no-repeat;
 }
 #btn_addLeafs:hover, #btn_addStone:hover, #btn_addFood:hover {
-	background-image: url("../img/icons/plusActive.png");
+	background-image: url('../img/icons/plusActive.png');
 }
 #gameWrapper {
 	margin: 100vh 0 0 0;
@@ -142,7 +142,7 @@ button:hover {
 	-moz-transition: margin 1s;
 	-o-transition: margin 1s;
 	transition: margin 1s;
-	background-image: url("../img/game_background1.png");
+	background-image: url('../img/game_background1.png');
 	background-position: bottom left;
 	background-size: cover;
 	background-repeat: no-repeat;
