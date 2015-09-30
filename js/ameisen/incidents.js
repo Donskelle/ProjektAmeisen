@@ -9,7 +9,7 @@ function incidents() {
 	var incidentTypes = [
 		{
 			'name': 'Ameisen verschwunden',
-			'description': 'Ein paar deiner Ameisen ist verschwunden. Sie sind nicht in dein Lager zurück gekommen.',
+			'description': 'Ein paar deiner Ameisen sind verschwunden. Sie sind nicht in dein Lager zurückgekommen.',
 			'image': 'img/icons/Achtung-01.png',
 			'calculateFunction': function(values) {
 				var removedAnts = 0;
@@ -49,7 +49,7 @@ function incidents() {
 			}
 		},
 		{
-			'name': 'Ameisen Schub',
+			'name': 'Geburtenglück',
 			'description': 'Deiner Königin geht es aktuell wirklich gut. Du erhälst 5 neue Ameisen.',
 			'image': 'img/icons/AchtungGut-01.png',
 			'calculateFunction': function(values) {
@@ -59,7 +59,7 @@ function incidents() {
 		},
 		{
 			'name': 'Vorräte wurden gestohlen',
-			'description': 'Eine deiner Arbeitin endeckte, dass viele deiner Vorräte geplündert wurden.',
+			'description': 'Eine deiner Arbeitin entdeckte, dass viele deiner Vorräte geplündert wurden.',
 			'image': 'img/icons/Achtung-01.png',
 			'calculateFunction': function(values) {
 				values.resources.leafs = Math.floor(values.resources.leafs / 2);
@@ -147,6 +147,7 @@ function incidents() {
 				// Kein Auslösen
 				break;
 		}
+
 		window.setTimeout(randomIncident, incidentTimeout);
 	}
 
@@ -166,6 +167,12 @@ function incidents() {
 		//öffnet Lightbox
 		zid("openLightboxincidentView").click();
 
-		zid("incidentViewContentBG").style.height = zid("incidentViewContent").offsetHeight + "px";
+
+		// resize
+		window.setTimeout(function() {
+			var height = zid("incidentViewContent").clientHeight || zid("incidentViewContent").offsetHeight;
+				zid("incidentViewContentBG").style.height = height + "px";
+		}, 10);
+		
 	}
 }

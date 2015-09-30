@@ -27,6 +27,7 @@ function Canvas(_options) {
 				"img/buildings/Brutkammer-03.png",
 				"img/buildings/Brutkammer-04.png"
 			],
+			icon: "img/icons/buildings/Brutkammer-01.png",
 			lvl: 1,
 			text: "Durch ein Upgrade der Brutkammer, erhöhst du die Anzahl der Ameisen, die du bauen kannst. Alle 5 Upgradestufen erhählst du eine zusätzliche Warteschlangenposition.",
 			costs: {
@@ -43,6 +44,7 @@ function Canvas(_options) {
 				"img/buildings/Pilzkammer-03.png",
 				"img/buildings/Pilzkammer-04.png"
 			],
+			icon: "img/icons/buildings/Pilzkammer-01.png",
 			lvl: 1,
 			text: "Die Pilzkammer wandelt Blätter in Nahrung um. Jede Upgradestufe erhöht die Anzahl der Blätter, welche zum Produzieren von Nahrung genutzt wird.",
 			costs: {
@@ -59,6 +61,7 @@ function Canvas(_options) {
 				"img/buildings/Rohstofflager-03.png",
 				"img/buildings/Rohstofflager-04.png"
 			],
+			icon: "img/icons/buildings/Lager-01.png",
 			lvl: 1,
 			text: "Im Lager werden deine Baumaterialien gespeichert, also Blätter und Steine. Je höher die Ausbaustufe, desto mehr Einheiten können gelagert werden.",
 			costs: {
@@ -75,6 +78,7 @@ function Canvas(_options) {
 				"img/buildings/Vorratskammer-03.png",
 				"img/buildings/Vorratskammer-04.png"
 			],
+			icon: "img/icons/buildings/Speisekammer-01.png",
 			lvl: 1,
 			text: "Hier werden Nahrungsmittel gelagert, die der Pilz produziert oder deine Arbeiterinnen bei der Jagt erbeutet haben. Auch hier bestimmt die Ausbaustufe die Größe des Speichers.",
 			costs: {
@@ -91,6 +95,7 @@ function Canvas(_options) {
 				"img/buildings/Deponie-03.png",
 				"img/buildings/Deponie-04.png"
 			],
+			icon: "img/icons/buildings/Deponie-01.png",
 			lvl: 1,
 			text: "Dies ist der Ort wo Abfälle, die dein Volk produziert, entsorgt werden. Dazu zählen tote Ameisen, verdorbene Nahrungsreste und die Notdurft deines Volkes. Je höher die Kammer ausgebaut ist, desto mehr Platz bietet sie und desto schneller wird der Abfall abgebaut.",
 			costs: {
@@ -107,6 +112,7 @@ function Canvas(_options) {
 				"img/buildings/Deponie-03.png",
 				"img/buildings/Deponie-04.png"
 			],
+			icon: "img/icons/buildings/Thronsaal-01.png",
 			lvl: 1,
 			text: "In diesem Gebäude lebt deine Königin.",
 			costs: {
@@ -116,7 +122,6 @@ function Canvas(_options) {
 			}
 		}
 	]
-
 
 	/**
 	 * [init description]
@@ -249,33 +254,8 @@ function Canvas(_options) {
 
 
 			var image = new Image();
-			switch(type)
-			{
-				// Brood
-				case 0: 
-					image.src = "img/icons/buildings/Brutkammer-01.png";
-					break;
-				// Mush
-				case 1: 
-					image.src = "img/icons/buildings/Pilzkammer-01.png";
-					break;
-				// Storage
-				case 2: 
-					image.src = "img/icons/buildings/Lager-01.png";
-					break;
-				// Pantry
-				case 3: 
-					image.src = "img/icons/buildings/Speisekammer-01.png";
-					break;
-				// Dumping
-				case 4: 
-					image.src = "img/icons/buildings/Deponie-01.png";
-					break;
-				// Startegebäude
-				case 5: 
-					image.src = "img/icons/buildings/Thronsaal-01.png";
-					break;
-			}
+			image.src = c.buildingData.icon;
+
 			image.onload = handleImageLoad;
 
 			/**
@@ -508,6 +488,8 @@ function Canvas(_options) {
 		if(i != 0)
 		{
 			zid("buildingUpgradeViewTitle").innerHTML = eles[i].buildingData.name;
+			zid("buildingUpgradeViewTitle").style.backgroundImage  = 'url(\'' +  eles[i].buildingData.icon + '\')';
+
 			zid("buildingUpgradeViewFormBuildingName").innerHTML = eles[i].buildingData.name;
 
 			var img = "";
@@ -539,9 +521,17 @@ function Canvas(_options) {
 
 			zid("openLightboxBuildingUpgradeView").click();
 
+			// resize
+			window.setTimeout(function() { 
+				console.log("drin");
+				var height = zid("lightboxContentbuildingUpgradeView").clientHeight || zid("lightboxContentbuildingUpgradeView").offsetHeight;
+				zid("buildingUpgradeViewBG").style.height = height + "px";
+				if(height>window.innerHeight)
+					zid("buildingUpgradeViewBG").style.top = "0px";
+				else 
+					zid("buildingUpgradeViewBG").style.top = ((window.innerHeight - height) / 2) + "px";
 
-			zid("buildingUpgradeViewBG").style.height = zid("lightboxContentbuildingUpgradeView").offsetHeight + "px";
-			zid("buildingUpgradeViewBG").style.marginTop = (- zid("lightboxContentbuildingUpgradeView").offsetHeight)/2 + "px";
+			}, 10);
 		}
 	}
 

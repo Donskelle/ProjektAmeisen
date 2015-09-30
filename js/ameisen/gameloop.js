@@ -30,9 +30,9 @@ function GameLoop (_options) {
 	var dumpHillBar = zid("dumpHillBar");
 
 	//Bestand von Rohstoffen
-	var _leafs = 25;
-	var _stone = 25;
-	var _food = 25;
+	var _leafs = 0;
+	var _stone = 0;
+	var _food = 0;
 	var _dump = 10;
 	
 	var _prodDump = 0;
@@ -41,7 +41,7 @@ function GameLoop (_options) {
     var _dumpHill = 0;
 	
 	//Bestand und Kosten von Ameisen
-	var unemployedAnts = 8;
+	var unemployedAnts = 0;
 	var _antS = 0;
 	
 	var _antCostW = {
@@ -461,7 +461,7 @@ function GameLoop (_options) {
 			wasNegativFoodProd = false;
 		else if(!wasNegativFoodProd && _prodFood < 0){
 			wasNegativFoodProd = true;
-			notifier.setContent("Deine Nahrung sinkt. Stell schnell wieder ein Gleichgewicht her.");
+			notifier.setContent("Deine Nahrung sinkt. Stell schnell wieder ein Gleichgewicht her. Schicke deine Ameisen dafür zum Jagen.");
 		}
 
 		/**
@@ -469,9 +469,9 @@ function GameLoop (_options) {
 		 */
     	if(wasNegativDumpProd && _prodDump > 0)
 			wasNegativDumpProd = false;
-		else if(!wasNegativDumpProd && _prodDump < 0){
+		else if(!wasNegativDumpProd && _dumpHill >= (buildingTypes[5]["storeDump"] / 2)){
 			wasNegativDumpProd = true;
-			notifier.setContent("Dein Müll steigt. Beginne ihn abzubauen.");
+			notifier.setContent("Dein Müll steigt. Schicke mehr Ameisen zum Bau säubern oder erweitere deinen Kompost, um die Abbaurate zu erhöhen.");
 		}
 
     	if(_prodLeafs < 0) {
