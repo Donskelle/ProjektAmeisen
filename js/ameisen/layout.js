@@ -29,6 +29,7 @@ function layout(options) {
 				pages[curPage].style.display = "block";
 				introIsActive = true;
 			}	
+			
 		});
 		
 		/**
@@ -76,13 +77,14 @@ function layout(options) {
 		var btnNext = zid("next");
 		var btnPrev = zid("prev");
 		var curPage = 1;
-		var pageAmount = 5;
+		var pageAmount = 6;
 		var pages = {
 			1 : pageOne,
 			2 : pageTwo,
 			3 : pageThree,
 			4 : pageFour,
-			5 : pageFive
+			5 : pageFive,
+			6 : pageSix
 		};
 		
 		btnlogin.addEventListener("click", function(e) {
@@ -175,63 +177,63 @@ function layout(options) {
 			var tipArray = {
 				broodChamber : {
 					title : "Brutkammer",
-					text : "Hier werden neue Arbeiterinnen ausgebildet. Die Ausbaustufe entscheidet darüber, wie viele Larven sich gleichzeitig in der Warteschleife befinden können."
+					text : "Alle Fünf Stufen wird die Warteschleife für neu zu produzierende Larven um 1 erweitert."
 				},
 				mushroomChamber : {
 					title : "Pilzkammer",
-					text : "In der Pilzkammer gedeiht ein Speisepilz, der hervorragend auf Blättern und anderen Pflanzenteilen wächst. Deine Ameisen ernähren sich von ihm. Du solltest dafür sorgen, dass immer genug Blätter vorhanden sind, da der Pilz sich sonst zurück entwickelt."
+					text : "Je Stufe wird ein Blatt in drei Einheiten Nahrung umgewandelt."
 				},
 				storage : {
 					title : "Lager",
-					text : "Im Lager werden deine Baumaterialien gespeichert, also Blätter und Steine. Je höher die Ausbaustufe, desto mehr Einheiten können gelagert werden."
+					text : "Jede Stufe erweitert die maximale Speicherkapazität von Blättern und Steinen."
 				},
 				pantry : {
 					title : "Speisekammer",
-					text : "Hier werden Nahrungsmittel gelagert, die der Pilz produziert oder deine Arbeiterinnen bei der Jagt erbeutet haben. Auch hier bestimmt die Ausbaustufe die Größe des Speichers."
+					text : "Jede Stufe erweitert deinen Nahrungsspeicher."
 				},
 				dumpingGround : {
 					title : "Kompost",
-					text : "Dies ist der Ort wo Abfälle, die dein Volk produziert, entsorgt werden. Dazu zählen tote Ameisen, verdorbene Nahrungsreste und die Notdurft deines Volkes. Je höher die Kammer ausgebaut ist, desto mehr Platz bietet sie und desto schneller wird der Abfall abgebaut."
+					text : "Jede Stufe erweitert die Speicherkapazität deines Komposts, sowie die Abbaurate von eingelagerten Abfällen um eine Einheit pro Runde."
 				},
 				worker : {
-					title : "Arbeiter",
-					text : "Hier kannst du neue Arbeiterinnen ausbrüten. Sie bilden das Rückrat deines Volkes und übernehmen sämtliche Aufgaben. Jede Ameise muss fressen und verbraucht pro Spielrunde (Tick) eine Nahrungseinheit. Sorge dafür, dass immer genug Nahrung vorhanden ist oder deine Ameisen verhungern."
+					title : "ohne Aufgabe",
+					text : "Diese Ameisen produzieren nichts, jedoch bewachen sie deinen Bau."
 				},
 				jLeafs : {
 					title : "Blätter sammeln",
-					text : "Ameisen auf diesem Posten sammeln eifrig Blätter. Pro Spielrunde (Tick) sammelt jede Ameise auf diesem Posten ein Blatt."
+					text : "Jede Ameise auf diesem Posten sammelt ein Blatt pro Runde."
 				},
 				jStone : {
 					title : "Steine sammeln",
-					text : "Steine zu sammeln ist keine einfache Aufgabe. Jede Ameise sammelt pro Spielrunde (Tick) einen Stein."
+					text : "Jede Ameise auf diesem Posten sammelt einen Stein pro Runde."
 				},
 				jHunt : {
 					title : "Jagen",
-					text : "Du kannst deine Ameisen auf die Jagt schicken, um Insekten und andere Kleintiere zu erbeuten. Es gibt Ameisenarten, die sogar Jungvögel erlegen."
+					text : "Jede Ameise auf der Jagt sammelt zwei Einheiten Nahrung pro Runde."
 				},
 				jHatch : {
 					title : "Brutpflege",
-					text : "Die Brutpflege ist ein wichtiger Bestandteil einer florierenden Kolonie. Je mehr Ameisen sich um den Nachwuchs kümmern, desto schneller wächst dieser heran."
+					text : "Je mehr Ameisen sich um den Nachwuchs kümmern, desto schneller entwickeln sich die Larven."
 				},
 				jClean : {
 					title : "Bau säubern",
-					text : "Ist dein Nest nicht gepflegt, können deine Ameisen krank werden. Sorge also dafür, dass sich immer genug Arbeiterinnen um die Sauberkeit im Bau kümmern."
+					text : "Ameisen, die den Bau säubern, bringen pro Runde eine Einheit Abfall zur Deponie, wo sie vergammelt."
 				},
 				leafs : {
 					title : "Blätter",
-					text : "Blätter sind äußerst wichtig für die Entwicklung deines Volkes. Du kannst sie entweder zum Bau von neuen Kammern oder zum speisen deines Pilzes verwenden."
+					text : "Ein wichtiger Rohstoff zur Entwicklung deiner Kammern und zur Produktion von Nahrung über die Pilzkammer."
 				},
 				stone : {
 					title : "Steine",
-					text : "Steine dienen ebenfalls als Baumaterial, das erforderlich ist, um Kammern zu erweitern oder neue zu bauen. Dieser Rohstoff ist unabdingbar und du solltest den Füllstand ständig im Auge behalten, damit das Wachstum nicht stagniert."
+					text : "Steine dienen als Baumaterial für neue Kammern und deren Ausbau."
 				},
 				food : {
 					title : "Nahrung",
-					text : "Nahrung ist die Basis, damit dein Volk existieren kann. Es gibt verschiedene Möglichkeiten um Nahrung zu gewinnen. Du kannst entweder über den Pilz Blätter in Nahrung umwandeln oder deine Ameisen auf die Jagt schicken."
+					text : "Dein wichtigster Rohstoff. Ohne Nahrung kann dein Volk nicht überleben!"
 				},
 				dump : {
 					title : "Kompost",
-					text : "Die antibakteriellen Eigenschaften von Harz sind sogar den Ameisen bekannt. Besonders Waldameisen machen sich diese zunutze, indem sie Baumharzstücke in den Bau schleppen und so die Vermehrung von Keimen unterbinden bzw. erschweren."
+					text : "Der Kreislauf der Kompostierung muss stets im Auge behalten werden. Der untere Balken zeigt links die Verschmutzung im Bau und rechts den Höchstwert. Wenn dieser erreicht ist, fangen Ameisen an krank zu werden und zu sterben."
 				}
 			};
 

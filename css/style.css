@@ -483,7 +483,7 @@ button:hover {
 	text-align: center;
 	
 }
-#login, #start, #pageOne, #pageTwo, #pageThree, #pageFour, #pageFive{
+#login, #start, #pageOne, #pageTwo, #pageThree, #pageFour, #pageFive, #pageSix{
 	margin: 10vh auto;
 	max-width: 600px;
 	max-height: 600px;
@@ -498,7 +498,6 @@ button:hover {
 	width: 50%;
 	height: 25%;
 	float: left;
-	border: solid 1px black;
 	font-size: .8em;
 	text-align: left;
 }
@@ -514,7 +513,7 @@ button:hover {
 }
 .tutText {
 	width: 70%;
-	padding: 15px 0px 0px 0px;
+	padding: 15px 0px 0px 5px;
 	float: left;
 }
 #start {
@@ -561,8 +560,8 @@ button:hover {
 #quitIntro {
 	float: right;
 	z-index: 300;
-	width: 40px;
-	height: 40px;
+	width: 30px;
+	height: 30px;
 	background-image: url("../img/icons/close.png");
 	background-size: contain;
 }
